@@ -1,0 +1,54 @@
+.Profile h5{
+    float: left;
+    width: 50%;
+    font-size: 18px;
+    color: #3E4095;
+}
+.Profile .btn{
+    font-size: 16px;
+    border-radius: 0px;
+}
+.Profile-form{
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 0px;
+    border: 1px solid #61dafb;
+}
+.Profile-form input{
+    height: 70px;
+    border-radius: 0px;
+    border: 0px solid #ffffff;
+    background: #e7e6ff;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 600;
+
+    box-shadow: 3px 3px 4px 1px rgba(100,100,100,0.75);
+    -webkit-box-shadow: 3px 3px 4px 1px rgba(100,100,100,0.75);
+    -moz-box-shadow: 3px 3px 4px 1px rgba(100,100,100,0.75);
+}
+.Profile-form input::placeholder{
+    color: #adadad;
+}
+
+.Profile-form .form-group .btn{
+    margin-top: 20px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 16px;
+    background: #3E4095;
+    border: 1px solid #3E4095;
+
+    box-shadow: 0px 2px 3px 1px rgba(100,100,100,0.75);
+    -webkit-box-shadow: 0px 2px 3px 1px rgba(100,100,100,0.75);
+    -moz-box-shadow: 0px 2px 3px 1px rgba(100,100,100,0.75);
+}
+.Profile-form .form-group .btn-primary {
+    background: #3E4095;
+    border: 1px solid #3E4095;
+}
+.Profile-form .form-group .btn-success {
+    background: #309634;
+    border: 1px solid #309634;
+}
+

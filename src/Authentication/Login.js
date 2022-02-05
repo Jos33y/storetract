@@ -46,6 +46,7 @@ const Login = () => {
 
     const onGoogleClick = async () => {
         try{
+            setDisable(true)
             const auth = getAuth()
             const provider = new GoogleAuthProvider()
             const result = await signInWithPopup(auth, provider)

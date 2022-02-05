@@ -17,8 +17,9 @@ const AdminNavbar = () => {
                 <ul>
                     <li><Link className="navbar-brand" to="/admin-dash"> Dashboard </Link> </li>
                     <div className="buttons">
-                    <li><Link className="btn btn-md btn-primary" to="/">Insert Product </Link> </li>
-                    <li><Link className="btn btn-md btn-success" to="/">Profile </Link></li>
+                        <li><Link className="btn btn-md btn-primary" to="/insert-category">Insert Category </Link> </li>
+                        <li><Link className="btn btn-md btn-success" to="/admin-profile">View Profile </Link></li>
+                        <li><Link className="btn btn-md btn-secondary" to="/activate-shop">Activate Shop </Link> </li>
                         <li><Link className="btn btn-md btn-danger" onClick={logOut} to="/">Log Out </Link></li>
                     </div>
                 </ul>

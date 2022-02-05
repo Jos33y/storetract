@@ -9,6 +9,10 @@ import Register from "./Authentication/Register";
 import ForgotPassword from "./Authentication/ForgotPassword";
 import AdminDashboard from "./Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
+import InsertCategory from "./Dashboard/insertCategory";
+import ViewCategories from "./Dashboard/viewCategories";
+import AdminProfile from "./Dashboard/profile";
+import ActivateShop from "./Dashboard/activateShop";
 
 const App = () => {
   return (
@@ -22,6 +26,19 @@ const App = () => {
                   <Route path="/admin-dash" element={<PrivateRoute/>}>
                       <Route path="/admin-dash" element={<AdminDashboard />} />
                   </Route>
+                  <Route path="/insert-category" element={<PrivateRoute/>}>
+                      <Route path="/insert-category" element={<InsertCategory />} />
+                  </Route>
+                  <Route path="/admin-profile" element={<PrivateRoute/>}>
+                      <Route path="/admin-profile" element={<AdminProfile />} />
+                  </Route>
+                  <Route path="/view-categories" element={<PrivateRoute/>}>
+                      <Route path="/view-categories" element={<ViewCategories />} />
+                  </Route>
+                  <Route path="/activate-shop" element={<PrivateRoute/>}>
+                      <Route path="/activate-shop" element={<ActivateShop />} />
+                  </Route>
+
 
               </Routes>
           </Router>
