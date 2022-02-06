@@ -3,9 +3,8 @@ import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {getAuth} from "firebase/auth";
-import {updateDoc ,doc ,addDoc ,setDoc, collection} from "firebase/firestore";
+import {updateDoc ,doc, setDoc} from "firebase/firestore";
 import {db} from "../firebase.config";
-import {v4 as uuidv4} from 'uuid'
 import {useNavigate} from "react-router-dom";
 
 const ActivateShop = () => {
@@ -24,9 +23,6 @@ const ActivateShop = () => {
         e.preventDefault()
         try
         {
-            let idUnique = `${formData.businessName
-                .replace(/,?\s+/g, '-')
-                .toLowerCase()}-${uuidv4()}`
             console.log({...formData})
 
             const auth = getAuth()
@@ -59,7 +55,7 @@ const ActivateShop = () => {
     return (
         <>
             <AdminNavbar />
-            <Container>
+            <Container className="Profile">
                 <h5>Activate Shop</h5>
                 <Row className="justify-content-center">
                     <Col md={8}>

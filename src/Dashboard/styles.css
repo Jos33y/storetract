@@ -66,3 +66,119 @@
     -moz-box-shadow: 3px 3px 4px 1px rgba(100,100,100,0.75);
 }
 
+.Product h4{
+    font-size: 20px;
+    font-weight: 700;
+    color: #3E4095;
+    margin: 10px 0;
+}
+.Product .Form-product{
+    margin: 10px;
+    padding: 20px;
+    border-radius: 0px;
+    border: 1px solid #61dafb;
+}
+.Product .Form-product h5{
+    font-size: 17px;
+    float: left;
+    font-weight: 700;
+    color: #222;
+    margin-right: 10px;
+    text-transform: capitalize;
+}
+.Product .Form-product h6{
+    font-size: 15px;
+    font-weight: 700;
+    color: #3E4095;
+    text-transform: uppercase;
+}
+.Product .Form-product input{
+    font-size: 14px;
+}
+.Product .Form-product select{
+    font-size: 14px;
+    color: #222222;
+}
+.Product .Form-product option{
+    font-size: 14px;
+    color: #222222;
+}
+.Product .Form-product textarea{
+    font-size: 14px;
+}
+.Category h4{
+    font-size: 20px;
+    font-weight: 700;
+    color: #3E4095;
+    margin: 20px 0;
+}
+.Category .Form-category{
+    margin: 10px 20px;
+    padding: 20px;
+    border-radius: 0px;
+    border: 1px solid #61dafb;
+}
+.Category .Form-category h5{
+    font-size: 17px;
+    float: left;
+    font-weight: 700;
+    color: #222;
+    margin-right: 10px;
+    text-transform: capitalize;
+}
+.Category .Form-category h6{
+    font-size: 15px;
+    font-weight: 700;
+    color: #3E4095;
+    text-transform: uppercase;
+}
+.Product-card{
+    margin: 10px;
+}
+.Product-card .card-img-top{
+    width: 100%;
+    height: 200px;
+}
+.Product-card .card-body{
+    padding: 10px;
+}
+.Product-card h6{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    color: #3E4095;
+}
+.Product-card .Price{
+    font-size: 14px;
+    font-weight: 500;
+    padding-bottom: 0px;
+    margin-bottom: 0;
+}
+.Product-card .Price-one{
+    float: left;
+    width: 50%;
+
+    margin-bottom: 0;
+}
+.Product-card .Price-two{
+    color: #939694;
+    text-decoration: line-through;
+
+    margin-bottom: 0;
+}
+.Product-card .buttons .btn{
+    border: 1px solid transparent;
+    border-radius: 0px;
+}
+.Product-card .buttons .btn-primary{
+    float: left;
+    width: 40%;
+    margin-right: 10px;
+}
+.Product-card .buttons .btn-danger{
+    width: 40%;
+}
+.Prod-head h6{
+  font-size: 14px;
+    font-weight: 600;
+}

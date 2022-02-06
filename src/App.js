@@ -13,6 +13,7 @@ import InsertCategory from "./Dashboard/insertCategory";
 import ViewCategories from "./Dashboard/viewCategories";
 import AdminProfile from "./Dashboard/profile";
 import ActivateShop from "./Dashboard/activateShop";
+import InsertProduct from "./Dashboard/insertProduct";
 
 const App = () => {
   return (
@@ -34,6 +35,9 @@ const App = () => {
                   </Route>
                   <Route path="/view-categories" element={<PrivateRoute/>}>
                       <Route path="/view-categories" element={<ViewCategories />} />
+                  </Route>
+                  <Route path="/insert-product" element={<PrivateRoute/>}>
+                      <Route path="/insert-product" element={<InsertProduct />} />
                   </Route>
                   <Route path="/activate-shop" element={<PrivateRoute/>}>
                       <Route path="/activate-shop" element={<ActivateShop />} />

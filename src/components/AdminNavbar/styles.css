@@ -26,10 +26,10 @@
     width: 50%;
 }
 .Admin-navbar ul .buttons .btn{
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
-    border-radius: 10px;
-    padding: 8px 20px;
+    border-radius: 1px;
+    padding: 5px 15px;
     color: #ffffff;
 
     box-shadow: -1px 1px 2px 1px rgba(69,69,69,0.75);

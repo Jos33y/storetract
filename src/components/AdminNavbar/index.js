@@ -21,7 +21,7 @@ const AdminNavbar = () => {
             const profileSnap =  await getDoc(profileRef)
 
             if(profileSnap.exists()){
-                console.log(profileSnap.data())
+              //  console.log(profileSnap.data())
                 setShopActivated(profileSnap.data().shopActivated)
             }
         }
@@ -33,8 +33,10 @@ const AdminNavbar = () => {
                 <ul>
                     <li><Link className="navbar-brand" to="/admin-dash"> Dashboard </Link> </li>
                     <div className="buttons">
-                        <li><Link className="btn btn-md btn-primary" to="/insert-category">Insert Category </Link> </li>
+                        <li><Link className="btn btn-sm btn-primary" to="/insert-category">Category </Link> </li>
+                        <li><Link className="btn btn-md btn-success" to="/insert-product">Products </Link></li>
                         <li><Link className="btn btn-md btn-success" to="/admin-profile">View Profile </Link></li>
+
                         {
                             shopActivated ?
                                 ( <li><Link className="btn btn-md btn-secondary" to="/view-shop">View Shop </Link> </li>)
@@ -42,9 +44,7 @@ const AdminNavbar = () => {
                                 ( <li><Link className="btn btn-md btn-secondary" to="/activate-shop">Activate Shop </Link> </li>)
 
                         }
-
-
-                        <li><Link className="btn btn-md btn-danger" onClick={logOut} to="/">Log Out </Link></li>
+                        <li><Link className="btn btn-sm btn-danger" onClick={logOut} to="/">Log Out </Link></li>
                     </div>
                 </ul>
             </div>
