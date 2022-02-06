@@ -6,6 +6,7 @@ import {getAuth ,updateProfile} from "firebase/auth";
 import {updateDoc ,doc ,getDoc} from "firebase/firestore";
 import {db} from "../firebase.config";
 import {toast} from "react-toastify";
+import {Link} from "react-router-dom";
 
 
 const AdminProfile = () => {
@@ -15,10 +16,9 @@ const AdminProfile = () => {
         name: auth.currentUser.displayName,
         email: auth.currentUser.email,
         businessName: '',
-        phoneNumber: '',
-
+        phoneNumber: parseInt(''),
     })
-    const {name, email, businessName, phoneNumber} = formData
+    const {name, email, businessName, phoneNumber, shopActivated} = formData
 
     const onSubmit = async () => {
         try{
@@ -31,6 +31,8 @@ const AdminProfile = () => {
             console.log({...formData})
             //update in firestore
             const formDataCopy = {...formData}
+            formDataCopy.shopActivated = false
+            formDataCopy.phoneNumber = Number(formData.phoneNumber)
             const userRef = doc(db, 'users', auth.currentUser.uid)
             await updateDoc(userRef, formDataCopy)
             toast.success("profile changes saved successfully")
@@ -67,7 +69,11 @@ const AdminProfile = () => {
             <AdminNavbar />
             <Container className="Profile">
                 <h5>View Profile</h5>
-                <Button className="btn btn-md btn-primary">View Shop Profile</Button>
+                {shopActivated ?
+                    (<Button className="btn btn-md btn-primary">View Shop Profile</Button>)
+                    :
+                    (<Link to="/activate-shop" className="btn btn-md btn-success">Activate Shop</Link>)
+                }
                 <Row className="justify-content-center">
                     <Col md={8}>
                         <Form className="Profile-form">

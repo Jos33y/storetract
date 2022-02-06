@@ -52,3 +52,17 @@
     border: 1px solid #309634;
 }
 
+.Profile-form select{
+    height: 70px;
+    border-radius: 0px;
+    border: 0px solid #ffffff;
+    background: #e7e6ff;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+
+    box-shadow: 3px 3px 4px 1px rgba(100,100,100,0.75);
+    -webkit-box-shadow: 3px 3px 4px 1px rgba(100,100,100,0.75);
+    -moz-box-shadow: 3px 3px 4px 1px rgba(100,100,100,0.75);
+}
+
