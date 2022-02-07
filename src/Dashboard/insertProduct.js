@@ -4,6 +4,12 @@ import ViewProducts from "./viewProducts";
 import {useEffect ,useRef ,useState} from "react";
 import {getAuth} from "firebase/auth";
 import {collection ,doc ,getDocs ,orderBy ,query ,serverTimestamp ,setDoc} from "firebase/firestore";
+import {
+    getStorage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL,
+} from 'firebase/storage'
 import {db} from "../firebase.config";
 import {toast} from "react-toastify";
 import Spinner from "../components/Spinner";
@@ -11,8 +17,9 @@ import {v4 as uuidv4} from "uuid";
 
 const InsertProduct = () => {
     const [categories, setCategories] = useState([])
+    const [disabled, setDisabled] = useState(false)
     const [products, setProducts] = useState(null)
-    //const auth = getAuth()
+    const auth = getAuth()
     const [loading, setLoading] = useState(true)
     const isMounted = useRef()
     const [formData, setFormData] = useState({
@@ -21,35 +28,110 @@ const InsertProduct = () => {
         productPrice: 0,
         productDiscountPrice: 0,
         productDescription: '',
+        images: {},
         offer: false,
         timestamp: '',
     })
 
-    const {productName, productCategory, productPrice, productDiscountPrice, productDescription, offer} = formData
+    const {
+        productName,
+        productCategory,
+        productPrice,
+        productDiscountPrice,
+        productDescription,
+        images,
+        offer} = formData
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        //console.log(formData.productCategory)
-        //console.log("working")
         try{
+            //disable button
+            setDisabled(true)
+            //generate unique ID for product
             let prodUniqueId = `${formData.productName
                 .replace(/,?\s+/g, '-')
                 .toLowerCase()}-${uuidv4()}`
 
-            const auth = getAuth()
-            const formDataCopy = {...formData}
-            !formDataCopy.offer && delete formDataCopy.productDiscountPrice
-            formDataCopy.timestamp= serverTimestamp();
+            //console.log(formData.productCategory)
+            //console.log("working")
 
-            await setDoc(doc(db, 'shops', auth.currentUser.uid, 'products', prodUniqueId ), formDataCopy)
+            //store image in firebase storage
+            const storeImage = async (image) => {
+                return new Promise((resolve, reject) => {
+                    const storage = getStorage()
+                    const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
+
+                    const storageRef = ref(storage, `products/${auth.currentUser.uid}/` + fileName)
+
+                    const uploadTask = uploadBytesResumable(storageRef, image)
+
+                    uploadTask.on(
+                        'state_changed',
+                        (snapshot) => {
+                            const progress =
+                                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                            console.log('Upload is ' + progress + '% done')
+                            switch (snapshot.state) {
+                                case 'paused':
+                                    console.log('Upload is paused')
+                                    break
+                                case 'running':
+                                    console.log('Upload is running')
+                                    break
+                                default:
+                                    console.log('Default Case')
+                                    break
+                            }
+                        },
+                        (error) => {
+                            // Handle unsuccessful uploads
+                            reject(error)
+                        },
+                        () => {
+                            // Handle successful uploads on complete
+                            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                                resolve(downloadURL)
+                            })
+                        }
+                    )
+                })
+            }
+            //console.log(formData)
+            const imgUrls = await Promise.all(
+                [...images].map((image) => storeImage(image))
+            ).catch(() => {
                 setLoading(false)
-            toast.success("Product Inserted Successfully")
-
+                toast.error('Images not uploaded ')
+                return
+            })
+            const formDataCopy = {
+                ...formData,
+                imgUrls,
+                uniqueId: prodUniqueId,
+                timestamp: serverTimestamp(),
+            }
+            delete formDataCopy.images
+            !formDataCopy.offer && delete formDataCopy.productDiscountPrice
+            await setDoc(doc(db, 'shops', auth.currentUser.uid, 'products', prodUniqueId ), formDataCopy)
+            setFormData((prevState) => ({
+                ...prevState,
+                productName: '',
+                productCategory: '',
+                productPrice: 0,
+                productDiscountPrice: 0,
+                productDescription: '',
+                images: {},
+                offer: false,
+            }))
+            setDisabled(false)
+            setLoading(false)
+            toast.success('product uploaded successfully')
+            await fetchProducts()
         }
         catch (error) {
             console.log({error})
             toast.error("unable to insert product")
-
         }
     }
 
@@ -62,10 +144,22 @@ const InsertProduct = () => {
         if (e.target.value === 'false') {
             boolean = false
         }
-        setFormData((prevState) => ({
-            ...prevState,
-            [e.target.id]: boolean ?? e.target.value,
-        }))
+
+        //Files
+        if (e.target.files) {
+            setFormData((prevState) => ({
+                ...prevState,
+                images: e.target.files,
+            }))
+        }
+
+        //Text/Numbers/booleans
+        if (!e.target.files) {
+            setFormData((prevState) => ({
+                ...prevState,
+                [e.target.id]: boolean ?? e.target.value,
+            }))
+        }
     }
 
     const fetchProducts = async () => {
@@ -128,7 +222,8 @@ const InsertProduct = () => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMounted], products)
+    }, [isMounted, auth.currentUser.uid])
+
     return (
         <>
             <AdminNavbar />
@@ -164,7 +259,7 @@ const InsertProduct = () => {
                                                     Select product category...
                                             </option>
                                             {categories.map((category) => (
-                                                <option
+                                                <option key={category.id}
                                                         value={category.data.categoryUrl}>{category.data.title}
                                                 </option>
                                             ))}
@@ -222,8 +317,24 @@ const InsertProduct = () => {
                                           placeholder="Product Description">
                                     </textarea>
                                 </div>
+
+                                    <div className='form-group'>
+                                        <label htmlFor='gig-image'> Insert Product Image</label>
+                                        <p className='info'>
+                                            The first image will be the cover (max 3).
+                                        </p>
+                                        <input
+                                            type='file'
+                                            onChange={onChange}
+                                            max='3'
+                                            accept='.jpeg,.jpg,.png'
+                                            multiple
+                                            required={true}
+                                            className='form-control image-file'
+                                        />
+                                    </div>
                                     <div className="form-group">
-                                        <Button className="btn btn-md btn-primary" type="submit">
+                                        <Button disabled={disabled} className="btn btn-md btn-primary" type="submit">
                                             Insert Product
                                         </Button>
 

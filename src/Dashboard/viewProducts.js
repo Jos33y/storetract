@@ -7,7 +7,7 @@ const ViewProducts = ({product, id}) => {
     return (
         <>
             <Card className="Product-card">
-                <Card.Img src={ImageOne} variant="top" alt="Product img here" className="card-img-top" />
+                <Card.Img src={product.imgUrls[0]} variant="top" alt="Product img here" className="card-img-top" />
                 <Card.Body className="card-body">
                     <h6>{product.productName}</h6>
                     <div className="Price">
