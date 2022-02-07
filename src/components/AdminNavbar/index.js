@@ -39,7 +39,7 @@ const AdminNavbar = () => {
 
                         {
                             shopActivated ?
-                                ( <li><Link className="btn btn-md btn-secondary" to="/view-shop">View Shop </Link> </li>)
+                                ( <li><Link target="_blank" rel="noopener noreferrer" className="btn btn-md btn-secondary" to={`/${auth.currentUser.uid}`}>View Shop </Link> </li>)
                                :
                                 ( <li><Link className="btn btn-md btn-secondary" to="/activate-shop">Activate Shop </Link> </li>)
 

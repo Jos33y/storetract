@@ -6,6 +6,7 @@ import {getAuth} from "firebase/auth";
 import {updateDoc ,doc, setDoc} from "firebase/firestore";
 import {db} from "../firebase.config";
 import {useNavigate} from "react-router-dom";
+import {v4 as uuidv4} from "uuid";
 
 const ActivateShop = () => {
 
@@ -14,6 +15,8 @@ const ActivateShop = () => {
         businessPhone: '',
         businessCategory: '',
         businessPlan: '',
+        shopUrl: '',
+        shopOwnerRef: '',
     })
     const navigate = useNavigate()
 
@@ -23,11 +26,17 @@ const ActivateShop = () => {
         e.preventDefault()
         try
         {
-            console.log({...formData})
+            //console.log({...formData})
+            //generate unique URL for shop
+            let shopUrl = `${formData.businessName
+                .replace(/,?\s+/g, '-')
+                .toLowerCase()}`
 
             const auth = getAuth()
             const formDataCopy = {...formData}
             formDataCopy.businessPhone = Number(formData.businessPhone)
+            formDataCopy.shopUrl = shopUrl
+            formDataCopy.shopOwnerRef = auth.currentUser.uid
 
             await setDoc (doc(db, 'shops', auth.currentUser.uid), formDataCopy)
                 .then( () => {

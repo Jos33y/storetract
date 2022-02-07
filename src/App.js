@@ -14,6 +14,7 @@ import ViewCategories from "./Dashboard/viewCategories";
 import AdminProfile from "./Dashboard/profile";
 import ActivateShop from "./Dashboard/activateShop";
 import InsertProduct from "./Dashboard/insertProduct";
+import Shop from "./Shop";
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
                   <Route path="/activate-shop" element={<PrivateRoute/>}>
                       <Route path="/activate-shop" element={<ActivateShop />} />
                   </Route>
+                  <Route path="/:shopName" element={<Shop />} />
 
 
               </Routes>

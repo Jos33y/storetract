@@ -1,0 +1,72 @@
+.Header{
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
+}
+.Header h5{
+    color: #3E4095;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 25px;
+}
+.Categories ul{
+    list-style: none;
+}
+.Categories ul li{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px;
+    color: #939694;
+}
+
+.Product-card{
+    margin: 10px;
+}
+.Product-card .card-img-top{
+    width: 100%;
+    height: 200px;
+}
+.Product-card .card-body{
+    padding: 10px;
+}
+.Product-card h6{
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    color: #3E4095;
+}
+.Product-card .Price{
+    font-size: 14px;
+    font-weight: 500;
+    padding-bottom: 0px;
+    margin-bottom: 0;
+}
+.Product-card .Price-one{
+    float: left;
+    width: 50%;
+
+    margin-bottom: 0;
+}
+.Product-card .Price-two{
+    color: #939694;
+    text-decoration: line-through;
+
+    margin-bottom: 0;
+}
+.Product-card .buttons .btn{
+    border: 1px solid transparent;
+    border-radius: 0px;
+    width: 100%;
+}
+
+.Prod-head h6{
+    font-size: 14px;
+    font-weight: 600;
+}
+.info{
+    font-size: 12px;
+    font-weight: 500;
+}
