@@ -8,6 +8,7 @@ import {db} from "../../firebase.config";
 const AdminNavbar = () => {
 
     const [shopActivated, setShopActivated] = useState(false)
+    const [shopURl, setShopURL] = useState('')
 
     const auth = getAuth()
     const navigate = useNavigate()
@@ -17,12 +18,16 @@ const AdminNavbar = () => {
     }
     useEffect(() => {
         const getUser = async () =>{
-            const profileRef = doc(db, 'users', auth.currentUser.uid)
+            const profileRef = doc(db, 'shops', auth.currentUser.uid)
             const profileSnap =  await getDoc(profileRef)
 
             if(profileSnap.exists()){
               //  console.log(profileSnap.data())
-                setShopActivated(profileSnap.data().shopActivated)
+                setShopURL(profileSnap.data().shopUrl)
+                setShopActivated(true)
+            }
+            else {
+                setShopActivated(false)
             }
         }
         getUser()
@@ -39,7 +44,7 @@ const AdminNavbar = () => {
 
                         {
                             shopActivated ?
-                                ( <li><Link target="_blank" rel="noopener noreferrer" className="btn btn-md btn-secondary" to={`/${auth.currentUser.uid}`}>View Shop </Link> </li>)
+                                ( <li><Link target="_blank" rel="noopener noreferrer" className="btn btn-md btn-secondary" to={`/${shopURl}`}>View Shop </Link> </li>)
                                :
                                 ( <li><Link className="btn btn-md btn-secondary" to="/activate-shop">Activate Shop </Link> </li>)
 

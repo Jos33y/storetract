@@ -38,11 +38,13 @@ const ActivateShop = () => {
             formDataCopy.shopUrl = shopUrl
             formDataCopy.shopOwnerRef = auth.currentUser.uid
 
-            await setDoc (doc(db, 'shops', auth.currentUser.uid), formDataCopy)
+            await setDoc (doc(db, 'shops', shopUrl), formDataCopy)
                 .then( () => {
                         const userRef = doc(db, 'users', auth.currentUser.uid)
                          updateDoc(userRef, {
                             shopActivated: true,
+                             businessName: formDataCopy.businessName,
+                             phoneNumber: formDataCopy.businessPhone,
                         })
                 })
             toast.success("shop activated")
