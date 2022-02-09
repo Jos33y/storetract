@@ -45,6 +45,7 @@ const ActivateShop = () => {
                             shopActivated: true,
                              businessName: formDataCopy.businessName,
                              phoneNumber: formDataCopy.businessPhone,
+                             shopUrl: formDataCopy.shopUrl,
                         })
                 })
             toast.success("shop activated")
