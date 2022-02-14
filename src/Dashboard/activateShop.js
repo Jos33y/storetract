@@ -7,6 +7,7 @@ import {updateDoc ,doc, setDoc} from "firebase/firestore";
 import {db} from "../firebase.config";
 import {useNavigate} from "react-router-dom";
 import {v4 as uuidv4} from "uuid";
+import Plan from "./plan";
 
 const ActivateShop = () => {
 
@@ -161,6 +162,7 @@ const ActivateShop = () => {
                     </Col>
                 </Row>
             </Container>
+            <Plan />
         </>
     )
 
