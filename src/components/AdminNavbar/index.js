@@ -5,7 +5,6 @@ import {getAuth} from "firebase/auth";
 import {doc ,getDoc} from "firebase/firestore";
 import {db} from "../../firebase.config";
 import PackLogo from "../../assets/images/packnow.jpg"
-import Spinner from "../Spinner";
 
 const AdminNavbar = () => {
 

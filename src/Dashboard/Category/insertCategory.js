@@ -2,7 +2,7 @@ import AdminNavbar from "../../components/AdminNavbar";
 import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
 import {useEffect ,useRef ,useState} from "react";
 import {getAuth} from "firebase/auth";
-import {doc ,getDocs ,orderBy ,limit ,query ,serverTimestamp ,setDoc ,collection ,getDoc} from "firebase/firestore";
+import {doc ,serverTimestamp ,setDoc ,getDoc} from "firebase/firestore";
 import {db} from "../../firebase.config";
 import {toast} from "react-toastify";
 import {v4 as uuidv4} from "uuid";
@@ -34,7 +34,6 @@ const InsertCategory = () => {
                 .replace(/,?\s+/g, '-')
                 .toLowerCase()}-${uuidv4()}`
 
-            const auth = getAuth()
             // console.log({...formData})
             const formDataCopy = {...formData}
             formDataCopy.categoryUrl = formData.title.replace(/,?\s+/g, '-')
