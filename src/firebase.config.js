@@ -20,4 +20,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore()
+// eslint-disable-next-line react-hooks/exhaustive-deps
 const analytics = getAnalytics(app);

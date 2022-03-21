@@ -3,12 +3,10 @@ import Products from "./Products";
 import './styles.css'
 import {useEffect ,useRef ,useState} from "react";
 import {Link ,useParams} from "react-router-dom";
-import {collection ,getDocs ,query ,where ,doc ,getDoc ,orderBy ,limit} from "firebase/firestore";
+import {collection ,getDocs ,query ,doc ,getDoc ,orderBy} from "firebase/firestore";
 import {db} from "../firebase.config";
 import Spinner from "../components/Spinner";
-import {getAuth} from "firebase/auth";
 import {toast} from "react-toastify";
-import ViewCategories from "../Dashboard/Category/viewCategories";
 
 const Shop = () => {
     const params = useParams()
@@ -99,6 +97,7 @@ const Shop = () => {
         return () => {
             isMounted.current = false
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMounted, params.shopName])
 
 
