@@ -1,19 +1,21 @@
-import AdminNavbar from "../components/AdminNavbar";
+import AdminNavbar from "../../components/AdminNavbar";
 import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
 import {useEffect ,useRef ,useState} from "react";
 import {getAuth} from "firebase/auth";
-import {doc, getDocs, orderBy, limit, query ,serverTimestamp ,setDoc, collection} from "firebase/firestore";
-import {db} from "../firebase.config";
+import {doc ,getDocs ,orderBy ,limit ,query ,serverTimestamp ,setDoc ,collection ,getDoc} from "firebase/firestore";
+import {db} from "../../firebase.config";
 import {toast} from "react-toastify";
 import {v4 as uuidv4} from "uuid";
-import ViewCategories from "./viewCategories";
-import Spinner from "../components/Spinner";
+import Spinner from "../../components/Spinner";
+import {Link, useNavigate} from "react-router-dom";
 
 const InsertCategory = () => {
 
     const [loading, setLoading] = useState(true)
-    const [categories, setCategories] = useState(null)
+    const [shopUrl, setShopUrl] = useState(null)
     const isMounted = useRef()
+    const auth = getAuth()
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         title: '',
@@ -22,6 +24,7 @@ const InsertCategory = () => {
         timestamp: '',
     })
     const {title, description} = formData
+
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -36,7 +39,7 @@ const InsertCategory = () => {
             const formDataCopy = {...formData}
             formDataCopy.categoryUrl = formData.title.replace(/,?\s+/g, '-')
             formDataCopy.timestamp= serverTimestamp();
-            const categoryRef = doc(db, 'shops', auth.currentUser.uid, 'category', catUniqueId)
+            const categoryRef = doc(db, 'shops', shopUrl, 'category', catUniqueId)
             await setDoc(categoryRef, formDataCopy)
 
             toast.success("category inserted")
@@ -57,48 +60,57 @@ const InsertCategory = () => {
 
     useEffect(() => {
         if(isMounted) {
-            const fetchCategories = async () => {
-                try
-                {
-                    const auth = getAuth()
-                    const catRef = collection(db, 'shops', auth.currentUser.uid, 'category' )
 
-                    const q = query(catRef, orderBy('timestamp', 'desc'), limit(5))
+            const getUser = async () =>{
+                setLoading(true)
+                const profileRef = doc(db, 'users', auth.currentUser.uid)
+                const profileSnap =  await getDoc(profileRef)
 
-                    const querySnap = await getDocs(q)
+                if(profileSnap.exists()){
+                    //  console.log(profileSnap.data())
+                    if (profileSnap.data().shopActivated){
+                        setShopUrl(profileSnap.data().shopUrl)
+                        setLoading(false)
+                    }
+                    else
+                    {
+                        navigate('/activate-shop')
+                    }
 
-                    let categories = [];
-
-                    querySnap.forEach((doc) => {
-                        //console.log(doc.data())
-                        return categories.push({
-                            id: doc.id,
-                            data: doc.data(),
-                        })
-                    })
-                    setCategories(categories)
-                    setLoading(false)
                 }
-                catch (error) {
-                    toast.error("could not fetch categories")
-                    console.log({error})
-                }
+
             }
-            fetchCategories()
+
+            getUser()
+
         }
         return () => {
             isMounted.current = false
         }
-    }, [isMounted, categories])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMounted, auth.currentUser.uid])
 
     return (
         <>
             <AdminNavbar />
+
+
+
             <Container className="Category">
+                {loading ?
+                    (<Spinner />) :
+
+                    (
 
                 <Row className="justify-content-center">
                     <Col md={6}>
-                        <h4>Insert Category</h4>
+                        <div className="head-text">
+                            <h4>Insert Category</h4>
+                            <div className="right-button">
+                                <Link to="/view-categories" className="btn btn-md btn-success">View Categories</Link>
+                            </div>
+                        </div>
+
                         <Form className="Form-category" onSubmit={onSubmit}>
                             <div className="form-group">
                                 <input type="text"
@@ -118,11 +130,12 @@ const InsertCategory = () => {
                                           maxLength={100}
                                           required={true}
                                           className="form-control"
+                                          placeholder="Category Description"
                                           cols="30"
                                           rows="5">
                                 </textarea>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group button">
                                 <Button className="btn btn-md btn-primary"
                                         type="submit">
                                     Insert Category
@@ -130,27 +143,31 @@ const InsertCategory = () => {
                             </div>
                         </Form>
                     </Col>
-
-                    <Col md={6}>
-                        <h4>View Categories</h4>
-                        {loading ?
-                            (<Spinner />)
-                            : categories && categories.length > 0 ?
-                            (<>
-                                <h6>({categories.length}) category(ies)</h6>
-                                {categories.map((category) =>(
-                                    <div className="Saved" key={category.id}>
-                                        <ViewCategories category={category.data} id={category.id}/>
-                                    </div>
-                                ))}
-
-                            </>) :
-                                (<h5>No Categories</h5>)
-                        }
-
-                    </Col>
                 </Row>
+                    ) }
             </Container>
+
+                    {/*<Col md={6}>*/}
+                    {/*    <h4>View Categories</h4>*/}
+                    {/*    {loading ?*/}
+                    {/*        (<Spinner />)*/}
+                    {/*        : categories && categories.length > 0 ?*/}
+                    {/*        (<>*/}
+                    {/*            <h6>({categories.length}) category(ies)</h6>*/}
+                    {/*            {categories.map((category) =>(*/}
+                    {/*                <div className="Saved" key={category.id}>*/}
+                    {/*                    <ViewCategories category={category.data} id={category.id}/>*/}
+                    {/*                </div>*/}
+                    {/*            ))}*/}
+
+                    {/*        </>) :*/}
+                    {/*            (<h5>No Categories</h5>)*/}
+                    {/*    }*/}
+
+                    {/*</Col>*/}
+
+
+
         </>
     )
 

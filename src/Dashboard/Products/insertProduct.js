@@ -1,25 +1,26 @@
-import AdminNavbar from "../components/AdminNavbar";
+import AdminNavbar from "../../components/AdminNavbar";
 import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
-import ViewProducts from "./viewProducts";
 import {useEffect ,useRef ,useState} from "react";
 import {getAuth} from "firebase/auth";
-import {collection ,doc ,getDocs ,orderBy ,query ,serverTimestamp ,setDoc} from "firebase/firestore";
+import {collection ,doc ,getDoc ,getDocs ,orderBy ,query ,serverTimestamp ,setDoc} from "firebase/firestore";
 import {
     getStorage,
     ref,
     uploadBytesResumable,
     getDownloadURL,
 } from 'firebase/storage'
-import {db} from "../firebase.config";
+import {db} from "../../firebase.config";
 import {toast} from "react-toastify";
-import Spinner from "../components/Spinner";
+import Spinner from "../../components/Spinner";
 import {v4 as uuidv4} from "uuid";
+import {Link ,useNavigate} from "react-router-dom";
 
 const InsertProduct = () => {
     const [categories, setCategories] = useState([])
+    const [shopUrl, setShopUrl] = useState(null)
     const [disabled, setDisabled] = useState(false)
-    const [products, setProducts] = useState(null)
     const auth = getAuth()
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
     const isMounted = useRef()
     const [formData, setFormData] = useState({
@@ -113,7 +114,7 @@ const InsertProduct = () => {
             }
             delete formDataCopy.images
             !formDataCopy.offer && delete formDataCopy.productDiscountPrice
-            await setDoc(doc(db, 'shops', auth.currentUser.uid, 'products', prodUniqueId ), formDataCopy)
+            await setDoc(doc(db, 'shops', shopUrl, 'products', prodUniqueId ), formDataCopy)
             setFormData((prevState) => ({
                 ...prevState,
                 productName: '',
@@ -127,7 +128,7 @@ const InsertProduct = () => {
             setDisabled(false)
             setLoading(false)
             toast.success('product uploaded successfully')
-            await fetchProducts()
+
         }
         catch (error) {
             console.log({error})
@@ -162,61 +163,53 @@ const InsertProduct = () => {
         }
     }
 
-    const fetchProducts = async () => {
-        try
-        {
-            const auth = getAuth()
-            const prodRef = collection(db, 'shops', auth.currentUser.uid, 'products')
-            const q = query(prodRef)
+
+    const fetchCategories = async (shopName) => {
+
+        try {
+            setLoading(true)
+            const catRef = collection(db ,'shops' ,shopName ,'category')
+            const q = query(catRef, orderBy('timestamp', "desc"))
             const querySnap = await getDocs(q)
 
-            let products = []
-
             querySnap.forEach((doc) => {
-                //console.log(doc.data());
-                return products.push({
-                    id: doc.id,
-                    data: doc.data(),
+                //console.log(doc.data())
+                return categories.push({
+                    id: doc.id ,
+                    data: doc.data() ,
                 })
+
             })
-            setProducts(products)
+            setCategories(categories)
             setLoading(false)
-
-        }
-        catch (error) {
+        } catch (error) {
+            toast.error("Error getting categories")
             console.log({error})
-            toast.error("Unable to retrieve products")
-
         }
     }
 
 
     useEffect(() => {
         if(isMounted) {
-            const fetchCategories = async () => {
-                try {
-                    const auth = getAuth()
-                    const catRef = collection(db ,'shops' ,auth.currentUser.uid ,'category')
-                    const q = query(catRef, orderBy('timestamp', "desc"))
-                    const querySnap = await getDocs(q)
+            const getUser = async () =>{
+                setLoading(true)
+                const profileRef = doc(db, 'users', auth.currentUser.uid)
+                const profileSnap =  await getDoc(profileRef)
 
-                    querySnap.forEach((doc) => {
-                        //console.log(doc.data())
-                        return categories.push({
-                            id: doc.id ,
-                            data: doc.data() ,
-                        })
+                if(profileSnap.exists()){
+                    //  console.log(profileSnap.data())
+                    if (profileSnap.data().shopActivated){
+                        setShopUrl(profileSnap.data().shopUrl)
+                        fetchCategories(profileSnap.data().shopUrl)
+                    }
+                    else
+                    {
+                        navigate('/activate-shop')
+                    }
 
-                    })
-                    setCategories(categories)
-                    setLoading(false)
-                } catch (error) {
-                    toast.error("Error getting categories")
-                    console.log({error})
                 }
             }
-            fetchCategories()
-            fetchProducts()
+            getUser()
         }
         return () => {
             isMounted.current = false
@@ -227,15 +220,28 @@ const InsertProduct = () => {
     return (
         <>
             <AdminNavbar />
-            <Container className="Product" >
-                <Row>
-                    <Col md={4}>
-                        <h4>Insert Product</h4>
+
+
+
+            <Container className="Product">
+                {loading ?
+                    (<Spinner />) :
+
+                    (
+                <Row className="justify-content-center">
+                    <Col md={6}>
+                        <div className="head-text">
+                            <h4>Insert Product</h4>
+                            <div className="right-button">
+                                <Link to="/view-products" className="btn btn-md btn-success">View Products</Link>
+                            </div>
+                        </div>
                         {loading ?
                             (
                                 <Spinner />
                             )
                             :
+
                             (<Form className="Form-product" onSubmit={onSubmit}>
                                 <div className="form-group">
                                     <input type="text"
@@ -319,7 +325,7 @@ const InsertProduct = () => {
                                 </div>
 
                                     <div className='form-group'>
-                                        <label htmlFor='gig-image'> Insert Product Image</label>
+                                        <label htmlFor='gig-image' className="label"> Insert Product Image</label>
                                         <p className='info'>
                                             The first image will be the cover (max 3).
                                         </p>
@@ -333,7 +339,7 @@ const InsertProduct = () => {
                                             className='form-control image-file'
                                         />
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group button">
                                         <Button disabled={disabled} className="btn btn-md btn-primary" type="submit">
                                             Insert Product
                                         </Button>
@@ -342,30 +348,10 @@ const InsertProduct = () => {
                             </Form>
                             )
                         }
-
                     </Col>
-                    <Col md={8} className="Prod-head">
-                            <h4>View Products</h4>
-                        {loading ?
-                            (<Spinner />)
-                            : products && products.length > 0 ?
-                                (<>
-                                <h6>{products.length} Product(S)</h6>
-                                <Row>
-                                    {products.map((product) => (
-                                        <Col md={4} key={product.id}>
-                                            <ViewProducts product={product.data} id={product.id} />
-                                        </Col>
-                                    ))}
 
-                                </Row>
-                                </>) :
-                                (<h6>No product available</h6>)
-                        }
-
-
-                    </Col>
                 </Row>
+                    ) }
 
             </Container>
         </>

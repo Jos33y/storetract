@@ -8,7 +8,7 @@ import {db} from "../firebase.config";
 import Spinner from "../components/Spinner";
 import {getAuth} from "firebase/auth";
 import {toast} from "react-toastify";
-import ViewCategories from "../Dashboard/viewCategories";
+import ViewCategories from "../Dashboard/Category/viewCategories";
 
 const Shop = () => {
     const params = useParams()

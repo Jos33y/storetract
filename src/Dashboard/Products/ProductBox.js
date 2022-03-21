@@ -1,8 +1,8 @@
 import {Button ,Card} from "react-bootstrap";
-import ImageOne from '../assets/images/products/yazzy-one.jpg'
+// import ImageOne from '../../assets/images/products/yazzy-one.jpg'
 import {Link} from "react-router-dom";
 
-const ViewProducts = ({product, id}) => {
+const ProductBox = ({product, id}) => {
 
     return (
         <>
@@ -33,4 +33,4 @@ const ViewProducts = ({product, id}) => {
     )
 
 }
-export default ViewProducts
+export default ProductBox

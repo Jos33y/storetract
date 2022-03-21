@@ -4,12 +4,13 @@ import {Link ,useNavigate} from "react-router-dom";
 import {getAuth} from "firebase/auth";
 import {doc ,getDoc} from "firebase/firestore";
 import {db} from "../../firebase.config";
+import Spinner from "../Spinner";
 
 const AdminNavbar = () => {
 
     const [shopActivated, setShopActivated] = useState(false)
     const [shopURl, setShopURL] = useState('')
-
+    const [loading, setLoading] = useState(true)
     const auth = getAuth()
     const navigate = useNavigate()
     const logOut = () => {
@@ -18,13 +19,16 @@ const AdminNavbar = () => {
     }
     useEffect(() => {
         const getUser = async () =>{
-            const profileRef = doc(db, 'shops', auth.currentUser.uid)
+            setLoading(true)
+            const profileRef = doc(db, 'users', auth.currentUser.uid)
             const profileSnap =  await getDoc(profileRef)
 
             if(profileSnap.exists()){
               //  console.log(profileSnap.data())
                 setShopURL(profileSnap.data().shopUrl)
-                setShopActivated(true)
+                setShopActivated(profileSnap.data().shopActivated)
+                setLoading(false)
+
             }
             else {
                 setShopActivated(false)
@@ -42,11 +46,20 @@ const AdminNavbar = () => {
                         <li><Link className="btn btn-md btn-success" to="/insert-product">Products </Link></li>
                         <li><Link className="btn btn-md btn-success" to="/admin-profile">View Profile </Link></li>
 
+                        {loading ? (<button className="btn btn-md btn-secondary" type="button" disabled>
+                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button>) :
+                            (
+                                shopActivated ?
+                                    ( <li><Link target="_blank" rel="noopener noreferrer" className="btn btn-md btn-secondary" to={`/${shopURl}`}>View Shop </Link> </li>)
+                                    :
+                                    ( <li><Link className="btn btn-md btn-secondary" to="/activate-shop">Activate Shop </Link> </li>)
+
+                            )
+                        }
+
                         {
-                            shopActivated ?
-                                ( <li><Link target="_blank" rel="noopener noreferrer" className="btn btn-md btn-secondary" to={`/${shopURl}`}>View Shop </Link> </li>)
-                               :
-                                ( <li><Link className="btn btn-md btn-secondary" to="/activate-shop">Activate Shop </Link> </li>)
 
                         }
                         <li><Link className="btn btn-sm btn-danger" onClick={logOut} to="/">Log Out </Link></li>

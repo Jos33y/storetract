@@ -54,6 +54,7 @@ const AdminProfile = () => {
 
     useEffect(() => {
         const getUser = async () =>{
+            const auth = getAuth()
             const profileRef = doc(db, 'users', auth.currentUser.uid)
             const profileSnap =  await getDoc(profileRef)
 

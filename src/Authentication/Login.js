@@ -84,10 +84,10 @@ const Login = () => {
                             <h5>Login</h5>
 
                             <div className="form-group">
-                                <Button className="btn btn-md btn-success" disabled={disable} onClick={onGoogleClick}>Login with Google</Button>
+                                <Button className="btn btn-md btn-success" disabled={disable} onClick={onGoogleClick}>Google Sign In</Button>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email" className="sr-only">Email</label>
                                 <input type="email"
                                        id="email"
                                        value={email}
@@ -98,7 +98,7 @@ const Login = () => {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="email">Password</label>
+                                <label htmlFor="email" className="sr-only">Password</label>
                                 <input type="password"
                                        id="password"
                                        value={password}
