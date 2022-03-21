@@ -9,7 +9,7 @@ const Home = () => {
             <HomeNavbar />
             <div className="Home">
                 <header>
-                    <h5>PackShop In Progress...</h5>
+                    <h5>StoreTract In Progress...</h5>
                     <Spinner animation="grow" variant="primary" />
                 </header>
             </div>

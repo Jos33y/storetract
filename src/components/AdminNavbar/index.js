@@ -4,6 +4,7 @@ import {Link ,useNavigate} from "react-router-dom";
 import {getAuth} from "firebase/auth";
 import {doc ,getDoc} from "firebase/firestore";
 import {db} from "../../firebase.config";
+import PackLogo from "../../assets/images/packnow.jpg"
 import Spinner from "../Spinner";
 
 const AdminNavbar = () => {
@@ -40,7 +41,10 @@ const AdminNavbar = () => {
         <>
             <div className="Admin-navbar">
                 <ul>
-                    <li><Link className="navbar-brand" to="/admin-dash"> Dashboard </Link> </li>
+                    <li><Link className="navbar-brand" to="/admin-dash">
+                        <img src={PackLogo} alt="" className="logo-fluid"/>
+                        Dashboard
+                    </Link> </li>
                     <div className="buttons">
                         <li><Link className="btn btn-sm btn-primary" to="/insert-category">Category </Link> </li>
                         <li><Link className="btn btn-md btn-success" to="/insert-product">Products </Link></li>

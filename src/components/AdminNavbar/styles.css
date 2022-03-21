@@ -12,6 +12,10 @@
     color: #3E4095;
     text-transform: uppercase;
 }
+.Admin-navbar .navbar-brand .logo-fluid{
+    width: 8%;
+    padding-right: 10px;
+}
 .Admin-navbar ul{
     list-style: none;
 }
