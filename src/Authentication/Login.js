@@ -2,11 +2,13 @@ import React ,{useState} from "react";
 import './styles.css'
 import HomeNavbar from "../components/HomeNavbar";
 import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
-import {Link ,useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import {getAuth ,GoogleAuthProvider ,signInWithEmailAndPassword ,signInWithPopup} from "firebase/auth";
 import {getDoc, setDoc, doc, serverTimestamp} from "firebase/firestore";
 import {db} from "../firebase.config";
+import GoogleLogo from "../assets/images/google-logo-9808.png"
+import LoginOffice from  "../assets/images/4957136.jpg"
 
 const Login = () => {
 
@@ -78,46 +80,66 @@ const Login = () => {
             <HomeNavbar />
             <Container>
                 <Row>
-                    <Col md={4}></Col>
-                    <Col md={4}>
-                        <Form className="Form" onSubmit={onSubmit}>
-                            <h5>Login</h5>
+                    <Col md={1}></Col>
+                    <Col md={10} className="Auth-box">
+                        <Row>
+                            <Col md={6}>
+                                <Form className="Form" onSubmit={onSubmit} autocomplete="off">
+                                    <h5>Sign in</h5>
 
-                            <div className="form-group">
-                                <Button className="btn btn-md btn-success" disabled={disable} onClick={onGoogleClick}>Google Sign In</Button>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email" className="sr-only">Email</label>
-                                <input type="email"
-                                       id="email"
-                                       value={email}
-                                       onChange={onChange}
-                                       required={true}
-                                       className="form-control"
-                                       placeholder="Enter Email Address"/>
-                            </div>
+                                    <div className="form-group">
+                                        {/*<Button className="btn btn-md btn-success" >Google Sign In</Button>*/}
+                                    </div>
+                                    <div className="form-group">
+                                        <div className="Input-box">
+                                            <label htmlFor="email"><i className="fas fa-envelope"></i></label>
+                                            <input type="email"
+                                                   id="email"
+                                                   value={email}
+                                                   onChange={onChange}
+                                                   required={true}
+                                                   placeholder="Your Email"/>
+                                        </div>
 
-                            <div className="form-group">
-                                <label htmlFor="email" className="sr-only">Password</label>
-                                <input type="password"
-                                       id="password"
-                                       value={password}
-                                       onChange={onChange}
-                                       required={true}
-                                       className="form-control"
-                                       placeholder="Enter Password"/>
-                            </div>
+                                    </div>
 
-                            <div className="form-group button">
-                              <Button className="btn btn-md btn-primary" type="submit">Sign In</Button>
-                            </div>
+                                    <div className="form-group">
+                                        <div className="Input-box">
+                                            <label htmlFor="email"><i className="fas fa-lock"></i></label>
+                                            <input type="password"
+                                                   id="password"
+                                                   value={password}
+                                                   onChange={onChange}
+                                                   required={true}
+                                                   placeholder="Password"/>
+                                        </div>
 
-                            <p> <Link to="/forgot-password" className="forget">Forgot Password</Link> </p>
-                        </Form>
+                                    </div>
+
+                                    <div className="form-group button">
+                                        <Button className="btn btn-md btn-primary" type="submit">Login</Button>
+                                    </div>
+
+                                    <hr/>
+                                    <p className="Social-sign-in">Social sign in</p>
+                                    <img src={GoogleLogo} alt="" className="Social-sign-in-fluid" disabled={disable} onClick={onGoogleClick}/>
+                                    <hr/>
+                                    <p> <Link to="/forgot-password" className="forget">Forgot Password</Link> </p>
+                                </Form>
+                            </Col>
+                            <Col md={6}>
+                                <div className="Form-image">
+                                    <img src={LoginOffice} alt="" className="img-fluid"/>
+                                    <p> <Link to="/register" className="register">I don't have a store</Link> </p>
+
+                                </div>
+                            </Col>
+
+                        </Row>
                     </Col>
-                    <Col md={4}></Col>
-
+                    <Col md={1}></Col>
                 </Row>
+
             </Container>
 
         </>

@@ -6,6 +6,8 @@ import {toast} from "react-toastify";
 import {getAuth, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import {doc, setDoc, serverTimestamp, getDoc} from "firebase/firestore"
 import {db} from "../firebase.config";
+import RegisterOffice from "../assets/images/22Z_2012.w003.n001.69B.p12.69.jpg";
+import GoogleLogo from "../assets/images/google-logo-9808.png";
 
 const Register = () => {
 
@@ -87,66 +89,80 @@ const Register = () => {
             <HomeNavbar />
             <Container >
                 <Row>
-                    <Col md={4}></Col>
-                    <Col md={4}>
-                        <Form className="Form" onSubmit={onSubmit}>
-                            <h5>Register Now</h5>
-                            <div className="form-group">
-                               <Button className="btn btn-md btn-success" disabled={disable} onClick={onGoogleClick}>Register with Google</Button>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email" className="sr-only">Full Name</label>
-                                <input type="text"
-                                       id="name"
-                                       value={name}
-                                       onChange={onChange}
-                                       className="form-control"
-                                       required={true}
-                                       maxLength={100}
-                                       placeholder="Enter Full Name"/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email" className="sr-only">Business Name</label>
-                                <input type="text"
-                                       id="businessName"
-                                       value={businessName}
-                                       onChange={onChange}
-                                       className="form-control"
-                                       required={true}
-                                       maxLength={80}
-                                       placeholder="Enter Business Name"/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email" className="sr-only">Email</label>
-                                <input type="email"
-                                       id="email"
-                                       value={email}
-                                       onChange={onChange}
-                                       className="form-control"
-                                       required={true}
-                                       placeholder="Enter Email "/>
-                            </div>
+                    <Col md={1}></Col>
+                    <Col md={10} className="Auth-box">
+                        <Row>
+                            <Col md={6}>
+                                <Form className="Form" onSubmit={onSubmit} autocomplete="off">
+                                    <h5>Sign up</h5>
+                                    <div className="form-group">
+                                        <div className="Input-box">
+                                            <label htmlFor="full-name"><i className="fas fa-user"></i></label>
+                                            <input type="text"
+                                                   id="name"
+                                                   value={name}
+                                                   onChange={onChange}
+                                                   required={true}
+                                                   maxLength={100}
+                                                   placeholder="Your Full Name"/>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <div className="Input-box">
+                                            <label htmlFor="email"><i className="fas fa-briefcase"></i></label>
+                                            <input type="text"
+                                                   id="businessName"
+                                                   value={businessName}
+                                                   onChange={onChange}
+                                                   required={true}
+                                                   maxLength={80}
+                                                   placeholder="Your Business Name"/>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <div className="Input-box">
+                                            <label htmlFor="email"><i className="fas fa-envelope"></i></label>
+                                            <input type="email"
+                                                   id="email"
+                                                   value={email}
+                                                   onChange={onChange}
+                                                   required={true}
+                                                   placeholder="Your Email "/>
+                                        </div>
+                                    </div>
 
-                            <div className="form-group" >
-                                <label htmlFor="email" className="sr-only">Password</label>
-                                <input type="password"
-                                       id="password"
-                                       value={password}
-                                       onChange={onChange}
-                                       required={true}
-                                       className="form-control"
-                                       placeholder="Enter Password"/>
-                            </div>
+                                    <div className="form-group" >
+                                        <div className="Input-box">
+                                            <label htmlFor="email"><i className="fas fa-lock"></i></label>
+                                            <input type="password"
+                                                   id="password"
+                                                   value={password}
+                                                   onChange={onChange}
+                                                   required={true}
+                                                   placeholder="Password"/>
+                                        </div>
+                                    </div>
 
-                            <div className="form-group button">
-                                <Button className="btn btn-md btn-primary" type="submit">Register</Button>
-                            </div>
+                                    <div className="form-group button">
+                                        <Button className="btn btn-md btn-primary" type="submit">Register</Button>
+                                    </div>
 
-                            <p> <Link to="/login" className="forget">Login</Link> </p>
-                        </Form>
+                                    <hr/>
+                                    <p className="Social-sign-in">Social sign up</p>
+                                    <img src={GoogleLogo} alt="" className="Social-sign-in-fluid" disabled={disable} onClick={onGoogleClick}/>
+                                    <hr/>
+                                </Form>
+                            </Col>
+                            <Col md={6}>
+                                <div className="Form-image">
+                                    <img src={RegisterOffice} alt="" className="img-register"/>
+                                    <p> <Link to="/login" className="register">I have a store</Link> </p>
+
+                                </div>
+                            </Col>
+                        </Row>
                     </Col>
-                    <Col md={4}></Col>
-
+                    <Col md={1}></Col>
                 </Row>
             </Container>
         </>
