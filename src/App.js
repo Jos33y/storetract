@@ -11,10 +11,10 @@ import AdminDashboard from "./Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import InsertCategory from "./Dashboard/Category/insertCategory";
 import ViewCategories from "./Dashboard/Category/viewCategories";
-import ViewProducts from "./Dashboard/Products/viewProducts";
+import ViewProducts from "./Dashboard/Product/viewProducts";
 import AdminProfile from "./Dashboard/profile";
 import ActivateShop from "./Dashboard/activateShop";
-import InsertProduct from "./Dashboard/Products/insertProduct";
+import InsertProduct from "./Dashboard/Product/insertProduct";
 import Shop from "./Shop";
 
 const App = () => {

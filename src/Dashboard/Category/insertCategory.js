@@ -104,7 +104,7 @@ const InsertCategory = () => {
                 <Row className="justify-content-center">
                     <Col md={6}>
                         <div className="head-text">
-                            <h4>Insert Category</h4>
+                            <h4>Insert Categories</h4>
                             <div className="right-button">
                                 <Link to="/view-categories" className="btn btn-md btn-success">View Categories</Link>
                             </div>
@@ -119,7 +119,7 @@ const InsertCategory = () => {
                                        required={true}
                                        maxLength={20}
                                        className="form-control"
-                                       placeholder="Category Title"/>
+                                       placeholder="Categories Title"/>
                             </div>
                             <div className="form-group">
                                 <textarea name="description"
@@ -129,7 +129,7 @@ const InsertCategory = () => {
                                           maxLength={100}
                                           required={true}
                                           className="form-control"
-                                          placeholder="Category Description"
+                                          placeholder="Categories Description"
                                           cols="30"
                                           rows="5">
                                 </textarea>
@@ -137,7 +137,7 @@ const InsertCategory = () => {
                             <div className="form-group button">
                                 <Button className="btn btn-md btn-primary"
                                         type="submit">
-                                    Insert Category
+                                    Insert Categories
                                 </Button>
                             </div>
                         </Form>

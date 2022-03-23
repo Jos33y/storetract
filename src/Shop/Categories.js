@@ -1,4 +1,4 @@
-const Category = () => {
+const Categories = () => {
     return(
         <>
             <h3>Shop Categories</h3>
@@ -7,4 +7,4 @@ const Category = () => {
 
 }
 
-export default Category
+export default Categories

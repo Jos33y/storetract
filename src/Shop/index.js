@@ -1,12 +1,15 @@
 import {Col ,Container ,Row} from "react-bootstrap";
-import Products from "./Products";
+import ProductCard from "./components/ProductCard";
 import './styles.css'
 import {useEffect ,useRef ,useState} from "react";
-import {Link ,useParams} from "react-router-dom";
-import {collection ,getDocs ,query ,doc ,getDoc ,orderBy} from "firebase/firestore";
+import {useParams} from "react-router-dom";
+import {collection ,getDocs ,query ,doc ,getDoc} from "firebase/firestore";
 import {db} from "../firebase.config";
 import Spinner from "../components/Spinner";
 import {toast} from "react-toastify";
+import ShopHeader from "./components/ShopHeader";
+import ShopFooter from "./components/ShopFooter";
+import CategorySection from "./components/CategorySection";
 
 const Shop = () => {
     const params = useParams()
@@ -15,35 +18,10 @@ const Shop = () => {
 
     const [shopData, setShopData] = useState('')
     const [products, setProducts] = useState(null)
-    const [categories, setCategories] = useState(null)
     const [loading, setLoading] = useState(true)
     const isMounted = useRef()
 
-    //Fetch Categories
-    const fetchCategories = async () => {
-        try
-        {
-            const catRef = collection(db, 'shops', params.shopName, 'category' )
-            const q = query(catRef, orderBy('timestamp', 'desc'))
-            const querySnap = await getDocs(q)
-            let categories = [];
-            querySnap.forEach((doc) => {
-                //console.log(doc.data())
-                return categories.push({
-                    id: doc.id,
-                    data: doc.data(),
-                })
-            })
-            setCategories(categories)
-            setLoading(false)
-        }
-        catch (error) {
-            toast.error("could not fetch categories")
-            console.log({error})
-        }
-    }
-
-    //Fetch Products
+    //Fetch Product
     const fetchProducts = async () => {
         try
         {
@@ -91,7 +69,7 @@ const Shop = () => {
                 }
             }
             fetchDetails()
-            fetchCategories()
+            // fetchCategories()
             fetchProducts()
         }
         return () => {
@@ -109,34 +87,22 @@ const Shop = () => {
                         :
                         (
                             <>
-                    <div className="Header">
-                        <h5>{shopData.businessName}</h5>
-
-                    </div>
+                                <ShopHeader businessName={shopData.businessName} />
+                                <CategorySection shopName={params.shopName}/>
                     <Container>
 
-                        <div className="Categories">
-                            <ul>
-                                {categories.map((category) =>(
-                                    <li key={category.id}>
-                                    <Link to={`${category.data.categoryUrl}`} >{category.data.title} </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div className="Products">
+                        <div className="Shop-products">
                             {loading ?
                                 (<Spinner />)
                                 : products && products.length > 0 ?
                                     (
                                         <>
-                                        <h6>{products.length} Product(S)</h6>
+                                        <h6 className="small">{products.length} Product(s)</h6>
                             <Row>
 
                                 {products.map((product) => (
                                 <Col md={3} key={product.id}>
-                                    <Products  product={product.data} />
+                                    <ProductCard product={product.data} />
                                 </Col>
                                 ))}
                             </Row>
@@ -147,6 +113,8 @@ const Shop = () => {
                         </div>
 
                     </Container>
+
+                                <ShopFooter businessName={shopData.businessName}/>
                                 </>
                         )}
                 </>

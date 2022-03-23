@@ -1,13 +1,16 @@
 import {Button ,Card} from "react-bootstrap";
-import './styles.css'
+import {Link} from "react-router-dom";
+import '../styles.css'
 
 
-const Products = ({product}) => {
+const ProductCard = ({product}) => {
 
     return(
         <>
-            <Card className="Product-card">
-                <Card.Img src={product.imgUrls[0]} variant="top" alt="Product img here" className="card-img-top" />
+            <Card className="Shop-product-card">
+                <Link to="/" className="Product-card-link">
+                    <Card.Img src={product.imgUrls[0]} variant="top" alt="Product img here" className="card-img-top" />
+                </Link>
                 <Card.Body className="card-body">
                     <h6>{product.productName}</h6>
                     <div className="Price">
@@ -21,14 +24,16 @@ const Products = ({product}) => {
                 <Card.Footer>
                     <div className="buttons">
                         <Button className="btn btn-sm btn-success">
-                            contact seller
+                            Quick View
                         </Button>
                     </div>
                 </Card.Footer>
             </Card>
+
+
         </>
     )
 
 }
 
-export default Products
+export default ProductCard

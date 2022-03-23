@@ -107,7 +107,7 @@ const ActivateShop = () => {
                                             required={true}
                                             onChange={onChange}
                                             value={businessCategory}
-                                            placeholder='Select a Business Category'
+                                            placeholder='Select a Business Categories'
                                         >
                                             <option value='disable' disabled={true}>
                                                 Select a business category

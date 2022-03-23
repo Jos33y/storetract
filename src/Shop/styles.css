@@ -1,16 +1,87 @@
+/*Shop Header Styles*/
 .Header{
-    padding: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
+    padding: 10px 10px 1px;
+    background: #2e2e2e;
+
 }
-.Header h5{
-    color: #3E4095;
+.Header ul{
+    list-style: none;
+    text-align: center;
+}
+
+.Header .NavBrand{
+    padding-top: 10px;
+    display: inline-block;
     font-weight: 700;
-    letter-spacing: 1px;
-    font-size: 25px;
+    font-size: 22px;
+    color: #ffffff;
+    text-transform: uppercase;
 }
+
+
+.Header .logo-fluid{
+    width: 10%;
+    border-radius: 50%;
+    background: #ffffff;
+    padding: 2px;
+    margin-right: 10px;
+
+    box-shadow: -1px 1px 7px 1px rgba(176,174,174,0.75);
+    -webkit-box-shadow: -1px 1px 7px 1px rgba(176,174,174,0.75);
+    -moz-box-shadow: -1px 1px 7px 1px rgba(176,174,174,0.75);
+}
+
+
+/*Shop Footer Styles*/
+.Footer {
+    padding: 10px 10px 1px;
+    margin-top: 2%;
+    background: #2e2e2e;
+    text-align: center;
+}
+.Footer p{
+    padding-top: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #ffffff;
+    text-transform: lowercase;
+}
+
+/*Shop Category Section Styles*/
+.Category-section{
+    padding: 15px 10px 0px 10px;
+    text-align: center;
+    background: #ffffff;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #bdbebf;
+}
+.Category-section ul{
+    list-style: none;
+}
+.Category-section ul li{
+    display: inline-block;
+    margin-right: 40px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 15px;
+
+
+}
+.Category-section ul li .Category-link{
+    text-decoration: none;
+    color: #222222;
+}
+
+.Category-section ul li .Category-link:hover{
+    background: #d4d4d4;
+    padding: 15px;
+}
+
+.Category-section ul li .fas{
+    padding-left: 5px;
+}
+
 .Categories ul{
     list-style: none;
 }
@@ -22,51 +93,89 @@
     color: #939694;
 }
 
-.Product-card{
+
+/*Shop Products Section Styles*/
+
+.Shop-products .small{
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/*Shop Product Card Section Styles*/
+.Shop-product-card{
     margin: 10px;
+    border-radius: 0;
+    border: 0px solid #939694;
+    box-shadow: 0px 0px 1px 1px rgba(181,181,181,0.75);
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(181,181,181,0.75);
+    -moz-box-shadow: 0px 0px 1px 1px rgba(181,181,181,0.75);
+
 }
-.Product-card .card-img-top{
+.Shop-product-card:hover{
+    box-shadow: 0px 0px 5px 3px rgba(201,201,201,0.75);
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(201,201,201,0.75);
+    -moz-box-shadow: 0px 0px 5px 3px rgba(201,201,201,0.75);
+}
+.Shop-product-card .card-img-top{
     width: 100%;
-    height: 200px;
+    height: 220px;
 }
-.Product-card .card-body{
+.Shop-product-card .card-body{
     padding: 10px;
+    height: 80px;
 }
-.Product-card h6{
+.Shop-product-card h6{
     font-size: 13px;
     font-weight: 600;
     text-align: left;
     color: #3E4095;
 }
-.Product-card .Price{
+.Shop-product-card .Price{
     font-size: 14px;
     font-weight: 500;
     padding-bottom: 0px;
     margin-bottom: 0;
 }
-.Product-card .Price-one{
+.Shop-product-card .Price-one{
     float: left;
     width: 50%;
+    font-size: 16px;
+    font-weight: 700;
 
     margin-bottom: 0;
 }
-.Product-card .Price-two{
+.Shop-product-card.Price-two{
     color: #939694;
     text-decoration: line-through;
-
     margin-bottom: 0;
 }
-.Product-card .buttons .btn{
+
+.Shop-product-card .buttons .btn{
     border: 1px solid transparent;
     border-radius: 0px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 8px;
     width: 100%;
+    letter-spacing: 1px;
+    background: #7d7d7d;
+}
+.Shop-product-card .buttons .btn:hover{
+    background: #525252;
 }
 
-.Prod-head h6{
-    font-size: 14px;
-    font-weight: 600;
-}
-.info{
-    font-size: 12px;
-    font-weight: 500;
-}
+
+
+
+/*.Prod-head h6{*/
+/*    font-size: 14px;*/
+/*    font-weight: 600;*/
+/*}*/
+/*.info{*/
+/*    font-size: 12px;*/
+/*    font-weight: 500;*/
+/*}*/

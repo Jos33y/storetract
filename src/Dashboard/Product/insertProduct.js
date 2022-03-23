@@ -133,6 +133,7 @@ const InsertProduct = () => {
         catch (error) {
             console.log({error})
             toast.error("unable to insert product")
+            setDisabled(false)
         }
     }
 
@@ -333,7 +334,7 @@ const InsertProduct = () => {
                                             type='file'
                                             onChange={onChange}
                                             max='3'
-                                            accept='.jpeg,.jpg,.png'
+                                            accept='image/*'
                                             multiple
                                             required={true}
                                             className='form-control image-file'
