@@ -1,5 +1,4 @@
 import React from "react";
-import PackLogo from "../../assets/images/packnow.jpg";
 import {getRandomColor,createImageFromInitials} from './utils'
 
 const ShopHeader = ({businessName}) => {

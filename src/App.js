@@ -16,6 +16,8 @@ import AdminProfile from "./Dashboard/profile";
 import ActivateShop from "./Dashboard/activateShop";
 import InsertProduct from "./Dashboard/Product/insertProduct";
 import Shop from "./Shop";
+import QuickView from "./Shop/QuickView";
+import ShopCategories from "./Shop/Categories";
 
 const App = () => {
   return (
@@ -48,6 +50,8 @@ const App = () => {
                       <Route path="/activate-shop" element={<ActivateShop />} />
                   </Route>
                   <Route path="/:shopName" element={<Shop />} />
+                  <Route path="/:shopName/quick-view" element={<QuickView />} />
+                  <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
 
 
               </Routes>

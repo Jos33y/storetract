@@ -6,15 +6,17 @@ export default function QuickViewModal({ open, children, onClose }) {
 
     return (
         <>
-            <div className="Overlay-styles" />
-            <div className="Pr-Modal-styles">
-                {children}
-                <div className="Close-button">
-                    <button onClick={onClose}  className="btn btn-md btn-primary" >
-                        Close window
-                    </button>
+            <div className="Modal-one">
+                <div className="Overlay-styles" />
+
+                <div className="Qv-Modal-styles">
+                    <div className="Close-button">
+                        <button onClick={onClose}  className="btn btn-md btn-primary" ><i className="fas fa-times"></i></button>
+                    </div>
+                    {children}
                 </div>
             </div>
+
         </>
     );
 }
