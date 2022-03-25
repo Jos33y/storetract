@@ -25,7 +25,7 @@ const ViewCategories = () => {
             // const auth = getAuth()
             const catRef = collection(db, 'shops', shopName, 'category' )
 
-            const q = query(catRef, orderBy('timestamp', 'desc'), limit(5))
+            const q = query(catRef, orderBy('timestamp', 'desc'), limit(10))
 
             const querySnap = await getDocs(q)
 

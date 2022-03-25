@@ -3,16 +3,16 @@ import {Link} from "react-router-dom";
 import '../styles.css'
 import {useState} from "react";
 import QuickViewModal from "../modal/QuickViewModal";
-import QuickView from "../QuickView";
+import QuickView from "../modal/QuickView";
 
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, businessUrl, id}) => {
     const [isQuickView, setQuickView] = useState(false);
 
     return(
         <>
             <Card className="Shop-product-card">
-                <Link to="quick-view" className="Product-card-link">
+                <Link to={ `/${businessUrl}/${ product.productCategory}/${id}`} className="Product-card-link">
                     <Card.Img src={product.imgUrls[0]} variant="top" alt="Product img here" className="card-img-top" />
                 </Link>
                 <Card.Body className="card-body">

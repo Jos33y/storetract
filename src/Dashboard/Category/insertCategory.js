@@ -12,6 +12,7 @@ import {Link, useNavigate} from "react-router-dom";
 const InsertCategory = () => {
 
     const [loading, setLoading] = useState(true)
+    const [disabled, setDisabled] = useState(false)
     const [shopUrl, setShopUrl] = useState(null)
     const isMounted = useRef()
     const auth = getAuth()
@@ -20,7 +21,6 @@ const InsertCategory = () => {
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        categoryUrl: '',
         timestamp: '',
     })
     const {title, description} = formData
@@ -28,20 +28,23 @@ const InsertCategory = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+        const randId = uuidv4().slice(0,7)
         try
         {
-            let catUniqueId = `${formData.title
-                .replace(/,?\s+/g, '-')
-                .toLowerCase()}-${uuidv4()}`
+            setDisabled(true)
+           let formDataTitle = (formData.title).replace(/[^a-zA-Z ]/g, "");
+            let catUnique = `${(formDataTitle).replace(/,?\s+/g, '-')}-${randId}`
+            let catUniqueId = catUnique.toLowerCase();
 
             // console.log({...formData})
             const formDataCopy = {...formData}
-            formDataCopy.categoryUrl = formData.title.replace(/,?\s+/g, '-')
+            formDataCopy.categoryUrl = catUniqueId;
             formDataCopy.timestamp= serverTimestamp();
             const categoryRef = doc(db, 'shops', shopUrl, 'category', catUniqueId)
             await setDoc(categoryRef, formDataCopy)
 
             toast.success("category inserted")
+            setDisabled(false)
         }
         catch (error) {
             console.log({error})
@@ -135,7 +138,7 @@ const InsertCategory = () => {
                                 </textarea>
                             </div>
                             <div className="form-group button">
-                                <Button className="btn btn-md btn-primary"
+                                <Button disabled={disabled}  className="btn btn-md btn-primary"
                                         type="submit">
                                     Insert Categories
                                 </Button>

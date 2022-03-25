@@ -2,7 +2,7 @@ import {Link ,useParams} from "react-router-dom";
 import ShopHeader from "./components/ShopHeader";
 import CategorySection from "./components/CategorySection";
 import {useEffect ,useRef ,useState} from "react";
-import {collection ,doc ,getDoc ,getDocs ,query, where} from "firebase/firestore";
+import {collection ,doc ,getDoc ,getDocs ,query ,where} from "firebase/firestore";
 import {db} from "../firebase.config";
 import Spinner from "../components/Spinner";
 import ShopFooter from "./components/ShopFooter";
@@ -14,16 +14,39 @@ const ShopCategories = () => {
     const params = useParams()
 
     const [shopData, setShopData] = useState('')
+    const [categoryName, setCategoryName] = useState('')
     const [products, setProducts] = useState(null)
     const [loading, setLoading] = useState(true)
     const isMounted = useRef()
 
 
+    //Fetch Categories
+    const fetchCategory = async () => {
+        try
+        {
+
+            const docRef = doc(db, "shops", params.shopName, 'category', params.categoryUrl )
+            const docSnap = await getDoc(docRef );
+
+            if (docSnap.exists()) {
+                //console.log("Document data:", docSnap.data());
+                setCategoryName(docSnap.data())
+
+
+            } else {
+                console.log("No such document!");
+            }
+        }
+        catch (error) {
+            console.log({error})
+        }
+    }
+
     //Fetch Product
     const fetchProducts = async () => {
         try
         {
-            setLoading(true)
+
             const prodRef = collection(db, 'shops', params.shopName, 'products')
             const q = query(prodRef, where("productCategory", "==", params.categoryUrl))
             const querySnap = await getDocs(q)
@@ -37,6 +60,7 @@ const ShopCategories = () => {
             })
             setProducts(products)
             setLoading(false)
+
 
         }
         catch (error) {
@@ -67,15 +91,16 @@ const ShopCategories = () => {
                     console.log({error})
                 }
             }
-            fetchDetails()
-            // fetchCategories()
             fetchProducts()
+            fetchDetails()
+            fetchCategory()
+
         }
         return () => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMounted, params.shopName])
+    }, [isMounted, params.categoryUrl])
 
 
     return(
@@ -85,7 +110,7 @@ const ShopCategories = () => {
                 :
                 (
                     <>
-                        <ShopHeader businessName={shopData.businessName} />
+                        <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName} />
                         <CategorySection shopName={params.shopName}/>
                         <Container className="Category-page">
                             <div className='bread-crumb'>
@@ -94,11 +119,11 @@ const ShopCategories = () => {
                                         <Link to="" className="bread-crumb-link"> Home</Link>
                                     </li> |
                                     <li>
-                                        <Link to="" className="bread-crumb-link"> Category Name</Link>
+                                        <Link to="" className="bread-crumb-link"> {categoryName.title}</Link>
                                     </li>
                                 </ul>
                             </div>
-            <h3 className="category-title">Shop Categories</h3>
+            <h3 className="category-title">{categoryName.title}</h3>
 
                             <div className="Shop-products">
                                 {loading ?
@@ -111,7 +136,7 @@ const ShopCategories = () => {
 
                                                     {products.map((product) => (
                                                         <Col md={3} key={product.id}>
-                                                            <ProductCard product={product.data} />
+                                                            <ProductCard id={product.id} product={product.data} businessUrl={params.shopName} />
                                                         </Col>
                                                     ))}
                                                 </Row>

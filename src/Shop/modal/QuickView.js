@@ -1,6 +1,6 @@
 import React ,{useState} from "react";
 import {Row, Col ,Container} from "react-bootstrap";
-import ShirtImage from "../assets/images/stripe-shirt.jpg"
+import ShirtImage from "../../assets/images/stripe-shirt.jpg"
 
 const QuickView = () => {
 

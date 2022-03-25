@@ -6,7 +6,7 @@
     -moz-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
 }
 .Admin-navbar .navbar-brand{
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 800;
     letter-spacing: 1px;
     color: #3E4095;
@@ -23,6 +23,7 @@
     font-size: 16px;
     font-weight: 600;
     margin-right: 20px;
+    margin-bottom: 20px;
     display: inline-block;
 }
 .Admin-navbar ul .buttons{

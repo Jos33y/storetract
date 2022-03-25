@@ -87,7 +87,7 @@ const Shop = () => {
                         :
                         (
                             <>
-                                <ShopHeader businessName={shopData.businessName} />
+                                <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName} />
                                 <CategorySection shopName={params.shopName}/>
                     <Container>
 
@@ -102,7 +102,7 @@ const Shop = () => {
 
                                 {products.map((product) => (
                                 <Col md={3} key={product.id}>
-                                    <ProductCard product={product.data} />
+                                    <ProductCard id={product.id} product={product.data} businessUrl={params.shopName} />
                                 </Col>
                                 ))}
                             </Row>

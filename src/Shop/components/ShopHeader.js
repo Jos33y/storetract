@@ -1,7 +1,8 @@
 import React from "react";
 import {getRandomColor,createImageFromInitials} from './utils'
+import {Link} from "react-router-dom";
 
-const ShopHeader = ({businessName}) => {
+const ShopHeader = ({businessName, businessUrl}) => {
 
     let name = businessName;
     let imgSrc = "";
@@ -9,13 +10,15 @@ const ShopHeader = ({businessName}) => {
         <>
             <div className="Header">
                 <ul>
-                    <li className="NavBrand"> <img src={
-                        imgSrc.length <= 0
-                            ? createImageFromInitials(500, name, getRandomColor())
-                            : imgSrc
-                    } alt="" className="logo-fluid"/>
-                        {businessName}
-                    </li>
+                    <Link to={`/${businessUrl}`}>
+                        <li className="NavBrand"> <img src={
+                            imgSrc.length <= 0
+                                ? createImageFromInitials(500, name, getRandomColor())
+                                : imgSrc
+                        } alt="" className="logo-fluid"/>
+                            {businessName}
+                        </li>
+                    </Link>
                 </ul>
 
             </div>
