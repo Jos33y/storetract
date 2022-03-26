@@ -7,7 +7,6 @@ import Spinner from "../components/Spinner";
 import ShopFooter from "./components/ShopFooter";
 import {Col ,Container ,Row} from "react-bootstrap";
 import ShopHeader from "./components/ShopHeader";
-import ShirtImage from "../assets/images/stripe-shirt.jpg";
 import ProductCard from "./components/ProductCard";
 import {toast} from "react-toastify";
 
