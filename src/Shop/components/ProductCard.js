@@ -38,8 +38,8 @@ const ProductCard = ({product, businessUrl, id}) => {
             </Card>
 
             {/** Modals Here */}
-            <QuickViewModal open={isQuickView} onClose={() => setQuickView(false)}>
-                <QuickView />
+            <QuickViewModal  open={isQuickView} onClose={() => setQuickView(false)}>
+                <QuickView product={product} />
             </QuickViewModal>
 
 

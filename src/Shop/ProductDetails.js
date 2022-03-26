@@ -148,13 +148,13 @@ const  ProductDetails = () => {
                 <div className='bread-crumb'>
                     <ul>
                         <li>
-                            <Link to="" className="bread-crumb-link"> Home</Link>
+                            <Link to={ `/${params.shopName}`} className="bread-crumb-link"> Home</Link>
                         </li> |
                         <li>
-                            <Link to="" className="bread-crumb-link"> {categoryName.title}</Link>
+                            <Link to={ `/${params.shopName}/${ params.categoryUrl}` }className="bread-crumb-link"> {categoryName.title}</Link>
                         </li> |
                         <li>
-                            <Link to="" className="bread-crumb-link"> {product.productName}</Link>
+                            {product.productName}
                         </li>
                     </ul>
                 </div>

@@ -374,6 +374,7 @@ Qv-Modal-styles .Close-button .fas{
     list-style: none;
     font-size: 13px;
     color: #adadad;
+    text-transform: uppercase;
 }
 .Category-page .bread-crumb ul li{
     display: inline-block;

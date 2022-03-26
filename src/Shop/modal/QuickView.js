@@ -2,7 +2,7 @@ import React ,{useState} from "react";
 import {Row, Col ,Container} from "react-bootstrap";
 import ShirtImage from "../../assets/images/stripe-shirt.jpg"
 
-const QuickView = () => {
+const QuickView = ({product}) => {
 
    const [display, setDisplay] = useState(false);
 
@@ -14,13 +14,13 @@ const QuickView = () => {
                       <div className="Image-box">
                           <Row>
                               <Col md={9} className="main">
-                                  <img src={ShirtImage} alt="" className="img-fluid"/>
+                                  <img src={product.imgUrls[0]} alt="" className="img-fluid"/>
                               </Col>
                               <Col md={3} className="thumb">
                                   <ul className="Thumb-nails">
-                                      <li>  <img src={ShirtImage} alt="" className="img-fluid"/></li>
-                                      <li>  <img src={ShirtImage} alt="" className="img-fluid"/></li>
-                                      <li>  <img src={ShirtImage} alt="" className="img-fluid"/></li>
+                                      <li>  <img src={product.imgUrls[0] ? product.imgUrls[0] : product.imgUrls[0] } alt="" className="img-fluid"/></li>
+                                      <li>  <img src={product.imgUrls[1] ? product.imgUrls[1] : product.imgUrls[0] } alt="" className="img-fluid"/></li>
+                                      <li>  <img src={product.imgUrls[2] ? product.imgUrls[2] : product.imgUrls[0] } alt="" className="img-fluid"/></li>
                                   </ul>
                               </Col>
                           </Row>
@@ -31,19 +31,15 @@ const QuickView = () => {
 
                   <Col md={6}>
                       <div className="Quick-view-text">
-                          <h5>UNCONDITIONAL Black cashmere mix mink collared single breasted coat </h5>
-                          <h6> &#8358; 3000 <span className="discount-price"> &#8358; 6000</span></h6>
+                          <h5>{product.productName} </h5>
+                          <h6> &#8358;{product.productPrice.toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                              {product.offer &&
+                              (<span className="discount-price">  &#8358; {product.productDiscountPrice.toString()
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>)}
+                          </h6>
                           <p>
-                              UNCONDITIONAL single breasted boyfriend coat in wool-cashmere coating ,
-                              with mink collar . Fully lined in grosgrain lining, the mink collar has a
-                              small white stripe on the centre back neck. Back neck and pocket flaps are faced in
-                              lambskin.
-                              <br/>
-                              Colour : Black with Black Mink
-                              <br/>
-                              Product code : WCOT609MI
-                              <br/>
-                              Care instructions : Dry Clean only.
+                              {product.productDescription}
                           </p>
                           <button className="btn btn-md btn-primary btn-contact" onClick={() => {
                               setDisplay((prevState) => !prevState)

@@ -116,10 +116,10 @@ const ShopCategories = () => {
                             <div className='bread-crumb'>
                                 <ul>
                                     <li>
-                                        <Link to="" className="bread-crumb-link"> Home</Link>
+                                        <Link to={ `/${params.shopName}`} className="bread-crumb-link"> Home</Link>
                                     </li> |
                                     <li>
-                                        <Link to="" className="bread-crumb-link"> {categoryName.title}</Link>
+                                         {categoryName.title}
                                     </li>
                                 </ul>
                             </div>
