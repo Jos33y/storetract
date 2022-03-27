@@ -1,6 +1,42 @@
+/*shop navheader styles*/
+
+.Nav-header{
+    padding: 10px 5px 5px;
+}
+.Nav-header .Socials ul{
+    list-style: none;
+}
+.Nav-header .Socials ul li{
+  display: inline-block;
+    margin-left: 20px;
+}
+.Nav-header .Socials ul li .Socials-link{
+    color: #2e2e2e;
+    text-decoration: none;
+}
+
+.Nav-header .Account-nav ul{
+    list-style: none;
+    float: right;
+    width: 60%;
+}
+.Nav-header .Account-nav ul li{
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.Nav-header .Account-nav ul li .Account-link{
+    color: #2e2e2e;
+    text-decoration: none
+;
+}
+.Nav-header .Account-nav ul li .Account-link .cart-count{
+    padding-left: 10px;
+}
 /*Shop Header Styles*/
 .Header{
-    padding: 10px 10px 1px;
+    padding: 5px 10px 1px;
     background: #2e2e2e;
 
 }
@@ -13,14 +49,14 @@
     padding-top: 10px;
     display: inline-block;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 20px;
     color: #ffffff;
     text-transform: uppercase;
 }
 
 
 .Header .logo-fluid{
-    width: 10%;
+    width: 8%;
     border-radius: 50%;
     background: #ffffff;
     padding: 2px;
@@ -366,6 +402,46 @@ Qv-Modal-styles .Close-button .fas{
     box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.75);
     -webkit-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.75);
+}
+/*cart page bread crumb styles */
+.bread-crumb{
+    text-align: center;
+}
+.bread-crumb ul{
+    padding: 10px 0;
+    list-style: none;
+    font-size: 13px;
+    color: #adadad;
+    text-transform: uppercase;
+}
+.bread-crumb ul li{
+    display: inline-block;
+    margin: 3px 10px;
+}
+.bread-crumb ul li .bread-crumb-link{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #adadad;
+    font-weight: 500;
+}
+
+/*cart page styles*/
+.Cart-page{
+    padding: 10px;
+}
+.Cart-page .cart-title{
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 16px;
+}
+.Cart-page .table-section .table th{
+    font-size: 14px;
+    color: #525252;
+}
+
+.Cart-page .table-section .table .th-product{
+ width: 70%;
 }
 
 /*category page styles*/

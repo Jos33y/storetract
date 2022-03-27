@@ -10,6 +10,7 @@ import {toast} from "react-toastify";
 import ShopHeader from "./components/ShopHeader";
 import ShopFooter from "./components/ShopFooter";
 import CategorySection from "./components/CategorySection";
+import ShopNavHeader from "./components/ShopNavHeader";
 
 const Shop = () => {
     const params = useParams()
@@ -19,7 +20,9 @@ const Shop = () => {
     const [shopData, setShopData] = useState('')
     const [products, setProducts] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [cart, setCart] = useState([])
     const isMounted = useRef()
+    let localCart = localStorage.getItem("cart");
 
     //Fetch Product
     const fetchProducts = async () => {
@@ -31,7 +34,7 @@ const Shop = () => {
             const querySnap = await getDocs(q)
             let products = []
             querySnap.forEach((doc) => {
-                console.log(doc.data());
+                //console.log(doc.data());
                 return products.push({
                     id: doc.id,
                     data: doc.data(),
@@ -71,6 +74,12 @@ const Shop = () => {
             fetchDetails()
             // fetchCategories()
             fetchProducts()
+            //turn it into js
+            localCart = JSON.parse(localCart);
+            //load persisted cart into state if it exists
+            if (localCart) setCart(localCart)
+            // console.log(localCart)
+            console.log(cart.length)
         }
         return () => {
             isMounted.current = false
@@ -87,6 +96,7 @@ const Shop = () => {
                         :
                         (
                             <>
+                                <ShopNavHeader cartCount={cart.length} businessUrl={params.shopName} />
                                 <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName} />
                                 <CategorySection shopName={params.shopName}/>
                     <Container>

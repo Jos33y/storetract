@@ -45,13 +45,14 @@ const InsertProduct = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+        const randId = uuidv4().slice(0,7)
         try{
             //disable button
             setDisabled(true)
             //generate unique ID for product
-            let prodUniqueId = `${formData.productName
-                .replace(/,?\s+/g, '-')
-                .toLowerCase()}-${uuidv4()}`
+            let formDataName = (formData.productName).replace(/[^a-zA-Z ]/g, "");
+            let prodUnique = `${(formDataName).replace(/,?\s+/g, '-')}-${randId}`
+            let prodUniqueId = prodUnique.toLowerCase();
 
             //console.log(formData.productCategory)
             //console.log("working")

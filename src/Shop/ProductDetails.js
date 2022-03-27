@@ -1,7 +1,7 @@
 import {Link ,useParams} from "react-router-dom";
 import CategorySection from "./components/CategorySection";
 import React ,{useEffect ,useRef ,useState} from "react";
-import {collection ,doc ,getDoc ,getDocs ,limit ,query ,where} from "firebase/firestore";
+import {collection ,doc ,getDoc ,getDocs ,limit ,query ,serverTimestamp ,setDoc ,where} from "firebase/firestore";
 import {db} from "../firebase.config";
 import Spinner from "../components/Spinner";
 import ShopFooter from "./components/ShopFooter";
@@ -9,21 +9,69 @@ import {Col ,Container ,Row} from "react-bootstrap";
 import ShopHeader from "./components/ShopHeader";
 import ProductCard from "./components/ProductCard";
 import {toast} from "react-toastify";
+// import publicIp from 'public-ip';
+import ShopNavHeader from "./components/ShopNavHeader";
 
 
 const  ProductDetails = () => {
     const params = useParams()
 
     const [display, setDisplay] = useState(false);
+    const [disabled, setDisabled] = useState(false)
+    const [shopUpgraded, setShopUpgraded] = useState(true);
     const [shopData, setShopData] = useState('')
     const [categoryName, setCategoryName] = useState('')
     const [products, setProducts] = useState(null)
     const [product, setProduct] = useState(null)
+    const [cart, setCart] = useState([])
     const [loading, setLoading] = useState(true)
 
     const isMounted = useRef()
+    let localCart = localStorage.getItem("cart");
 
 
+    //add to cart function
+   const addToCart = async (product) => {
+       setDisabled(true)
+
+       try{
+            let cartData = [...cart]
+
+           //assuming we have an ID field in our item
+
+           //console.log(cartData)
+
+           //look for item in cart array
+           const existingItem = cartData.find(cartItem => cartItem.uniqueId === product.uniqueId);
+
+           //if item already exists
+           if (existingItem) {
+               toast.error('item already added') //alert user
+           } else { //if item doesn't exist, simply add it
+               cartData.push(product)
+               toast.success('product added to cart')
+           }
+
+           //update app state
+           setCart(cartData)
+
+           //make cart a string and store in local space
+           let stringCart = JSON.stringify(cartData);
+           localStorage.setItem("cart", stringCart)
+           setDisabled(false)
+
+       }
+       catch (error) {
+           console.log({error})
+           setDisabled(false)
+           setShopUpgraded(true)
+       }
+
+
+
+       // setDisabled(true)
+
+    }
 
     //Fetch Category
     const fetchCategory = async () => {
@@ -47,6 +95,37 @@ const  ProductDetails = () => {
         }
     }
 
+    // //Fetch Carts
+    // const fetchCarts = async () => {
+    //     try
+    //     {
+    //         const ipAddress = await (publicIp.v4({
+    //             fallbackUrls: [
+    //                 'https://ifconfig.co/ip'
+    //             ]
+    //         }));
+    //         const cartRef = collection(db, 'shops', params.shopName, 'carts')
+    //         const q = query(cartRef, where("ipAddress", "==", ipAddress))
+    //         const querySnap = await getDocs(q)
+    //         let carts = []
+    //         querySnap.forEach((doc) => {
+    //             console.log(doc.data());
+    //             return carts.push({
+    //                 id: doc.id,
+    //                 data: doc.data(),
+    //             })
+    //         })
+    //         setCarts(carts)
+    //         setLoading(false)
+    //     }
+    //     catch (error) {
+    //         console.log({error})
+    //         toast.error("Unable to retrieve carts")
+    //
+    //     }
+    // }
+    //
+
     //Fetch Product
     const fetchProducts = async () => {
         try
@@ -57,7 +136,7 @@ const  ProductDetails = () => {
             const querySnap = await getDocs(q)
             let products = []
             querySnap.forEach((doc) => {
-                console.log(doc.data());
+                //console.log(doc.data());
                 return products.push({
                     id: doc.id,
                     data: doc.data(),
@@ -125,6 +204,13 @@ const  ProductDetails = () => {
             fetchProducts()
             fetchProductDetails()
 
+            //turn it into js
+            localCart = JSON.parse(localCart);
+            //load persisted cart into state if it exists
+            if (localCart) setCart(localCart)
+           // console.log(localCart)
+            console.log(cart.length)
+
 
         }
         return () => {
@@ -141,6 +227,7 @@ const  ProductDetails = () => {
                 :
                 (
                     <>
+                        <ShopNavHeader cartCount={cart.length} businessUrl={params.shopName} />
             <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName} />
             <CategorySection shopName={params.shopName}/>
             <Container className="Category-page">
@@ -192,9 +279,13 @@ const  ProductDetails = () => {
                                 <p>
                                     {product.productDescription}
                                 </p>
-                                <button className="btn btn-md btn-primary btn-contact" onClick={() => {
-                                    setDisplay((prevState) => !prevState)
-                                }}> Contact Seller</button>
+                                {shopUpgraded ? (<button disabled={disabled} className="btn btn-md btn-primary btn-contact" onClick={() => addToCart(product)}> Add to Cart</button>)
+                                    :
+                                    (<button className="btn btn-md btn-primary btn-contact" onClick={() => {
+                                        setDisplay((prevState) => !prevState)
+                                    }}> Contact Seller</button>)}
+
+
 
                                 {display ? (
                                     <div className="contact-buttons">
