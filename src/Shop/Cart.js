@@ -10,6 +10,7 @@ import {collection ,doc ,getDoc ,getDocs ,limit ,query} from "firebase/firestore
 import {db} from "../firebase.config";
 import {Link ,useParams} from "react-router-dom";
 import {toast} from "react-toastify";
+import ShirtImage from "../assets/images/stripe-shirt.jpg"
 
 const Cart = () => {
 
@@ -128,6 +129,21 @@ const Cart = () => {
                                             <th>Price</th>
                                         </tr>
                                     </thead>
+
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div className="Img-box">
+                                                <img src={ShirtImage} alt="" className="img-fluid"/>
+                                            </div>
+                                           <p>UNCONDITIONAL Black cashmere mix mink collared single breasted coat - small </p>
+                                        </td>
+                                        <td> <p> &#8358; 4,000</p></td>
+                                        <td> <p> &#8358; 4,000</p></td>
+                                        <td> <p> &#8358; 4,000</p></td>
+                                        <td> <p> &#8358; 4,000</p></td>
+                                    </tr>
+                                    </tbody>
 
                                 </Table>
                             </div>
