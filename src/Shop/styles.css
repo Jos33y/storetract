@@ -427,7 +427,7 @@ Qv-Modal-styles .Close-button .fas{
 
 /*cart page styles*/
 .Cart-page{
-    padding: 10px;
+    padding: 20px 60px;
 }
 .Cart-page .cart-title{
     text-align: center;
@@ -446,6 +446,9 @@ Qv-Modal-styles .Close-button .fas{
 .Cart-page .table-section .table .th-product{
  width: 70%;
 }
+.Cart-page .table-section .table th{
+    width: 7.5%;
+}
 .Cart-page .table-section .table tbody .Img-box{
     float: left;
     width: 120px;
@@ -455,12 +458,78 @@ Qv-Modal-styles .Close-button .fas{
     max-width: 100%;
     max-height: 100%;
 }
+
 .Cart-page .table-section .table tbody td p{
     font-size: 14px;
     color: #525252;
-    margin-top: 50px;
+    margin-top: 40px;
 }
-/*category page styles*/
+.Cart-page .table-section .table tbody td p.prod-name{
+    text-align: left;
+}
+.Cart-page .table-section .table tbody td p{
+    text-align: center;
+}
+.Cart-page .table-section .table tbody td p .far{
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+.Cart-page .table-section .table tbody td.input p{
+    margin-top: 30px;
+    text-align: center;
+}
+.Cart-page .table-section .table tbody td .form-control{
+    height: 50px;
+    width: 60px;
+    border-radius: 1px;
+}
+.Cart-page .table-section .table tbody .total td p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.Cart-page .Checkout-buttons p{
+    font-weight: 600;
+    font-size: 14px;
+}
+.Cart-page .Checkout-buttons textarea{
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 1px;
+}
+.Cart-page .Checkout-buttons .continue-link{
+    font-weight: 600;
+    font-size: 15px;
+    color: #2e2e2e;
+    text-align: right;
+    text-decoration: none;
+    float: right;
+    margin-top: 10%;
+}
+.Cart-page .Checkout-buttons .btn-secondary{
+
+    border: 1px solid transparent;
+    border-radius: 0px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    height: 50px;
+    text-transform: capitalize;
+    padding: 8px;
+    width: 100%;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    background: #7d7d7d;
+}
+.Cart-page .Checkout-buttons .btn-secondary:hover{
+    background: #222222;
+}
+
+
+    /*category page styles*/
 .Category-page .bread-crumb ul{
     padding: 10px 0;
     list-style: none;

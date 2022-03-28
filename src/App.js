@@ -20,6 +20,7 @@ import QuickView from "./Shop/modal/QuickView";
 import ShopCategories from "./Shop/Categories";
 import ProductDetails from "./Shop/ProductDetails";
 import Cart from "./Shop/Cart";
+import TrackOrder from "./Shop/TrackOrder";
 
 const App = () => {
   return (
@@ -51,11 +52,13 @@ const App = () => {
                   <Route path="/activate-shop" element={<PrivateRoute/>}>
                       <Route path="/activate-shop" element={<ActivateShop />} />
                   </Route>
+                  <Route path="/:shopName/track-order" element={<TrackOrder />} />
                   <Route path="/:shopName" element={<Shop />} />
                   <Route path="/:shopName/cart" element={<Cart />} />
                   <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                   <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
                   <Route path="/:shopName/:categoryUrl/:productUrl" element={<ProductDetails />} />
+                  <Route path="/:shopName/track-order" element={<TrackOrder />} />
 
 
               </Routes>

@@ -20,7 +20,7 @@ const ShopCategories = () => {
     const [loading, setLoading] = useState(true)
     const [cart, setCart] = useState([])
     const isMounted = useRef()
-    let localCart = localStorage.getItem("cart");
+
 
 
     //Fetch Categories
@@ -76,6 +76,9 @@ const ShopCategories = () => {
 
     useEffect(() => {
         if(isMounted) {
+
+            let localCart = localStorage.getItem("cart");
+
             const fetchDetails = async () => {
                 try
                 {

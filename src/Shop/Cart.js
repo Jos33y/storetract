@@ -3,14 +3,14 @@ import ShopNavHeader from "./components/ShopNavHeader";
 import ShopHeader from "./components/ShopHeader";
 import CategorySection from "./components/CategorySection";
 import React ,{useEffect ,useRef ,useState} from "react";
-import {Col ,Row ,Table} from "react-bootstrap";
+import {Button ,Col ,Row ,Table} from "react-bootstrap";
 import ProductCard from "./components/ProductCard";
 import ShopFooter from "./components/ShopFooter";
 import {collection ,doc ,getDoc ,getDocs ,limit ,query} from "firebase/firestore";
 import {db} from "../firebase.config";
 import {Link ,useParams} from "react-router-dom";
 import {toast} from "react-toastify";
-import ShirtImage from "../assets/images/stripe-shirt.jpg"
+import CartTable from "./components/CartTable";
 
 const Cart = () => {
 
@@ -21,11 +21,11 @@ const Cart = () => {
     // const [disabled, setDisabled] = useState(false)
     const [shopData, setShopData] = useState('')
     const [products, setProducts] = useState(null)
-    const [cart, setCart] = useState([])
+    const [carts, setCarts] = useState([])
     const [loading, setLoading] = useState(true)
 
     const isMounted = useRef()
-    let localCart = localStorage.getItem("cart");
+
 
 
     //Fetch Product
@@ -57,6 +57,7 @@ const Cart = () => {
 
     useEffect(() => {
         if(isMounted) {
+            let localCart = localStorage.getItem("cart");
             const fetchDetails = async () => {
                 try
                 {
@@ -81,9 +82,9 @@ const Cart = () => {
             //turn it into js
             localCart = JSON.parse(localCart);
             //load persisted cart into state if it exists
-            if (localCart) setCart(localCart)
-            // console.log(localCart)
-            console.log(cart.length)
+            if (localCart) setCarts(localCart)
+            //console.log(carts)
+            //console.log(carts.length)
 
 
         }
@@ -102,7 +103,7 @@ const Cart = () => {
                 :
                 (
                     <>
-                        <ShopNavHeader cartCount={cart.length} businessUrl={params.shopName} />
+                        <ShopNavHeader cartCount={carts.length} businessUrl={params.shopName} />
                         <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName} />
                         <CategorySection shopName={params.shopName}/>
                         <div className="Cart-page">
@@ -131,22 +132,38 @@ const Cart = () => {
                                     </thead>
 
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <div className="Img-box">
-                                                <img src={ShirtImage} alt="" className="img-fluid"/>
-                                            </div>
-                                           <p>UNCONDITIONAL Black cashmere mix mink collared single breasted coat - small </p>
-                                        </td>
-                                        <td> <p> &#8358; 4,000</p></td>
-                                        <td> <p> &#8358; 4,000</p></td>
-                                        <td> <p> &#8358; 4,000</p></td>
+                                    {carts.map((cart) => (
+                                    <tr key={cart.id}>
+                                        <CartTable id={cart.id} cart={cart}  />
+                                    </tr>
+                                    ))}
+
+                                    <tr className="total">
+                                       <td colSpan={3}></td>
+                                        <td><p>Subtotal</p></td>
                                         <td> <p> &#8358; 4,000</p></td>
                                     </tr>
                                     </tbody>
 
                                 </Table>
                             </div>
+
+                            <div className="Checkout-buttons">
+                                <Row>
+                                    <Col md={9}>
+                                        <div className="Instruction">
+                                            <p>Please leave special instructions below:</p>
+                                            <textarea name="instructions" id="" cols="30" rows="7" className="form-control"></textarea>
+                                        </div>
+                                    </Col>
+                                    <Col md={3}>
+                                            <Link to="https://" className="continue-link">Continue Shopping</Link>
+                                            <p><Button className="btn btn-md btn-secondary">Update Cart</Button></p>
+                                            <p><Button className="btn btn-md btn-secondary">Checkout</Button></p>
+                                    </Col>
+                                </Row>
+                            </div>
+
                         </div>
 
 

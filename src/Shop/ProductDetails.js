@@ -1,7 +1,7 @@
 import {Link ,useParams} from "react-router-dom";
 import CategorySection from "./components/CategorySection";
 import React ,{useEffect ,useRef ,useState} from "react";
-import {collection ,doc ,getDoc ,getDocs ,limit ,query ,serverTimestamp ,setDoc ,where} from "firebase/firestore";
+import {collection ,doc ,getDoc ,getDocs ,limit ,query} from "firebase/firestore";
 import {db} from "../firebase.config";
 import Spinner from "../components/Spinner";
 import ShopFooter from "./components/ShopFooter";
@@ -9,7 +9,6 @@ import {Col ,Container ,Row} from "react-bootstrap";
 import ShopHeader from "./components/ShopHeader";
 import ProductCard from "./components/ProductCard";
 import {toast} from "react-toastify";
-// import publicIp from 'public-ip';
 import ShopNavHeader from "./components/ShopNavHeader";
 
 
@@ -27,7 +26,7 @@ const  ProductDetails = () => {
     const [loading, setLoading] = useState(true)
 
     const isMounted = useRef()
-    let localCart = localStorage.getItem("cart");
+
 
 
     //add to cart function
@@ -180,6 +179,7 @@ const  ProductDetails = () => {
 
     useEffect(() => {
         if(isMounted) {
+            let localCart = localStorage.getItem("cart");
             const fetchDetails = async () => {
                 try
                 {
