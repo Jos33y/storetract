@@ -92,8 +92,8 @@ const ShopAuth = () => {
                                     <Col md={6}>
                                         <div className="auth-tab">
                                             <ul>
-                                                <li><h5>Login</h5></li>
-                                                <li><h5>Register</h5></li>
+                                                <li><h5 >Login</h5></li>
+                                                <li><h5 className="not-active">Register</h5></li>
                                             </ul>
                                         </div>
 

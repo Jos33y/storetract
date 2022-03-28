@@ -91,7 +91,7 @@ const App = () => {
                   <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                   <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
                   <Route path="/:shopName/:categoryUrl/:productUrl" element={<ProductDetails />} />
-                  <Route exact path="/" element={<TrackOrder />} />
+                  <Route exact path="/:shopName/track-order" element={<TrackOrder />} />
 
 
 

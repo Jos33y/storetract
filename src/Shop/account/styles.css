@@ -1,6 +1,7 @@
 .auth-tab ul{
     list-style: none;
     text-align: center;
+    margin-bottom: 30px;
 }
 .auth-tab ul li{
     display: inline-block;
@@ -10,4 +11,34 @@
     text-transform: uppercase;
     color: #525252;
     cursor: pointer;
+}
+.auth-tab ul li .not-active{
+    background: #7d7d7d;
+    padding: 10px 15px;
+    color: #ffffff;
+}
+.auth-tab ul li .not-active:hover{
+    background: #525252;
+}
+.auth-login .form-group.button{
+    text-align: center;
+}
+.auth-login .form-group.button p{
+    font-size: 13px;
+    color: #7d7d7d;
+    text-align: left;
+}
+.auth-login .form-group.button .btn{
+    width: 80%;
+    font-size: 15px;
+    color: #ffffff;
+    border-radius: 1px;
+    border: 1px solid #525252;
+    background: #525252;
+    padding: 12px;
+}
+.auth-login .form-group.button .btn:hover{
+    border-radius: 1px;
+    border: 1px solid #525252;
+    background: #222222;
 }
