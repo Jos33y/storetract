@@ -15,7 +15,7 @@ import ShopNavHeader from "./components/ShopNavHeader";
 const Shop = () => {
     const params = useParams()
 
-    //console.log(params.shopName)
+    console.log(params.shopName)
 
     const [shopData, setShopData] = useState('')
     const [products, setProducts] = useState(null)
