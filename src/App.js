@@ -45,7 +45,7 @@ const App = () => {
               <Routes>
                   {
                       domainActivated ?
-                          (<Route path=":shopName" element={<Shop />} />)
+                          (<Route path="/:shopName" element={<Shop />} />)
                           :
                           (   <Route exact path="/" element={<Home />} />)
                   }
