@@ -89,7 +89,7 @@ const ShopAuth = () => {
                                     </ul>
                                 </div>
                                 <Row className="justify-content-center">
-                                    <Col md={6}>
+                                    <Col md={5}>
                                         <div className="auth-tab">
                                             <ul>
                                                 <li><h5 >Login</h5></li>

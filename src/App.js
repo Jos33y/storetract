@@ -55,7 +55,7 @@ const App = () => {
               <Routes>
                   {
                       domainActivated ?
-                          (   <Route path=":shopName" element={<Shop />} />)
+                          (   <Route exact path="/" element={<Shop />} />)
                           :
                           (   <Route exact path="/" element={<Home />} />)
                   }
@@ -85,7 +85,7 @@ const App = () => {
                   </Route>
 
 
-
+                  <Route path="/:shopName" element={<Shop />} />
                   <Route path="/:shopName/cart" element={<Cart />} />
                   <Route path="/:shopName/account" element={<ShopAuth />} />
                   <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
