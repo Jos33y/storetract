@@ -1,4 +1,5 @@
-import {Col ,Container ,Row} from "react-bootstrap";
+import {Col ,Container ,Form ,Row} from "react-bootstrap";
+import React from "react";
 
 const ShopLogin = () => {
 
@@ -15,6 +16,22 @@ const ShopLogin = () => {
                         </div>
 
                         <div className="account-login">
+                            <Form>
+                                <h5>Login</h5>
+                                <div className="form-group">
+                                    <div className="Input-box">
+                                        <label htmlFor="email"><i className="fas fa-envelope"></i></label>
+                                        <input type="email"
+                                               id="email"
+                                               value={email}
+                                               onChange={onChange}
+                                               required={true}
+                                               placeholder="Your Email"/>
+                                    </div>
+
+                                </div>
+
+                            </Form>
 
                         </div>
 

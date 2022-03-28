@@ -88,9 +88,6 @@ const Login = () => {
                                     <h5>Sign in</h5>
 
                                     <div className="form-group">
-                                        {/*<Button className="btn btn-md btn-success" >Google Sign In</Button>*/}
-                                    </div>
-                                    <div className="form-group">
                                         <div className="Input-box">
                                             <label htmlFor="email"><i className="fas fa-envelope"></i></label>
                                             <input type="email"

@@ -21,26 +21,34 @@ import ShopCategories from "./Shop/Categories";
 import ProductDetails from "./Shop/ProductDetails";
 import Cart from "./Shop/Cart";
 import TrackOrder from "./Shop/TrackOrder";
-import {useState} from "react";
+import {useEffect ,useState} from "react";
 
 const App = () => {
     const currentURL = window.location.href;
     const [domainActivated, setDomainActivated] = useState(false)
 
-    if (currentURL === "https://storetract.com/") {
-        console.log(true)
-        setDomainActivated(false)
-    }
-    else if (currentURL === "http://localhost:3000/" ){
-        console.log('true true')
-        setDomainActivated(false)
-    }
-    else {
-        console.log('false true')
-        setDomainActivated(true)
-    }
 
-  return (
+    useEffect(() => {
+
+        if (currentURL === "https://storetract.com/") {
+            console.log(true)
+            setDomainActivated(false)
+        }
+        else if (currentURL === "http://localhost:3000/" ){
+            console.log('true true')
+            setDomainActivated(false)
+        }
+        else {
+            console.log('false true')
+            setDomainActivated(true)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [domainActivated])
+
+
+
+    return (
       <>
           <Router>
               <Routes>
