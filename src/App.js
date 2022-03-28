@@ -21,22 +21,23 @@ import ShopCategories from "./Shop/Categories";
 import ProductDetails from "./Shop/ProductDetails";
 import Cart from "./Shop/Cart";
 import TrackOrder from "./Shop/TrackOrder";
+import {useState} from "react";
 
 const App = () => {
-    const currentURL = window.location.href
-    let domainActivated;
+    const currentURL = window.location.href;
+    const [domainActivated, setDomainActivated] = useState(false)
 
     if (currentURL === "https://storetract.com/") {
         console.log(true)
-        domainActivated = false
+        setDomainActivated(false)
     }
     else if (currentURL === "http://localhost:3000/" ){
         console.log('true true')
-        domainActivated = false
+        setDomainActivated(false)
     }
     else {
         console.log('false true')
-        domainActivated = true
+        setDomainActivated(true)
     }
 
   return (
@@ -45,7 +46,7 @@ const App = () => {
               <Routes>
                   {
                       domainActivated ?
-                          ( <Route path="/track-order" element={<TrackOrder />} />)
+                          ( <Route exact path="/" element={<TrackOrder />} />)
                           :
                           (   <Route exact path="/" element={<Home />} />)
                   }
@@ -74,7 +75,7 @@ const App = () => {
                       <Route path="/activate-shop" element={<ActivateShop />} />
                   </Route>
 
-                  <Route path="/:shopName" element={<Shop />} />
+                  <Route path="shop/:shopName" element={<Shop />} />
                   <Route path="/:shopName/cart" element={<Cart />} />
                   <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                   <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />

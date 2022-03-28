@@ -8,7 +8,7 @@ const TrackOrder = () => {
     // console.log(params.domain)
     return (
         <>
-            <h3>Track Order</h3>
+            <h1 className="text-center">Track Order</h1>
         </>
     )
 
