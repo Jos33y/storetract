@@ -28,7 +28,7 @@ const Shop = () => {
         try
         {
             setLoading(true)
-            const prodRef = collection(db, 'shops', params.shopName || 'johnson-enterprises', 'products')
+            const prodRef = collection(db, 'shops', params.shopName, 'products')
             const q = query(prodRef)
             const querySnap = await getDocs(q)
             let products = []
@@ -56,7 +56,7 @@ const Shop = () => {
             const fetchDetails = async () => {
                 try
                 {
-                    const docRef = doc(db, "shops", params.shopName || 'johnson-enterprises')
+                    const docRef = doc(db, "shops", params.shopName)
                     const docSnap = await getDoc(docRef);
 
                     if (docSnap.exists()) {
@@ -96,9 +96,9 @@ const Shop = () => {
                         :
                         (
                             <>
-                                <ShopNavHeader cartCount={cart.length} businessUrl={params.shopName || 'johnson-enterprises'} />
-                                <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName || 'johnson-enterprises'} />
-                                <CategorySection shopName={params.shopName || 'johnson-enterprises'}/>
+                                <ShopNavHeader cartCount={cart.length} businessUrl={params.shopName} />
+                                <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName} />
+                                <CategorySection shopName={params.shopName}/>
                     <Container>
 
                         <div className="Shop-products">
@@ -112,7 +112,7 @@ const Shop = () => {
 
                                 {products.map((product) => (
                                 <Col md={3} key={product.id}>
-                                    <ProductCard id={product.id} product={product.data} businessUrl={params.shopName || 'johnson-enterprises'} />
+                                    <ProductCard id={product.id} product={product.data} businessUrl={params.shopName} />
                                 </Col>
                                 ))}
                             </Row>
