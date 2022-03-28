@@ -49,7 +49,7 @@ const ShopNavHeader = ({businessUrl, cartCount}) => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="https://" className="Account-link">
+                                    <Link to={`/${businessUrl}/account`} className="Account-link">
                                         <i className="fas fa-user-alt"></i>
                                     </Link>
                                 </li>
