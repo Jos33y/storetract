@@ -22,6 +22,7 @@ import ProductDetails from "./Shop/ProductDetails";
 import Cart from "./Shop/Cart";
 import TrackOrder from "./Shop/TrackOrder";
 import {useEffect ,useState} from "react";
+import ShopAuth from "./Shop/account/Auth";
 
 const App = () => {
     const currentURL = window.location.href;
@@ -85,6 +86,7 @@ const App = () => {
 
                   <Route path="shop/:shopName" element={<Shop />} />
                   <Route path="/:shopName/cart" element={<Cart />} />
+                  <Route path="/:shopName/account" element={<ShopAuth />} />
                   <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                   <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
                   <Route path="/:shopName/:categoryUrl/:productUrl" element={<ProductDetails />} />

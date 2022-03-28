@@ -1,7 +1,7 @@
-import {Col ,Container ,Form ,Row} from "react-bootstrap";
+import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
 import React from "react";
 
-const ShopLogin = () => {
+const ShopAuth = () => {
 
     return (
         <>
@@ -20,15 +20,27 @@ const ShopLogin = () => {
                                 <h5>Login</h5>
                                 <div className="form-group">
                                     <div className="Input-box">
-                                        <label htmlFor="email"><i className="fas fa-envelope"></i></label>
+                                        <label htmlFor="email">Email</label>
                                         <input type="email"
                                                id="email"
-                                               value={email}
-                                               onChange={onChange}
                                                required={true}
                                                placeholder="Your Email"/>
                                     </div>
+                                </div>
 
+                                <div className="form-group">
+                                    <div className="Input-box">
+                                        <label htmlFor="email">Password</label>
+                                        <input type="password"
+                                               id="password"
+                                               required={true}
+                                               placeholder="Your Password"/>
+                                    </div>
+                                </div>
+
+                                <div className="form-group button">
+                                    <p>Forgot Password ?</p>
+                                    <Button className="btn btn-md btn-primary" type="submit">Login</Button>
                                 </div>
 
                             </Form>
@@ -43,4 +55,4 @@ const ShopLogin = () => {
     )
 
 }
-export default ShopLogin
+export default ShopAuth
