@@ -23,11 +23,32 @@ import Cart from "./Shop/Cart";
 import TrackOrder from "./Shop/TrackOrder";
 
 const App = () => {
+    const currentURL = window.location.href
+    let domainActivated;
+
+    if (currentURL === "https://storetract.com/") {
+        console.log(true)
+        domainActivated = false
+    }
+    else if (currentURL === "http://localhost:3000/" ){
+        console.log('true true')
+        domainActivated = false
+    }
+    else {
+        console.log('false true')
+        domainActivated = true
+    }
+
   return (
       <>
           <Router>
               <Routes>
-                  <Route exact path="/" element={<Home />} />
+                  {
+                      domainActivated ?
+                          (<Route path=":shopName" element={<Shop />} />)
+                          :
+                          (   <Route exact path="/" element={<Home />} />)
+                  }
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -52,8 +73,8 @@ const App = () => {
                   <Route path="/activate-shop" element={<PrivateRoute/>}>
                       <Route path="/activate-shop" element={<ActivateShop />} />
                   </Route>
-                  <Route path="/:shopName/track-order" element={<TrackOrder />} />
-                  <Route path="/:shopName" element={<Shop />} />
+
+
                   <Route path="/:shopName/cart" element={<Cart />} />
                   <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                   <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
