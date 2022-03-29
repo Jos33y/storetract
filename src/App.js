@@ -50,6 +50,7 @@ const App = () => {
 
                 } else {
                     console.log("No such URL Found !");
+                    console.log(currentEdited)
                 setStoreUrl(true)
                 }
             } catch (error) {
