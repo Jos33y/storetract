@@ -1,4 +1,4 @@
-import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
+import {Col ,Container ,Row} from "react-bootstrap";
 import React ,{useEffect ,useRef ,useState} from "react";
 import './styles.css'
 import Spinner from "../../components/Spinner";
@@ -9,18 +9,22 @@ import {Link ,useParams} from "react-router-dom";
 import ShopFooter from "../components/ShopFooter";
 import {doc ,getDoc} from "firebase/firestore";
 import {db} from "../../firebase.config";
+import Login from "./Login";
+import Register from "./Register";
 
 const ShopAuth = () => {
 
-
-
     const params = useParams()
 
-    // const [display, setDisplay] = useState(false);
+    const [display, setDisplay] = useState(false);
     // const [disabled, setDisabled] = useState(false)
     const [shopData, setShopData] = useState('')
     const [carts, setCarts] = useState([])
     const [loading, setLoading] = useState(true)
+    const currentURL = window.location.href;
+    const currentEdited = (currentURL).toString().replace(/[^a-zA-Z0-9]/g ,'')
+
+    console.log(currentEdited)
 
     const isMounted = useRef()
 
@@ -92,43 +96,19 @@ const ShopAuth = () => {
                                     <Col md={5}>
                                         <div className="auth-tab">
                                             <ul>
-                                                <li><h5 >Login</h5></li>
-                                                <li><h5 className="not-active">Register</h5></li>
+                                                <li>
+                                                    <h5 className = {!display ? ('not-active') : ('')}
+                                                        onClick={() => setDisplay(true)}>Login</h5>
+                                                </li>
+                                                <li>
+                                                    <h5 className={!display ? ('') : ('not-active')}
+                                                        onClick={() => setDisplay(false)}>Register</h5>
+                                                </li>
                                             </ul>
                                         </div>
 
                                         <div className="auth-login">
-                                            <Form>
-                                                <h5>Login</h5>
-                                                <div className="form-group">
-                                                    <div className="Input-box">
-                                                        <label htmlFor="email">Email</label>
-                                                        <input type="email"
-                                                               id="email"
-                                                               required={true}
-                                                               className="form-control"
-                                                               placeholder="Your Email"/>
-                                                    </div>
-                                                </div>
-
-                                                <div className="form-group">
-                                                    <div className="Input-box">
-                                                        <label htmlFor="email">Password</label>
-                                                        <input type="password"
-                                                               id="password"
-                                                               required={true}
-                                                               className="form-control"
-                                                               placeholder="Your Password"/>
-                                                    </div>
-                                                </div>
-
-                                                <div className="form-group button">
-                                                    <p>Forgot Password ?</p>
-                                                    <Button className="btn btn-md btn-primary" type="submit">Login</Button>
-                                                </div>
-
-                                            </Form>
-
+                                            {display ? (<Login />) : (<Register />)}
                                         </div>
 
                                     </Col>

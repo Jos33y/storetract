@@ -23,25 +23,46 @@ import Cart from "./Shop/Cart";
 import TrackOrder from "./Shop/TrackOrder";
 import {useEffect ,useState} from "react";
 import ShopAuth from "./Shop/account/Auth";
+import {doc ,getDoc} from "firebase/firestore";
+import {db} from "./firebase.config";
+import Spinner from "./components/Spinner";
 
 const App = () => {
     const currentURL = window.location.href;
+    const [loading ,setLoading] = useState(true)
+    const currentEdited = (currentURL).toString().replace(/[^a-zA-Z0-9]/g ,'')
     const [domainActivated, setDomainActivated] = useState(false)
+    const [storeUrl, setStoreUrl] = useState(false)
 
 
     useEffect(() => {
 
+
+        const fetchUrl = async () => {
+            try {
+                const urlRef = doc(db ,"domains" ,currentEdited)
+                const docSnap = await getDoc(urlRef);
+
+                if (docSnap.exists()) {
+                    //console.log("Document data:", docSnap.data());
+                    setDomainActivated(true)
+
+
+                } else {
+                    console.log("No such URL Found !");
+                setStoreUrl(true)
+                }
+            } catch (error) {
+                console.log({error})
+            }
+            setLoading(false)
+
+        }
+
+        fetchUrl()
         if (currentURL === "https://storetract.com/") {
-            console.log(true)
+            //console.log(true)
             setDomainActivated(false)
-        }
-        else if (currentURL === "http://localhost:3000/" ){
-            console.log('true true')
-            setDomainActivated(false)
-        }
-        else {
-            console.log('false true')
-            setDomainActivated(true)
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,12 +71,27 @@ const App = () => {
 
 
     return (
+
       <>
+          { loading ?
+              (<Spinner/>)
+              :
+              (
+                  <>
           <Router>
               <Routes>
                   {
                       domainActivated ?
-                          (   <Route exact path="/" element={<Shop />} />)
+                          (  <>
+
+                              <Route exact path="/" element={<Shop />} />
+                          <Route path="/cart" element={<Cart />} />
+                      <Route path="/account" element={<ShopAuth />} />
+                      <Route path="/:categoryUrl/quick-view" element={<QuickView />} />
+                      <Route path="/:categoryUrl" element={<ShopCategories />} />
+                      <Route path="/:categoryUrl/:productUrl" element={<ProductDetails />} />
+                              </>
+                          )
                           :
                           (   <Route exact path="/" element={<Home />} />)
                   }
@@ -84,20 +120,22 @@ const App = () => {
                       <Route path="/activate-shop" element={<ActivateShop />} />
                   </Route>
 
-
-                  <Route path="/:shopName" element={<Shop />} />
-                  <Route path="/:shopName/cart" element={<Cart />} />
-                  <Route path="/:shopName/account" element={<ShopAuth />} />
-                  <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
-                  <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
-                  <Route path="/:shopName/:categoryUrl/:productUrl" element={<ProductDetails />} />
-                  <Route exact path="/:shopName/track-order" element={<TrackOrder />} />
-
+                  {storeUrl ? (<>
+                      <Route path="/:shopName" element={<Shop />} />
+                      <Route path="/:shopName/cart" element={<Cart />} />
+                      <Route path="/:shopName/account" element={<ShopAuth />} />
+                      <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
+                      <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
+                      <Route path="/:shopName/:categoryUrl/:productUrl" element={<ProductDetails />} />
+                      <Route exact path="/:shopName/track-order" element={<TrackOrder />} />
+                  </>) : ('')}
 
 
               </Routes>
           </Router>
           <ToastContainer />
+              </>
+              ) }
 
       </>
 

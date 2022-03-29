@@ -1,5 +1,4 @@
-import {Col ,Container ,Row} from "react-bootstrap";
-import ProductCard from "./components/ProductCard";
+
 import './styles.css'
 import {useEffect ,useRef ,useState} from "react";
 import {useParams} from "react-router-dom";
@@ -11,124 +10,136 @@ import ShopHeader from "./components/ShopHeader";
 import ShopFooter from "./components/ShopFooter";
 import CategorySection from "./components/CategorySection";
 import ShopNavHeader from "./components/ShopNavHeader";
+import ShopHome from "./ShopHome";
 
 const Shop = () => {
     const params = useParams()
+    //console.log(params.shopName)
 
-    console.log(params.shopName)
-
-    const [shopData, setShopData] = useState('')
-    const [products, setProducts] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [cart, setCart] = useState([])
+    const [shopData ,setShopData] = useState('')
+    const [products ,setProducts] = useState(null)
+    const [loading ,setLoading] = useState(true)
+    const [cart ,setCart] = useState([])
     const isMounted = useRef()
+    const [domain, setDomain] = useState(false)
+    const [ShopURL ,setShopURL] = useState(params.shopName)
+
+
+    const currentURL = window.location.href;
+    const currentEdited = (currentURL).toString().replace(/[^a-zA-Z0-9]/g ,'')
+
 
     //Fetch Product
-    const fetchProducts = async () => {
-        try
-        {
-            setLoading(true)
-            const prodRef = collection(db, 'shops', params.shopName || 'johnson-enterprises', 'products')
+    const fetchProducts = async (storeURL) => {
+
+        try {
+            const prodRef = collection(db ,'shops' , storeURL, 'products')
             const q = query(prodRef)
             const querySnap = await getDocs(q)
             let products = []
             querySnap.forEach((doc) => {
                 //console.log(doc.data());
                 return products.push({
-                    id: doc.id,
-                    data: doc.data(),
+                    id: doc.id ,
+                    data: doc.data() ,
                 })
             })
             setProducts(products)
-            setLoading(false)
-
-        }
-        catch (error) {
+        } catch (error) {
             console.log({error})
+
             toast.error("Unable to retrieve products")
 
         }
     }
 
-    useEffect(() => {
-        if(isMounted) {
-            let localCart = localStorage.getItem("cart");
-            const fetchDetails = async () => {
-                try
-                {
-                    const docRef = doc(db, "shops", params.shopName || 'johnson-enterprises')
-                    const docSnap = await getDoc(docRef);
 
-                    if (docSnap.exists()) {
-                        //console.log("Document data:", docSnap.data());
-                        setShopData(docSnap.data())
+    const fetchDetails = async (storeURL) => {
 
-                    } else {
-                        console.log("No such document!");
-                    }
-                }
-                catch (error) {
-                    console.log({error})
-                }
+        try {
+            const docRef = doc(db ,"shops" ,storeURL)
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                //console.log("Document data:", docSnap.data());
+                setShopData(docSnap.data())
+
+            } else {
+                console.log("No such Details Found!");
+
             }
-            fetchDetails()
-            // fetchCategories()
-            fetchProducts()
+        } catch (error) {
+            console.log({error})
+        }
+    }
+
+    const fetchUrl = async () => {
+        try {
+            const urlRef = doc(db ,"domains" ,currentEdited)
+            const docSnap = await getDoc(urlRef);
+
+            if (docSnap.exists()) {
+                //console.log("Document data:", docSnap.data());
+                setShopURL(docSnap.data().shopUrl)
+                setDomain(true)
+                fetchDetails(docSnap.data().shopUrl)
+                fetchProducts(docSnap.data().shopUrl)
+
+
+            } else {
+                console.log("No such URL Found !");
+                setShopURL(params.shopName)
+                setDomain(false)
+                fetchDetails(params.shopName)
+                fetchProducts(params.shopName)
+            }
+
+            setLoading(false)
+        } catch (error) {
+            console.log({error})
+        }
+
+    }
+
+    useEffect(() => {
+        if (isMounted) {
+            let localCart = localStorage.getItem("cart");
+            fetchUrl()
+
+
             //turn it into js
             localCart = JSON.parse(localCart);
             //load persisted cart into state if it exists
             if (localCart) setCart(localCart)
             // console.log(localCart)
-            console.log(cart.length)
+            // console.log(cart.length)
         }
         return () => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMounted, params.shopName])
+    } ,[isMounted ,params.shopName])
 
 
+        return (
+            <>
+                { loading ?
+                    (<Spinner/>)
+                    :
+                    (
+                        <>
+                            <ShopNavHeader cartCount={ cart.length } businessUrl={ ShopURL } domain={domain}/>
+                            <ShopHeader businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain}/>
+                            <CategorySection shopName={ ShopURL }/>
 
-    return(
-                <>
-                    {loading ?
-                        (<Spinner />)
-                        :
-                        (
-                            <>
-                                <ShopNavHeader cartCount={cart.length} businessUrl={params.shopName || 'johnson-enterprises'} />
-                                <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName || 'johnson-enterprises'} />
-                                <CategorySection shopName={params.shopName || 'johnson-enterprises'}/>
-                    <Container>
+                            {/*<Auth businessUrl={ShopURL} />*/}
+                            <ShopHome businessUrl={ShopURL} products={products} loading={loading} />
+                            <ShopFooter businessName={ shopData.businessName }/>
+                        </>
+                    ) }
+            </>
+        )
 
-                        <div className="Shop-products">
-                            {loading ?
-                                (<Spinner />)
-                                : products && products.length > 0 ?
-                                    (
-                                        <>
-                                        <h6 className="small">{products.length} Product(s)</h6>
-                            <Row>
-
-                                {products.map((product) => (
-                                <Col md={3} key={product.id}>
-                                    <ProductCard id={product.id} product={product.data} businessUrl={params.shopName || 'johnson-enterprises'} />
-                                </Col>
-                                ))}
-                            </Row>
-                                        </>
-                                    ) :
-                                    (<h6>No product available</h6>)
-                            }
-                        </div>
-
-                    </Container>
-
-                                <ShopFooter businessName={shopData.businessName}/>
-                                </>
-                        )}
-                </>
-    )
 
 }
 

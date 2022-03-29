@@ -10,12 +10,13 @@
     font-weight: 700;
     text-transform: uppercase;
     color: #525252;
-    cursor: pointer;
+
 }
 .auth-tab ul li .not-active{
     background: #7d7d7d;
     padding: 10px 15px;
     color: #ffffff;
+    cursor: pointer;
 }
 .auth-tab ul li .not-active:hover{
     background: #525252;

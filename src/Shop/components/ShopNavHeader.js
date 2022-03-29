@@ -2,7 +2,7 @@ import {Col ,Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import React from "react";
 
-const ShopNavHeader = ({businessUrl, cartCount}) => {
+const ShopNavHeader = ({businessUrl, cartCount, domain}) => {
     return (
         <>
             <div className="Nav-header">
@@ -11,22 +11,22 @@ const ShopNavHeader = ({businessUrl, cartCount}) => {
                         <div className="Socials">
                             <ul>
                                 <li>
-                                    <Link to="https//" className="Socials-link">
+                                    <Link to="https://" className="Socials-link">
                                         <i className="fab fa-facebook-f"></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="https//" className="Socials-link">
+                                    <Link to="https://" className="Socials-link">
                                         <i className="fab fa-twitter"></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="https//" className="Socials-link">
+                                    <Link to="https://" className="Socials-link">
                                         <i className="fab fa-instagram-square"></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="https//" className="Socials-link">
+                                    <Link to="https://" className="Socials-link">
                                         <i className="fab fa-pinterest-square"></i>
                                     </Link>
                                 </li>
@@ -49,12 +49,12 @@ const ShopNavHeader = ({businessUrl, cartCount}) => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to={`/${businessUrl}/account`} className="Account-link">
+                                    <Link to={domain ? ('/account') : (`/${businessUrl}/account`) } className="Account-link">
                                         <i className="fas fa-user-alt"></i>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to={`/${businessUrl}/cart`} className="Account-link">
+                                    <Link to={domain ? ('/cart') : (`/${businessUrl}/cart`) } className="Account-link">
                                         My Cart <i className="fas fa-shopping-cart"></i>
                                         <span className="cart-count">{cartCount ? (cartCount) : '0' } </span>
                                     </Link>
