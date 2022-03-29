@@ -45,8 +45,8 @@ const App = () => {
 
                 if (docSnap.exists()) {
                     //console.log("Document data:", docSnap.data());
-                    setDomainActivated(true)
-
+                   setStoreUrl(false)
+                    console.log(currentEdited)
 
                 } else {
                     console.log("No such URL Found !");
@@ -62,7 +62,7 @@ const App = () => {
         fetchUrl()
         if (currentURL === "https://storetract.com/") {
             //console.log(true)
-            setDomainActivated(false)
+            setDomainActivated(true)
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,21 +80,7 @@ const App = () => {
                   <>
           <Router>
               <Routes>
-                  {
-                      domainActivated ?
-                          (  <>
-
-                              <Route exact path="/" element={<Shop />} />
-                          <Route path="/cart" element={<Cart />} />
-                      <Route path="/account" element={<ShopAuth />} />
-                      <Route path="/:categoryUrl/quick-view" element={<QuickView />} />
-                      <Route path="/:categoryUrl" element={<ShopCategories />} />
-                      <Route path="/:categoryUrl/:productUrl" element={<ProductDetails />} />
-                              </>
-                          )
-                          :
-                          (   <Route exact path="/" element={<Home />} />)
-                  }
+                  { domainActivated && <Route exact path="/" element={<Home />} /> }
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -128,7 +114,17 @@ const App = () => {
                       <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
                       <Route path="/:shopName/:categoryUrl/:productUrl" element={<ProductDetails />} />
                       <Route exact path="/:shopName/track-order" element={<TrackOrder />} />
-                  </>) : ('')}
+                  </>) : (
+                      <>
+
+                          <Route exact path="/" element={<Shop />} />
+                          <Route path="/cart" element={<Cart />} />
+                          <Route path="/account" element={<ShopAuth />} />
+                          <Route path="/:categoryUrl/quick-view" element={<QuickView />} />
+                          <Route path="/:categoryUrl" element={<ShopCategories />} />
+                          <Route path="/:categoryUrl/:productUrl" element={<ProductDetails />} />
+                      </>
+                  )}
 
 
               </Routes>

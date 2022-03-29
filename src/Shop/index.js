@@ -65,6 +65,7 @@ const Shop = () => {
                 setShopData(docSnap.data())
 
             } else {
+                console.log(storeURL)
                 console.log("No such Details Found!");
 
             }
@@ -82,6 +83,7 @@ const Shop = () => {
                 //console.log("Document data:", docSnap.data());
                 setShopURL(docSnap.data().shopUrl)
                 setDomain(true)
+                console.log(docSnap.data().shopUrl)
                 fetchDetails(docSnap.data().shopUrl)
                 fetchProducts(docSnap.data().shopUrl)
 
@@ -104,6 +106,7 @@ const Shop = () => {
     useEffect(() => {
         if (isMounted) {
             let localCart = localStorage.getItem("cart");
+
             fetchUrl()
 
 
