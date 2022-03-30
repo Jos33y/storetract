@@ -14,12 +14,11 @@ const CheckOutShipping = () => {
                 <div className="Shipping-address">
                     <Table className="table">
                         <tbody>
-                        <tr>
+                        <tr className="top">
                             <td><p className="text-head"> Contact</p></td>
                             <td> <p>josephlagbalu@gmail.com </p></td>
                             <td> <Link to="https://" className="link">Change</Link> </td>
                         </tr>
-
                         <tr>
                             <td><p className="text-head"> Ship to</p></td>
                             <td> <p>My QR KARD, 333 Fremont Street, San Francisco CA 94105, United States </p></td>
@@ -33,19 +32,34 @@ const CheckOutShipping = () => {
                 {/*shipping method*/}
                 <div className="Shipping-method">
                     <h6>Shipping method</h6>
-                    <tbody className="Shipping-method-table">
-                        <tr>
-                            <td>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                                        <label className="form-check-label" htmlFor="flexRadioDefault1">
-                                            Default radio
-                                        </label>
-                                </div>
-                            </td>
-                            <td> <p>Free</p> </td>
-                        </tr>
-                    </tbody>
+                    <Table className="table">
+                        <tbody className="Shipping-method-table">
+                            <tr>
+                                <td>
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                                            <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                                FREE DHL Express Recorded delivery + taxes paid
+                                            </label>
+                                    </div>
+                                </td>
+                                <td> <p>Free</p> </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="radio" name="flexRadioDefault"
+                                               id="flexRadioDefault2" checked/>
+                                            <label className="form-check-label" htmlFor="flexRadioDefault2">
+                                                Delivery within Lagos
+                                            </label>
+                                    </div>
+                                </td>
+                                <td> <p> &#8358;1,500</p> </td>
+                            </tr>
+                        </tbody>
+                    </Table>
 
                 </div>
 

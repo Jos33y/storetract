@@ -2,9 +2,11 @@ import {Col ,Container ,Row} from "react-bootstrap";
 import "./Styles.css"
 import OrderSummary from "./OrderSummary";
 import CheckOutHeader from "./CheckOutHeader";
-import CheckOutInfo from "./CheckOutInfo";
 import ShopFooter from "../components/ShopFooter";
-import CheckOutShipping from "./CheckOutShipping";
+import CheckOutInfo from "./CheckOutInfo";
+// import CheckOutShipping from "./CheckOutShipping";
+// import CheckOutPayment from "./CheckOutPayment";
+// import OrderConfirmation from "./OrderConfirmation";
 
 
 const CheckOutInformation = () => {
@@ -16,8 +18,10 @@ const CheckOutInformation = () => {
                     <Row>
                         <Col md={7}>
                             <CheckOutHeader />
-                            <CheckOutShipping />
-                           {/*<CheckOutInfo />*/}
+                            {/*<CheckOutShipping />*/}
+                           <CheckOutInfo />
+                           {/* <CheckOutPayment />*/}
+                           {/* <OrderConfirmation />*/}
                         </Col>
                         <Col md={5}>
                             <OrderSummary />

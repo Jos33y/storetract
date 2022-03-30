@@ -17,19 +17,19 @@ const CheckOutHeader = () => {
                         </li>
                         <i className="fas fa-chevron-right"></i>
                         <li>
-                           <span className="link"> Information</span>
+                           <span className="active"> Information</span>
                         </li>
                         <i className="fas fa-chevron-right"></i>
                         <li>
-                            <span className="active"> Shipping</span>
+                            <span className="link"> Shipping</span>
                         </li>
                         <i className="fas fa-chevron-right"></i>
                         <li>
-                            <span className="link"> Payment Method</span>
+                            <span className="link"> Payment</span>
                         </li>
                         <i className="fas fa-chevron-right"></i>
                         <li>
-                            <span className="link"> Review</span>
+                            <span className="link"> Order Confirmation</span>
                         </li>
 
                     </ul>
