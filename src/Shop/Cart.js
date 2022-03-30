@@ -159,7 +159,7 @@ const Cart = () => {
                                     <Col md={3}>
                                             <Link to="https://" className="continue-link">Continue Shopping</Link>
                                             <p><Button className="btn btn-md btn-secondary">Update Cart</Button></p>
-                                            <p><Button className="btn btn-md btn-secondary">Checkout</Button></p>
+                                            <p><Link to={(`/${params.shopName}/checkout/information`)} className="btn btn-md btn-secondary">Checkout </Link></p>
                                     </Col>
                                 </Row>
                             </div>

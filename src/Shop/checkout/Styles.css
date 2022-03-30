@@ -1,0 +1,233 @@
+.Order-summary{
+    margin-top: 15%;
+   padding: 20px 40px;
+    background: #f2f2f2;
+
+}
+.Mini-cart .table{
+    padding: 0;
+}
+.Mini-cart .table tr{
+    padding: 0;
+}
+
+.Mini-cart .table tr td{
+    padding-left: 0;
+    padding-right: 0;
+}
+.Mini-cart .table .cart-width{
+    width: 80%;
+}
+
+.Mini-cart .mini-img-box{
+    float: left;
+    height: 60px;
+    padding-right: 5px;
+}
+.Mini-cart .mini-img-box .Quantity{
+    padding: 2px 5px;
+    background: #525252;
+    color: #ffffff;
+    font-size: 10px;
+    border-radius: 10px;
+    position: relative;
+   z-index: 1000;
+    left: 65px;
+    top: -30px;
+
+}
+.Mini-cart td .mini-img-box .img-fluid{
+    height: 100%;
+    border: 1px solid #939694;
+    border-radius: 5px;
+}
+
+.Mini-cart td p{
+    padding-top: 5px;
+}
+.Mini-cart td .title{
+    font-size: 11px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+.Mini-cart td .amount{
+    font-size: 11px;
+    font-weight: 600;
+    text-align: right;
+}
+.Mini-cart .coupon td .form-control{
+    width: 100%;
+    font-size: 12px;
+    height: 40px;
+}
+.Mini-cart .coupon td .form-control::placeholder{
+    font-size: 11px;
+}
+.Mini-cart .coupon td .btn{
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+    height: 40px;
+    width: 100%;
+    margin-left: 10px;
+    letter-spacing: 1px;
+    background: #95933e;
+}
+.Mini-cart .coupon td .btn:hover{
+    background: #95933d;
+}
+.Mini-cart .Sub-total td{
+    padding: 0;
+}
+.Mini-cart .Sub-total ul{
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+.Mini-cart .Sub-total ul li{
+    font-size: 11px;
+    color: #525252;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.Mini-cart .Sub-total ul .price{
+    float: right;
+}
+.Mini-cart .Sub-total ul .price.money{
+   font-size: 12px;
+    font-weight: 600;
+}
+.Mini-cart .Total-section td .total{
+    font-size: 12px;
+    font-weight: 600;
+}
+.Mini-cart .Total-section td .total-price{
+    font-size: 15px;
+    font-weight: 600;
+    float: right;
+}
+
+/*Checkout header styles */
+.Checkout{
+    background: #ffffff;
+}
+.Checkout-header{
+    margin-top: 5%;
+}
+.Checkout-header .checkout-img-box{
+    text-align: center;
+    height: 100px;
+}
+
+.Checkout-header .checkout-img-box .img-fluid{
+    height: 100%;
+}
+
+/*checkout header bread crumb styles */
+.Checkout-header .bread-crumb{
+    text-align: center;
+}
+.Checkout-header .bread-crumb ul{
+    padding: 10px 0;
+    list-style: none;
+    font-size: 13px;
+    color: #adadad;
+    text-transform: capitalize;
+}
+.Checkout-header .bread-crumb ul li{
+    display: inline-block;
+    margin: 3px 10px;
+}
+.Checkout-header .bread-crumb .fas{
+    font-size: 10px;
+}
+.Checkout-header .bread-crumb ul li .bread-crumb-link{
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #adadad;
+    font-weight: 500;
+}
+.Checkout-header .bread-crumb ul li .active{
+    font-weight: 600;
+    color: #2e2e2e;
+}
+
+
+/*Check Out Information*/
+
+.Checkout-information{
+    padding: 20px;
+    background: #f0f0ff;
+    margin-bottom: 20px;
+}
+
+.Checkout-information h6{
+    font-size: 14px;
+    color: #525252;
+    font-weight: 600;
+}
+.Checkout-information .form-group{
+   margin: 20px 0;
+}
+.Checkout-information .form-group input{
+    height: 40px;
+    font-size: 13px;
+    border-radius: 1px;
+}
+.Checkout-information .form-group select{
+    height: 40px;
+    font-size: 13px;
+    border-radius: 1px;
+}
+
+.Checkout-information .form-group textarea{
+    font-size: 13px;
+    border-radius: 1px;
+}
+.Checkout-information .form-group .btn{
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    height: 50px;
+    width: 100%;
+    background: #7d7d7d;
+    border: 0 solid #2e2e2e;
+}
+.Checkout-information .form-group .btn:hover{
+    background: #525252;
+}
+
+.Checkout-information .form-group p{
+    padding-top: 20px;
+    font-size: 14px;
+    border-radius: 1px;
+    color:#525252;
+}
+.Checkout-information .form-group p .link{
+    color:#525252;
+    text-decoration: none;
+}
+
+/*SHipping Styles*/
+.Shipping{
+    padding: 20px;
+    /*background: #f0f0ff;*/
+    margin-bottom: 20px;
+}
+
+.Shipping-address .text-head{
+    font-size: 13px;
+    color: #7d7d7d;
+}
+.Shipping-address p{
+    font-size: 13px;
+    color: #7d7d7d;
+}
+.Shipping-address .link{
+    font-size: 12px;
+    color: #7d7d7d;
+}

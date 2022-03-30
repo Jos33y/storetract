@@ -26,6 +26,7 @@ import ShopAuth from "./Shop/account/Auth";
 import {doc ,getDoc} from "firebase/firestore";
 import {db} from "./firebase.config";
 import Spinner from "./components/Spinner";
+import CheckOutInformation from "./Shop/checkout";
 
 const App = () => {
     const currentURL = window.location.href;
@@ -110,6 +111,7 @@ const App = () => {
                   {storeUrl ? (<>
                       <Route path="/:shopName" element={<Shop />} />
                       <Route path="/:shopName/cart" element={<Cart />} />
+                      <Route path="/:shopName/checkout/information" element={<CheckOutInformation />} />
                       <Route path="/:shopName/account" element={<ShopAuth />} />
                       <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                       <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
