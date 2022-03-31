@@ -1,16 +1,12 @@
 import {Button ,Table} from "react-bootstrap";
-import ShirtImage from "../../assets/images/stripe-shirt.jpg"
 import React ,{useEffect ,useRef ,useState} from "react";
-import {doc ,getDoc} from "firebase/firestore";
-import {db} from "../../firebase.config";
 import {useParams} from "react-router-dom";
-import CartTable from "../components/CartTable";
+
 
 const OrderSummary = () => {
 
     const params = useParams()
     const [carts, setCarts] = useState([])
-    const [loading, setLoading] = useState(true)
 
     const isMounted = useRef()
 

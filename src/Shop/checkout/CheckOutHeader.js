@@ -1,6 +1,6 @@
 import LogoHead from "../../assets/images/packnow.jpg"
 import {Link} from "react-router-dom";
-import React ,{useState} from "react";
+import React from "react";
 
 const CheckOutHeader = ({active}) => {
 
@@ -18,19 +18,19 @@ const CheckOutHeader = ({active}) => {
                         </li>
                         <i className="fas fa-chevron-right"></i>
                         <li>
-                           <span className={active == 'checkout-info' ? 'active' : 'link'}> Information</span>
+                           <span className={active === 'checkout-info' ? 'active' : 'link'}> Information</span>
                         </li>
                         <i className="fas fa-chevron-right"></i>
                         <li>
-                            <span className={active == 'checkout-shipping' ? 'active' : 'link'}> Shipping</span>
+                            <span className={active === 'checkout-shipping' ? 'active' : 'link'}> Shipping</span>
                         </li>
                         <i className="fas fa-chevron-right"></i>
                         <li>
-                            <span className={active == 'checkout-payment' ? 'active' : 'link'}> Payment</span>
+                            <span className={active === 'checkout-payment' ? 'active' : 'link'}> Payment</span>
                         </li>
                         <i className="fas fa-chevron-right"></i>
                         <li>
-                            <span className={active == 'checkout-confirm' ? 'active' : 'link'}> Order Confirmation</span>
+                            <span className={active === 'checkout-confirm' ? 'active' : 'link'}> Order Confirmation</span>
                         </li>
 
                     </ul>

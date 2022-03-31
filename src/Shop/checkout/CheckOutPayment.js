@@ -1,41 +1,61 @@
-import {Button ,Col ,Container ,Row ,Table} from "react-bootstrap";
+import {Col ,Container ,Row ,Table} from "react-bootstrap";
 import {Link ,useParams} from "react-router-dom";
-import {useState} from "react";
 import CheckOutHeader from "./CheckOutHeader";
 import OrderSummary from "./OrderSummary";
 import ShopFooter from "../components/ShopFooter";
+import FlutterLogo from "../../assets/images/flutter-wave.png";
+import PaystackLogo from "../../assets/images/paystack-logo-vector.png";
+import KlumpLogo from "../../assets/images/klump-two-ng.PNG";
+import {useFlutterwave, closePaymentModal} from "flutterwave-react-v3";
+import {usePaystackPayment} from "react-paystack";
 
 const CheckOutPayment = () => {
     const params = useParams()
 
-    const [paystack, setPaystack] = useState(true)
-    const [flutterWave, setFlutterWave] = useState(false)
-    const [klump, setKlump] = useState(false)
 
-    const handleShipping = () => {
-        console.log("Handling Information")
+    // flutter wave payment section
+    const flutter_config = {
+        public_key: process.env.FLUTTERWAVE_PUBLIC_TEST_KEY,
+        tx_ref: 'sdssds',
+        amount: 100,
+        currency: 'NGN',
+        payment_options: 'card, mobilemoney, banktransfer ,ussd',
+        customer: {
+            email: 'user@gmail.com',
+            phonenumber: '070455666845',
+            name: 'Johnson Enterprise',
+        },
+        customizations: {
+            title: 'payment title',
+            description: 'Payment fort items in cart',
+            logo: 'https://i.ibb.co/Lh3dcSM/logo512.png',
+        },
+    };
+    const handleFlutterPayment = useFlutterwave(flutter_config);
+
+
+    // paystack payment config
+
+
+    const paystack_config = {
+        reference: (new Date()).getTime().toString(),
+        email: "user@example.com",
+        amount: 20000,
+        publicKey: process.env.PAYSTACK_PUBLIC_TEST_KEY,
+    };
+    // you can call this function anything
+    const onSuccess = (reference) => {
+        // Implementation for whatever you want to do with reference and after success call.
+        console.log(reference);
+    };
+
+    // you can call this function anything
+    const onClose = () => {
+        // implementation for  whatever you want to do when the Paystack dialog closed.
+        console.log('closed')
     }
+    const initializePayment = usePaystackPayment(paystack_config);
 
-    const handlePayment = (payment) => {
-
-        if (payment === "paystack"){
-            setPaystack(true)
-            setFlutterWave(false)
-            setKlump(false)
-
-        }
-        else  if (payment === "flutterWave"){
-            setFlutterWave(true)
-            setPaystack(false)
-            setKlump(false)
-        }
-        else{
-            setKlump(true)
-            setFlutterWave(false)
-            setPaystack(false)
-
-        }
-    }
 
     return (
         <>
@@ -92,9 +112,25 @@ const CheckOutPayment = () => {
                                     <h6>All transactions are secure and encrypted.</h6>
 
                                     <div className="Payment-method-list">
-                                        <h4 onClick={() => handlePayment("paystack")} className={paystack ? ("active") : ("")}>Pay with Paystack</h4>
-                                        <h4 onClick={() => handlePayment("flutterWave")} className={flutterWave ? ("active") : ("")}>Pay with FlutterWave</h4>
-                                        <h4 onClick={() => handlePayment("klump")} className={klump ? ("active") : ("")}>Pay with Klump <span className="small">(pay installmentally using klump) </span> </h4>
+                                        {/*paystack button*/}
+                                        <h4
+                                            onClick={() => {
+                                                initializePayment(onSuccess, onClose)
+                                            }}
+                                            className="paystack">
+                                            Pay with  <img src={PaystackLogo} alt="" className="img-fluid"/></h4>
+
+                                        {/*flutter wave button*/}
+                                        <h4 onClick={() => {
+                                            handleFlutterPayment({
+                                                callback: (response) => {
+                                                    console.log(response);
+                                                    closePaymentModal() // this will close the modal programmatically
+                                                },
+                                                onClose: () => {},
+                                            });
+                                        }}>Pay with <img src={FlutterLogo} alt="" className="img-fluid"/></h4>
+                                        <h4 className="klump">Pay with <img src={KlumpLogo} alt="" className="img-fluid"/> <span className="small">(pay installmentally using klump) </span> </h4>
                                     </div>
 
                                 </div>
@@ -103,7 +139,7 @@ const CheckOutPayment = () => {
                                 <div className="form-group">
                                     <Row>
                                         <Col md={4}>
-                                            <Button className="btn btn-md btn-primary" onClick={handleShipping}> Pay Now</Button>
+
                                         </Col>
                                         <Col md={4}>
                                             <p><Link to={(`/${params.shopName}/checkout/order-confirmation`)} className="link"> Return to Shipping</Link></p>
