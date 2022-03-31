@@ -27,6 +27,9 @@ import {doc ,getDoc} from "firebase/firestore";
 import {db} from "./firebase.config";
 import Spinner from "./components/Spinner";
 import CheckOutInformation from "./Shop/checkout";
+import CheckOutShipping from "./Shop/checkout/CheckOutShipping";
+import CheckOutPayment from "./Shop/checkout/CheckOutPayment";
+import OrderConfirmation from "./Shop/checkout/OrderConfirmation";
 
 const App = () => {
     const currentURL = window.location.href;
@@ -112,6 +115,9 @@ const App = () => {
                       <Route path="/:shopName" element={<Shop />} />
                       <Route path="/:shopName/cart" element={<Cart />} />
                       <Route path="/:shopName/checkout/information" element={<CheckOutInformation />} />
+                      <Route path="/:shopName/checkout/shipping" element={<CheckOutShipping />} />
+                      <Route path="/:shopName/checkout/payment" element={<CheckOutPayment />} />
+                      <Route path="/:shopName/checkout/order-confirmation" element={<OrderConfirmation />} />
                       <Route path="/:shopName/account" element={<ShopAuth />} />
                       <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                       <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
