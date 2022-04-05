@@ -84,6 +84,13 @@ const Login = () => {
                     <Col md={10} className="Auth-box">
                         <Row>
                             <Col md={6}>
+                                <div className="Form-image">
+                                    <img src={LoginOffice} alt="" className="img-fluid"/>
+                                    <p> <Link to="/register" className="register">I don't have a store</Link> </p>
+
+                                </div>
+                            </Col>
+                            <Col md={6}>
                                 <Form className="Form" onSubmit={onSubmit} autocomplete="off">
                                     <h5>Sign in</h5>
 
@@ -124,13 +131,7 @@ const Login = () => {
                                     <p> <Link to="/forgot-password" className="forget">Forgot Password</Link> </p>
                                 </Form>
                             </Col>
-                            <Col md={6}>
-                                <div className="Form-image">
-                                    <img src={LoginOffice} alt="" className="img-fluid"/>
-                                    <p> <Link to="/register" className="register">I don't have a store</Link> </p>
 
-                                </div>
-                            </Col>
 
                         </Row>
                     </Col>

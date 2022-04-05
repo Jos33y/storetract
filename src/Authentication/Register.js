@@ -93,6 +93,13 @@ const Register = () => {
                     <Col md={10} className="Auth-box">
                         <Row>
                             <Col md={6}>
+                                <div className="Form-image">
+                                    <img src={RegisterOffice} alt="" className="img-register"/>
+                                    <p> <Link to="/login" className="register">I have a store</Link> </p>
+
+                                </div>
+                            </Col>
+                            <Col md={6}>
                                 <Form className="Form" onSubmit={onSubmit} autocomplete="off">
                                     <h5>Sign up</h5>
                                     <div className="form-group">
@@ -147,19 +154,13 @@ const Register = () => {
                                         <Button className="btn btn-md btn-primary" type="submit">Register</Button>
                                     </div>
 
-                                    <hr/>
+                                    {/*<hr/>*/}
                                     {/*<p className="Social-sign-in">Social sign up</p>*/}
                                     {/*<img src={GoogleLogo} alt="" className="Social-sign-in-fluid" disabled={disable} onClick={onGoogleClick}/>*/}
                                     {/*<hr/>*/}
                                 </Form>
                             </Col>
-                            <Col md={6}>
-                                <div className="Form-image">
-                                    <img src={RegisterOffice} alt="" className="img-register"/>
-                                    <p> <Link to="/login" className="register">I have a store</Link> </p>
 
-                                </div>
-                            </Col>
                         </Row>
                     </Col>
                     <Col md={1}></Col>

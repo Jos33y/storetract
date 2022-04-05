@@ -125,7 +125,8 @@ body{
 
 .Form-image{
    text-align: center;
-    margin-top: 30%;
+    margin-top: 20%;
+    margin-bottom: 5%;
 }
 
 .Form-image .img-fluid{
@@ -170,7 +171,7 @@ body{
         border: 0px solid #3E4095;
         border-radius: 0px;
         padding: 10px 10px 30px 10px;
-        margin-top: 10%;
+        margin-top: 0;
     }
     .Form h5{
         text-align: center;
@@ -265,8 +266,8 @@ body{
 
     .Form-image{
         text-align: center;
-        margin-top: 0;
-        margin-bottom: 20%;
+        margin-top: 10%;
+        margin-bottom: 10%;
     }
 
     .Form-image .img-fluid{

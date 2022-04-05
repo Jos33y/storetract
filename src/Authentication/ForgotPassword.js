@@ -19,6 +19,13 @@ const ForgotPassword = () => {
                     <Col md={10} className="Auth-box">
                         <Row>
                             <Col md={6}>
+                                <div className="Form-forgot">
+                                    <img src={ForgotPasswordI} alt="" className="img-fluid"/>
+                                    <p> <Link to="/login" className="register">I have a store</Link> </p>
+
+                                </div>
+                            </Col>
+                            <Col md={6}>
                                 <Form className="Form" onSubmit={onSubmit} autocomplete="off">
                                     <h5>Reset Password</h5>
 
@@ -39,13 +46,7 @@ const ForgotPassword = () => {
 
                                 </Form>
                             </Col>
-                            <Col md={6}>
-                                <div className="Form-forgot">
-                                    <img src={ForgotPasswordI} alt="" className="img-fluid"/>
-                                    <p> <Link to="/login" className="register">I have a store</Link> </p>
 
-                                </div>
-                            </Col>
 
                         </Row>
                     </Col>
