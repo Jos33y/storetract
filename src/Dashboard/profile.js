@@ -1,7 +1,7 @@
 import './styles.css'
 import AdminNavbar from "../components/AdminNavbar";
 import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
-import {useEffect ,useState} from "react";
+import React, {useEffect ,useState} from "react";
 import {getAuth ,updateProfile} from "firebase/auth";
 import {updateDoc ,doc ,getDoc} from "firebase/firestore";
 import {db} from "../firebase.config";

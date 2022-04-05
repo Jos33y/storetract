@@ -1,6 +1,6 @@
 
 import './styles.css'
-import {useEffect ,useRef ,useState} from "react";
+import React, {useEffect ,useRef ,useState} from "react";
 import {useParams} from "react-router-dom";
 import {collection ,getDocs ,query ,doc ,getDoc} from "firebase/firestore";
 import {db} from "../firebase.config";

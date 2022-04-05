@@ -21,7 +21,7 @@ import ShopCategories from "./Shop/Categories";
 import ProductDetails from "./Shop/ProductDetails";
 import Cart from "./Shop/Cart";
 import TrackOrder from "./Shop/TrackOrder";
-import {useEffect ,useState} from "react";
+import React, {useEffect ,useState} from "react";
 import ShopAuth from "./Shop/account/Auth";
 import {doc ,getDoc} from "firebase/firestore";
 import {db} from "./firebase.config";
@@ -49,13 +49,13 @@ const App = () => {
 
                 if (docSnap.exists()) {
                     //console.log("Document data:", docSnap.data());
-                   setStoreUrl(false)
+                    setStoreUrl(false)
                     console.log(currentEdited)
 
                 } else {
                     console.log("No such URL Found !");
                     console.log(currentEdited)
-                setStoreUrl(true)
+                    setStoreUrl(true)
                 }
             } catch (error) {
                 console.log({error})
@@ -65,7 +65,7 @@ const App = () => {
         }
 
         fetchUrl()
-        if (currentURL === "https://storetract.com/") {
+        if (currentURL === "http://localhost:3000/") {
             //console.log(true)
             setDomainActivated(true)
         }
@@ -77,74 +77,74 @@ const App = () => {
 
     return (
 
-      <>
-          { loading ?
-              (<Spinner/>)
-              :
-              (
-                  <>
-          <Router>
-              <Routes>
-                  { domainActivated && <Route exact path="/" element={<Home />} /> }
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/forgot-password" element={<ForgotPassword />} />
-                  <Route path="/admin-dash" element={<PrivateRoute/>}>
-                      <Route path="/admin-dash" element={<AdminDashboard />} />
-                  </Route>
-                  <Route path="/admin-profile" element={<PrivateRoute/>}>
-                      <Route path="/admin-profile" element={<AdminProfile />} />
-                  </Route>
-                  <Route path="/insert-category" element={<PrivateRoute/>}>
-                      <Route path="/insert-category" element={<InsertCategory />} />
-                  </Route>
-                  <Route path="/view-categories" element={<PrivateRoute/>}>
-                      <Route path="/view-categories" element={<ViewCategories />} />
-                  </Route>
-                  <Route path="/insert-product" element={<PrivateRoute/>}>
-                      <Route path="/insert-product" element={<InsertProduct />} />
-                  </Route>
-                  <Route path="/view-products" element={<PrivateRoute/>}>
-                      <Route path="/view-products" element={<ViewProducts />} />
-                  </Route>
-                  <Route path="/activate-shop" element={<PrivateRoute/>}>
-                      <Route path="/activate-shop" element={<ActivateShop />} />
-                  </Route>
+        <>
+            { loading ?
+                (<Spinner/>)
+                :
+                (
+                    <>
+                        <Router>
+                            <Routes>
+                                { domainActivated && <Route exact path="/" element={<Home />} /> }
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/register" element={<Register />} />
+                                <Route path="/forgot-password" element={<ForgotPassword />} />
+                                <Route path="/admin-dash" element={<PrivateRoute/>}>
+                                    <Route path="/admin-dash" element={<AdminDashboard />} />
+                                </Route>
+                                <Route path="/admin-profile" element={<PrivateRoute/>}>
+                                    <Route path="/admin-profile" element={<AdminProfile />} />
+                                </Route>
+                                <Route path="/insert-category" element={<PrivateRoute/>}>
+                                    <Route path="/insert-category" element={<InsertCategory />} />
+                                </Route>
+                                <Route path="/view-categories" element={<PrivateRoute/>}>
+                                    <Route path="/view-categories" element={<ViewCategories />} />
+                                </Route>
+                                <Route path="/insert-product" element={<PrivateRoute/>}>
+                                    <Route path="/insert-product" element={<InsertProduct />} />
+                                </Route>
+                                <Route path="/view-products" element={<PrivateRoute/>}>
+                                    <Route path="/view-products" element={<ViewProducts />} />
+                                </Route>
+                                <Route path="/activate-shop" element={<PrivateRoute/>}>
+                                    <Route path="/activate-shop" element={<ActivateShop />} />
+                                </Route>
 
-                  {storeUrl ? (<>
-                      <Route path="/:shopName" element={<Shop />} />
-                      <Route path="/:shopName/cart" element={<Cart />} />
-                      <Route path="/:shopName/checkout/information" element={<CheckOutInformation />} />
-                      <Route path="/:shopName/checkout/shipping" element={<CheckOutShipping />} />
-                      <Route path="/:shopName/checkout/payment" element={<CheckOutPayment />} />
-                      <Route path="/:shopName/checkout/order-confirmation" element={<OrderConfirmation />} />
-                      <Route path="/:shopName/account" element={<ShopAuth />} />
-                      <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
-                      <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
-                      <Route path="/:shopName/:categoryUrl/:productUrl" element={<ProductDetails />} />
-                      <Route exact path="/:shopName/track-order" element={<TrackOrder />} />
-                  </>) : (
-                      <>
+                                {storeUrl ? (<>
+                                    <Route path="/:shopName" element={<Shop />} />
+                                    <Route path="/:shopName/cart" element={<Cart />} />
+                                    <Route path="/:shopName/checkout/information" element={<CheckOutInformation />} />
+                                    <Route path="/:shopName/checkout/shipping" element={<CheckOutShipping />} />
+                                    <Route path="/:shopName/checkout/payment" element={<CheckOutPayment />} />
+                                    <Route path="/:shopName/checkout/order-confirmation" element={<OrderConfirmation />} />
+                                    <Route path="/:shopName/account" element={<ShopAuth />} />
+                                    <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
+                                    <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
+                                    <Route path="/:shopName/:categoryUrl/:productUrl" element={<ProductDetails />} />
+                                    <Route exact path="/:shopName/track-order" element={<TrackOrder />} />
+                                </>) : (
+                                    <>
 
-                          <Route exact path="/" element={<Shop />} />
-                          <Route path="/cart" element={<Cart />} />
-                          <Route path="/account" element={<ShopAuth />} />
-                          <Route path="/:categoryUrl/quick-view" element={<QuickView />} />
-                          <Route path="/:categoryUrl" element={<ShopCategories />} />
-                          <Route path="/:categoryUrl/:productUrl" element={<ProductDetails />} />
-                      </>
-                  )}
+                                        <Route exact path="/" element={<Shop />} />
+                                        <Route path="/cart" element={<Cart />} />
+                                        <Route path="/account" element={<ShopAuth />} />
+                                        <Route path="/:categoryUrl/quick-view" element={<QuickView />} />
+                                        <Route path="/:categoryUrl" element={<ShopCategories />} />
+                                        <Route path="/:categoryUrl/:productUrl" element={<ProductDetails />} />
+                                    </>
+                                )}
 
 
-              </Routes>
-          </Router>
-          <ToastContainer />
-              </>
-              ) }
+                            </Routes>
+                        </Router>
+                        <ToastContainer />
+                    </>
+                ) }
 
-      </>
+        </>
 
-  );
+    );
 }
 
 export default App;
