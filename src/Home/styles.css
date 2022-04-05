@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
+.Hero{
+    background: #ffffff;
+    overflow: hidden;
+    background: url("../assets/images/background.svg");
+    width: 100%;
+    background-size:100%;
+    background-position: center;
+    height: 100%;
+    padding-bottom: 50px;
+    margin-bottom: 5%;
+}
+.Nav-header {
+    background: transparent;
+}
+.Nav-header .navbar{
+    background: transparent;
+    padding: 20px 30px 5px 0px;
+    font-family: 'Poppins', sans-serif;
+}
+.Nav-header .navbar .navbar-brand{
+    width: 75%;
+    padding-left: 150px;
+}
+.Nav-header .navbar .logo-fluid{
+    width: 12%;
+}
+.Nav-header .navbar .navbar-nav {
+    float: right;
+}
+.Nav-header .navbar .navbar-nav .nav-item{
+    margin-right: 40px;
+}
+.Nav-header .navbar .navbar-nav .nav-item .btn{
+    border-radius: 5px;
+    border: 1px solid transparent;
+    font-size: 15px;
+    font-weight: 400;
+    color: #ffffff;
+    text-transform: capitalize;
+    padding: 10px 25px;
+}
+.Nav-header .navbar .navbar-nav .nav-item .btn.btn-primary{
+    background: #5C94EB;
+}
+
+.Nav-header .navbar .navbar-nav .nav-item .btn.btn-success{
+    background: #3E4095;
+}
+.Hero-section .Hero-text {
+    padding-left: 150px;
+    font-family: 'Poppins', sans-serif;
+}
+.Hero-section .Hero-text h2{
+    position: relative;
+    margin-top: 150px;
+    font-size: 50px;
+    font-weight: 600;
+    color: #3E4095;
+    z-index: 1;
+}
+.Hero-section .Hero-text .line{
+    background: #DDDDAA;
+    position: absolute;
+    height: 20px;
+    width: 458px;
+    top: 230px;
+    margin-right: 20px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.Hero-section .Hero-text p{
+    font-size: 14px;
+    font-weight: 400;
+    color: #525252;
+}
+
+.Hero-section .Hero-text .btn{
+    margin-top: 20px;
+    background: #3E4095;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 25px;
+    letter-spacing: normal;
+    border-radius: 5px;
+    text-transform: capitalize;
+    border: 1px solid #3E4095;
+}
+.Hero-section .Hero-image{
+    position: relative;
+    padding-top: 70px;
+    width: 100%;
+    right: 150px;
+}
+.Hero-section .Hero-image .hero-fluid{
+    width: 110%;
+}
+
+
+/*Body styling starts here*/
+.Body-section {
+    padding-top: 50px;
+    background: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+.Body-section .Body-header{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+
+.Body-section h3{
+   font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 5%;
+}
+.colored{
+    color: #3E4095;
+}
+/*First section here*/
+.Section-one{
+    margin-top: 8%;
+}
+.Box-image{
+    text-align: center;
+}
+.Box-image .box-fluid{
+    width: 100%;
+}
+.Box-image .box-fluid.section-three{
+    width: 80%;
+}
+.Body-text{
+    text-align: center;
+    margin-top: 30%;
+}
+.Body-text h4{
+    font-size: 30px;
+    font-weight: 600;
+}
+.Body-text h6{
+    font-size: 20px;
+    font-weight: 400;
+    width: 70%;
+    margin: auto;
+}
+
+
+/*section two with different background*/
+
+.Container-two{
+    margin-top: 8%;
+    padding: 50px 0;
+    background: #F7F7F7;
+}
+
+.Box-image{
+    text-align: center;
+}
+.Box-image .box-fluid{
+    width: 110%;
+}
+.Container-two .Body-text{
+    text-align: left;
+    margin-top: 10%;
+}
+.Container-two .Body-text h4{
+    font-size: 35px;
+    line-height: 50px;
+    font-weight: 500;
+}
+.Container-two .Body-text h6{
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%;
+    margin: 0;
+}
+.News-letter{
+    margin-top: 5%;
+    margin-bottom: 8%;
+}
+.Form-letter{
+    padding: 30px 20px;
+    background: #494B9B;
+    border-radius: 10px;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0px 5px 20px rgba(63, 55, 55, 0.19);
+}
+.Form-letter h4{
+    font-size: 30px;
+    font-weight: 500;
+}
+.Form-letter p{
+    font-size: 12px;
+    font-weight: 300;
+}
+.Form-letter .form-control{
+    height: 50px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin: 15px 10px;
+}
+.Form-letter .btn{
+    height: 50px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin: 15px 0px;
+    width: 100%;
+    background: #93B3F4;
+    border: 1px solid #93B3F4;
+}
