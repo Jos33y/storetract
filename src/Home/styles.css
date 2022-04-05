@@ -263,3 +263,285 @@
 .Footer-section .back-to-top .fas{
     padding-left: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+
+    .Hero{
+        background: #ffffff;
+        overflow: hidden;
+        background: url("../assets/images/small-background.svg");
+        width: 100%;
+        background-size:100%;
+        background-position: center;
+        height: 100%;
+        padding-bottom: 50px;
+        margin-bottom: 1%;
+    }
+    .Nav-header {
+        background: transparent;
+    }
+    .Nav-header .navbar{
+        background: transparent;
+        padding: 0px 10px 5px 0px;
+        font-family: 'Poppins', sans-serif;
+        background: transparent;
+        border-radius: 5px;
+    }
+    .Nav-header:active,
+    .Nav-header:focus,
+    .Nav-header:after{
+        background: #ffffff !important;
+    }
+    .Nav-header .navbar .navbar-brand{
+        width: 75%;
+        padding-left: 20px;
+    }
+    .Nav-header .navbar .logo-fluid{
+        width: 45%;
+    }
+    .Nav-header .navbar .navbar-nav {
+        float: none;
+        text-align: center;
+        background: #ffffff;
+        border-radius: 5px;
+        padding-bottom: 50px;
+    }
+    .Nav-header .navbar .navbar-nav .nav-item{
+        margin: 15px 0;
+    }
+    .Nav-header .navbar .navbar-nav .nav-item .btn{
+        border-radius: 5px;
+        border: 1px solid transparent;
+        font-size: 14px;
+        font-weight: 400;
+        color: #ffffff;
+        text-transform: capitalize;
+        padding: 10px 25px;
+    }
+
+    .Hero-section .Hero-text {
+        padding-left: 10px;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+    .Hero-section .Hero-text h2{
+        position: relative;
+        margin-top: 50px;
+        font-size: 30px;
+        font-weight: 600;
+        color: #3E4095;
+        z-index: 1;
+    }
+    .Hero-section .Hero-text .line{
+        background: #DDDDAA;
+        position: absolute;
+        height: 8px;
+        width: 260px;
+        top: 92px;
+        margin-right: 0px;
+        margin-left: 60px;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .Hero-section .Hero-text p{
+        font-size: 13px;
+        font-weight: 400;
+        color: #525252;
+        width: 80%;
+        margin: auto;
+    }
+
+    .Hero-section .Hero-text .btn{
+        margin-top: 20px;
+        background: #3E4095;
+        color: #ffffff;
+        font-size: 13px;
+        padding: 10px 25px;
+    }
+    .Hero-section .Hero-image{
+        position: relative;
+        padding-top: 70px;
+        width: 100%;
+        right: 10px;
+    }
+    .Hero-section .Hero-image img.hero-fluid{
+        width: 100%;
+    }
+
+
+    /*Body styling starts here*/
+    .Body-section {
+        padding-top: 40px;
+    }
+    .Body-section .Body-header{
+        text-align: center;
+        width: 75%;
+        margin: auto;
+
+    }
+
+    .Body-section h3{
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 5%;
+        line-height: 35px;
+    }
+    /*First section here*/
+    .Section-one{
+        margin-top: 25%;
+    }
+    .Box-image{
+        text-align: justify;
+
+    }
+    .Box-image img.box-fluid{
+        width: 80%;
+
+    }
+    .Box-image .box-fluid.section-three{
+        width: 70%;
+    }
+    .Body-text{
+        text-align: center;
+        margin-top: 30px;
+    }
+    .Body-text h4{
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .Body-text h6{
+        font-size: 15px;
+        font-weight: 400;
+        width: 70%;
+        margin: auto;
+    }
+
+
+    /*section two with different background*/
+
+    .Container-two{
+        margin-top: 15%;
+        padding: 30px 0;
+
+    }
+
+    .Box-image{
+        text-align: center;
+    }
+    .Box-image img.box-fluid{
+        width: 100%;
+    }
+    .Container-two .Body-text{
+        text-align: left;
+        margin-top: 10%;
+        text-align: center;
+    }
+    .Container-two .Body-text h4{
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 500;
+        width: 80%;
+        margin: auto;
+    }
+    .Container-two .Body-text h6{
+        font-size: 15px;
+        font-weight: 400;
+        width: 90%;
+        margin: auto;
+    }
+    .News-letter{
+
+        margin: 20% 3% 10%;
+    }
+    .Form-letter{
+        padding: 20px 10px;
+        background: #494B9B;
+        border-radius: 10px;
+        color: #ffffff;
+        text-align: center;
+        box-shadow: 0px 5px 20px rgba(63, 55, 55, 0.19);
+    }
+    .Form-letter h4{
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .Form-letter p{
+        font-size: 12px;
+        font-weight: 300;
+        width: 60%;
+        margin: auto;
+    }
+    .Form-letter .form-control{
+        height: 40px;
+        border-radius: 10px;
+        border: 2px solid #494B9B;
+        font-size: 12px;
+        width: 100%;
+        margin: 15px 15px 15px 5px;
+    }
+    .Form-letter .btn{
+        height: 40px;
+        border-radius: 5px;
+        font-size: 13px;
+        margin: 5px 0px;
+        width: 40%;
+        background: #93B3F4;
+        border: 1px solid #93B3F4;
+    }
+
+    /*Footer section styles */
+    .Footer-section{
+        margin-top: 5%;
+        padding: 15px 0px;
+        text-align: center;
+        background: #F7F7F7;
+    }
+    .Footer-section p{
+        font-size: 10px;
+        padding-top: 10px;
+        color: #3E4095;
+        text-align: center;
+    }
+    .Footer-section .footer-socials{
+        list-style: none;
+        padding-left: 0;
+    }
+    .Footer-section .footer-socials li{
+        display: inline-block;
+        padding: 5px 10px;
+    }
+    .Footer-section .footer-socials .Footer-link{
+        text-decoration: none;
+        color: #000000;
+        font-size: 18px;
+    }
+    .Footer-section ul{
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    .Footer-section ul li{
+        padding: 5px 0;
+    }
+    .Footer-section ul li .Footer-link{
+        text-decoration: none;
+        color: #000000;
+        font-size: 13px;
+        font-weight: 400;
+    }
+    .Footer-section .back-to-top{
+        padding-top: 5px;
+        color: #3E4095;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 25px;
+        cursor: pointer;
+        text-align: center;
+    }
+    .Footer-section .back-to-top .fas{
+        padding-left: 10px;
+    }
+
+
+}

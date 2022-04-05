@@ -48,7 +48,7 @@ const BodySection = () => {
                                 </div>
                             </Col>
 
-                            <Col md={6}>
+                            <Col md={6} className="order-first">
                                 <div className="Box-image">
                                     <img src={SectionTwo} alt="" className="box-fluid"/>
                                 </div>
@@ -91,7 +91,7 @@ const BodySection = () => {
                                     </h6>
                                 </div>
                             </Col>
-                            <Col md={7}>
+                            <Col md={7} className="order-first">
                                 <div className="Box-image">
                                     <img src={SectionFour} alt="" className="box-fluid"/>
                                 </div>
