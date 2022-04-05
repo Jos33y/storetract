@@ -1,5 +1,5 @@
 import {Button ,Col ,Container ,Row ,Table} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link ,useNavigate ,useParams} from "react-router-dom";
 import React from "react";
 import OrderSummary from "./OrderSummary";
 import ShopFooter from "../components/ShopFooter";
@@ -8,8 +8,14 @@ import CheckOutHeader from "./CheckOutHeader";
 
 const OrderConfirmation = () => {
 
-    const handleShipping = () => {
+    const params = useParams()
+    const navigate = useNavigate()
+
+
+    const continueShopping = () => {
+
         console.log("Handling Information")
+        navigate(`/${params.shopName}`)
     }
     return (
         <>
@@ -125,7 +131,7 @@ const OrderConfirmation = () => {
                                 <div className="form-group">
                                     <Row>
                                         <Col md={4}>
-                                            <Button className="btn btn-md btn-primary" onClick={handleShipping}> Continue Shopping</Button>
+                                            <Button className="btn btn-md btn-primary" onClick={continueShopping}> Continue Shopping</Button>
                                         </Col>
                                         <Col md={4}>
                                             <p><Link to="https://" className="link"> Need help ? Contact us</Link></p>
@@ -135,7 +141,7 @@ const OrderConfirmation = () => {
                             </div>
                         </Col>
                         <Col md={5}>
-                            <OrderSummary />
+                            <OrderSummary confirm={true} />
                         </Col>
                     </Row>
                 </Container>

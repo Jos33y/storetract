@@ -14,6 +14,7 @@ const ShopHome = ({products, businessUrl, loading}) => {
                     : products && products.length > 0 ?
                         (
                             <>
+                                <h4 className="our-prod">Our Products</h4>
                                 <h6 className="small">{ products.length } Product(s)</h6>
                                 <Row>
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {Col ,Container ,Row ,Table} from "react-bootstrap";
-import {Link ,useParams} from "react-router-dom";
+import {Link ,useNavigate ,useParams} from "react-router-dom";
 import CheckOutHeader from "./CheckOutHeader";
 import OrderSummary from "./OrderSummary";
 import ShopFooter from "../components/ShopFooter";
@@ -9,14 +9,16 @@ import PaystackLogo from "../../assets/images/paystack-logo-vector.png";
 import KlumpLogo from "../../assets/images/klump-two-ng.PNG";
 import {useFlutterwave, closePaymentModal} from "flutterwave-react-v3";
 import {usePaystackPayment} from "react-paystack";
+import {Helmet} from "react-helmet";
 
 const CheckOutPayment = () => {
     const params = useParams()
+    const navigate = useNavigate()
 
 
     // flutter wave payment section
     const flutter_config = {
-        public_key: process.env.FLUTTERWAVE_PUBLIC_TEST_KEY,
+        public_key: "FLWPUBK_TEST-44d817f412ee52d8daf7a5a67444b73c-X",
         tx_ref: 'sdssds',
         amount: 100,
         currency: 'NGN',
@@ -37,16 +39,16 @@ const CheckOutPayment = () => {
 
     // paystack payment config
 
-
     const paystack_config = {
         reference: (new Date()).getTime().toString(),
         email: "user@example.com",
         amount: 20000,
-        publicKey: process.env.PAYSTACK_PUBLIC_TEST_KEY,
+        publicKey:"pk_test_92373800d132af22fc873ce48794f7f6165d4ad3",
     };
     // you can call this function anything
     const onSuccess = (reference) => {
         // Implementation for whatever you want to do with reference and after success call.
+        navigate(`/${params.shopName}/checkout/order-confirmation`)
         console.log(reference);
     };
 
@@ -58,8 +60,64 @@ const CheckOutPayment = () => {
     const initializePayment = usePaystackPayment(paystack_config);
 
 
+    // useKlump
+    //         const payload = {
+    //         publicKey: "klp_pk_test_540b6dfd1e1a4ac1b234963e5fedb9d4cc90cafb97b94d5c93f72e61379dfb91",
+    //         data: {
+    //         amount: 4100,
+    //         shipping_fee: 100,
+    //         currency: 'NGN',
+    //         merchant_reference: 'what-ever-you-want-this-to-be',
+    //         meta_data: {
+    //         customer: 'Elon Musk',
+    //         email: 'musk@spacex.com'
+    //     },
+    //         items: [
+    //     {
+    //         image_url:
+    //         'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    //         item_url: 'https://www.paypal.com/in/webapps/mpp/home',
+    //         name: 'Awesome item',
+    //         unit_price: '2000',
+    //         quantity: 2,
+    //     }
+    //         ]
+    //     },
+    //         onSuccess: (data) => {
+    //         console.log('html onSuccess will be handled by the merchant');
+    //         console.log(data);
+    //         // ok = data;
+    //         return data;
+    //     },
+    //         onError: (data) => {
+    //         console.log('html onError will be handled by the merchant');
+    //         console.log(data);
+    //     },
+    //         onLoad: (data) => {
+    //         console.log('html onLoad will be handled by the merchant');
+    //         console.log(data);
+    //     },
+    //         onOpen: (data) => {
+    //         console.log('html OnOpen will be handled by the merchant');
+    //         console.log(data);
+    //     },
+    //         onClose: (data) => {
+    //         console.log('html onClose will be handled by the merchant');
+    //         console.log(data);
+    //     }
+    //     }
+
+
+
     return (
         <>
+            <Helmet>
+                <script src="https://js.useklump.com/klump.js"
+                        type="text/javascript" />
+                <script>
+
+                </script>
+            </Helmet>
             <div className="Checkout">
                 <Container>
                     <Row>
@@ -125,13 +183,16 @@ const CheckOutPayment = () => {
                                         <h4 onClick={() => {
                                             handleFlutterPayment({
                                                 callback: (response) => {
+                                                    navigate(`/${params.shopName}/checkout/order-confirmation`)
                                                     console.log(response);
                                                     closePaymentModal() // this will close the modal programmatically
                                                 },
-                                                onClose: () => {},
+                                                onClose: () => { navigate(`/${params.shopName}/checkout/order-confirmation`)},
                                             });
                                         }}>Pay with <img src={FlutterLogo} alt="" className="img-fluid"/></h4>
-                                        <h4 className="klump">Pay with <img src={KlumpLogo} alt="" className="img-fluid"/> <span className="small">(pay installmentally using klump) </span> </h4>
+                                        {/* eslint-disable-next-line no-undef */}
+                                        <h4  className="klump">Pay with <img src={KlumpLogo} alt="" className="img-fluid"/> <span className="small">(pay installmentally using klump) </span> </h4>
+                                        {/*onClick={() => {const Klump = new Klump(payload);}}*/}
                                     </div>
 
                                 </div>
@@ -143,14 +204,14 @@ const CheckOutPayment = () => {
 
                                         </Col>
                                         <Col md={4}>
-                                            <p><Link to={(`/${params.shopName}/checkout/order-confirmation`)} className="link"> Return to Shipping</Link></p>
+                                            <p><Link to={(`/${params.shopName}/checkout/shipping`)} className="link"> Return to Shipping</Link></p>
                                         </Col>
                                     </Row>
                                 </div>
                             </div>
                         </Col>
                         <Col md={5}>
-                            <OrderSummary />
+                            <OrderSummary/>
                         </Col>
                     </Row>
                 </Container>

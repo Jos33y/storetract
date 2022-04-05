@@ -3,50 +3,21 @@
 .Nav-header{
     padding: 10px 5px 5px;
 }
-.Nav-header .Socials ul{
-    list-style: none;
-}
-.Nav-header .Socials ul li{
-  display: inline-block;
-    margin-left: 20px;
-}
-.Nav-header .Socials ul li .Socials-link{
-    color: #2e2e2e;
-    text-decoration: none;
-}
 
-.Nav-header .Account-nav ul{
-    list-style: none;
-    float: right;
-    width: 60%;
-}
-.Nav-header .Account-nav ul li{
-    display: inline-block;
-    margin-right: 20px;
-    font-size: 13px;
-    text-transform: uppercase;
-}
-.Nav-header .Account-nav ul li .Account-link{
-    color: #2e2e2e;
-    text-decoration: none
-;
-}
-.Nav-header .Account-nav ul li .Account-link .cart-count{
-    padding-left: 10px;
-}
 /*Shop Header Styles*/
 .Header{
-    padding: 5px 10px 1px;
+    padding: 5px 10px 0px;
     background: #2e2e2e;
 
 }
 .Header ul{
     list-style: none;
-    text-align: center;
+    padding-bottom: 0px;
 }
 
 .Header .NavBrand{
-    padding-top: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     display: inline-block;
     font-weight: 700;
     font-size: 20px;
@@ -56,10 +27,10 @@
 
 
 .Header .logo-fluid{
-    width: 8%;
+    width: 7%;
     border-radius: 50%;
     background: #ffffff;
-    padding: 2px;
+    padding: 1px;
     margin-right: 10px;
 
     box-shadow: -1px 1px 7px 1px rgba(176,174,174,0.75);
@@ -68,50 +39,129 @@
 }
 
 
+.Header .Account-nav ul{
+    list-style: none;
+    padding-top: 10px;
+    float: right;
+    width: 60%;
+    padding-bottom: 0px;
+}
+.Header .Account-nav ul li{
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.Header .Account-nav ul li .Account-link{
+    color: #ffffff;
+    text-decoration: none
+;
+}
+.Header .Account-nav ul li .Account-link .cart-count{
+    padding-left: 10px;
+}
+
 /*Shop Footer Styles*/
 .Footer {
-    padding: 10px 10px 1px;
-    margin-top: 2%;
+    padding: 20px 40px 20px;
+
     background: #2e2e2e;
-    text-align: center;
 }
 .Footer p{
     padding-top: 10px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     color: #ffffff;
-    text-transform: lowercase;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    float: left;
+
+}
+
+
+.Footer .Socials ul{
+    list-style: none;
+    text-align: right;
+}
+.Footer .Socials ul li{
+    display: inline-block;
+    margin-right: 20px;
+}
+.Footer .Socials ul li .Socials-link{
+    color: #ffffff;
+    text-decoration: none;
 }
 
 /*Shop Category Section Styles*/
-.Category-section{
-    padding: 15px 10px 0px 10px;
+
+.Shop-hero{
+   height: 450px;
+    padding: 10px 50px;
+    margin-bottom: 5%;
+    align-items: center;
+    justify-content: center;
+}
+.Shop-hero .img-fluid{
+    width: 100%;
+    height: 450px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #2e2e2e;
+}
+.Shop-hero h1{
+
+    position: absolute;
     text-align: center;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 45px;
+    color: #ffffff;
+    word-wrap: break-word;
+   top: 50%;
+    left: 15%;
+    z-index: 1000;
+    text-transform: uppercase;
+}
+.Category-section{
+    text-align: center;
+    padding: 50px 20px 10px;
+
+    border: 0px solid #2e2e2e;
+}
+.Category-section .btn{
     background: #ffffff;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: #bdbebf;
+    color: #2e2e2e;
+    border: 0px solid #2e2e2e;
+    font-size: 14px;
+    font-weight: 600;
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+
+    box-shadow: 2px 2px 1px 1px rgba(143,143,143,0.75);
+    -webkit-box-shadow: 2px 2px 1px 1px rgba(143,143,143,0.75);
+    -moz-box-shadow: 2px 2px 1px 1px rgba(143,143,143,0.75);
 }
 .Category-section ul{
     list-style: none;
 }
 .Category-section ul li{
-    display: inline-block;
-    margin-right: 40px;
+    display: grid;
+    padding: 10px 0;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 15px;
-
-
+    font-size: 13px;
 }
 .Category-section ul li .Category-link{
     text-decoration: none;
     color: #222222;
+    border-radius: 3px;
+    padding: 5px 5px 5px 10px;
 }
 
-.Category-section ul li .Category-link:hover{
+.Category-section ul li .Category-link:hover {
     background: #d4d4d4;
-    padding: 15px;
+    padding: 5px 5px;
 }
 
 .Category-section ul li .fas{
@@ -137,17 +187,21 @@
     font-size: 14px;
     font-weight: 600;
 }
+.Shop-products .our-prod{
+    text-align: center;
+    font-weight: 600;
+    font-size: 30px;
+}
 
 
 /*Shop Product Card Section Styles*/
 .Shop-product-card{
-    margin: 10px;
+    margin: 10px 0px 30px;
     border-radius: 0;
     border: 0px solid #939694;
     box-shadow: 0px 0px 1px 1px rgba(181,181,181,0.75);
     -webkit-box-shadow: 0px 0px 1px 1px rgba(181,181,181,0.75);
     -moz-box-shadow: 0px 0px 1px 1px rgba(181,181,181,0.75);
-
 }
 .Shop-product-card:hover{
     box-shadow: 0px 0px 5px 3px rgba(201,201,201,0.75);
@@ -161,6 +215,7 @@
 .Shop-product-card .card-img-top{
     max-width: 100%;
     max-height: 100%;
+    object-fit: cover;
 }
 .Shop-product-card .card-body{
     padding: 10px;
@@ -267,7 +322,15 @@
     padding-bottom: 10px;
     color: #2e2e2e;
 }
+.Quick-view-text p.input{
+    justify-content: center;
+    margin-left: 45%;
 
+}
+.Quick-view-text input{
+    width: 80px;
+    height: 50px;
+}
 
 .Quick-view-text h6 .discount-price{
     font-size: 16px;
@@ -441,13 +504,20 @@ Qv-Modal-styles .Close-button .fas{
 .Cart-page .table-section .table th{
     font-size: 14px;
     color: #525252;
+    text-align: center;
 }
 
 .Cart-page .table-section .table .th-product{
- width: 70%;
+ width: 60%;
+}
+.Cart-page .table-section .table .th-delete{
+     width: 5%;
+ }
+.Cart-page .table-section .table .th-price{
+    width: 15%;
 }
 .Cart-page .table-section .table th{
-    width: 7.5%;
+    width: 5%;
 }
 .Cart-page .table-section .table tbody .Img-box{
     float: left;
@@ -464,6 +534,10 @@ Qv-Modal-styles .Close-button .fas{
     color: #525252;
     margin-top: 40px;
 }
+.Cart-page .table-section .table tbody td .btn-outline{
+    color: #525252;
+    margin-top: 30px;
+}
 .Cart-page .table-section .table tbody td p.prod-name{
     text-align: left;
 }
@@ -471,17 +545,21 @@ Qv-Modal-styles .Close-button .fas{
     text-align: center;
 }
 .Cart-page .table-section .table tbody td p .far{
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
     cursor: pointer;
 }
 .Cart-page .table-section .table tbody td.input p{
-    margin-top: 30px;
     text-align: center;
+    font-weight: 700;
 }
 .Cart-page .table-section .table tbody td .form-control{
-    height: 50px;
-    width: 60px;
+    height: 40px;
+    width: 50px;
+    text-align: center;
+    padding: 2px 5px;
+    font-size: 13px;
+    font-weight: 500;
     border-radius: 1px;
 }
 .Cart-page .table-section .table tbody .total td p{

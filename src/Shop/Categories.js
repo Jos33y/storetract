@@ -9,7 +9,6 @@ import ShopFooter from "./components/ShopFooter";
 import {Col ,Container ,Row} from "react-bootstrap";
 import {toast} from "react-toastify";
 import ProductCard from "./components/ProductCard";
-import ShopNavHeader from "./components/ShopNavHeader";
 
 const ShopCategories = () => {
     const params = useParams()
@@ -27,7 +26,6 @@ const ShopCategories = () => {
     const fetchCategory = async () => {
         try
         {
-
             const docRef = doc(db, "shops", params.shopName, 'category', params.categoryUrl )
             const docSnap = await getDoc(docRef );
 
@@ -122,44 +120,50 @@ const ShopCategories = () => {
                 :
                 (
                     <>
-                        <ShopNavHeader cartCount={cart.length} businessUrl={params.shopName} />
-                        <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName} />
-                        <CategorySection shopName={params.shopName}/>
-                        <Container className="Category-page">
-                            <div className='bread-crumb'>
-                                <ul>
-                                    <li>
-                                        <Link to={ `/${params.shopName}`} className="bread-crumb-link"> Home</Link>
-                                    </li> |
-                                    <li>
-                                         {categoryName.title}
-                                    </li>
-                                </ul>
-                            </div>
-            <h3 className="category-title">{categoryName.title}</h3>
+                        <ShopHeader cartCount={ cart.length } businessName={shopData.businessName} businessUrl={params.shopName} />
+                        <Row>
+                            <Col md={3}>
+                                <CategorySection shopName={params.shopName}/>
+                            </Col>
+                            <Col md={9}>
+                                <Container className="Category-page">
+                                    <div className='bread-crumb'>
+                                        <ul>
+                                            <li>
+                                                <Link to={ `/${params.shopName}`} className="bread-crumb-link"> Home</Link>
+                                            </li> |
+                                            <li>
+                                                {categoryName.title}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3 className="category-title">{categoryName.title}</h3>
 
-                            <div className="Shop-products">
-                                {loading ?
-                                    (<Spinner />)
-                                    : products && products.length > 0 ?
-                                        (
-                                            <>
-                                                <h6 className="small">{products.length} Product(s)</h6>
-                                                <Row>
+                                    <div className="Shop-products">
+                                        {loading ?
+                                            (<Spinner />)
+                                            : products && products.length > 0 ?
+                                                (
+                                                    <>
+                                                        <h6 className="small">{products.length} Product(s)</h6>
+                                                        <Row>
 
-                                                    {products.map((product) => (
-                                                        <Col md={3} key={product.id}>
-                                                            <ProductCard id={product.id} product={product.data} businessUrl={params.shopName} />
-                                                        </Col>
-                                                    ))}
-                                                </Row>
-                                            </>
-                                        ) :
-                                        (<h6>No product available</h6>)
-                                }
-                            </div>
+                                                            {products.map((product) => (
+                                                                <Col md={3} key={product.id}>
+                                                                    <ProductCard id={product.id} product={product.data} businessUrl={params.shopName} />
+                                                                </Col>
+                                                            ))}
+                                                        </Row>
+                                                    </>
+                                                ) :
+                                                (<h6>No product available</h6>)
+                                        }
+                                    </div>
 
-                        </Container>
+                                </Container>
+                            </Col>
+                        </Row>
+
 
                         <ShopFooter businessName={shopData.businessName}/>
                     </>

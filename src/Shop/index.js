@@ -9,8 +9,9 @@ import {toast} from "react-toastify";
 import ShopHeader from "./components/ShopHeader";
 import ShopFooter from "./components/ShopFooter";
 import CategorySection from "./components/CategorySection";
-import ShopNavHeader from "./components/ShopNavHeader";
 import ShopHome from "./ShopHome";
+import {Col ,Row} from "react-bootstrap";
+import HeroImage from "../assets/images/224_UG9kaXVtMi0wMQ.jpg"
 
 const Shop = () => {
     const params = useParams()
@@ -131,12 +132,23 @@ const Shop = () => {
                     :
                     (
                         <>
-                            <ShopNavHeader cartCount={ cart.length } businessUrl={ ShopURL } domain={domain}/>
-                            <ShopHeader businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain}/>
-                            <CategorySection shopName={ ShopURL }/>
+                            <ShopHeader cartCount={ cart.length } businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain}/>
+                           <div className="Shop-hero">
+                               <h1>Welcome to {shopData.businessName}</h1>
+                               <img src={HeroImage} alt="" className="img-fluid"/>
+                           </div>
 
                             {/*<Auth businessUrl={ShopURL} />*/}
-                            <ShopHome businessUrl={ShopURL} products={products} loading={loading} />
+                            <Row>
+                                <Col md={3} className="side-bar">
+                                    <CategorySection shopName={ ShopURL }/>
+                                </Col>
+                                <Col md={9}>
+
+                                    <ShopHome businessUrl={ShopURL} products={products} loading={loading} />
+                                </Col>
+                            </Row>
+
                             <ShopFooter businessName={ shopData.businessName }/>
                         </>
                     ) }

@@ -2,7 +2,6 @@ import {Col ,Container ,Row} from "react-bootstrap";
 import React ,{useEffect ,useRef ,useState} from "react";
 import './styles.css'
 import Spinner from "../../components/Spinner";
-import ShopNavHeader from "../components/ShopNavHeader";
 import ShopHeader from "../components/ShopHeader";
 import CategorySection from "../components/CategorySection";
 import {Link ,useParams} from "react-router-dom";
@@ -77,8 +76,7 @@ const ShopAuth = () => {
                 :
                 (
                     <>
-                        <ShopNavHeader cartCount={carts.length} businessUrl={params.shopName} />
-                        <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName} />
+                        <ShopHeader cartCount={carts.length}  businessName={shopData.businessName} businessUrl={params.shopName} />
                         <CategorySection shopName={params.shopName}/>
                         <Container>
                             <div className="Auth-page">

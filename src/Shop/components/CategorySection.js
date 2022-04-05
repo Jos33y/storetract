@@ -3,11 +3,11 @@ import {Link} from "react-router-dom";
 import {collection ,getDocs ,orderBy ,query} from "firebase/firestore";
 import {db} from "../../firebase.config";
 import {toast} from "react-toastify";
-import Spinner from "../../components/Spinner";
+import {Button} from "react-bootstrap";
 
 const CategorySection = ({shopName}) => {
+    const [display, setDisplay] = useState(false);
     const [categories, setCategories] = useState(null)
-    const [loading, setLoading] = useState(true)
     const isMounted = useRef()
 
 
@@ -15,7 +15,6 @@ const CategorySection = ({shopName}) => {
     const fetchCategories = async () => {
         try
         {
-            setLoading(true)
             const catRef = collection(db, 'shops', shopName, 'category' )
             const q = query(catRef, orderBy('timestamp', 'asc'))
             const querySnap = await getDocs(q)
@@ -28,7 +27,6 @@ const CategorySection = ({shopName}) => {
                 })
             })
             setCategories(categories)
-            setLoading(false)
         }
         catch (error) {
             toast.error("could not fetch categories")
@@ -51,26 +49,28 @@ const CategorySection = ({shopName}) => {
 
     return(
         <>
-            { loading ?
-                (<Spinner/>)
-                :
-                (
                     <div className="Category-section">
+                        <Button onClick={() => {
+                            setDisplay((prevState) => !prevState)}}
+                            className="btn btn-md btn-primary">View Categories</Button>
+
+                        {display ?
+                            (
                         <ul>
                             { categories.map((category) => (
                                 <li key={ category.id }>
                                     <Link to={ `/${shopName}/${ category.data.categoryUrl }` }
-                                          className="Category-link">{ category.data.title } <i
-                                        className="fas fa-angle-right"></i></Link>
+                                          className="Category-link">{ category.data.title }
+                                    </Link>
                                 </li>
                                 // <li>
                                 //     <Link to="/" className="Category-link">Hand Bag <i className="fas fa-angle-right"></i></Link>
                                 // </li>
                             )) }
-                        </ul>
-
-                    </div>)
-            }
+                        </ul>) :
+                            ("")
+                        }
+                    </div>
         </>
     )
 

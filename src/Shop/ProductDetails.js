@@ -1,5 +1,5 @@
 import {Link ,useParams} from "react-router-dom";
-import CategorySection from "./components/CategorySection";
+// import CategorySection from "./components/CategorySection";
 import React ,{useEffect ,useRef ,useState} from "react";
 import {collection ,doc ,getDoc ,getDocs ,limit ,query} from "firebase/firestore";
 import {db} from "../firebase.config";
@@ -9,7 +9,6 @@ import {Col ,Container ,Row} from "react-bootstrap";
 import ShopHeader from "./components/ShopHeader";
 import ProductCard from "./components/ProductCard";
 import {toast} from "react-toastify";
-import ShopNavHeader from "./components/ShopNavHeader";
 
 
 const  ProductDetails = () => {
@@ -24,30 +23,31 @@ const  ProductDetails = () => {
     const [product, setProduct] = useState(null)
     const [cart, setCart] = useState([])
     const [loading, setLoading] = useState(true)
+    const [quantity, setQuantity] = useState("1")
 
     const isMounted = useRef()
 
 
+    const onChange = (e) => {
+        setQuantity(e.target.value)
+        // console.log(quantity)
 
+    }
     //add to cart function
    const addToCart = async (product) => {
        setDisabled(true)
-
+       console.log("quantity:", quantity)
        try{
             let cartData = [...cart]
-
-           //assuming we have an ID field in our item
-
-           //console.log(cartData)
-
            //look for item in cart array
            const existingItem = cartData.find(cartItem => cartItem.uniqueId === product.uniqueId);
 
            //if item already exists
            if (existingItem) {
+               console.log(product.quantity)
                toast.error('item already added') //alert user
            } else { //if item doesn't exist, simply add it
-               cartData.push(product)
+               cartData.push({...product, qty: quantity})
                toast.success('product added to cart')
            }
 
@@ -93,38 +93,6 @@ const  ProductDetails = () => {
             console.log({error})
         }
     }
-
-    // //Fetch Carts
-    // const fetchCarts = async () => {
-    //     try
-    //     {
-    //         const ipAddress = await (publicIp.v4({
-    //             fallbackUrls: [
-    //                 'https://ifconfig.co/ip'
-    //             ]
-    //         }));
-    //         const cartRef = collection(db, 'shops', params.shopName, 'carts')
-    //         const q = query(cartRef, where("ipAddress", "==", ipAddress))
-    //         const querySnap = await getDocs(q)
-    //         let carts = []
-    //         querySnap.forEach((doc) => {
-    //             console.log(doc.data());
-    //             return carts.push({
-    //                 id: doc.id,
-    //                 data: doc.data(),
-    //             })
-    //         })
-    //         setCarts(carts)
-    //         setLoading(false)
-    //     }
-    //     catch (error) {
-    //         console.log({error})
-    //         toast.error("Unable to retrieve carts")
-    //
-    //     }
-    // }
-    //
-
     //Fetch Product
     const fetchProducts = async () => {
         try
@@ -227,9 +195,8 @@ const  ProductDetails = () => {
                 :
                 (
                     <>
-                        <ShopNavHeader cartCount={cart.length} businessUrl={params.shopName} />
-            <ShopHeader businessName={shopData.businessName} businessUrl={params.shopName} />
-            <CategorySection shopName={params.shopName}/>
+            <ShopHeader cartCount={cart.length} businessName={shopData.businessName} businessUrl={params.shopName} />
+            {/*<CategorySection shopName={params.shopName}/>*/}
             <Container className="Category-page">
                 <div className='bread-crumb'>
                     <ul>
@@ -276,6 +243,12 @@ const  ProductDetails = () => {
                                     (<span className="discount-price">  &#8358; {product.productDiscountPrice.toString()
                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>)}
                                 </h6>
+                                <p className="input"><input type="number"
+                                                            className="form-control"
+                                                            id="quantity"
+                                                            onChange={onChange}
+                                                            value={quantity}
+                                /></p>
                                 <p>
                                     {product.productDescription}
                                 </p>

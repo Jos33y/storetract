@@ -1,20 +1,88 @@
-import React from "react";
 import {Button ,Col ,Container ,Row ,Table} from "react-bootstrap";
-import {Link ,useParams} from "react-router-dom";
+import {Link ,useNavigate ,useParams} from "react-router-dom";
 import CheckOutHeader from "./CheckOutHeader";
 import OrderSummary from "./OrderSummary";
 import ShopFooter from "../components/ShopFooter";
+import React, {useEffect ,useRef ,useState} from "react";
+import {doc ,getDoc} from "firebase/firestore";
+import {db} from "../../firebase.config";
+import Spinner from "../../components/Spinner";
 
 const CheckOutShipping = () => {
+    // const [carts, setCarts] = useState([])
+    // const [customerID, setCustomerID] = useState("")
+    const [loading, setLoading] = useState(true)
+    const [formData, setFormData] = useState([])
 
     const params = useParams()
+    const navigate = useNavigate()
+    const isMounted = useRef()
 
     const handleShipping = () => {
         console.log("Handling Information")
+        navigate(`/${params.shopName}/checkout/payment`)
     }
+
+    const getCustomer = async (CustomerID) =>{
+
+        try {
+            const customerRef = doc(db, 'shops', params.shopName, 'customers', CustomerID)
+            const customerSnap =  await getDoc(customerRef)
+
+            if(customerSnap.exists()){
+                // console.log(customerSnap.data())
+                setFormData(customerSnap.data())
+                setLoading(false)
+            }
+
+        }
+        catch (e) {
+            console.log({e})
+        }
+
+    }
+
+    useEffect(() => {
+        if(isMounted) {
+            let localCustomerID = localStorage.getItem("customerID");
+            // let localCart = localStorage.getItem("cart");
+
+
+            localCustomerID = JSON.parse(localCustomerID);
+            //load persisted cart into state if it exists
+            if (localCustomerID) {
+                // setCustomerID(localCustomerID)
+                getCustomer(localCustomerID)
+            }
+
+
+
+            // //turn it into js
+            // localCart = JSON.parse(localCart);
+            // //load persisted cart into state if it exists
+            // if (localCart) {
+            //     setCarts(localCart)
+            //     // console.log(carts)
+            // }
+
+
+
+        }
+        return () => {
+            isMounted.current = false
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMounted, params.shopName])
+
+
 
     return (
         <>
+            { loading ?
+                (<Spinner/>) :
+
+                (
+                    <>
             <div className="Checkout">
                 <Container>
                     <Row>
@@ -27,13 +95,13 @@ const CheckOutShipping = () => {
                                         <tbody>
                                         <tr className="top">
                                             <td><p className="text-head"> Contact</p></td>
-                                            <td> <p>josephlagbalu@gmail.com </p></td>
-                                            <td> <Link to="https://" className="link">Change</Link> </td>
+                                            <td> <p>{formData.email} </p></td>
+                                            <td> <Link to={(`/${params.shopName}/checkout/information`)} className="link">Change</Link> </td>
                                         </tr>
                                         <tr>
                                             <td><p className="text-head"> Ship to</p></td>
-                                            <td> <p>My QR KARD, 333 Fremont Street, San Francisco CA 94105, United States </p></td>
-                                            <td> <Link to="https://" className="link">Change</Link> </td>
+                                            <td> <p>{`${formData.deliveryAddress}, ${formData.city}, ${formData.state}, ${formData.country}`} </p></td>
+                                            <td> <Link to={(`/${params.shopName}/checkout/information`)} className="link">Change</Link> </td>
                                         </tr>
                                         </tbody>
                                     </Table>
@@ -81,7 +149,7 @@ const CheckOutShipping = () => {
                                             <Button className="btn btn-md btn-primary" onClick={handleShipping}> Continue to payment</Button>
                                         </Col>
                                         <Col md={4}>
-                                            <p><Link to={(`/${params.shopName}/checkout/payment`)} className="link"> Return to information</Link></p>
+                                            <p><Link to={(`/${params.shopName}/checkout/information`)} className="link"> Return to information</Link></p>
                                         </Col>
                                     </Row>
                                 </div>
@@ -94,6 +162,10 @@ const CheckOutShipping = () => {
                 </Container>
             </div>
             <ShopFooter businessName="Johnson Enterprises" />
+                    </>
+                )
+            }
+
         </>
     )
 

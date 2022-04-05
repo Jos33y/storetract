@@ -3,11 +3,11 @@ import React ,{useEffect ,useRef ,useState} from "react";
 import {useParams} from "react-router-dom";
 
 
-const OrderSummary = () => {
+const OrderSummary = ({confirm}) => {
 
     const params = useParams()
     const [carts, setCarts] = useState([])
-
+    const itemsPrice = carts.reduce((a, c) => a + c.productPrice * c.qty, 0);
     const isMounted = useRef()
 
 
@@ -42,36 +42,41 @@ const OrderSummary = () => {
                       <tbody>
 
                           {carts.map((cart) => (
-                      <tr key={cart.id}>
-                          <td className="cart-width">
+                      <tr >
+                          <td key={cart.id} className="cart-width">
                               <div className="mini-img-box">
-                                  <span className="Quantity">1</span>
+                                  <span className="Quantity">{cart.qty}</span>
                                   <img src={cart.imgUrls[0]} alt="" className="img-fluid"/>
                               </div>
                               <p className="title"> {cart.productName}</p>
                           </td>
                           <td>
-                              <p className="amount">&#8358;{(cart.productPrice).toString()
+                              <p className="amount">&#8358;{(cart.productPrice * cart.qty).toString()
                                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
                           </td>
                       </tr>
                           ))}
 
                       {/*coupon section*/}
-                      <tr className="coupon">
-                          <td>
-                              <input type="text" className="form-control" placeholder="Discount code"/>
-                          </td>
-                          <td>
-                              <Button className="btn btn-md btn-primary"> Apply</Button>
-                          </td>
-                      </tr>
+                          { confirm ?
+                              ("") :
+
+                              <tr className="coupon">
+                                  <td>
+                                      <input type="text" className="form-control" placeholder="Discount code"/>
+                                  </td>
+                                  <td>
+                                      <Button className="btn btn-md btn-primary"> Apply</Button>
+                                  </td>
+                              </tr>
+                          }
 
                       {/*subtotal section*/}
                       <tr className="Sub-total">
                           <td colSpan={2}>
                               <ul>
-                                  <li>Subtotal <span className="price money">dddd</span>  </li>
+                                  <li>Subtotal <span className="price money">&#8358;{(itemsPrice).toFixed(2).toString()
+                                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>  </li>
                                   <li>Shipping <span className="price"> Calculated at next steps</span></li>
                               </ul>
                           </td>
@@ -80,7 +85,8 @@ const OrderSummary = () => {
                       {/*total section*/}
                       <tr className="Total-section">
                           <td colSpan={2}>
-                              <p className="total">Total <span className="total-price">&#8358; 6000  </span></p>
+                              <p className="total">Total <span className="total-price">&#8358;{(itemsPrice).toFixed(2).toString()
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}  </span></p>
                           </td>
                       </tr>
                       </tbody>
