@@ -3,15 +3,15 @@ import HomeNavbar from "../components/HomeNavbar";
 import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
-import {getAuth, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
-import {doc, setDoc, serverTimestamp, getDoc} from "firebase/firestore"
+import {getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+import {doc, setDoc, serverTimestamp} from "firebase/firestore"
 import {db} from "../firebase.config";
 import RegisterOffice from "../assets/images/22Z_2012.w003.n001.69B.p12.69.jpg";
-import GoogleLogo from "../assets/images/google-logo-9808.png";
+// import GoogleLogo from "../assets/images/google-logo-9808.png";
 
 const Register = () => {
 
-    const[disable, setDisable]= useState(false)
+    // const[disable, setDisable]= useState(false)
     const[formData, setFormData] = useState({
         name: '',
         businessName: '',
@@ -57,32 +57,32 @@ const Register = () => {
             [e.target.id]: e.target.value,
         }))
     }
-
-    const onGoogleClick = async () => {
-        try {
-            setDisable(true)
-            const auth = getAuth()
-            const provider = new GoogleAuthProvider()
-            const result = await signInWithPopup(auth, provider)
-            const user = result.user
-
-            //check if user a exist
-            const docRef = doc(db, 'users', user.uid)
-            const docSnap = await getDoc(docRef)
-
-            //if user doesnt exist create user
-            if (!docSnap.exists()) {
-                await setDoc(doc(db, 'users', user.uid), {
-                    name: user.displayName,
-                    email: user.email,
-                    timestamp: serverTimestamp(),
-                })
-            }
-            navigate('/admin-dash')
-        } catch (error) {
-            toast.error('unable to sign in with google')
-        }
-    }
+    //
+    // const onGoogleClick = async () => {
+    //     try {
+    //         setDisable(true)
+    //         const auth = getAuth()
+    //         const provider = new GoogleAuthProvider()
+    //         const result = await signInWithPopup(auth, provider)
+    //         const user = result.user
+    //
+    //         //check if user a exist
+    //         const docRef = doc(db, 'users', user.uid)
+    //         const docSnap = await getDoc(docRef)
+    //
+    //         //if user doesnt exist create user
+    //         if (!docSnap.exists()) {
+    //             await setDoc(doc(db, 'users', user.uid), {
+    //                 name: user.displayName,
+    //                 email: user.email,
+    //                 timestamp: serverTimestamp(),
+    //             })
+    //         }
+    //         navigate('/admin-dash')
+    //     } catch (error) {
+    //         toast.error('unable to sign in with google')
+    //     }
+    // }
 
     return(
         <>
@@ -148,9 +148,9 @@ const Register = () => {
                                     </div>
 
                                     <hr/>
-                                    <p className="Social-sign-in">Social sign up</p>
-                                    <img src={GoogleLogo} alt="" className="Social-sign-in-fluid" disabled={disable} onClick={onGoogleClick}/>
-                                    <hr/>
+                                    {/*<p className="Social-sign-in">Social sign up</p>*/}
+                                    {/*<img src={GoogleLogo} alt="" className="Social-sign-in-fluid" disabled={disable} onClick={onGoogleClick}/>*/}
+                                    {/*<hr/>*/}
                                 </Form>
                             </Col>
                             <Col md={6}>

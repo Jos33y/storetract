@@ -1,85 +1,10 @@
-.Home-navbar{
-    padding: 10px 0px 10px 10px;
-    margin-bottom: 20px;
-    box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
+
+.Home-navbar .Nav-header {
+    background: #ffffff;
+    border-radius: 1px;
+    margin-bottom: 30px;
 }
-.Home-navbar .navbar-brand .logo-fluid{
-     width: 8%;
+.Home-navbar .Nav-header .navbar{
+    background: #ffffff;
 
- }
-
-.Home-navbar .navbar-brand{
-    font-size: 25px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    color: #3E4095;
-    text-transform: uppercase;
-    float: left;
-}
-
-.Home-navbar ul{
-    list-style: none;
-}
-.Home-navbar ul li{
-    font-size: 16px;
-    font-weight: 600;
-    margin-right: 20px;
-    display: inline-block;
-}
-.Home-navbar ul .buttons{
-
-    float: right;
-    width: 40%;
-
-}
-.Home-navbar ul .buttons .btn{
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 15px;
-    padding: 5px 25px;
-    color: #ffffff;
-    margin-top: 0;
-
-}
-@media only screen and (max-width: 600px) {
-    .Home-navbar{
-        padding: 10px 0px 10px 10px;
-        margin-bottom: 20px;
-    }
-    .Home-navbar .navbar-brand .logo-fluid{
-        width: 13%;
-
-    }
-
-    .Home-navbar .navbar-brand{
-        font-size: 16px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        color: #3E4095;
-        text-transform: uppercase;
-        float: left;
-    }
-
-    .Home-navbar ul{
-        list-style: none;
-    }
-    .Home-navbar ul li{
-        font-size: 16px;
-        font-weight: 600;
-        margin-right: 20px;
-        display: inline-block;
-    }
-    .Home-navbar ul .buttons{
-        float: none;
-        width: 100%;
-        margin-bottom: 5%;
-
-    }
-    .Home-navbar ul .buttons .btn{
-        font-size: 12px;
-        border-radius: 5px;
-        padding: 3px 10px;
-    }
 }

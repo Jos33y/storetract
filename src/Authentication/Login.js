@@ -4,15 +4,15 @@ import HomeNavbar from "../components/HomeNavbar";
 import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
-import {getAuth ,GoogleAuthProvider ,signInWithEmailAndPassword ,signInWithPopup} from "firebase/auth";
-import {getDoc, setDoc, doc, serverTimestamp} from "firebase/firestore";
-import {db} from "../firebase.config";
-import GoogleLogo from "../assets/images/google-logo-9808.png"
+import {getAuth ,signInWithEmailAndPassword } from "firebase/auth";
+// import {getDoc, setDoc, doc, serverTimestamp} from "firebase/firestore";
+// import {db} from "../firebase.config";
+// import GoogleLogo from "../assets/images/google-logo-9808.png"
 import LoginOffice from  "../assets/images/4957136.jpg"
 
 const Login = () => {
 
-    const[disable, setDisable]= useState(false)
+    // const[disable, setDisable]= useState(false)
     const [formData, setFormData] = useState({
         email:'',
         password: '',
@@ -46,35 +46,35 @@ const Login = () => {
         } ))
     }
 
-    const onGoogleClick = async () => {
-        try{
-            setDisable(true)
-            const auth = getAuth()
-            const provider = new GoogleAuthProvider()
-            const result = await signInWithPopup(auth, provider)
-            const user = result.user
-
-            //check if user exist
-            const docRef = doc(db, 'users', user.uid)
-            const docSnap = await getDoc(docRef)
-
-            //if user doesnt exist
-            if(!docSnap.exists()) {
-                await setDoc(doc(db, 'users', user.uid), {
-                    name: user.displayName,
-                    email: email,
-                    timestamp: serverTimestamp(),
-                })
-            }
-            navigate('/admin-dash')
-        }
-        catch (error) {
-            console.log({error})
-            toast.error("Can't sign in with google")
-
-        }
-
-    }
+    // const onGoogleClick = async () => {
+    //     try{
+    //         setDisable(true)
+    //         const auth = getAuth()
+    //         const provider = new GoogleAuthProvider()
+    //         const result = await signInWithPopup(auth, provider)
+    //         const user = result.user
+    //
+    //         //check if user exist
+    //         const docRef = doc(db, 'users', user.uid)
+    //         const docSnap = await getDoc(docRef)
+    //
+    //         //if user doesnt exist
+    //         if(!docSnap.exists()) {
+    //             await setDoc(doc(db, 'users', user.uid), {
+    //                 name: user.displayName,
+    //                 email: email,
+    //                 timestamp: serverTimestamp(),
+    //             })
+    //         }
+    //         navigate('/admin-dash')
+    //     }
+    //     catch (error) {
+    //         console.log({error})
+    //         toast.error("Can't sign in with google")
+    //
+    //     }
+    //
+    // }
     return(
         <>
             <HomeNavbar />
@@ -118,9 +118,9 @@ const Login = () => {
                                     </div>
 
                                     <hr/>
-                                    <p className="Social-sign-in">Social sign in</p>
-                                    <img src={GoogleLogo} alt="" className="Social-sign-in-fluid" disabled={disable} onClick={onGoogleClick}/>
-                                    <hr/>
+                                    {/*<p className="Social-sign-in">Social sign in</p>*/}
+                                    {/*<img src={GoogleLogo} alt="" className="Social-sign-in-fluid" disabled={disable} onClick={onGoogleClick}/>*/}
+                                    {/*<hr/>*/}
                                     <p> <Link to="/forgot-password" className="forget">Forgot Password</Link> </p>
                                 </Form>
                             </Col>
