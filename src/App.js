@@ -70,6 +70,11 @@ const App = () => {
             setDomainActivated(true)
         }
 
+        if (currentURL === "https://storetract.com/") {
+            //console.log(true)
+            setDomainActivated(true)
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [domainActivated])
 
