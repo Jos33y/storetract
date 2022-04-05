@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
+.Home-section{
+    background: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
 .Hero{
     background: #ffffff;
     overflow: hidden;
@@ -8,7 +12,7 @@
     background-position: center;
     height: 100%;
     padding-bottom: 50px;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
 }
 .Nav-header {
     background: transparent;
@@ -210,4 +214,52 @@
     width: 100%;
     background: #93B3F4;
     border: 1px solid #93B3F4;
+}
+
+/*Footer section styles */
+.Footer-section{
+    margin-top: 5%;
+    padding: 10px 0px;
+    background: #F7F7F7;
+}
+.Footer-section p{
+    font-size: 12px;
+    padding-top: 15px;
+    color: #3E4095;
+}
+.Footer-section .footer-socials{
+    list-style: none;
+}
+.Footer-section .footer-socials li{
+    display: inline-block;
+    padding: 5px 15px;
+}
+.Footer-section .footer-socials .Footer-link{
+    text-decoration: none;
+    color: #000000;
+    font-size: 20px;
+}
+.Footer-section ul{
+    list-style: none;
+}
+.Footer-section ul li{
+    padding: 8px 0;
+}
+.Footer-section ul li .Footer-link{
+    text-decoration: none;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 400;
+}
+.Footer-section .back-to-top{
+    padding-top: 25px;
+    color: #3E4095;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    cursor: pointer;
+    text-align: right;
+}
+.Footer-section .back-to-top .fas{
+    padding-left: 10px;
 }
