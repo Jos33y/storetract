@@ -3,7 +3,9 @@ import React ,{useEffect ,useState} from "react";
 import {Col ,Row} from "react-bootstrap";
 import StoreTractLogo from "../assets/images/logo-svg.svg";
 import HeroImage from "../assets/images/store-tract-hero.svg";
-
+import RubberBand from "react-reveal/RubberBand";
+import Jello from "react-reveal/Jello";
+import Shake from "react-reveal/Shake";
 const Hero = () => {
     const [hamburgerClicked, setHamburgerClicked] = useState(false)
 
@@ -26,7 +28,7 @@ const Hero = () => {
             <div className="Hero">
             {/*nav section*/}
             <div className={hamburgerClicked ? ("Nav-header bg") : ("Nav-header")}>
-            <nav id={hamburgerClicked ? ("bg") : ("")} className="navbar navbar-expand-lg navbar-light">
+            <nav id={hamburgerClicked ? ("bg") : ("")} className="navbar fixed-top navbar-expand-lg navbar-light">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
                         <img src={StoreTractLogo} alt="" className="logo-fluid"/>
@@ -55,18 +57,26 @@ const Hero = () => {
                 <Row>
                     <Col md={6}>
                         <div className="Hero-text">
-                            <h2> Create a free online store in an instant</h2>
-                            <hr className="line"/>
-                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore </p>
-                            <Link to="/register" className="btn btn-md btn-primary"> Get started for free</Link>
+                            <RubberBand>
+                                <h2> Create a free online store in an instant</h2>
+                            </RubberBand>
+                            <Shake>
+                                <hr className="line"/>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                    eiusmod tempor incididunt ut labore et dolore </p>
+                                <Link to="/register" className="btn btn-md btn-primary"> Get started for free</Link>
+                            </Shake>
+
                         </div>
 
                     </Col>
                     <Col md={6}>
-                        <div className="Hero-image">
-                            <img src={HeroImage} alt="hero-box" className="hero-fluid"/>
-                        </div>
+                        <Jello>
+                            <div className="Hero-image">
+                                <img src={HeroImage} alt="hero-box" className="hero-fluid"/>
+                            </div>
+                        </Jello>
+
                     </Col>
                 </Row>
 

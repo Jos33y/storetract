@@ -2,12 +2,14 @@ import React from "react";
 import {Col ,Container ,Row} from "react-bootstrap";
 import StoreTractLogo from "../assets/images/logo-svg.svg";
 import {Link} from "react-router-dom";
+import {Fade} from "react-reveal";
 
 const FooterSection = () => {
   return(
       <>
           <div className="Footer-section">
               <Container>
+                  <Fade bottom>
                   <Row className="justify-content-between">
                       <Col md={2}>
                           <img src={StoreTractLogo} alt="" className="logo-fluid"/>
@@ -46,6 +48,7 @@ const FooterSection = () => {
                           <h6 className="back-to-top">Back to top <i className="fas fa-chevron-up"></i> </h6>
                       </Col>
                   </Row>
+                  </Fade>
               </Container>
 
           </div>
