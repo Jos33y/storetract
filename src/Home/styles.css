@@ -279,6 +279,15 @@
     }
     .Nav-header {
         background: transparent;
+        border-radius: 1px;
+    }
+    .Nav-header.bg {
+        background: #ffffff;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .Nav-header #bg{
+        background: #ffffff;
     }
     .Nav-header .navbar{
         background: transparent;
@@ -304,7 +313,7 @@
         text-align: center;
         background: #ffffff;
         border-radius: 5px;
-        padding-bottom: 50px;
+        padding-bottom: 20px;
     }
     .Nav-header .navbar .navbar-nav .nav-item{
         margin: 15px 0;

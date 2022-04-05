@@ -1,21 +1,39 @@
 import {Link} from "react-router-dom";
-import React from "react";
+import React ,{useEffect ,useState} from "react";
 import {Col ,Row} from "react-bootstrap";
 import StoreTractLogo from "../assets/images/logo-svg.svg";
 import HeroImage from "../assets/images/store-tract-hero.svg";
 
 const Hero = () => {
+    const [hamburgerClicked, setHamburgerClicked] = useState(false)
+
+    const changeBackground = () => {
+        console.log(window.scrollY)
+        if (window.scrollY >= 80) {
+            setHamburgerClicked(true)
+        } else {
+            setHamburgerClicked(false)
+        }
+    }
+
+    useEffect(() => {
+        changeBackground()
+        // adding the event when scroll change background
+        window.addEventListener("scroll", changeBackground)
+    }, [])
     return (
         <>
             <div className="Hero">
             {/*nav section*/}
-            <div className="Nav-header">
-            <nav className="navbar navbar-expand-lg navbar-light">
+            <div className={hamburgerClicked ? ("Nav-header bg") : ("Nav-header")}>
+            <nav id={hamburgerClicked ? ("bg") : ("")} className="navbar navbar-expand-lg navbar-light">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
                         <img src={StoreTractLogo} alt="" className="logo-fluid"/>
                     </Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    <button className="navbar-toggler" onClick={() => {
+                        setHamburgerClicked((prevState) => !prevState)
+                    }} type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
