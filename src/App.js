@@ -7,13 +7,14 @@ import Home from "./Home";
 import Login from "./Authentication/Login";
 import Register from "./Authentication/Register";
 import ForgotPassword from "./Authentication/ForgotPassword";
-import AdminDashboard from "./Dashboard";
+// import AdminDashboard from "./Dashboard/others";
+import SellersDashboard from "./Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import InsertCategory from "./Dashboard/Category/insertCategory";
 import ViewCategories from "./Dashboard/Category/viewCategories";
 import ViewProducts from "./Dashboard/Product/viewProducts";
-import AdminProfile from "./Dashboard/profile";
-import ActivateShop from "./Dashboard/activateShop";
+import AdminProfile from "./Dashboard/others/profile";
+import ActivateShop from "./Dashboard/others/activateShop";
 import InsertProduct from "./Dashboard/Product/insertProduct";
 import Shop from "./Shop";
 import QuickView from "./Shop/modal/QuickView";
@@ -94,8 +95,8 @@ const App = () => {
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/register" element={<Register />} />
                                 <Route path="/forgot-password" element={<ForgotPassword />} />
-                                <Route path="/admin-dash" element={<PrivateRoute/>}>
-                                    <Route path="/admin-dash" element={<AdminDashboard />} />
+                                <Route path="/sellers-dashboard" element={<PrivateRoute/>}>
+                                    <Route path="/sellers-dashboard" element={<SellersDashboard />} />
                                 </Route>
                                 <Route path="/admin-profile" element={<PrivateRoute/>}>
                                     <Route path="/admin-profile" element={<AdminProfile />} />

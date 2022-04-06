@@ -1,10 +1,10 @@
-import AdminNavbar from "../components/AdminNavbar";
+import AdminNavbar from "../../components/AdminNavbar";
 import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
 import React, {useState} from "react";
 import {toast} from "react-toastify";
 import {getAuth} from "firebase/auth";
 import {updateDoc ,doc, setDoc} from "firebase/firestore";
-import {db} from "../firebase.config";
+import {db} from "../../firebase.config";
 import {useNavigate} from "react-router-dom";
 import Plan from "./plan";
 

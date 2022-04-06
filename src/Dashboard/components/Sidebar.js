@@ -1,0 +1,150 @@
+import React from "react";
+import StoreTractLogo from "../../assets/images/logo-svg.svg";
+import {Link} from "react-router-dom";
+import "./componetStyles.css"
+import {Button} from "react-bootstrap";
+
+const Sidebar = () => {
+
+    const handleMinimize = () => {
+        if (window.innerWidth < 768) {
+            console.log(" less than 768");
+        }
+        else {
+            console.log("greater than 768")
+        }
+    }
+
+
+    return(
+        <>
+            <aside className="navbar-aside" id="offcanvas_aside">
+                {/*aside top section*/}
+                <div className="aside-top">
+                    <Link to="/sellers-dashboard" className="brand-wrap">
+                        <img src={StoreTractLogo} alt="dashboard logo" className="logo" />
+                    </Link>
+                    <div>
+                        <Button onClick={handleMinimize} type="button" className="btn btn-md btn-primary btn-aside-minimize"> <i className="fas fa-bars"></i></Button>
+                    </div>
+                </div>
+
+                {/*nav section start*/}
+                <nav>
+                    <ul className="menu-aside">
+                        {/*menu one*/}
+                        <li className="menu-item active">
+                            <Link to="/sellers-dashboard" className="menu-link">
+                                <i className="fas fa-home"></i>
+                            <span className="text">Dashboard</span>
+                            </Link>
+                        </li>
+
+                        {/*menu add products*/}
+                        <li className="menu-item">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-plus-square"></i>
+                                <span className="text">Add Product</span>
+                            </Link>
+                        </li>
+
+
+                        {/*menu products*/}
+                        <li className="menu-item has-submenu">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-shopping-bag"></i>
+                            <span className="text">Products</span>
+                            </Link>
+                            <div className="submenu">
+                                <Link to="https://" className="submenu-link"> Product List View</Link>
+                                <Link to="https://" className="submenu-link"> Product Grid</Link>
+                                <Link to="https://" className="submenu-link"> Product Categories</Link>
+                            </div>
+                        </li>
+
+                        {/*menu orders*/}
+                        <li className="menu-item has-submenu">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-shopping-cart"></i>
+                                <span className="text">Orders</span>
+                            </Link>
+                            <div className="submenu">
+                                <Link to="https://" className="submenu-link"> Order List</Link>
+                                <Link to="https://" className="submenu-link"> Order Details</Link>
+                            </div>
+                        </li>
+
+                        {/*menu customers*/}
+                        <li className="menu-item">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-users"></i>
+                                <span className="text">Customers</span>
+                            </Link>
+                        </li>
+
+
+                        {/*menu transactions*/}
+                        <li className="menu-item">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-money-bill-alt"></i>
+                                <span className="text">Transactions</span>
+                            </Link>
+                        </li>
+
+                        {/*menu wallet*/}
+                        <li className="menu-item">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-wallet"></i>
+                                <span className="text">Wallet</span>
+                            </Link>
+                        </li>
+
+                        {/*menu credit*/}
+                        <li className="menu-item">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-credit-card"></i>
+                                <span className="text">Subscriptions</span>
+                            </Link>
+                        </li>
+
+                        {/*menu loan*/}
+                        <li className="menu-item">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-coins"></i>
+                                <span className="text">Storetract Credit</span>
+                            </Link>
+                        </li>
+
+                        {/*menu settings*/}
+                        <hr/>
+                        <li className="menu-item">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-cog"></i>
+                                <span className="text">Settings</span>
+                            </Link>
+                        </li>
+                        {/*view shop*/}
+                        <li className="menu-item">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-store"></i>
+                                <span className="text">View Store</span>
+                            </Link>
+                        </li>
+
+                        {/*view connect*/}
+                        <li className="menu-item">
+                            <Link to="https://" className="menu-link">
+                                <i className="fas fa-headset"></i>
+                                <span className="text">Help Desk</span>
+                            </Link>
+                        </li>
+                    </ul>
+                    <br/>
+                    <br/>
+                </nav>
+            </aside>
+       </>
+    )
+
+}
+export default Sidebar

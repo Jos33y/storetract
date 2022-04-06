@@ -1,0 +1,160 @@
+
+.navbar-aside {
+    background: #ffffff;
+    display: block;
+    max-width: 260px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow-y: auto;
+    z-index: 10;
+    border-right: 1px solid rgba(108, 117, 125, 0.25);
+    box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* ================== aside top styles =================== */
+.navbar-aside .aside-top{
+    padding: 1rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar-aside .aside-top .brand-wrap{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    display: inline-block;
+}
+.navbar-aside .aside-top .logo{
+    height: 46px;
+    width: auto;
+    max-width: 200px;
+}
+.navbar-aside .aside-top .btn{
+    background: transparent;
+    color: #adadad;
+    border: 0px solid #7d7d7d;
+    font-size: 18px;
+
+}
+
+/*menu side styles*/
+.menu-aside {
+    list-style: none;
+    margin: 0.5rem;
+    padding: 0;
+}
+.menu-aside .menu-link{
+    display: block;
+    text-decoration: none;
+}
+.menu-aside .menu-item{
+    margin-bottom: 5px;
+}
+.menu-aside .menu-item .fas{
+    color: #adb5bd;
+    margin-right: 10px;
+    font-size: 18px;
+}
+.menu-aside .menu-item.active .fas{
+    color: #3167EB;
+}
+.menu-aside .menu-item.active .menu-link{
+    background-color: #ebf0fd;
+}
+
+.menu-aside .menu-link{
+    padding: 10px;
+    color: #29335d;
+    font-weight: bold;
+    border-radius: 0.3rem;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.menu-aside .menu-link .text{
+    vertical-align: middle;
+
+}
+.menu-aside .menu-link:hover{
+    transition: 0.2s linear;
+    background-color: #e9ecef;
+}
+.menu-aside .submenu{
+    margin-left: 44px;
+    display: none;
+}
+.menu-aside .submenu .submenu-link {
+    color: #6c757d;
+    padding: 5px;
+}
+.menu-aside .submenu .submenu-link:hover{
+    color: #000000;
+}
+.menu-aside .menu-item.active .submenu{
+    display: block;
+}
+.menu-aside .menu-item.has-submenu > .menu-link:after {
+    display: inline-block;
+    float: right;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    margin-top: 0.6em;
+    vertical-align: middle;
+    content: "";
+    border-top: 5px solid #adb5bd;
+    border-right: 5px solid transparent;
+    border-bottom: 0;
+    border-left: 5px solid transparent;
+}
+
+/* ================== Admin navbar styles =================== */
+.main-header{
+    padding-left: 3%;
+    padding-right: 5%;
+    min-height: 72px;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(108, 117, 125, 0.25);
+}
+
+.main-header .nav{
+    align-items: center;
+}
+.main-header .nav-item > .nav-link{
+    border-radius: 0.25rem;
+    color: #adb5bd;
+    display: block;
+    text-decoration: none;
+}
+.main-header .nav-link:hover{
+    background-color: #e9ecef;
+    color: #3167EB;;
+}
+.main-header .col-search{
+    flex-grow: 0.5;
+}
+.main-header .col-nav{
+    display: flex;
+    align-items: center;
+}
+.main-header img.rounded-circle{
+    border: 2px solid #eee;
+}
+.nav-item img.rounded-circle:hover{
+    border-color: #3167EB;
+}
+.main-header .input-group .form-control{
+    border-radius: 5px 0px 0px 5px;
+    height: 40px;
+    border-color: rgba(108, 117, 125, 0.25);
+}
+.main-header .input-group .btn-outline{
+    background-color: transparent;
+    color: #7d7d7d;
+    border-radius: 0px 5px 5px 0px;
+    border-color: rgba(108, 117, 125, 0.25);
+}
+
+

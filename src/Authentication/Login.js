@@ -30,7 +30,7 @@ const Login = () => {
                password
            )
            if(userCredential.user) {
-               navigate('/admin-dash')
+               navigate('/sellers-dashboard')
            }
        }
        catch (error) {

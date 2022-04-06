@@ -1,5 +1,5 @@
 import AdminNavbar from "../../components/AdminNavbar";
-import '../styles.css'
+import '../others/styles.css'
 import {Col ,Container, Row} from "react-bootstrap";
 import React, {useEffect ,useRef ,useState} from "react";
 import {getAuth} from "firebase/auth";
