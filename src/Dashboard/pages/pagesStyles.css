@@ -119,3 +119,28 @@ a.itemside {
 a.itemside:hover .title {
     text-decoration: underline;
 }
+
+
+/* --------- description list --------*/
+[class*=dlist] {
+    margin-bottom: 5px;
+}
+
+.dlist-inline dt, .dlist-inline dd {
+    display: inline-block;
+}
+
+.dlist {
+    display: flex;
+}
+.dlist dt {
+    width: 150px;
+    font-weight: normal;
+}
+.dlist dd {
+    margin-left: 30px;
+    vertical-align: baseline;
+    flex-grow: 1;
+    margin-bottom: 0;
+    text-align: right;
+}

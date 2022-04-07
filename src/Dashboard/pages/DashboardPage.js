@@ -310,7 +310,7 @@ const DashboardPage = () => {
                                  <td> <span className="badge rounded-pill alert-success">Delivered</span> </td>
                                  <td> 13-03-2022</td>
                                  <td className="text-end">
-                                     <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
+                                     <Link to="/dashboard/orders/7899" className="btn btn-light btn-analytics">Details </Link>
                                      <div className="dropdown">
                                          <Link to="#" data-bs-toggle="dropdown" class="btn btn-light btn-analytics">
                                              <i className="fas fa-ellipsis-v"></i>
