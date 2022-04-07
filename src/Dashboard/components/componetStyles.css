@@ -1,4 +1,58 @@
 
+
+/* ================== aside mini styles =================== */
+body.aside-mini .main-wrap {
+    margin-left: 70px;
+}
+body.aside-mini .navbar-aside {
+    max-width: 70px;
+    overflow: visible;
+    position: absolute;
+    min-height: 100%;
+    bottom: auto;
+}
+body.aside-mini .navbar-aside .aside-top {
+    text-align: center;
+}
+body.aside-mini .navbar-aside .aside-top > div {
+    flex-grow: 1;
+}
+body.aside-mini .navbar-aside .brand-wrap, body.aside-mini .navbar-aside .logo {
+    display: none;
+}
+body.aside-mini .menu-aside .menu-link {
+    text-align: center;
+}
+body.aside-mini .menu-aside .menu-link .text {
+    display: none;
+}
+body.aside-mini .menu-aside .menu-link .icon {
+    margin-right: 0;
+}
+body.aside-mini .menu-aside .submenu {
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background-color: white;
+    margin-left: 0;
+    padding: 10px;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 180px;
+}
+body.aside-mini .menu-aside .menu-item {
+    position: relative;
+}
+body.aside-mini .menu-aside .menu-item:hover .submenu {
+    display: block;
+    z-index: 10;
+}
+body.aside-mini .menu-aside .menu-item.has-submenu .menu-link:after {
+    display: none;
+}
+/* ================== navbar aside =================== */
+
 .navbar-aside {
     background: #ffffff;
     display: block;

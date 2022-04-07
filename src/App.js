@@ -95,9 +95,24 @@ const App = () => {
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/register" element={<Register />} />
                                 <Route path="/forgot-password" element={<ForgotPassword />} />
-                                <Route path="/sellers-dashboard" element={<PrivateRoute/>}>
-                                    <Route path="/sellers-dashboard" element={<SellersDashboard />} />
+                                <Route path="/dashboard/:dashUrl" element={<PrivateRoute/>}>
+                                    <Route path="/dashboard/:dashUrl" element={<SellersDashboard />} />
                                 </Route>
+
+                                <Route path="/dashboard/products/:productId" element={<PrivateRoute/>}>
+                                    <Route path="/dashboard/products/:productId" element={<SellersDashboard />} />
+                                </Route>
+
+                                <Route path="/dashboard/orders/:orderId" element={<PrivateRoute/>}>
+                                    <Route path="/dashboard/orders/:orderId" element={<SellersDashboard />} />
+                                </Route>
+
+                                <Route path="/dashboard/customers/:customerId" element={<PrivateRoute/>}>
+                                    <Route path="/dashboard/customers/:customerId" element={<SellersDashboard />} />
+                                </Route>
+
+
+
                                 <Route path="/admin-profile" element={<PrivateRoute/>}>
                                     <Route path="/admin-profile" element={<AdminProfile />} />
                                 </Route>

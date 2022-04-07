@@ -42,7 +42,7 @@ const Register = () => {
 
             await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
-            navigate('/admin-dash')
+            navigate('/dashboard/home')
         }
         catch (error) {
             toast.error("couldn't sign in user")

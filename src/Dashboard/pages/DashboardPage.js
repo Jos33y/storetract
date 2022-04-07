@@ -15,7 +15,7 @@ import { Bar } from 'react-chartjs-2';
 
 
 ChartJS.register(
-    CategoryScale,                   
+    CategoryScale,
     LinearScale,
     BarElement,
     Tooltip,
@@ -162,6 +162,7 @@ const DashboardPage = () => {
                      <h5 className="card-title">Latest Orders</h5>
                      <div className="table-responsive">
                          <Table className="table table-hover">
+                             <tbody>
                              {/*row one */}
                              <tr>
                                  <td>2323</td>
@@ -322,6 +323,7 @@ const DashboardPage = () => {
                                      </div> {/* dropdown ends*/}
                                  </td>
                              </tr>
+                             </tbody>
                      </Table></div>
                  </div>
              </Card>

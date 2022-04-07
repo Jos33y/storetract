@@ -8,6 +8,16 @@ const TopNavbar = () => {
         console.log("Dark Mode Loading...")
     }
 
+    const handleSidebar = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("Handling Sidebar");
+        document.querySelector('#offcanvas_aside').classList.toggle('show')
+        document.body.classList.toggle('offcanvas-active');
+        document.querySelector('.screen-overlay').classList.toggle('show')
+
+    }
+
     return(
         <>
             <header className="main-header navbar">
@@ -15,7 +25,7 @@ const TopNavbar = () => {
                     <Form className="searchForm">
                         <div className="input-group">
                             <input list="search_terms" type="text" className="form-control" placeholder="Search term"/>
-                            <Button className="btn btn-md btn-outline" type="button"><i className="fas fa-search"></i> </Button>
+                            <Button className="btn btn-md btn-outline" type="button"><i className="fas fa-search"/> </Button>
                         </div>
                         <datalist id="search_terms">
                             <option value="Products"/>
@@ -26,8 +36,7 @@ const TopNavbar = () => {
                     </Form>
                 </div>
                 <div className="col-nav">
-                    <Button className="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
-                        className="fas fa-minus-square"></i></Button>
+                    <Button className="btn btn-icon btn-mobile me-auto" onClick={handleSidebar} data-trigger="#offcanvas_aside">  <i className="fas fa-bars"></i></Button>
                     <ul className="nav">
                         <li className="nav-item">
                             <Link to="#" className="nav-link btn-icon" onClick={darkMode} title="Dark mode" > <i

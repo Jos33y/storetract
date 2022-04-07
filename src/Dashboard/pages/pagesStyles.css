@@ -74,3 +74,48 @@
     background-color: #ffe8d0;
     border-color: #fedcb9;
 }
+
+/* ====================== box ==================== */
+.box {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid rgba(108, 117, 125, 0.2);
+    background: #fff;
+}
+.box img {
+    max-width: 100%;
+}
+
+/* ITEMSIDE */
+.itemside {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.itemside .aside, .itemside .left {
+    position: relative;
+    flex-shrink: 0;
+}
+.itemside .info {
+    padding-left: 15px;
+    padding-right: 7px;
+}
+.itemside p {
+    margin-bottom: 0;
+}
+.itemside .title {
+    display: block;
+    margin-bottom: 5px;
+}
+.itemside a.title:hover {
+    color: #3167EB;
+}
+
+a.itemside {
+    color: initial;
+    text-decoration: none;
+}
+a.itemside:hover .title {
+    text-decoration: underline;
+}
