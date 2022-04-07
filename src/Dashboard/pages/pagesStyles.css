@@ -121,6 +121,88 @@ a.itemside:hover .title {
 }
 
 
+/* BASE STYLE FOR PRODUCT ITEM */
+[class*=card-product] {
+    border: 1px solid rgba(108, 117, 125, 0.25);
+}
+[class*=card-product] p {
+    margin-bottom: 0;
+}
+[class*=card-product] .img-wrap {
+    text-align: center;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    background: white;
+}
+[class*=card-product] .img-wrap img {
+    height: 100%;
+    max-width: 100%;
+    width: auto;
+    display: inline-block;
+    object-fit: cover;
+}
+
+/* GRID STYLE PRODUCT ITEM */
+.card-product-grid {
+    margin-bottom: 20px;
+}
+.card-product-grid .img-wrap {
+    border-radius: 0.2rem 0.2rem 0 0;
+    height: 220px;
+}
+.card-product-grid .info-wrap {
+    padding: 1rem;
+}
+.card-product-grid .title {
+    color: #6c757d;
+    display: block;
+    text-decoration: none;
+}
+.card-product-grid .title:hover {
+    color: #3167EB;
+    cursor: pointer;
+}
+.card-product-grid:hover {
+    border-color: #adb5bd;
+}
+
+/* LARGE LIST STYLE PRODUCT ITEM */
+.card-product-list {
+    margin-bottom: 20px;
+}
+.card-product-list .img-wrap {
+    height: 220px;
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+.card-product-list .info-main {
+    padding: 1.5rem 1rem;
+}
+.card-product-list .info-aside {
+    padding: 1.5rem 1rem;
+    border-left: 1px solid rgba(108, 117, 125, 0.25);
+    height: 100%;
+}
+
+.card-user {
+    margin-bottom: 20px;
+}
+.card-user .card-header {
+    position: relative;
+    height: 100px;
+    background-color: #FFE5A0 !important;
+    text-align: center;
+}
+.card-user .img-avatar {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 100%;
+}
+.card-user .card-body {
+    text-align: center;
+}
+
+
 /* --------- description list --------*/
 [class*=dlist] {
     margin-bottom: 5px;
@@ -143,4 +225,203 @@ a.itemside:hover .title {
     flex-grow: 1;
     margin-bottom: 0;
     text-align: right;
+}
+
+
+/* ================= lists ================= */
+[class*=list-] li:after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    overflow: hidden;
+    height: 0;
+    clear: both;
+}
+
+.list-icon {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+.list-icon li {
+    margin-bottom: 7px;
+    position: relative;
+    padding-left: 30px;
+}
+.list-icon .icon {
+    width: 22px;
+    margin-right: 15px;
+    vertical-align: middle;
+    text-align: center;
+    color: #6c757d;
+    position: absolute;
+    top: 3px;
+    left: 0;
+}
+.list-icon span {
+    vertical-align: middle;
+}
+
+.list-bullet {
+    list-style: none;
+    padding-left: 0;
+}
+
+.list-bullet li {
+    margin-bottom: 5px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.list-bullet li::before {
+    content: " ";
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 7px;
+    border-radius: 100%;
+    height: 7px;
+    background: #3167EB;
+}
+
+.list-check {
+    padding-left: 0;
+    list-style: none;
+}
+.list-check > li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 7px;
+}
+.list-check > li::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    color: #00B517;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    content: "";
+}
+
+.list-normal {
+    list-style: none;
+    padding-left: 0;
+}
+.list-normal li {
+    padding-left: 1em;
+    margin-bottom: 7px;
+}
+.list-normal li:before {
+    content: "•";
+    color: #3167EB;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.list-menu {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+.list-menu li {
+    margin-bottom: 5px;
+}
+.list-menu a {
+    color: #141432;
+}
+.list-menu a:hover {
+    color: #3167EB;
+}
+
+.cols-two {
+    column-count: 2;
+}
+
+.cols-three {
+    column-count: 3;
+}
+
+.cols-four {
+    column-count: 4;
+}
+
+.icontext {
+    display: inline-flex;
+    align-items: center;
+}
+.icontext .icon {
+    position: relative;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+.icontext small, .icontext .title {
+    display: block;
+}
+
+.tag {
+    display: inline-block;
+    padding: 3px 7px;
+    background: #f2f2f2;
+    border: 1px xolid #eee;
+    border-radius: 3px;
+    margin-top: 4px;
+    margin-right: 2px;
+    font-size: 85%;
+}
+
+.price {
+    font-weight: 600;
+}
+
+.notify {
+    position: absolute;
+    top: -4px;
+    right: -10px;
+    display: inline-block;
+    padding: 0.25em 0.6em;
+    font-size: 75%;
+    line-height: 1;
+    text-align: center;
+    border-radius: 3rem;
+    color: #fff;
+    background-color: #F30000;
+}
+
+.map-pin {
+    border-radius: 3rem;
+    background-color: red;
+    position: absolute;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+}
+.map-pin:after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    top: 8px;
+    left: 8px;
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.icon-action {
+    margin-top: 5px;
+    float: right;
+}
+
+
+
+.nav-pills .nav-link {
+    color: #6c757d;
+    font-weight: 500;
+}
+.nav-pills .nav-link:hover {
+    color: #141432;
+    background-color: rgba(173, 181, 189, 0.15);
 }
