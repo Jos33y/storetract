@@ -364,7 +364,7 @@ a.itemside:hover .title {
     display: inline-block;
     padding: 3px 7px;
     background: #f2f2f2;
-    border: 1px xolid #eee;
+    border: 1px solid #eee;
     border-radius: 3px;
     margin-top: 4px;
     margin-right: 2px;
@@ -424,4 +424,37 @@ a.itemside:hover .title {
 .nav-pills .nav-link:hover {
     color: #141432;
     background-color: rgba(173, 181, 189, 0.15);
+}
+
+
+/* ================= error styles ================= */
+
+.content-error .error-text{
+    padding: 20px 40px;
+}
+.content-error .error-text h2{
+    font-size: 100px;
+    font-weight: 900;
+    color: #3E4095;
+}
+.content-error .error-page .error-text p{
+    font-size: 18px;
+    color: #010101;
+}
+.content-error .error-page .error-text .btn{
+    background: #3E4095;
+    color: #ffffff;
+    padding: 10px 30px;
+    border: 1px solid #3E4095;
+    border-radius: 10px;
+}
+.content-error .error-page .error-image{
+    width: 100%;
+    height: 100%;
+}
+.content-error .error-page .error-image .error-img{
+    position: absolute;
+    width: 140%;
+    height: 150%;
+    right: 20px;
 }
