@@ -1,25 +1,30 @@
+import Spinner from "../../../components/Spinner";
+import "../../css/shopHeader.css"
+import {Col, Row} from "react-bootstrap";
+import ProductCard from "../../components/ProductCard";
 import React from "react";
-import ProductCard from "./components/ProductCard";
-import {Row, Col,Container} from "react-bootstrap";
-import Spinner from "../components/Spinner";
+import {Link} from "react-router-dom";
 
-const ShopHome = ({products, businessUrl, loading}) => {
+const ShopHomeProduct = ({loading, products, businessUrl}) => {
 
-    return (
-        <Container>
-
+    return(
+        <>
             <div className="Shop-products">
                 { loading ?
                     (<Spinner/>)
                     : products && products.length > 0 ?
                         (
                             <>
-                                <h4 className="our-prod">Our Products</h4>
-                                <h6 className="small">{ products.length } Product(s)</h6>
+
+                                <div className="Shop-home-title">
+                                    <h3 className="home-title">Products</h3>
+                                    <Link to="#" className="h5"> view all <i className="fas fa-chevron-right"></i></Link>
+                                </div>
+                                {/*<h6 className="small">{ products.length } Product(s)</h6>*/}
                                 <Row>
 
                                     { products.map((product) => (
-                                        <Col md={ 3 } key={ product.id }>
+                                        <Col md={ 4 } key={ product.id }>
                                             <ProductCard id={ product.id } product={ product.data }
                                                          businessUrl={ businessUrl }/>
                                         </Col>
@@ -30,10 +35,8 @@ const ShopHome = ({products, businessUrl, loading}) => {
                         (<h6>No product available</h6>)
                 }
             </div>
-
-        </Container>
+        </>
     )
 
 }
-
-export default ShopHome
+export default ShopHomeProduct

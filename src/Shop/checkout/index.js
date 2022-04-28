@@ -19,7 +19,7 @@ const CheckOutInformation = () => {
     const [carts, setCarts] = useState([])
     const [customerID, setCustomerID] = useState("")
     const params = useParams()
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const isMounted = useRef()
 
@@ -32,12 +32,11 @@ const CheckOutInformation = () => {
         city: '',
         deliveryAddress: '',
         phoneNumber: '',
-        deliveryNote: '',
         customerId: '',
         timeStamp: '',
     })
 
-    const {email, firstname, lastname, country, state, city, deliveryAddress, phoneNumber, deliveryNote} = formData
+    const {email, firstname, lastname, country, state, city, deliveryAddress, phoneNumber} = formData
 
 
 
@@ -151,6 +150,7 @@ const CheckOutInformation = () => {
             if (localCustomerID) {
                 setCustomerID(localCustomerID)
                 getCustomer(localCustomerID)
+                console.log(localCustomerID)
             }
 
 
@@ -325,14 +325,14 @@ const CheckOutInformation = () => {
                                                        placeholder="Phone Number"/>
                                             </div>
                                             <div className="form-group">
-                                        <textarea name="delivery-note"
-                                                  className="form-control"
-                                                  id="deliveryNote"
-                                                  value={ deliveryNote }
-                                                  cols="30"
-                                                  rows="4"
-                                                  onChange={ onChange }
-                                                  placeholder="delivery note"></textarea>
+                                        {/*<textarea name="delivery-note"*/}
+                                        {/*        className="form-control"*/}
+                                        {/*        id="deliveryNote"*/}
+                                        {/*        value=" "*/}
+                                        {/*        cols="30"*/}
+                                        {/*        rows="4"*/}
+                                        {/*        onChange={onChange}*/}
+                                        {/*          placeholder="delivery note"></textarea>*/}
                                             </div>
 
                                             <div className="form-group">

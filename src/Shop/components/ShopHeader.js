@@ -1,56 +1,46 @@
 import React from "react";
-import {getRandomColor,createImageFromInitials} from './utils'
+import "../css/shopHeader.css"
 import {Link} from "react-router-dom";
-import {Row, Col} from "react-bootstrap";
+import {Dropdown, Container} from "react-bootstrap";
 
 const ShopHeader = ({businessName, businessUrl, domain, cartCount}) => {
-
-    let name = businessName;
-    let imgSrc = "";
+    //
+    // let name = businessName;
+    // let imgSrc = "";
     return(
         <>
-            <div className="Header">
-                <Row>
-                    <Col md={6}>
-                        <ul>
-                            <Link  to= {domain ? ('/') : (`/${businessUrl}`) }>
-                                <li className="NavBrand">
-                                    <img src={
-                                    imgSrc.length <= 0
-                                        ? createImageFromInitials(500, name, getRandomColor())
-                                        : imgSrc
-                                } alt="" className="logo-fluid"/>
-                                    {businessName}
-                                </li>
-                            </Link>
-                        </ul>
+            <div className="Header-two">
+                <Container>
+                    <ul>
+                        <li><Link to= {domain ? ('/') : (`/${businessUrl}`) } className="Shop-name"> {businessName} </Link></li>
+                        <li>
+                            <div className="form-group">
+                                <input type="text" placeholder="Search" className="form-control"/>
+                                <button className="btn btn-sm btn-outline"> <i className="fas fa-search"></i> </button>
+                            </div>
+                        </li>
+                        <li>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="success" id="dropdown-basic" className="dropDown">
+                                    Categories
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="#"> Lingerie</Dropdown.Item>
+                                    <Dropdown.Item href="#"> HandBag</Dropdown.Item>
+                                    <Dropdown.Item href="#"> Shoes</Dropdown.Item>
+                                    <Dropdown.Item href="#"> Chain</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </li>
+                        <li className="button-cart"> <Link to={domain ? ('/cart') : (`/${businessUrl}/cart`) }
+                                                           className="Cart-button"> <i className="fas fa-shopping-cart"></i>
+                            Cart: <span className="number">{cartCount ? (cartCount) : '0' }</span></Link></li>
 
-                    </Col>
-                    <Col md={6}>
-                        <div className="Account-nav">
-                            <ul>
-                                <li>
-                                    <Link to="https://" className="Account-link">
-                                        <i className="fas fa-search"></i>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={domain ? ('/account') : (`/${businessUrl}/account`) } className="Account-link">
-                                        <i className="fas fa-truck"></i>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={domain ? ('/cart') : (`/${businessUrl}/cart`) } className="Account-link">
-                                        My Cart <i className="fas fa-shopping-cart"></i>
-                                        <span className="cart-count">{cartCount ? (cartCount) : '0' } </span>
-                                    </Link>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </Col>
-                </Row>
-
+                        {/*<Link to={domain ? ('/account') : (`/${businessUrl}/account`) } className="Account-link">*/}
+                        {/*    <i className="fas fa-truck"></i>*/}
+                        {/*</Link>*/}
+                    </ul>
+                </Container>
 
             </div>
         </>

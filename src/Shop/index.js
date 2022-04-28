@@ -2,16 +2,14 @@
 import './styles.css'
 import React, {useEffect ,useRef ,useState} from "react";
 import {useParams} from "react-router-dom";
-import {collection ,getDocs ,query ,doc ,getDoc} from "firebase/firestore";
+import {collection, getDocs, query, doc, getDoc, limit} from "firebase/firestore";
 import {db} from "../firebase.config";
 import Spinner from "../components/Spinner";
 import {toast} from "react-toastify";
 import ShopHeader from "./components/ShopHeader";
 import ShopFooter from "./components/ShopFooter";
-import CategorySection from "./components/CategorySection";
-import ShopHome from "./ShopHome";
-import {Col ,Row} from "react-bootstrap";
-import HeroImage from "../assets/images/224_UG9kaXVtMi0wMQ.jpg"
+import ShopHome from "./pages/shopHome";
+import ShopProductDetails from "./pages/shopProductDetails";
 
 const Shop = () => {
     const params = useParams()
@@ -21,6 +19,7 @@ const Shop = () => {
     const [products ,setProducts] = useState(null)
     const [loading ,setLoading] = useState(true)
     const [cart ,setCart] = useState([])
+    const [confirmed, setConfirmed] = useState(false);
     const isMounted = useRef()
     const [domain, setDomain] = useState(false)
     const [ShopURL ,setShopURL] = useState(params.shopName)
@@ -30,12 +29,32 @@ const Shop = () => {
     const currentEdited = (currentURL).toString().replace(/[^a-zA-Z0-9]/g ,'')
 
 
+    const confirmUrl = async (storeURL) => {
+      try {
+          const shopRef = doc(db ,"shops" , storeURL)
+          const shopSnap = await getDoc(shopRef);
+
+          if (shopSnap.exists()) {
+              setConfirmed(true)
+
+          } else {
+              setConfirmed(false)
+              console.log("page not loading")
+          }
+
+      }
+      catch (e) {
+          console.log({e})
+      }
+
+    }
+
     //Fetch Product
     const fetchProducts = async (storeURL) => {
 
         try {
             const prodRef = collection(db ,'shops' , storeURL, 'products')
-            const q = query(prodRef)
+            const q = query(prodRef, limit(3))
             const querySnap = await getDocs(q)
             let products = []
             querySnap.forEach((doc) => {
@@ -85,6 +104,7 @@ const Shop = () => {
                 setShopURL(docSnap.data().shopUrl)
                 setDomain(true)
                 console.log(docSnap.data().shopUrl)
+                confirmUrl(docSnap.data().shopUrl)
                 fetchDetails(docSnap.data().shopUrl)
                 fetchProducts(docSnap.data().shopUrl)
 
@@ -93,6 +113,7 @@ const Shop = () => {
                 console.log("No such URL Found !");
                 setShopURL(params.shopName)
                 setDomain(false)
+                confirmUrl(params.shopName)
                 fetchDetails(params.shopName)
                 fetchProducts(params.shopName)
             }
@@ -102,6 +123,22 @@ const Shop = () => {
             console.log({error})
         }
 
+    }
+
+
+    const pages = () => {
+        if (confirmed) {
+
+            if(params.shopName && params.productUrl) {
+                return <ShopProductDetails businessUrl={ShopURL} loading={loading}/>
+            }
+            else if(params.shopName) {
+                return <ShopHome businessUrl={ShopURL} products={products} loading={loading} />
+            }
+        }
+        else{
+            return <h5 className="text-center"> error page </h5>;
+        }
     }
 
     useEffect(() => {
@@ -119,7 +156,7 @@ const Shop = () => {
             // console.log(cart.length)
         }
         return () => {
-            isMounted.current = false
+            isMounted.current = false;
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     } ,[isMounted ,params.shopName])
@@ -132,24 +169,34 @@ const Shop = () => {
                     :
                     (
                         <>
+                            <div className="body">
                             <ShopHeader cartCount={ cart.length } businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain}/>
-                           <div className="Shop-hero">
-                               <h1>Welcome to {shopData.businessName}</h1>
-                               <img src={HeroImage} alt="" className="img-fluid"/>
-                           </div>
+                               <div className="main-section">
+
+                                   {pages()}
+
+                               </div>
+                                <ShopFooter businessName={ shopData.businessName }/>
+                            </div>
+
+
+                            {/*<div className="Shop-hero">*/}
+                           {/*    <h1>Welcome to {shopData.businessName}</h1>*/}
+                           {/*    <img src={HeroImage} alt="" className="img-fluid"/>*/}
+                           {/*</div>*/}
 
                             {/*<Auth businessUrl={ShopURL} />*/}
-                            <Row>
-                                <Col md={3} className="side-bar">
-                                    <CategorySection shopName={ ShopURL }/>
-                                </Col>
-                                <Col md={9}>
+                            {/*<Row>*/}
+                            {/*    <Col md={3} className="side-bar">*/}
+                            {/*        <CategorySection shopName={ ShopURL }/>*/}
+                            {/*    </Col>*/}
+                            {/*    <Col md={9}>*/}
 
-                                    <ShopHome businessUrl={ShopURL} products={products} loading={loading} />
-                                </Col>
-                            </Row>
+                            {/*        <ShopHome businessUrl={ShopURL} products={products} loading={loading} />*/}
+                            {/*    </Col>*/}
+                            {/*</Row>*/}
 
-                            <ShopFooter businessName={ shopData.businessName }/>
+
                         </>
                     ) }
             </>

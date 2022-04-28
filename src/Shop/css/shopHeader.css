@@ -1,0 +1,420 @@
+/*Shop Header Styles*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&display=swap');
+/*body{*/
+/*    background: linear-gradient(255.45deg, #FFEEE4 19.77%, #BCEDFC 64.33%);*/
+/*}*/
+.Header-two{
+    padding: 30px 5px 5px;
+    background: #E1F6FF;
+    font-family: 'Poppins', sans-serif;
+}
+.Header-two .Shop-name{
+    font-size: 28px;
+    line-height: 48px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #212529;
+    text-transform: uppercase;
+}
+
+.Header-two ul{
+    list-style: none;
+    padding-bottom: 0px;
+}
+.Header-two ul li{
+    display: inline-block;
+    margin: 5px 20px;
+}
+.Header-two ul li .form-group{
+   display: flex;
+    background: #FBFEFF;
+    border: 1px solid #FBFEFF;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+.Header-two ul li .form-group .form-control{
+    width: 80%;
+    height: 40px;
+    padding: 0px;
+    color: #BDBDBD;
+    font-size: 18px;
+    margin-left: 10px;
+    background: #FBFEFF;
+    border: 0px solid transparent;
+}
+.Header-two ul li .form-group input::placeholder{
+    font-size: 18px;
+    font-weight: 500;
+    color: #BDBDBD;
+    text-transform: capitalize;
+
+}
+.Header-two ul li .form-group .btn.btn-outline{
+    width: 20%;
+    height: 40px;
+    padding: 0;
+    border: 0px solid transparent;
+    background: transparent;
+}
+.Header-two ul li .form-group .btn.btn-outline .fas{
+    font-size: 20px;
+    color: #212529;
+}
+
+.Header-two ul li .dropDown{
+    background: transparent;
+    font-size: 20px;
+    font-weight: 500;
+    border: 0px solid transparent;
+}
+
+.Header-two ul .button-cart{
+    margin-top: 20px;
+    float: right;
+}
+.Header-two ul li .Cart-button{
+    background: #FBFEFF;
+    font-size: 18px;
+    color: #212529;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 20px;
+}
+.Header-two ul li .Cart-button .fas{
+    font-size: 18px;
+}
+
+/************ footer section ************/
+.Footer-two{
+    margin-top: 5%;
+    background: #000000;
+    color: #ffffff;
+    padding: 20px 5px;
+    font-family: 'Poppins', sans-serif;
+}
+.Footer-two .Top-section{
+    margin-top: 20px;
+}
+.Footer-two .Top-section h5{
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.Footer-two .Top-section .Payment-list{
+    padding-left: 0;
+    margin-left: 0;
+}
+.Footer-two .Top-section .Payment-list li{
+    list-style: none;
+    font-size: 18px;
+    margin: 5px 0;
+    padding-left: 0;
+    font-weight: 300;
+}
+.Footer-two .footer-note{
+    text-align: center;
+    font-weight: 300;
+    font-size: 20px;
+
+}
+.Footer-two .Whatsapp{
+    display: flex;
+    margin-top: 15%;
+}
+.Footer-two .Whatsapp .Whatsapp-font .fab{
+    font-size: 50px;
+    margin-right: 10px;
+}
+.Footer-two .Whatsapp .Whatsapp-text p{
+    font-size: 18px;
+    font-weight: 300;
+}
+.Footer-two .connect{
+    margin-top: 15%;
+    text-align: center;
+}
+
+.Footer-two .connect .Socials ul{
+    list-style: none;
+
+}
+
+.Footer-two .connect .Socials ul li{
+    display: inline-block;
+    margin-right: 40px;
+}
+
+.Footer-two .connect .Socials ul li .fab{
+    font-size: 30px;
+    color: #ffffff;
+}
+/************ Hero shop section ************/
+
+.Hero-shop .Hero-shop-box{
+    margin-top: 20px;
+    background: linear-gradient(255.45deg, #FFEEE4 19.77%, #BCEDFC 64.33%);
+    padding: 0px 20px 0px 0px;
+    border-radius: 80px;
+
+
+}
+.Hero-shop-box .Hero-shop-text{
+    margin-top: 30%;
+   margin-left: 50px;
+}
+
+.Hero-shop-box .Hero-shop-text h3{
+    font-size: 55px;
+    font-weight: 900;
+    text-transform: capitalize;
+}
+
+.Hero-shop-box .Hero-shop-text h5{
+    margin-top: 15px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.Hero-shop-box .Hero-shop-text .btn{
+    margin-top: 20px;
+    background: #FE5F03;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 21px;
+    border: 1px solid #FE5F03;
+    padding: 13px 35px;
+    align-items: center;
+    text-align: center;
+    border-radius: 25px;
+}
+.Hero-shop-box .Hero-shop-img .Hero-img{
+    width: 120%;
+}
+/************ shop home product section ************/
+.Shop-products{
+    margin-top: 5%;
+}
+.Shop-products .Shop-home-title{
+    display: flex;
+    justify-content: space-between;
+    color: #212529;
+    margin-bottom: 20px;
+}
+.Shop-products .Shop-home-title h3.home-title{
+    font-weight: 700;
+    font-size: 30px;
+}
+.Shop-products .Shop-home-title .h5{
+    font-weight: 600;
+    font-size: 23px;
+    color: #212529;
+    text-decoration: none;
+}
+
+/************ product card section ************/
+.Shop-products .product-card-shop{
+    border-radius: 20px;
+    margin-bottom: 30px;
+    padding: 5px;
+}
+
+.Shop-products .product-card-shop .card-body .product-title {
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration: none;
+    color: #212529;
+}
+.Shop-products .product-card-shop .card-body .card-shop-footer{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+.Shop-products .product-card-shop .card-body .card-shop-footer .btn{
+    background: transparent;
+    color: #212529;
+    border: 1px solid #E2E2E2;
+    border-radius: 24px;
+    padding: 7px 22px;
+    font-weight: 500;
+    font-size: 18px;
+}
+.Shop-products .product-card-shop .card-body .card-shop-footer .product-price{
+    font-weight: 600;
+    font-size: 22px;
+    color: #000000;
+    margin-top: 5px;
+}
+
+/************ shop trending section ************/
+.Shop-trending{
+    margin-top: 5%;
+
+}
+.Shop-trending .Shop-trending-head{
+    font-weight: 700;
+    font-size: 30px;
+    color: #212529;
+    text-align: center;
+    margin-bottom: 3%;
+    text-transform: uppercase;
+}
+.Shop-trending .Shop-trending-box{
+    position: relative;
+}
+.Shop-trending .Shop-trending-box .img-fluid{
+    width: 100%;
+
+}
+.Shop-trending .Shop-trending-box .Shop-trend-text{
+    position: absolute;
+    top: 160px;
+    margin: auto;
+    left: 10%;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 65px;
+    color: #ffffff;
+    z-index: 1;
+    text-transform: uppercase;
+}
+
+
+
+/************ product details section ************/
+.Product-details{
+    margin-top: 40px;
+    background: transparent;
+}
+.Product-details .h5{
+    font-weight: 400;
+    font-size: 23px;
+    color: #212529;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+.Product-details .Image-box{
+    margin-top: 20px;
+    height: 550px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+.Product-details .Image-box .img-fluid{
+    width: 100%;
+   height: 100%;
+}
+.Product-details .Image-box .Thumb-nails{
+    list-style: none;
+    padding: 0;
+    margin-left: 20px;
+}
+.Product-details .Image-box .Thumb-nails li{
+    margin-bottom: 20px;
+    width: 100%;
+    display: grid;
+    padding: 0;
+}
+.Product-details .Image-box .Thumb-nails li:hover{
+    background: #939694;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.Product-details .Image-box .thumb{
+    margin: 0;
+    padding: 0;
+}
+.Product-details .Image-box .main{
+    margin: 0;
+    padding: 0;
+}
+.Product-details .Image-box .Thumb-nails li .img-fluid{
+    width: 100%;
+}
+.Product-details-text{
+    margin-left: 30px;
+}
+.Product-details-text h5.Product-title{
+    font-size: 25px;
+    font-weight: 700;
+    padding-bottom: 10px;
+    color: #212529;
+    margin-bottom: 20px;
+}
+
+.Product-details-text h6.Product-price{
+    font-size: 30px;
+    font-weight: 700;
+    padding-bottom: 10px;
+    color: #212529;
+    margin-bottom: 30px;
+}
+
+.Product-details-text p.input{
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+}
+
+.Product-details-text p.input h5{
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 400;
+
+}
+.Product-details-text input{
+    width: 80px;
+    height: 50px;
+    margin-left: 20px;
+    border: 2px solid #212529;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.Product-details-text h6 .discount-price{
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    padding-bottom: 10px;
+    color: #939694;
+    margin-left: 30px;
+    text-decoration: line-through;
+}
+
+.Product-details-text p.Product-description{
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #212529;
+    margin-bottom: 30px;
+}
+.Product-details-text p.Product-description .title{
+    font-size: 20px;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 15px;
+}
+
+.Product-details-text .btn-contact{
+    margin-top: 10px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 15px 35px;
+    background: #FE5F03;
+    border: 1px solid #FE5F03;
+}
+.Quick-view-text .margin-break{
+    margin-bottom: 40px;
+}
+
+.Quick-view-text .btn-contact:hover{
+    background: #222222;
+}

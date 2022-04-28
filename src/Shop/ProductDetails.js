@@ -71,7 +71,6 @@ const  ProductDetails = () => {
        // setDisabled(true)
 
     }
-
     //Fetch Category
     const fetchCategory = async () => {
         try
@@ -120,9 +119,7 @@ const  ProductDetails = () => {
 
         }
     }
-
-
-//Fetch Product Details
+    //Fetch Product Details
     const fetchProductDetails = async () => {
         try
         {

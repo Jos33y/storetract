@@ -4,6 +4,7 @@ import '../styles.css'
 import React, {useState} from "react";
 import QuickViewModal from "../modal/QuickViewModal";
 import QuickView from "../modal/QuickView";
+// import ProdImage from "../../assets/images/shopimages/61Dr0DoZ2aL.png";
 
 
 const ProductCard = ({product, businessUrl, id}) => {
@@ -11,31 +12,48 @@ const ProductCard = ({product, businessUrl, id}) => {
 
     return(
         <>
-            <Card className="Shop-product-card">
-                <Link to={ `/${businessUrl}/${ product.productCategory}/${id}`} className="Product-card-link">
-                    <Card.Img src={product.imgUrls[0]} variant="top" alt="Product img here" className="card-img-top" />
-                </Link>
+            <Card className="product-card-shop">
+                <Card.Img src={product.imgUrls[0]}  variant="top" alt="prod picture here" className="card-img-top" />
                 <Card.Body className="card-body">
-                    <h6>{product.productName}</h6>
-                    <div className="Price">
-                        <p className="Price-one"> &#8358;{product.productPrice.toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
-                        {product.offer && (<p className="Price-two"> &#8358;{product.productDiscountPrice.toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>)}
-
+                    <Link to={ `/${businessUrl}/products/${ product.productCategory}/${id}`} className="product-title">
+                    <h5>{product.productName}</h5>
+                    </Link>
+                    <div className="card-shop-footer">
+                        <Button className="btn btn-md btn-outline">Add <i className="fas fa-plus"></i></Button>
+                        <h5 className="product-price">&#8358;{product.productPrice.toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h5>
                     </div>
                 </Card.Body>
-                <Card.Footer>
-                    <div className="buttons">
-                        <Button className="btn btn-sm btn-success"
-                                onClick={() => {
-                            setQuickView(true);
-                        }}>
-                            Quick View
-                        </Button>
-                    </div>
-                </Card.Footer>
+
             </Card>
+
+            {/*<Card className="Shop-product-card">*/}
+            {/*    <Link to={ `/${businessUrl}/${ product.productCategory}/${id}`} className="Product-card-link">*/}
+            {/*        <Card.Img src={product.imgUrls[0]} variant="top" alt="Product img here" className="card-img-top" />*/}
+            {/*    </Link>*/}
+            {/*    <Card.Body className="card-body">*/}
+            {/*        <h6>{product.productName}</h6>*/}
+            {/*        <div className="Price">*/}
+            {/*            <p className="Price-one"> &#8358;{product.productPrice.toString()*/}
+            {/*                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>*/}
+            {/*            {product.offer && (<p className="Price-two"> &#8358;{product.productDiscountPrice.toString()*/}
+            {/*                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>)}*/}
+
+            {/*        </div>*/}
+            {/*    </Card.Body>*/}
+            {/*    <Card.Footer>*/}
+            {/*        <div className="buttons">*/}
+            {/*            <Button className="btn btn-sm btn-success"*/}
+            {/*                    onClick={() => {*/}
+            {/*                setQuickView(true);*/}
+            {/*            }}>*/}
+            {/*                Quick View*/}
+            {/*            </Button>*/}
+            {/*        </div>*/}
+            {/*    </Card.Footer>*/}
+            {/*</Card>*/}
+
+
 
             {/** Modals Here */}
             <QuickViewModal  open={isQuickView} onClose={() => setQuickView(false)}>
