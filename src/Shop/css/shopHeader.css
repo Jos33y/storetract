@@ -411,10 +411,127 @@
     background: #FE5F03;
     border: 1px solid #FE5F03;
 }
-.Quick-view-text .margin-break{
-    margin-bottom: 40px;
+
+
+/************ shopping cart section ************/
+.Shopping-cart{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.Shopping-cart .Cart-section{
+    margin-top: 3%;
+}
+.Shopping-cart h4.title{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 35px;
+    color: #212529;
+    text-align: center;
+    text-transform: uppercase;
 }
 
-.Quick-view-text .btn-contact:hover{
-    background: #222222;
+.Shopping-cart .Shopping-cart-box ul{
+    list-style: none;
+    width: 100%;
+}
+.Shopping-cart .Shopping-cart-box{
+    padding: 15px 5px 10px;
+    border-bottom-width: 2px;
+    border-bottom-color: #606060;
+    border-bottom-style: dashed;
+}
+
+.Shopping-cart .Shopping-cart-box ul li{
+    display: inline-block;
+}
+
+.Shopping-cart .Shopping-cart-box ul li.left-cart {
+    width: 25%;
+}
+.Shopping-cart .Shopping-cart-box ul li.middle-cart {
+    width: 60%;
+}
+.Shopping-cart .Shopping-cart-box ul li.right-cart {
+    width: 15%;
+}
+
+
+.Shopping-cart-box .cart-img{
+    width: 80%;
+}
+.Shopping-cart-box .cart-img .img-fluid{
+    max-width: 100%;
+}
+.Shopping-cart-box .cart-texts{
+    text-align: left;
+    object-position: center;
+}
+.Shopping-cart-box .cart-texts .cart-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #212529;
+    text-decoration: none;
+}
+
+.Shopping-cart-box .cart-texts .quantity{
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: 600;
+}
+.Shopping-cart-box .cart-texts .quantity .fas{
+    margin: 0 10px;
+}
+
+.Shopping-cart-box .cart-right{
+    margin-bottom: 20px;
+    text-align: right;
+}
+.Shopping-cart-box .cart-right .far{
+    font-size: 30px;
+    cursor: pointer;
+}
+.Shopping-cart-box .cart-right .cart-price{
+    margin-top: 20px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    color: #212529;
+}
+.Shopping-cart .Checkout-box{
+    margin-top: 30px;
+    background: #ffffff;
+    padding: 20px 40px;
+    border: 1px solid #ffffff;
+    border-radius: 30px;
+}
+.Shopping-cart .Checkout-box .cart-count{
+    font-weight: 400;
+    font-size: 20px;
+   margin-bottom: 20px;
+}
+.Shopping-cart .Checkout-box .cart-total{
+    display: flex;
+    justify-content: space-between;
+}
+.Shopping-cart .Checkout-box .cart-total h5{
+    font-weight: 400;
+    font-size: 22px;
+}
+
+.Shopping-cart .Checkout-box .cart-total h5.total-price{
+    font-weight: 600;
+    font-size: 25px;
+}
+.Shopping-cart .Checkout-box .cart-total-btn .btn{
+    margin-top: 20px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 15px 35px;
+    background: #FE5F03;
+    width: 100%;
+    border: 1px solid #FE5F03;
 }

@@ -135,7 +135,8 @@ const App = () => {
                                 {storeUrl ? (<>
                                     <Route path="/:shopName" element={<Shop />} />
                                     <Route path="/:shopName/products/:categoryUrl/:productUrl" element={<Shop />} />
-                                    <Route path="/:shopName/cart" element={<Cart />} />
+                                    <Route path="/:shopName/:indexUrl" element={<Shop />} />
+                                    {/*<Route path="/:shopName/cart" element={<Cart />} />*/}
                                     <Route path="/:shopName/checkout/information" element={<CheckOutInformation />} />
                                     <Route path="/:shopName/checkout/shipping" element={<CheckOutShipping />} />
                                     <Route path="/:shopName/checkout/payment" element={<CheckOutPayment />} />
@@ -143,7 +144,6 @@ const App = () => {
                                     <Route path="/:shopName/account" element={<ShopAuth />} />
                                     <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                                     <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
-                                    <Route path="/:shopName/:categoryUrl/:productUrl" element={<ProductDetails />} />
 
 
                                     <Route exact path="/:shopName/track-order" element={<TrackOrder />} />

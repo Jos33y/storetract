@@ -10,6 +10,7 @@ import ShopHeader from "./components/ShopHeader";
 import ShopFooter from "./components/ShopFooter";
 import ShopHome from "./pages/shopHome";
 import ShopProductDetails from "./pages/shopProductDetails";
+import ShopCart from "./pages/cart";
 
 const Shop = () => {
     const params = useParams()
@@ -131,6 +132,9 @@ const Shop = () => {
 
             if(params.shopName && params.productUrl) {
                 return <ShopProductDetails businessUrl={ShopURL} loading={loading}/>
+            }
+           else if(params.indexUrl === "cart") {
+                return <ShopCart businessUrl={ShopURL} loading={loading}/>
             }
             else if(params.shopName) {
                 return <ShopHome businessUrl={ShopURL} products={products} loading={loading} />
