@@ -20,7 +20,7 @@ const ShopHome = ({products, businessUrl, loading}) => {
                                <div className="Hero-shop-text">
                                    <h3>Fashion Home</h3>
                                    <h5>Let's make your shopping life easier</h5>
-                                   <Link to="#" className="btn btn-md btn-success"> Shop now </Link>
+                                   <Link to="products" className="btn btn-md btn-success"> Shop now </Link>
                                </div>
                            </Col>
                            <Col md={6}>

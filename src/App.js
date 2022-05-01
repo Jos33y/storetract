@@ -136,7 +136,6 @@ const App = () => {
                                     <Route path="/:shopName" element={<Shop />} />
                                     <Route path="/:shopName/products/:categoryUrl/:productUrl" element={<Shop />} />
                                     <Route path="/:shopName/:indexUrl" element={<Shop />} />
-                                    {/*<Route path="/:shopName/cart" element={<Cart />} />*/}
                                     <Route path="/:shopName/checkout/information" element={<CheckOutInformation />} />
                                     <Route path="/:shopName/checkout/shipping" element={<CheckOutShipping />} />
                                     <Route path="/:shopName/checkout/payment" element={<CheckOutPayment />} />

@@ -69,7 +69,7 @@ const ShopProductDetails = ({businessUrl}) => {
         {
 
             const prodRef = collection(db, 'shops', params.shopName, 'products')
-            const q = query(prodRef, limit(3))
+            const q = query(prodRef, limit(4))
             const querySnap = await getDocs(q)
             let products = []
             querySnap.forEach((doc) => {
@@ -156,7 +156,7 @@ const ShopProductDetails = ({businessUrl}) => {
                     </div>
                     {/*--------------product details section-----------------------*/}
                     <div className="Product-details">
-                        <Link to="#" className="h5"> <i className="fas fa-chevron-left"></i>  Products</Link>
+                        <Link to={ `/${businessUrl}/products` }  className="h5"> <i className="fas fa-chevron-left"></i>  Products</Link>
                         <Row>
                             <Col md={7}>
                                 <div className="Image-box">

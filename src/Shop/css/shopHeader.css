@@ -33,6 +33,7 @@
     border-radius: 20px;
     padding: 5px 10px;
 }
+
 .Header-two ul li .form-group .form-control{
     width: 80%;
     height: 40px;
@@ -48,7 +49,10 @@
     font-weight: 500;
     color: #BDBDBD;
     text-transform: capitalize;
-
+}
+.Header-two ul li .form-group input:focus{
+    outline: none !important;
+    box-shadow: none;
 }
 .Header-two ul li .form-group .btn.btn-outline{
     width: 20%;
@@ -56,6 +60,10 @@
     padding: 0;
     border: 0px solid transparent;
     background: transparent;
+}
+.Header-two ul li .form-group .btn.btn-outline:focus{
+    outline: none !important;
+    box-shadow: none;
 }
 .Header-two ul li .form-group .btn.btn-outline .fas{
     font-size: 20px;
@@ -193,56 +201,81 @@
     width: 120%;
 }
 /************ shop home product section ************/
-.Shop-products{
+.Shop-home-products{
     margin-top: 5%;
 }
-.Shop-products .Shop-home-title{
+.Shop-home-products .Shop-home-title{
     display: flex;
     justify-content: space-between;
     color: #212529;
     margin-bottom: 20px;
 }
-.Shop-products .Shop-home-title h3.home-title{
+.Shop-home-products.Shop-home-title h3.home-title{
     font-weight: 700;
-    font-size: 30px;
+    font-size: 20px;
 }
-.Shop-products .Shop-home-title .h5{
+.Shop-home-products .Shop-home-title .h5{
     font-weight: 600;
-    font-size: 23px;
+    font-size: 20px;
     color: #212529;
     text-decoration: none;
 }
 
 /************ product card section ************/
-.Shop-products .product-card-shop{
+.product-card-shop{
     border-radius: 20px;
     margin-bottom: 30px;
     padding: 5px;
 }
 
-.Shop-products .product-card-shop .card-body .product-title {
-    font-weight: 700;
-    font-size: 20px;
+.product-card-shop .Product-card-link{
+    text-decoration: none;
+    height: 230px;
+}
+.product-card-shop .card-img-top{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+
+}
+
+.product-card-shop .card-body .text{
+    height: 40px;
+}
+.product-card-shop .card-body .product-title {
     text-decoration: none;
     color: #212529;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 13px;
 }
-.Shop-products .product-card-shop .card-body .card-shop-footer{
+.product-card-shop .card-body .product-title h6 {
+    font-weight: 500;
+    font-size: 14px;
+    color: #212529;
+}
+
+.product-card-shop .card-body .card-shop-footer {
     display: flex;
     justify-content: space-between;
-    margin: 10px;
+    margin: 15px 10px 0px;
 }
-.Shop-products .product-card-shop .card-body .card-shop-footer .btn{
+.product-card-shop .card-body .card-shop-footer .btn{
     background: transparent;
     color: #212529;
     border: 1px solid #E2E2E2;
     border-radius: 24px;
-    padding: 7px 22px;
+    padding: 5px 18px;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 15px;
+
+    box-shadow: 1px 1px 1px 1px rgba(89,87,87,0.75);
+    -webkit-box-shadow: 1px 1px 1px 1px rgba(89,87,87,0.75);
+    -moz-box-shadow: 1px 1px 1px 1px rgba(89,87,87,0.75);
 }
-.Shop-products .product-card-shop .card-body .card-shop-footer .product-price{
+.product-card-shop .card-body .card-shop-footer .product-price{
     font-weight: 600;
-    font-size: 22px;
+    font-size: 16px;
     color: #000000;
     margin-top: 5px;
 }
@@ -291,7 +324,7 @@
 }
 .Product-details .h5{
     font-weight: 400;
-    font-size: 23px;
+    font-size: 20px;
     color: #212529;
     text-decoration: none;
     margin-bottom: 20px;
@@ -305,6 +338,7 @@
 .Product-details .Image-box .img-fluid{
     width: 100%;
    height: 100%;
+    object-fit: contain;
 }
 .Product-details .Image-box .Thumb-nails{
     list-style: none;
@@ -338,16 +372,17 @@
     margin-left: 30px;
 }
 .Product-details-text h5.Product-title{
-    font-size: 25px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
     padding-bottom: 10px;
     color: #212529;
     margin-bottom: 20px;
 }
 
 .Product-details-text h6.Product-price{
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 25px;
+    font-weight: 600;
     padding-bottom: 10px;
     color: #212529;
     margin-bottom: 30px;
@@ -361,20 +396,26 @@
 
 .Product-details-text p.input h5{
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 400;
 
 }
 .Product-details-text input{
-    width: 80px;
-    height: 50px;
+    width: 70px;
+    height: 45px;
     margin-left: 20px;
+    padding: 1px;
     border: 2px solid #212529;
     border-radius: 50px;
     text-align: center;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 500;
 }
+.Product-details-text input:focus{
+    outline: none !important;
+    box-shadow: none;
+}
+
 
 .Product-details-text h6 .discount-price{
     font-size: 16px;
@@ -388,13 +429,13 @@
 
 .Product-details-text p.Product-description{
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 400;
     color: #212529;
     margin-bottom: 30px;
 }
 .Product-details-text p.Product-description .title{
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
     color: #212529;
     margin-bottom: 15px;
@@ -406,7 +447,7 @@
     border-radius: 50px;
     color: #ffffff;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 15px;
     padding: 15px 35px;
     background: #FE5F03;
     border: 1px solid #FE5F03;
@@ -424,8 +465,8 @@
 .Shopping-cart h4.title{
     font-family: 'Poppins';
     font-style: normal;
-    font-weight: 800;
-    font-size: 35px;
+    font-weight: 700;
+    font-size: 27px;
     color: #212529;
     text-align: center;
     text-transform: uppercase;
@@ -458,25 +499,34 @@
 
 
 .Shopping-cart-box .cart-img{
-    width: 80%;
+    width: 70%;
+
+
 }
 .Shopping-cart-box .cart-img .img-fluid{
     max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 1px rgba(138,134,134,0.75);
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(138,134,134,0.75);
+    -moz-box-shadow: 0px 0px 1px 1px rgba(138,134,134,0.75);
+
+
 }
 .Shopping-cart-box .cart-texts{
     text-align: left;
     object-position: center;
 }
 .Shopping-cart-box .cart-texts .cart-name {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: capitalize;
     color: #212529;
     text-decoration: none;
 }
 
 .Shopping-cart-box .cart-texts .quantity{
-    margin-top: 20px;
-    font-size: 22px;
+    margin-top: 15px;
+    font-size: 18px;
     font-weight: 600;
 }
 .Shopping-cart-box .cart-texts .quantity .fas{
@@ -488,14 +538,14 @@
     text-align: right;
 }
 .Shopping-cart-box .cart-right .far{
-    font-size: 30px;
+    font-size: 25px;
     cursor: pointer;
 }
 .Shopping-cart-box .cart-right .cart-price{
     margin-top: 20px;
     font-style: normal;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 20px;
     color: #212529;
 }
 .Shopping-cart .Checkout-box{
@@ -504,6 +554,10 @@
     padding: 20px 40px;
     border: 1px solid #ffffff;
     border-radius: 30px;
+
+    box-shadow: 2px 2px 2px 1px rgba(102,101,101,0.75);
+    -webkit-box-shadow: 2px 2px 2px 1px rgba(102,101,101,0.75);
+    -moz-box-shadow: 2px 2px 2px 1px rgba(102,101,101,0.75);
 }
 .Shopping-cart .Checkout-box .cart-count{
     font-weight: 400;
@@ -516,12 +570,12 @@
 }
 .Shopping-cart .Checkout-box .cart-total h5{
     font-weight: 400;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .Shopping-cart .Checkout-box .cart-total h5.total-price{
     font-weight: 600;
-    font-size: 25px;
+    font-size: 22px;
 }
 .Shopping-cart .Checkout-box .cart-total-btn .btn{
     margin-top: 20px;
@@ -529,9 +583,23 @@
     border-radius: 50px;
     color: #ffffff;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
     padding: 15px 35px;
     background: #FE5F03;
     width: 100%;
     border: 1px solid #FE5F03;
+}
+
+/************ shop product section ************/
+.Shop-products{
+    margin-top: 2%;
+}
+
+.Shop-products .Shop-products-list .h5{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    color: #212529;
+    text-decoration: none;
+    margin-bottom: 3%;
 }

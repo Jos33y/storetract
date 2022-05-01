@@ -13,11 +13,15 @@ const ProductCard = ({product, businessUrl, id}) => {
     return(
         <>
             <Card className="product-card-shop">
+                <Link to={ `/${businessUrl}/products/${ product.productCategory}/${id}`} className="Product-card-link">
                 <Card.Img src={product.imgUrls[0]}  variant="top" alt="prod picture here" className="card-img-top" />
+                </Link>
                 <Card.Body className="card-body">
+                    <div className="text">
                     <Link to={ `/${businessUrl}/products/${ product.productCategory}/${id}`} className="product-title">
-                    <h5>{product.productName}</h5>
+                    {product.productName}
                     </Link>
+                    </div>
                     <div className="card-shop-footer">
                         <Button className="btn btn-md btn-outline">Add <i className="fas fa-plus"></i></Button>
                         <h5 className="product-price">&#8358;{product.productPrice.toString()

@@ -8,7 +8,7 @@ const SimilarItem = ({loading, products, businessUrl}) => {
 
     return(
         <>
-            <div className="Shop-products">
+            <div className="Shop-home-products">
                 { loading ?
                     (<Spinner/>)
                     : products && products.length > 0 ?
@@ -23,7 +23,7 @@ const SimilarItem = ({loading, products, businessUrl}) => {
                                 <Row>
 
                                     { products.map((product) => (
-                                        <Col md={ 4 } key={ product.id }>
+                                        <Col md={ 3 } key={ product.id }>
                                             <ProductCard id={ product.id } product={ product.data }
                                                          businessUrl={ businessUrl } />
                                         </Col>

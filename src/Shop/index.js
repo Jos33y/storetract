@@ -11,6 +11,7 @@ import ShopFooter from "./components/ShopFooter";
 import ShopHome from "./pages/shopHome";
 import ShopProductDetails from "./pages/shopProductDetails";
 import ShopCart from "./pages/cart";
+import ShopProducts from "./pages/products";
 
 const Shop = () => {
     const params = useParams()
@@ -55,7 +56,7 @@ const Shop = () => {
 
         try {
             const prodRef = collection(db ,'shops' , storeURL, 'products')
-            const q = query(prodRef, limit(3))
+            const q = query(prodRef, limit(4))
             const querySnap = await getDocs(q)
             let products = []
             querySnap.forEach((doc) => {
@@ -135,6 +136,9 @@ const Shop = () => {
             }
            else if(params.indexUrl === "cart") {
                 return <ShopCart businessUrl={ShopURL} loading={loading}/>
+            }
+            else if(params.indexUrl === "products") {
+                return <ShopProducts businessUrl={ShopURL} loading={loading}/>
             }
             else if(params.shopName) {
                 return <ShopHome businessUrl={ShopURL} products={products} loading={loading} />
