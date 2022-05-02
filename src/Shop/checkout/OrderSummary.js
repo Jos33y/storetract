@@ -45,10 +45,11 @@ const OrderSummary = ({confirm}) => {
                       <tr >
                           <td key={cart.id} className="cart-width">
                               <div className="mini-img-box">
-                                  <span className="Quantity">{cart.qty}</span>
                                   <img src={cart.imgUrls[0]} alt="" className="img-fluid"/>
                               </div>
-                              <p className="title"> {cart.productName}</p>
+                              <p className="title"> {cart.productName} <br/>
+                                  <span>x {cart.qty} </span>
+                              </p>
                           </td>
                           <td>
                               <p className="amount">&#8358;{(cart.productPrice * cart.qty).toString()
@@ -77,7 +78,7 @@ const OrderSummary = ({confirm}) => {
                               <ul>
                                   <li>Subtotal <span className="price money">&#8358;{(itemsPrice).toFixed(2).toString()
                                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>  </li>
-                                  <li>Shipping <span className="price"> Calculated at next steps</span></li>
+                                  <li>Shipping <span className="price"> Added at next steps</span></li>
                               </ul>
                           </td>
                       </tr>

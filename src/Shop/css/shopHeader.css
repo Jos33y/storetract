@@ -603,3 +603,251 @@
     text-decoration: none;
     margin-bottom: 3%;
 }
+
+/***********************************************/
+/*--------------check out styles---------------*/
+/***********************************************/
+
+/************ checkout-bread-crumb ************/
+.Shop-Checkout .bread-crumb{
+    text-align: center;
+}
+.Shop-Checkout  .bread-crumb ul{
+    padding: 10px 0;
+    list-style: none;
+    font-weight: 500;
+    font-size: 16px;
+    color: #adadad;
+    text-transform: capitalize;
+}
+.Shop-Checkout  .bread-crumb ul li{
+    display: inline-block;
+    margin: 3px 10px;
+}
+.Shop-Checkout .bread-crumb .fas{
+    font-size: 10px;
+}
+.Shop-Checkout .bread-crumb ul li .bread-crumb-link{
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #adadad;
+    font-weight: 500;
+}
+.Shop-Checkout .bread-crumb ul li .active{
+    font-weight: 600;
+    color: #2e2e2e;
+}
+.Shop-Checkout .bread-crumb ul li .current{
+    font-weight: 600;
+    color: #2e2e2e;
+}
+
+/************ order summary section ************/
+.Order-summary{
+    margin-top: 5%;
+    padding: 20px 40px;
+    background: transparent;
+    box-shadow: 0px 0px 1px 1px rgba(56,56,56,0.75);
+    -webkit-box-shadow: 0px 0px 1px 1px rgba(56,56,56,0.75);
+    -moz-box-shadow: 0px 0px 1px 1px rgba(56,56,56,0.75);
+
+}
+.Mini-cart .table{
+    padding: 0;
+}
+.Mini-cart .table tr{
+    padding: 0;
+}
+
+.Mini-cart .table tr td{
+    padding-left: 0;
+    padding-right: 0;
+}
+.Mini-cart .table .cart-width{
+    width: 80%;
+}
+
+.Mini-cart .mini-img-box{
+    float: left;
+    height: 60px;
+    padding-right: 5px;
+}
+
+.Mini-cart td .mini-img-box .img-fluid{
+    height: 100%;
+    border: 1px solid #939694;
+    border-radius: 5px;
+}
+
+.Mini-cart td p{
+    padding-top: 5px;
+}
+.Mini-cart td .title{
+    font-size: 11px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+.Mini-cart td .amount{
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+}
+.Mini-cart .coupon td .form-control{
+    width: 100%;
+    font-size: 12px;
+    height: 40px;
+}
+.Mini-cart .coupon td .form-control::placeholder{
+    font-size: 11px;
+}
+.Mini-cart .coupon td .btn{
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+    height: 40px;
+    width: 100%;
+    margin-left: 10px;
+    letter-spacing: 1px;
+    background: #95933e;
+}
+.Mini-cart .coupon td .btn:hover{
+    background: #95933d;
+}
+.Mini-cart .Sub-total td{
+    padding: 0;
+}
+.Mini-cart .Sub-total ul{
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+.Mini-cart .Sub-total ul li{
+    font-size: 11px;
+    color: #525252;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.Mini-cart .Sub-total ul .price{
+    float: right;
+}
+.Mini-cart .Sub-total ul .price.money{
+    font-size: 12px;
+    font-weight: 600;
+}
+.Mini-cart .Total-section td .total{
+    font-size: 12px;
+    font-weight: 600;
+}
+.Mini-cart .Total-section td .total-price{
+    font-size: 15px;
+    font-weight: 600;
+    float: right;
+}
+
+
+/************ shop checkout wrapper section ************/
+
+.Shop-section-wrapper h5.title{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    color: #212529;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+.Shop-section-wrapper h6.sub-title{
+    margin-top: 8%;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #212529;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+/************ checkout input styles ************/
+.Shop-section-wrapper .form-group{
+    margin: 20px 0;
+}
+.Shop-section-wrapper .Form-checkout label{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    color: #363636;
+    text-align: left;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    text-transform: capitalize;
+}
+.Shop-section-wrapper .form-group input{
+    height: 50px;
+    font-size: 13px;
+    border-radius: 5px;
+    border: 1px solid #d1d1d1;
+    box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.05);
+}
+.Shop-section-wrapper .form-group select{
+    height: 50px;
+    font-size: 13px;
+    border-radius: 5px;
+    border: 1px solid #d1d1d1;
+    box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.05);
+}
+
+.Shop-section-wrapper .form-group textarea{
+    font-size: 13px;
+    border-radius: 1px;
+}
+.Shop-section-wrapper .form-group input:focus{
+    outline: none !important;
+    box-shadow: none;
+}
+.Shop-section-wrapper .form-group select:focus{
+    outline: none !important;
+    box-shadow: none;
+}
+
+/************ checkout button section ************/
+.Shop-Checkout .form-group.buttons{
+    margin-top: 8%;
+}
+.Shop-Checkout .form-group .btn {
+    border-radius: 25px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    height: 50px;
+    width: 100%;
+    background: #FE5F03;
+    border: 0 solid #FE5F03;
+
+    box-shadow: 2px 2px 2px 1px rgba(56, 56, 56, 0.75);
+    -webkit-box-shadow: 2px 2px 2px 1px rgba(56, 56, 56, 0.75);
+    -moz-box-shadow: 2px 2px 2px 1px rgba(56, 56, 56, 0.75);
+}
+.Shop-Checkout .form-group .btn:hover{
+    background: #7a2e01;
+}
+.Shop-Checkout .form-group p{
+    padding-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 1px;
+    color: #363636;
+}
+.Shop-Checkout .form-group p .link{
+    color:#363636;
+    text-decoration: none;
+}
