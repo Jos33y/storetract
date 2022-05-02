@@ -1,14 +1,22 @@
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import "../../css/shopHeader.css"
-import {Link} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import React from "react";
 import OrderSummary from "./orderSummary";
+import {toast} from "react-toastify";
 
-const handleInfo = () => {
-  console.log("hello world")
-}
 
-const ShopCheckout = ({active, businessUrl}) => {
+
+const ShopCheckout = ({businessUrl}) => {
+
+    const params = useParams()
+    const navigate = useNavigate()
+
+    const handleInfo = () => {
+        console.log("hello world")
+        toast.success("information saved")
+        navigate(`/${params.shopName}/checkout/payment`)
+    }
 
     return(
         <>
@@ -189,7 +197,7 @@ const ShopCheckout = ({active, businessUrl}) => {
                                         <Row>
                                             <Col md={ 4 }>
                                                 <Button className="btn btn-md btn-primary"
-                                                        type="submit"> Continue to Shipping</Button>
+                                                        type="submit"> Continue to Payment</Button>
                                             </Col>
                                             <Col md={ 4 }>
                                                 <p><Link to={ (`/${ businessUrl }/cart`) }

@@ -137,10 +137,7 @@ const App = () => {
                                     <Route path="/:shopName/products/:categoryUrl/:productUrl" element={<Shop />} />
                                     <Route path="/:shopName/:indexUrl" element={<Shop />} />
                                     <Route path="/:shopName/:indexUrl/:checkoutUrl" element={<Shop />} />
-                                    {/*<Route path="/:shopName/checkout/information" element={<CheckOutInformation />} />*/}
-                                    <Route path="/:shopName/checkout/shipping" element={<CheckOutShipping />} />
-                                    <Route path="/:shopName/checkout/payment" element={<CheckOutPayment />} />
-                                    <Route path="/:shopName/checkout/order-confirmation" element={<OrderConfirmation />} />
+                                    {/*<Route path="/:shopName/checkout/order-confirmation" element={<OrderConfirmation />} />*/}
                                     <Route path="/:shopName/account" element={<ShopAuth />} />
                                     <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                                     <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
@@ -157,6 +154,9 @@ const App = () => {
                                         <Route path="/:categoryUrl" element={<ShopCategories />} />
                                         <Route path="/:categoryUrl/:productUrl" element={<ProductDetails />} />
                                         <Route path="/:shopName/checkout/information" element={<CheckOutInformation />} />
+                                        <Route path="/:shopName/checkout/shipping" element={<CheckOutShipping />} />
+                                        <Route path="/:shopName/checkout/payment" element={<CheckOutPayment />} />
+                                        <Route path="/:shopName/checkout/order-confirmation" element={<OrderConfirmation />} />
                                     </>
                                 )}
 

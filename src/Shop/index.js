@@ -13,6 +13,8 @@ import ShopProductDetails from "./pages/shopProductDetails";
 import ShopCart from "./pages/cart";
 import ShopProducts from "./pages/products";
 import ShopCheckout from "./pages/checkout";
+import ShopPayment from "./pages/checkout/shopPayment";
+import ShopOrderConfirmation from "./pages/checkout/orderConfirmation";
 
 const Shop = () => {
     const params = useParams()
@@ -143,6 +145,12 @@ const Shop = () => {
             }
             else if(params.indexUrl === "checkout" && params.checkoutUrl === "information") {
                 return <ShopCheckout businessUrl={ShopURL} loading={loading}/>
+            }
+            else if(params.indexUrl === "checkout" && params.checkoutUrl === "payment") {
+                return <ShopPayment businessUrl={ShopURL} loading={loading}/>
+            }
+            else if(params.indexUrl === "checkout" && params.checkoutUrl === "order-confirmation") {
+                return <ShopOrderConfirmation businessUrl={ShopURL} loading={loading}/>
             }
             else if(params.shopName) {
                 return <ShopHome businessUrl={ShopURL} products={products} loading={loading} />

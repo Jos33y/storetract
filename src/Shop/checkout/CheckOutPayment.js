@@ -16,6 +16,8 @@ const CheckOutPayment = () => {
     const navigate = useNavigate()
 
 
+
+
     // flutter wave payment section
     const flutter_config = {
         public_key: "FLWPUBK_TEST-44d817f412ee52d8daf7a5a67444b73c-X",
@@ -106,8 +108,6 @@ const CheckOutPayment = () => {
     //         console.log(data);
     //     }
     //     }
-
-
 
     return (
         <>

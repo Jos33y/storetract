@@ -758,10 +758,11 @@
     color: #212529;
     text-align: left;
     text-transform: capitalize;
+    margin-bottom: 5%;
 }
 
 .Shop-section-wrapper h6.sub-title{
-    margin-top: 8%;
+    margin-top: 5%;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
@@ -851,3 +852,145 @@
     color:#363636;
     text-decoration: none;
 }
+
+/************ payment  section ************/
+
+/************ shipping  section ************/
+.Shop-Checkout .Shipping-address .text-head{
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a4a4a;
+}
+.Shop-Checkout .Shipping-address p{
+    font-size: 13px;
+    color: #4a4a4a;
+    padding-bottom: 0;
+}
+.Shop-Checkout .Shipping-address .total .text-head{
+    font-size: 16px;
+    color: #2e2e2e;
+    font-weight: 600;
+}
+.Shop-Checkout .Shipping-address .total p{
+    font-size: 18px;
+    color: #2e2e2e;
+    font-weight: 600;
+}
+.Shop-Checkout .Shipping-address p.left{
+    text-align: right;
+}
+
+.Shop-Checkout .Shipping-address .link{
+    font-size: 12px;
+    color: #7d7d7d;
+    text-decoration: none;
+}
+.Shop-Checkout .Shipping-address{
+    border: 1px solid #adadad;
+    border-radius: 5px;
+    padding-bottom: 0;
+    margin-bottom: 10%;
+}
+.Shop-Checkout .Shipping-address .table .top td {
+    border-top-width: 0;
+}
+
+.Shop-Checkout .Shipping-address .table tr td {
+    padding-bottom: 0;
+}
+.Shop-Checkout .Shipping-method h6{
+    font-size: 15px;
+    color: #525252;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+.Shop-Checkout .Shipping-method .Shipping-method-table .form-check {
+    cursor: pointer;
+}
+.Shop-Checkout .Shipping-method .Shipping-method-table .form-check .form-check-label{
+    font-size: 13px;
+    color: #939694;
+    cursor: pointer;
+}
+.Shop-Checkout .Shipping-method .Shipping-method-table {
+    font-size: 13px;
+    font-weight: 600;
+}
+/************ payment method styles ************/
+.Payment-method .note{
+    font-size: 13px;
+    color: #4a4a4a;
+    font-weight: 400;
+    padding-bottom: 10px;
+}
+
+
+.Payment-method .Payment-method-list h4.klump{
+    color: #ffffff;
+    background: #192c69;
+}
+
+
+.Payment-method .Payment-method-list .Payment-box{
+    margin-bottom: 5%;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 10px 10px;
+    background: #ffffff;
+    color: #011B33;
+    cursor: pointer;
+    border-left: 8px solid #16befa;
+
+    box-shadow: 2px 2px 3px 1px rgba(105,105,105,0.75);
+    -webkit-box-shadow: 2px 2px 3px 1px rgba(105,105,105,0.75);
+    -moz-box-shadow: 2px 2px 3px 1px rgba(105,105,105,0.75);
+}
+
+
+
+.Payment-method .Payment-method-list .Payment-box h5{
+    display: flex;
+    justify-content: space-between;
+}
+.Payment-method .Payment-method-list .Payment-box h5 .text{
+    font-size: 18px;
+    font-weight: 700;
+    color: #011B33;
+}
+.Payment-method .Payment-method-list .Payment-box h5 .img-pay{
+    width: 50%;
+}
+.Payment-method .Payment-method-list .Payment-box p{
+    padding-top: 20px;
+   text-align: center;
+    font-size: 14px;
+    color: #011B33;
+    font-weight: 400;
+}
+.Payment-method .Payment-method-list .Payment-box .payment-img{
+    width: 70%;
+    margin: auto;
+}
+.Payment-method .Payment-method-list .Payment-box .payment-img img{
+    width: 100%;
+}
+
+
+.Payment-method .Payment-method-list .Payment-box.klump{
+    border: 1px solid  #192c69;
+    background:  #192c69;
+    color: #ffffff;
+    border-left: 8px solid #16befa;
+
+}
+
+.Payment-method .Payment-method-list .Payment-box.klump h5 .text{
+    color: #ffffff;
+}
+.Payment-method .Payment-method-list .Payment-box.klump h5 .img-pay{
+    width: 35%;
+}
+.Payment-method .Payment-method-list .Payment-box.klump p{
+    color: #ffffff;
+}
+
