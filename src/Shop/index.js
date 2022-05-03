@@ -14,7 +14,7 @@ import ShopCart from "./pages/cart";
 import ShopProducts from "./pages/products";
 import ShopCheckout from "./pages/checkout";
 import ShopPayment from "./pages/checkout/shopPayment";
-import ShopOrderConfirmation from "./pages/checkout/orderConfirmation";
+import ShopOrderConfirmation from "./pages/checkout/shopOrderConfirmation";
 
 const Shop = () => {
     const params = useParams()
@@ -23,7 +23,6 @@ const Shop = () => {
     const [shopData ,setShopData] = useState('')
     const [products ,setProducts] = useState(null)
     const [loading ,setLoading] = useState(true)
-    const [cart ,setCart] = useState([])
     const [confirmed, setConfirmed] = useState(false);
     const isMounted = useRef()
     const [domain, setDomain] = useState(false)
@@ -163,17 +162,9 @@ const Shop = () => {
 
     useEffect(() => {
         if (isMounted) {
-            let localCart = localStorage.getItem("cart");
 
             fetchUrl()
 
-
-            //turn it into js
-            localCart = JSON.parse(localCart);
-            //load persisted cart into state if it exists
-            if (localCart) setCart(localCart)
-            // console.log(localCart)
-            // console.log(cart.length)
         }
         return () => {
             isMounted.current = false;
@@ -190,7 +181,7 @@ const Shop = () => {
                     (
                         <>
                             <div className="body">
-                            <ShopHeader cartCount={ cart.length } businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain}/>
+                            <ShopHeader businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain}/>
                                <div className="main-section">
 
                                    {pages()}

@@ -12,6 +12,7 @@ const OrderConfirmation = () => {
     const navigate = useNavigate()
 
 
+
     const continueShopping = () => {
 
         console.log("Handling Information")

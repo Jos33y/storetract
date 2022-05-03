@@ -29,7 +29,6 @@ const ShopProductDetails = ({businessUrl}) => {
     //add to cart function
     const addToCart = async (product) => {
         setDisabled(true)
-        console.log("quantity:", quantity)
         try{
             let cartData = [...cart]
             //look for item in cart array
@@ -121,7 +120,6 @@ const ShopProductDetails = ({businessUrl}) => {
             //load persisted cart into state if it exists
             if (localCart) setCart(localCart)
             // console.log(localCart)
-            console.log(cart.length)
 
 
         }

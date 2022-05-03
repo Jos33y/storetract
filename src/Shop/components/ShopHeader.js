@@ -1,12 +1,32 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "../css/shopHeader.css"
 import {Link} from "react-router-dom";
 import {Dropdown, Container} from "react-bootstrap";
 
-const ShopHeader = ({businessName, businessUrl, domain, cartCount}) => {
+const ShopHeader = ({businessName, businessUrl, domain}) => {
     //
     // let name = businessName;
     // let imgSrc = "";
+    const isMounted = useRef()
+    const [cart ,setCart] = useState([])
+
+    useEffect(() => {
+        if (isMounted) {
+            let localCart = localStorage.getItem("cart");
+
+
+            //turn it into js
+            localCart = JSON.parse(localCart);
+            //load persisted cart into state if it exists
+            if (localCart) setCart(localCart)
+            // console.log(localCart)
+            // console.log(cart.length)
+        }
+        return () => {
+            isMounted.current = false;
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    } ,[isMounted])
     return(
         <>
             <div className="Header-two">
@@ -34,7 +54,7 @@ const ShopHeader = ({businessName, businessUrl, domain, cartCount}) => {
                         </li>
                         <li className="button-cart"> <Link to={domain ? ('/cart') : (`/${businessUrl}/cart`) }
                                                            className="Cart-button"> <i className="fas fa-shopping-cart"></i>
-                            Cart: <span className="number">{cartCount ? (cartCount) : '0' }</span></Link></li>
+                            Cart: <span className="number">{ cart.length > 0 ? ( cart.length ) : '0' }</span></Link></li>
 
                         {/*<Link to={domain ? ('/account') : (`/${businessUrl}/account`) } className="Account-link">*/}
                         {/*    <i className="fas fa-truck"></i>*/}

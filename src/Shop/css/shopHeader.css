@@ -930,7 +930,6 @@
     background: #192c69;
 }
 
-
 .Payment-method .Payment-method-list .Payment-box{
     margin-bottom: 5%;
     border: 1px solid #ffffff;
@@ -945,8 +944,6 @@
     -webkit-box-shadow: 2px 2px 3px 1px rgba(105,105,105,0.75);
     -moz-box-shadow: 2px 2px 3px 1px rgba(105,105,105,0.75);
 }
-
-
 
 .Payment-method .Payment-method-list .Payment-box h5{
     display: flex;
@@ -994,3 +991,131 @@
     color: #ffffff;
 }
 
+
+/************ order confirmation styles ************/
+.Order-confirmation{
+    padding: 20px;
+    /*background: #f0f0ff;*/
+    margin-bottom: 20px;
+}
+.Order-confirmation .far{
+    font-size: 70px;
+    float: left;
+    padding-right: 20px;
+}
+.Order-confirmation .Thank-you .text{
+    margin-bottom: 10%;
+}
+.Order-confirmation .Thank-you .text h6{
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+
+}
+.Order-confirmation .Thank-you .text h4{
+    font-size: 25px;
+    font-weight: 400;
+}
+.order-box{
+    border-radius: 5px;
+    border: 1px solid #939694;
+    padding: 15px;
+    margin-bottom: 5%;
+}
+.order-box h4{
+    font-size: 18px;
+    font-weight: 400;
+    color: #525252;
+}
+.order-box p{
+    font-size: 13px;
+    font-weight: 400;
+    color: #525252;
+}
+.Order-updates .btn {
+    border-radius: 25px;
+    border: 0px solid #FE5F03;
+    color: #FE5F03;
+    padding: 10px 30px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #ffffff;
+    letter-spacing: 1px;
+    margin-right: 20px;
+
+    box-shadow: 0px 0px 2px 1px rgba(71,71,71,0.75);
+    -webkit-box-shadow: 0px 0px 2px 1px rgba(71,71,71,0.75);
+    -moz-box-shadow: 0px 0px 2px 1px rgba(71,71,71,0.75);
+}
+
+.Order-updates button.btn-success {
+    text-transform: lowercase;
+    background:  #192c69;
+    border: 1px solid #192c69;
+    color: #ffffff;
+    letter-spacing: 1px;
+    margin-left: 20px;
+}
+
+.Contact-info h5{
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2e2e2e;
+}
+.Contact-info p{
+    font-size: 13px;
+    font-weight: 400;
+    color: #939694;
+}
+
+.Order-confirmation th {
+    font-size: 14px;
+    color: #525252;
+    border-top-width: 0;
+}
+
+.Order-confirmation td p{
+    padding-top: 5px;
+}
+.Order-confirmation td .title{
+    font-size: 13px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+.Order-confirmation td .amount{
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.Order-confirmation .Sub-total td{
+    padding: 0;
+}
+.Order-confirmation .Sub-total ul{
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+.Order-confirmation .Sub-total ul li{
+    font-size: 12px;
+    color: #525252;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.Order-confirmation .Sub-total ul .price{
+    float: right;
+}
+.Order-confirmation .Sub-total ul .price.money{
+    font-size: 12px;
+    font-weight: 600;
+}
+.Order-confirmation .Total-section td .total{
+    font-size: 12px;
+    font-weight: 600;
+}
+.Order-confirmation .Total-section td .total-price{
+    font-size: 15px;
+    font-weight: 600;
+    float: right;
+}
