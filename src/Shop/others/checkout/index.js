@@ -2,14 +2,14 @@ import {Button ,Col ,Container ,Form ,Row} from "react-bootstrap";
 import "./Styles.css"
 import OrderSummary from "./OrderSummary";
 import CheckOutHeader from "./CheckOutHeader";
-import ShopFooter from "../components/ShopFooter";
+import ShopFooter from "../../components/ShopFooter";
 import {Link ,useNavigate ,useParams} from "react-router-dom";
 import React, {useEffect ,useRef ,useState} from "react";
 import {toast} from "react-toastify";
 import {v4 as uuidv4} from "uuid";
 import {doc ,getDoc ,serverTimestamp ,setDoc ,updateDoc} from "firebase/firestore";
-import {db} from "../../firebase.config";
-import Spinner from "../../components/Spinner";
+import {db} from "../../../firebase.config";
+import Spinner from "../../../components/Spinner";
 
 
 

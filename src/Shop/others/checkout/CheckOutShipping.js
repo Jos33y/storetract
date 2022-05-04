@@ -2,11 +2,11 @@ import {Button ,Col ,Container ,Row ,Table} from "react-bootstrap";
 import {Link ,useNavigate ,useParams} from "react-router-dom";
 import CheckOutHeader from "./CheckOutHeader";
 import OrderSummary from "./OrderSummary";
-import ShopFooter from "../components/ShopFooter";
+import ShopFooter from "../../components/ShopFooter";
 import React, {useEffect ,useRef ,useState} from "react";
 import {doc ,getDoc} from "firebase/firestore";
-import {db} from "../../firebase.config";
-import Spinner from "../../components/Spinner";
+import {db} from "../../../firebase.config";
+import Spinner from "../../../components/Spinner";
 
 const CheckOutShipping = () => {
     // const [carts, setCarts] = useState([])

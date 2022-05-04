@@ -2,7 +2,7 @@ import {Button ,Col ,Container ,Row ,Table} from "react-bootstrap";
 import {Link ,useNavigate ,useParams} from "react-router-dom";
 import React from "react";
 import OrderSummary from "./OrderSummary";
-import ShopFooter from "../components/ShopFooter";
+import ShopFooter from "../../components/ShopFooter";
 import CheckOutHeader from "./CheckOutHeader";
 
 

@@ -15,7 +15,8 @@ const ShopOrderConfirmation = ({businessUrl}) => {
     const componentRef = useRef();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const [customerID, setCustomerID] = useState("")
+    // const [customerID, setCustomerID] = useState("")
+    const [orderUniqueID, setOrderUniqueID] = useState("")
     const [formData, setFormData] = useState('')
     const [carts, setCarts] = useState([])
     const [paymentMethod, setPaymentMethod] = useState('')
@@ -52,14 +53,21 @@ const ShopOrderConfirmation = ({businessUrl}) => {
             let localCustomerID = localStorage.getItem("customerID");
             let localCart = localStorage.getItem("cart");
             let localPayment = localStorage.getItem("paymentMethod");
+            let localOrderID = localStorage.getItem("orderUniqueID");
 
             // customer ID session
             localCustomerID = JSON.parse(localCustomerID);
             //load persisted cart into state if it exists
             if (localCustomerID) {
-                setCustomerID(localCustomerID)
                 getCustomer(localCustomerID)
                 console.log(localCustomerID)
+            }
+
+            // orderID ID session
+            localOrderID= JSON.parse(localOrderID);
+            //load persisted cart into state if it exists
+            if (localOrderID) {
+                setOrderUniqueID(localOrderID)
             }
 
             // cart session
@@ -86,8 +94,19 @@ const ShopOrderConfirmation = ({businessUrl}) => {
 
 
     const continueShopping = () => {
-        console.log("Handling Information")
         navigate(`/${params.shopName}`)
+    }
+
+    const trackOrder = () => {
+        try {
+            localStorage.removeItem("cart")
+            localStorage.removeItem("orderUniqueID");
+            localStorage.removeItem("paymentMethod")
+        }
+        catch (e) {
+            console.log({e})
+        }
+        navigate(`/${params.shopName}/track-order`)
     }
 
     return(
@@ -129,7 +148,7 @@ const ShopOrderConfirmation = ({businessUrl}) => {
                                     <div className="Thank-you">
                                         <i className="far fa-check-circle"></i>
                                         <div className="text">
-                                            <h6>Order ID:  #{customerID}</h6>
+                                            <h6>Order ID:  #{orderUniqueID}</h6>
                                             <h4>Thank you {formData.lastname}! </h4>
                                         </div>
                                     </div>
@@ -190,7 +209,7 @@ const ShopOrderConfirmation = ({businessUrl}) => {
                                     <div className="Order-updates order-box">
                                         <h4>Order updates</h4>
                                         <p> You’ll get shipping and delivery updates by email.</p>
-                                        <Link to="https://" className="btn btn-md btn-primary"><i className="fas fa-truck"></i>  track orders</Link>
+                                        <button  onClick={trackOrder} className="btn btn-md btn-primary"><i className="fas fa-truck"></i>  track orders</button>
 
                                         <button className="btn btn-md btn-success" onClick={handlePrint}>
                                             <i className="fas fa-file-pdf"></i> Print Receipt

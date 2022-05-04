@@ -17,20 +17,19 @@ import AdminProfile from "./Dashboard/others/profile";
 import ActivateShop from "./Dashboard/others/activateShop";
 import InsertProduct from "./Dashboard/Product/insertProduct";
 import Shop from "./Shop";
-import QuickView from "./Shop/modal/QuickView";
+import QuickView from "./Shop/others/modal/QuickView";
 import ShopCategories from "./Shop/Categories";
-import ProductDetails from "./Shop/ProductDetails";
-import Cart from "./Shop/Cart";
-import TrackOrder from "./Shop/TrackOrder";
+import ProductDetails from "./Shop/others/ProductDetails";
+import Cart from "./Shop/others/Cart";
 import React, {useEffect ,useState} from "react";
-import ShopAuth from "./Shop/account/Auth";
+import ShopAuth from "./Shop/others/account/Auth";
 import {doc ,getDoc} from "firebase/firestore";
 import {db} from "./firebase.config";
 import Spinner from "./components/Spinner";
-import CheckOutInformation from "./Shop/checkout";
-import CheckOutShipping from "./Shop/checkout/CheckOutShipping";
-import CheckOutPayment from "./Shop/checkout/CheckOutPayment";
-import OrderConfirmation from "./Shop/checkout/OrderConfirmation";
+import CheckOutInformation from "./Shop/others/checkout";
+import CheckOutShipping from "./Shop/others/checkout/CheckOutShipping";
+import CheckOutPayment from "./Shop/others/checkout/CheckOutPayment";
+import OrderConfirmation from "./Shop/others/checkout/OrderConfirmation";
 
 const App = () => {
     const currentURL = window.location.href;
@@ -137,13 +136,9 @@ const App = () => {
                                     <Route path="/:shopName/products/:categoryUrl/:productUrl" element={<Shop />} />
                                     <Route path="/:shopName/:indexUrl" element={<Shop />} />
                                     <Route path="/:shopName/:indexUrl/:checkoutUrl" element={<Shop />} />
-                                    {/*<Route path="/:shopName/checkout/order-confirmation" element={<OrderConfirmation />} />*/}
                                     <Route path="/:shopName/account" element={<ShopAuth />} />
                                     <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
                                     <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
-
-
-                                    <Route exact path="/:shopName/track-order" element={<TrackOrder />} />
                                 </>) : (
                                     <>
 

@@ -7,7 +7,7 @@ import KlumpLogo from "../../../assets/images/klump-two-ng.PNG";
 import AcceptedPayment from "../../../assets/images/shopimages/cards-501x173.png";
 import {toast} from "react-toastify";
 import {usePaystackPayment} from "react-paystack";
-import {doc, getDoc, serverTimestamp, setDoc, addDoc} from "firebase/firestore";
+import {doc, getDoc, serverTimestamp, setDoc, addDoc, updateDoc, collection} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import Spinner from "../../../components/Spinner";
 
@@ -21,6 +21,7 @@ const ShopPayment = ({businessUrl}) => {
     const [displayK, setDisplayK] = useState(false);
     const [payMethod, setPayMethod] = useState("not selected");
     const [formData, setFormData] = useState('')
+    const [balanceData, setBalanceData] = useState('')
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const [customerID, setCustomerID] = useState("")
@@ -29,46 +30,22 @@ const ShopPayment = ({businessUrl}) => {
     const itemsPrice = carts.reduce((a, c) => a + c.productPrice * c.qty, 0);
     const [loading, setLoading] = useState(false);
 
-    const transactionData = {
-        transactionId: '',
-        orderId: '',
-        customerId: '',
-        status: '',
-        message: '',
-        paymentMethod: '',
-        orderTotal: '',
-        transactionRef: '',
-        timeStamp: '',
-    }
-    const balanceData = {
-        accountBalance: '',
-        timeStamp: '',
-    }
-    const depositHistoryData = {
-        amountDeposited: '',
-        customerId: '',
-        orderId: '',
-        transactionRef: '',
-        timeStamp: '',
-    }
-
     // save transactions for references
     const saveTransaction = async (reference) => {
         try {
-            console.log("Handling Payment")
-            const transactionDataCopy = {...transactionData}
-            transactionDataCopy.transactionId = reference.reference;
-            transactionDataCopy.customerId = customerID;
-            transactionDataCopy.orderId = orderUniqueID;
-            transactionDataCopy.paymentMethod = "PAYSTACK";
-            transactionDataCopy.status = reference.status;
-            transactionDataCopy.message = reference.message;
-            transactionDataCopy.orderTotal = itemsPrice;
-            transactionDataCopy.transactionRef = reference.transaction;
-            transactionDataCopy.timeStamp = serverTimestamp();
-
+            const transactionData = {
+                transactionId: reference.reference,
+                customerId: (`${customerID}`),
+                orderId: (`${orderUniqueID}`),
+                paymentMethod: "PAYSTACK",
+                status: reference.status,
+                message: reference.message,
+                orderTotal: (`${itemsPrice}`),
+                transactionRef: reference.transaction,
+                timeStamp: serverTimestamp(),
+            }
             const transRef = doc(db, 'shops', params.shopName, 'transactions', reference.reference)
-            await setDoc(transRef, transactionDataCopy)
+            await setDoc(transRef, transactionData)
 
         }
         catch (error) {
@@ -77,95 +54,137 @@ const ShopPayment = ({businessUrl}) => {
     }
 
     // get account balance
-
     const getWalletBalance = async () => {
+
         try {
-            console.log("Adding to Balance")
+            const getBalanceRef = doc(db, 'shops', params.shopName, 'walletBalance', 'account')
+            const balanceSnap =  await getDoc(getBalanceRef)
+
+            if(balanceSnap.exists()){
+                // console.log(customerSnap.data())
+                setBalanceData(balanceSnap.data())
+            }
+            else {
+                newWallet()
+            }
+        }
+        catch (e) {
+            console.log({e})
+        }
+    }
+
+    // update account balance
+    const updateWalletBalance = async () => {
+        const newBalance = (balanceData.accountBalance + itemsPrice);
+        try {
+            console.log("updating to Balance")
             const balanceDataCopy = {...balanceData}
-            balanceDataCopy.accountBalance = itemsPrice;
+            balanceDataCopy.accountBalance = newBalance;
             balanceDataCopy.timeStamp = serverTimestamp();
 
             const balanceRef = doc(db, 'shops', params.shopName, 'walletBalance', 'account')
-            await setDoc(balanceRef, balanceDataCopy)
+            await updateDoc(balanceRef, balanceDataCopy)
         }
 
+        catch (e) {
+            console.log({e})
+        }
+    }
+
+    // create new wallet
+    const newWallet = async () => {
+        try {
+            const balanceDataCopy = {
+                accountBalance: 0,
+                timeStamp: serverTimestamp(),
+            }
+            const balanceRef = doc(db, 'shops', params.shopName, 'walletBalance', 'account')
+            await setDoc(balanceRef, balanceDataCopy)
+        }
         catch (error) {
             console.log({error})
         }
     }
-
-    // add purchase to balance
-    const addToBalance = async () => {
-        try {
-            console.log("Adding to Balance")
-            const balanceDataCopy = {...balanceData}
-            balanceDataCopy.accountBalance = itemsPrice;
-            balanceDataCopy.timeStamp = serverTimestamp();
-
-            const balanceRef = doc(db, 'shops', params.shopName, 'walletBalance', 'account')
-            await setDoc(balanceRef, balanceDataCopy)
-        }
-
-        catch (error) {
-            console.log({error})
-        }
-    }
-
-
-    // add purhcase to deposit history
+    // add purchase to deposit history
     const addDepositToHistory = async (reference) => {
         try {
-            console.log("Adding to deposit history")
-            const depositHistoryDataCopy= {...depositHistoryData}
-            depositHistoryDataCopy.amountDeposited = itemsPrice;
-            depositHistoryDataCopy.transactionRef = reference.reference;
-            depositHistoryDataCopy.orderId = orderUniqueID;
-            depositHistoryDataCopy.customerId = customerID;
-            depositHistoryDataCopy.timeStamp = serverTimestamp();
-
-            const depositRef = doc(db, 'shops', params.shopName, 'walletDepositHistory')
-            await addDoc(depositRef, depositHistoryDataCopy)
+            const depositHistoryData = {
+                amountDeposited: (`${itemsPrice}`),
+                customerId: (`${customerID}`),
+                orderId: (`${orderUniqueID}`),
+                transactionRef: reference.reference,
+                timeStamp: serverTimestamp(),
+            }
+            const depositRef = collection(db, 'shops', params.shopName, 'walletDepositHistory')
+            await addDoc(depositRef, depositHistoryData)
         }
-
         catch (error) {
             console.log({error})
         }
     }
 
-    // paystack payment config
+    // update order status
+    const updateOrder = async () => {
+        try {
+            //store orders
+            const orderCopy = {
+                deliveryStatus: "Confirmed",
+                orderStatus:"Success",
+                paymentMethod: "PayStack",
+                orderTotal: (`${itemsPrice}`),
+                timeStamp: serverTimestamp(),
+            }
+            const orderRef = doc(db, 'shops', params.shopName, 'orders', orderUniqueID)
+            await updateDoc(orderRef, orderCopy)
+        }
 
+        catch (e) {
+            console.log({e})
+        }
+    }
+
+
+    // PayStack Payment config
     const paystack_config = {
         reference: (new Date()).getTime().toString(),
         email: (formData.email),
         amount: (itemsPrice * 100),
         publicKey: "pk_test_92373800d132af22fc873ce48794f7f6165d4ad3",
     };
+
+
+    // function that initializes PayStack Payment
     const initializePayment = usePaystackPayment(paystack_config);
-    // you can call this function anything
+
+    // onSuccess function to call when the PayStack payment is a success
     const onSuccess = (reference) => {
         // Implementation for whatever you want to do with reference and after success call.
         //make payment method a string and store in local space
         let paymentMethod = JSON.stringify("PAYSTACK");
         localStorage.setItem("paymentMethod" ,paymentMethod)
 
-        saveTransaction(reference)
-
+        saveTransaction(reference).then()
+        // check status from paystack
+        if (reference.status === "success") {
+            updateWalletBalance().then()
+            addDepositToHistory(reference).then()
+            updateOrder().then()
+        }
         // toast.success("stringify")
         toast.success("Payment successful");
         console.log({reference});
 
-        // navigate(`/${params.shopName}/checkout/order-confirmation`)
-
+        navigate(`/${params.shopName}/checkout/order-confirmation`)
     };
 
-    // you can call this function anything
+    // you onclose function for when the PayStack dialog is closed
     const onClose = () => {
-        // implementation for  whatever you want to do when the Paystack dialog closed.
+        // implementation for  whatever you want to do when the PayStack dialog closed.
         toast.error("Payment window closed");
     }
 
 
-
+    // check if paystack buttons is active
     const activePaystack = () => {
         if(displayP) {
             if(!displayK){
@@ -183,6 +202,7 @@ const ShopPayment = ({businessUrl}) => {
         }
     }
 
+    // check if klump button is active
     const activeKlump = () => {
 
         if(displayK) {
@@ -201,6 +221,7 @@ const ShopPayment = ({businessUrl}) => {
         }
     }
 
+        // make payment functions for any selected payment method
     const makePayment = () => {
         if(payMethod === 'not selected') {
             toast.error("Select a payment method");
@@ -238,6 +259,9 @@ const ShopPayment = ({businessUrl}) => {
     // useEffect functions containing add form data to session storage
     useEffect(() => {
         if(isMounted) {
+
+            getWalletBalance()
+
             let localCustomerID = localStorage.getItem("customerID");
             let localCart = localStorage.getItem("cart");
             let localOrderID = localStorage.getItem("orderUniqueID");
@@ -257,6 +281,7 @@ const ShopPayment = ({businessUrl}) => {
             if (localOrderID) {
                 setOrderUniqueID(localOrderID)
             }
+
 
             // cart session
             localCart = JSON.parse(localCart);

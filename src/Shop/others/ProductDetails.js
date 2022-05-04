@@ -2,12 +2,12 @@ import {Link ,useParams} from "react-router-dom";
 // import CategorySection from "./components/CategorySection";
 import React ,{useEffect ,useRef ,useState} from "react";
 import {collection ,doc ,getDoc ,getDocs ,limit ,query} from "firebase/firestore";
-import {db} from "../firebase.config";
-import Spinner from "../components/Spinner";
-import ShopFooter from "./components/ShopFooter";
+import {db} from "../../firebase.config";
+import Spinner from "../../components/Spinner";
+import ShopFooter from "../components/ShopFooter";
 import {Col ,Container ,Row} from "react-bootstrap";
-import ShopHeader from "./components/ShopHeader";
-import ProductCard from "./components/ProductCard";
+import ShopHeader from "../components/ShopHeader";
+import ProductCard from "../components/ProductCard";
 import {toast} from "react-toastify";
 
 

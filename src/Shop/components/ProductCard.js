@@ -1,9 +1,9 @@
 import {Button ,Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import '../styles.css'
+import '../css/styles.css'
 import React, {useState} from "react";
-import QuickViewModal from "../modal/QuickViewModal";
-import QuickView from "../modal/QuickView";
+import QuickViewModal from "../others/modal/QuickViewModal";
+import QuickView from "../others/modal/QuickView";
 // import ProdImage from "../../assets/images/shopimages/61Dr0DoZ2aL.png";
 
 

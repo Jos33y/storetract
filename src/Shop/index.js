@@ -1,5 +1,5 @@
 
-import './styles.css'
+import './css/styles.css'
 import React, {useEffect ,useRef ,useState} from "react";
 import {useParams} from "react-router-dom";
 import {collection, getDocs, query, doc, getDoc, limit} from "firebase/firestore";
@@ -15,6 +15,7 @@ import ShopProducts from "./pages/products";
 import ShopCheckout from "./pages/checkout";
 import ShopPayment from "./pages/checkout/shopPayment";
 import ShopOrderConfirmation from "./pages/checkout/shopOrderConfirmation";
+import TrackOrder from "./pages/trackOrder";
 
 const Shop = () => {
     const params = useParams()
@@ -135,6 +136,9 @@ const Shop = () => {
 
             if(params.shopName && params.productUrl) {
                 return <ShopProductDetails businessUrl={ShopURL} loading={loading}/>
+            }
+            else if(params.indexUrl === "track-order") {
+                return <TrackOrder businessUrl={ShopURL} loading={loading}/>
             }
            else if(params.indexUrl === "cart") {
                 return <ShopCart businessUrl={ShopURL} loading={loading}/>
