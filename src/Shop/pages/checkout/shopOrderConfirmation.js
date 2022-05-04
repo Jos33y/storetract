@@ -46,7 +46,6 @@ const ShopOrderConfirmation = ({businessUrl}) => {
         setLoading(false)
     }
 
-
     // useEffect functions containing add form data to session storage
     useEffect(() => {
         if(isMounted) {
@@ -91,7 +90,6 @@ const ShopOrderConfirmation = ({businessUrl}) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMounted, params.shopName])
-
 
     const continueShopping = () => {
         navigate(`/${params.shopName}`)

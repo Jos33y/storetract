@@ -16,6 +16,7 @@ import ShopCheckout from "./pages/checkout";
 import ShopPayment from "./pages/checkout/shopPayment";
 import ShopOrderConfirmation from "./pages/checkout/shopOrderConfirmation";
 import TrackOrder from "./pages/trackOrder";
+import ShopCategories from "./pages/categories";
 
 const Shop = () => {
     const params = useParams()
@@ -139,6 +140,9 @@ const Shop = () => {
             }
             else if(params.indexUrl === "track-order") {
                 return <TrackOrder businessUrl={ShopURL} loading={loading}/>
+            }
+            else if(params.indexUrl === "category") {
+                return <ShopCategories businessUrl={ShopURL} loading={loading}/>
             }
            else if(params.indexUrl === "cart") {
                 return <ShopCart businessUrl={ShopURL} loading={loading}/>

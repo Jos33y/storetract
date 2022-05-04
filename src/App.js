@@ -134,6 +134,7 @@ const App = () => {
                                 {storeUrl ? (<>
                                     <Route path="/:shopName" element={<Shop />} />
                                     <Route path="/:shopName/products/:categoryUrl/:productUrl" element={<Shop />} />
+                                    <Route path="/:shopName/products/:indexUrl/:categoryUrl" element={<Shop />} />
                                     <Route path="/:shopName/:indexUrl" element={<Shop />} />
                                     <Route path="/:shopName/:indexUrl/:checkoutUrl" element={<Shop />} />
                                     <Route path="/:shopName/account" element={<ShopAuth />} />
