@@ -1,9 +1,19 @@
 import React from "react";
 import {Button ,Form} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import AvatarSeller from "../../assets/images/sellers/avatar1.jpg";
+import {getAuth} from "firebase/auth";
 
 const TopNavbar = () => {
+
+    const auth = getAuth()
+    const navigate = useNavigate()
+
+    const logOut = () => {
+        auth.signOut().then(
+            navigate('/login')
+        )
+    }
     const darkMode = () => {
         console.log("Dark Mode Loading...")
     }
@@ -52,7 +62,7 @@ const TopNavbar = () => {
                             <div className="dropdown-menu dropdown-menu-end">
                                 <Link to="/seller-profile" className="dropdown-item">My Profile</Link>
                                 <Link to="/account-settings" className="dropdown-item">Settings</Link>
-                                <Link to="/" className="dropdown-item text-danger"> Log out</Link>
+                                <Button  onClick={logOut} className="dropdown-item text-danger"> Log out</Button>
                             </div>
                         </li>
                     </ul>

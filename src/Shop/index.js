@@ -2,7 +2,7 @@
 import './css/styles.css'
 import React, {useEffect ,useRef ,useState} from "react";
 import {useParams} from "react-router-dom";
-import {collection, getDocs, query, doc, getDoc, limit} from "firebase/firestore";
+import {collection, getDocs, query, doc, getDoc, limit, orderBy} from "firebase/firestore";
 import {db} from "../firebase.config";
 import Spinner from "../components/Spinner";
 import {toast} from "react-toastify";
@@ -24,6 +24,7 @@ const Shop = () => {
 
     const [shopData ,setShopData] = useState('')
     const [products ,setProducts] = useState(null)
+    const [categories, setCategories] = useState([])
     const [loading ,setLoading] = useState(true)
     const [confirmed, setConfirmed] = useState(false);
     const isMounted = useRef()
@@ -79,6 +80,29 @@ const Shop = () => {
         }
     }
 
+    //Fetch Categories
+    const fetchCategories = async (shopName) => {
+        try
+        {
+            const catRef = collection(db, 'shops', shopName, 'category' )
+            const q = query(catRef, orderBy('timestamp', 'asc'))
+            const querySnap = await getDocs(q)
+            let categories = [];
+            querySnap.forEach((doc) => {
+                //console.log(doc.data())
+                return categories.push({
+                    id: doc.id,
+                    data: doc.data(),
+                })
+            })
+            setCategories(categories)
+        }
+        catch (error) {
+            toast.error("could not fetch categories")
+            console.log({error})
+        }
+    }
+
 
     const fetchDetails = async (storeURL) => {
 
@@ -122,6 +146,7 @@ const Shop = () => {
                 confirmUrl(params.shopName)
                 fetchDetails(params.shopName)
                 fetchProducts(params.shopName)
+                fetchCategories(params.shopName)
             }
 
             setLoading(false)
@@ -189,7 +214,7 @@ const Shop = () => {
                     (
                         <>
                             <div className="body">
-                            <ShopHeader businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain}/>
+                            <ShopHeader businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain} categories={categories}/>
                                <div className="main-section">
 
                                    {pages()}

@@ -30,6 +30,7 @@ import CheckOutInformation from "./Shop/others/checkout";
 import CheckOutShipping from "./Shop/others/checkout/CheckOutShipping";
 import CheckOutPayment from "./Shop/others/checkout/CheckOutPayment";
 import OrderConfirmation from "./Shop/others/checkout/OrderConfirmation";
+import OnBoarding from "./Authentication/onBoarding";
 
 const App = () => {
     const currentURL = window.location.href;
@@ -110,7 +111,9 @@ const App = () => {
                                     <Route path="/dashboard/customers/:customerId" element={<SellersDashboard />} />
                                 </Route>
 
-
+                                <Route path="/onboarding/pricing" element={<PrivateRoute/>}>
+                                    <Route path="/onboarding/pricing" element={<OnBoarding />} />
+                                </Route>
 
                                 <Route path="/admin-profile" element={<PrivateRoute/>}>
                                     <Route path="/admin-profile" element={<AdminProfile />} />
@@ -134,12 +137,12 @@ const App = () => {
                                 {storeUrl ? (<>
                                     <Route path="/:shopName" element={<Shop />} />
                                     <Route path="/:shopName/products/:categoryUrl/:productUrl" element={<Shop />} />
-                                    <Route path="/:shopName/products/:indexUrl/:categoryUrl" element={<Shop />} />
+                                    <Route path="/:shopName/:indexUrl/:categoryUrl" element={<Shop />} />
                                     <Route path="/:shopName/:indexUrl" element={<Shop />} />
                                     <Route path="/:shopName/:indexUrl/:checkoutUrl" element={<Shop />} />
                                     <Route path="/:shopName/account" element={<ShopAuth />} />
-                                    <Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />
-                                    <Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />
+                                    {/*<Route path="/:shopName/:categoryUrl/quick-view" element={<QuickView />} />*/}
+                                    {/*<Route path="/:shopName/:categoryUrl" element={<ShopCategories />} />*/}
                                 </>) : (
                                     <>
 
@@ -149,10 +152,12 @@ const App = () => {
                                         <Route path="/:categoryUrl/quick-view" element={<QuickView />} />
                                         <Route path="/:categoryUrl" element={<ShopCategories />} />
                                         <Route path="/:categoryUrl/:productUrl" element={<ProductDetails />} />
-                                        <Route path="/:shopName/checkout/information" element={<CheckOutInformation />} />
-                                        <Route path="/:shopName/checkout/shipping" element={<CheckOutShipping />} />
-                                        <Route path="/:shopName/checkout/payment" element={<CheckOutPayment />} />
-                                        <Route path="/:shopName/checkout/order-confirmation" element={<OrderConfirmation />} />
+                                        <Route path="/checkout/information" element={<CheckOutInformation />} />
+                                        <Route path="/checkout/shipping" element={<CheckOutShipping />} />
+                                        <Route path="/checkout/payment" element={<CheckOutPayment />} />
+                                        <Route path="/checkout/order-confirmation" element={<OrderConfirmation />} />
+                                        <Route path="/:categoryUrl/quick-view" element={<QuickView />} />
+                                        <Route path="/:categoryUrl" element={<ShopCategories />} />
                                     </>
                                 )}
 

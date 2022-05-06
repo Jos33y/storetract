@@ -59,7 +59,7 @@ const CategorySection = ({shopName}) => {
                         <ul>
                             { categories.map((category) => (
                                 <li key={ category.id }>
-                                    <Link to={ `/${shopName}/${ category.data.categoryUrl }` }
+                                    <Link to={ `/${shopName}/category/${ category.data.categoryUrl }` }
                                           className="Category-link">{ category.data.title }
                                     </Link>
                                 </li>

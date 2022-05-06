@@ -3,24 +3,22 @@ import "../css/shopHeader.css"
 import {Link} from "react-router-dom";
 import {Dropdown, Container} from "react-bootstrap";
 
-const ShopHeader = ({businessName, businessUrl, domain}) => {
+const ShopHeader = ({businessName, businessUrl, domain, categories}) => {
     //
     // let name = businessName;
     // let imgSrc = "";
     const isMounted = useRef()
     const [cart ,setCart] = useState([])
 
+
     useEffect(() => {
         if (isMounted) {
             let localCart = localStorage.getItem("cart");
-
-
             //turn it into js
             localCart = JSON.parse(localCart);
             //load persisted cart into state if it exists
             if (localCart) setCart(localCart)
-            // console.log(localCart)
-            // console.log(cart.length)
+
         }
         return () => {
             isMounted.current = false;
@@ -41,15 +39,16 @@ const ShopHeader = ({businessName, businessUrl, domain}) => {
                         </li>
                         <li>
                             <Dropdown>
-                                <Dropdown.Toggle variant="success" id="dropdown-basic" className="dropDown">
+                                <Dropdown.Toggle variant="transparent"  id="dropdown-basic" className="dropDown">
                                     Categories
                                 </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="#"> Lingerie</Dropdown.Item>
-                                    <Dropdown.Item href="#"> HandBag</Dropdown.Item>
-                                    <Dropdown.Item href="#"> Shoes</Dropdown.Item>
-                                    <Dropdown.Item href="#"> Chain</Dropdown.Item>
-                                </Dropdown.Menu>
+
+                                <Dropdown.Menu >
+                                    {categories.map((category) => (
+                                    <Dropdown.Item href={ `/${businessUrl}/category/${ category.data.categoryUrl }` } key={ category.id }> {category.data.title} </Dropdown.Item>
+                                    ))}
+                                    </Dropdown.Menu>
+
                             </Dropdown>
                         </li>
                         <li className="button-cart"> <Link to={domain ? ('/cart') : (`/${businessUrl}/cart`) }

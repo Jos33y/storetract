@@ -14,11 +14,15 @@ const Register = () => {
     // const[disable, setDisable]= useState(false)
     const[formData, setFormData] = useState({
         name: '',
-        businessName: '',
+        phoneNumber: '',
         email: '',
         password: '',
+        storeActivated: '',
+        businessName: '',
+        storeUrl: '',
+        storePlan: '',
     })
-    const {email, password, name, businessName} = formData;
+    const {email, password, name, phoneNumber} = formData;
     const navigate = useNavigate()
 
 
@@ -39,17 +43,17 @@ const Register = () => {
             const formDataCopy = {...formData}
             delete formDataCopy.password
             formDataCopy.timestamp = serverTimestamp()
+            formDataCopy.storeActivated = false;
 
             await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
-            navigate('/dashboard/home')
+            navigate('/onboarding/pricing')
         }
         catch (error) {
             toast.error("couldn't sign in user")
             console.log({error})
 
         }
-
     }
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -116,14 +120,14 @@ const Register = () => {
                                     </div>
                                     <div className="form-group">
                                         <div className="Input-box">
-                                            <label htmlFor="email"><i className="fas fa-briefcase"></i></label>
+                                            <label htmlFor="phoneNumber"><i className="fas fa-briefcase"></i></label>
                                             <input type="text"
-                                                   id="businessName"
-                                                   value={businessName}
+                                                   id="phoneNumber"
+                                                   value={phoneNumber}
                                                    onChange={onChange}
                                                    required={true}
-                                                   maxLength={80}
-                                                   placeholder="Your Business Name"/>
+                                                   maxLength={20}
+                                                   placeholder="Your Phone Number"/>
                                         </div>
                                     </div>
                                     <div className="form-group">

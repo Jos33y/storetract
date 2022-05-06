@@ -1,7 +1,7 @@
 import React from "react";
-import "./dashStyles.css";
-import "./bootstrap.css";
-import "./responsive.css";
+import "./css/dashStyles.css";
+import "./css/bootstrap.css";
+import "./css/responsive.css";
 import {useParams} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import TopNavbar from "./components/TopNavbar";

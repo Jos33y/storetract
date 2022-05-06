@@ -74,7 +74,12 @@
     background: transparent;
     font-size: 20px;
     font-weight: 500;
+    color: #212529;
     border: 0px solid transparent;
+}
+.Header-two ul li .dropDown:focus{
+    outline: none;
+    box-shadow: none;
 }
 
 .Header-two ul .button-cart{
