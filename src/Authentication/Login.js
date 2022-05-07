@@ -9,6 +9,8 @@ import {getAuth ,signInWithEmailAndPassword } from "firebase/auth";
 // import {db} from "../firebase.config";
 // import GoogleLogo from "../assets/images/google-logo-9808.png"
 import LoginOffice from  "../assets/images/4957136.jpg"
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../firebase.config";
 
 const Login = () => {
 
@@ -30,9 +32,22 @@ const Login = () => {
                password
            )
            if(userCredential.user) {
-               navigate('/dashboard/home')
+
+               // check if user exist
+               const docRef = doc(db, 'users', `${userCredential.user.uid}`)
+               const docSnap = await getDoc(docRef)
+               //if user doesnt exist
+
+               if(docSnap.exists()) {
+                   if(!docSnap.data().shopActivated) {
+                       navigate('/onboarding/pricing')
+                   }
+                   else {
+                       navigate('/dashboard/home')
+                   }
+               }
            }
-       }
+        }
        catch (error) {
             console.log({error})
            toast.error("Can't login user")

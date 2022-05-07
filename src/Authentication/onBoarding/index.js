@@ -3,14 +3,12 @@ import {doc, getDoc} from "firebase/firestore";
 import {db} from "../../firebase.config";
 import React, {useEffect, useRef, useState} from "react";
 import {getAuth} from "firebase/auth";
-import {useNavigate} from "react-router-dom";
 import Spinner from "../../components/Spinner";
 
 const OnBoarding = () => {
 
     const auth = getAuth()
     const isMounted = useRef()
-    const navigate = useNavigate()
 
     const [loading, setLoading] = useState(true)
     const [shopData, setShopData] = useState(null)
@@ -24,12 +22,8 @@ const OnBoarding = () => {
 
         if(profileSnap.exists()){
             //  console.log(profileSnap.data())
-            if (profileSnap.data().shopActivated){
+            if (profileSnap.data()){
                 setShopData(profileSnap.data())
-            }
-            else
-            {
-                navigate('/login')
             }
         }
 

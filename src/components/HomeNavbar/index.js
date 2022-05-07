@@ -7,7 +7,6 @@ const HomeNavbar = () => {
     const [hamburgerClicked, setHamburgerClicked] = useState(false)
 
     const changeBackground = () => {
-        console.log(window.scrollY)
         if (window.scrollY >= 80) {
             setHamburgerClicked(true)
         } else {
