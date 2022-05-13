@@ -159,3 +159,111 @@
     font-size: 12px;
     word-break: normal;
 }
+
+@media only screen and (max-width: 600px) {
+
+    .on-boarding-header{
+        background: transparent;
+        padding: 10px 10px 5px;
+    }
+
+    .on-boarding-header .logo-fluid{
+        width: 80%;
+    }
+
+    /*store pricing styles*/
+    .store-pricing{
+        margin-top: 10%;
+    }
+    .store-pricing .title-section{
+        width: 100%;
+        margin: auto;
+    }
+    .store-pricing .title{
+        font-size: 22px;
+        font-weight: 600;
+        text-align: center;
+        line-height: 35px;
+        color: #292b2e;
+    }
+
+    .store-pricing .title-section .sub-title{
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 10%;
+    }
+    .store-pricing .card{
+        border: 0px solid #3E4095;
+        padding: 0;
+        border-radius: 20px;
+        margin-bottom: 30px;
+    }
+
+    .store-pricing .card .card-header{
+        text-align: center;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+    }
+    .store-pricing .card .card-header h5{
+        font-size: 20px;
+        color: #ffffff;
+        padding: 10px 10px;
+        text-transform: uppercase;
+    }
+    .store-pricing .price-section hr{
+        margin: 20px 0 30px;
+    }
+    .store-pricing .price-section .price-text{
+        text-align: center;
+    }
+
+    .store-pricing .price-section .price-text h3.price{
+        color: #3f4451;
+        font-size: 50px;
+        font-weight: 500;
+    }
+    .store-pricing .price-section .price-text h3.price .month{
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .store-pricing .price-section .price-features{
+        margin-top: 20px;
+    }
+    .store-pricing .price-section .price-features ul{
+        list-style: none;
+        padding: 0;
+    }
+    .store-pricing .price-section .price-features ul li{
+        margin: 10px 0px;
+        padding: 10px;
+        border-radius: 5px;
+        color:#505975;
+        font-size: 14px;
+        background: #F2F2F2;
+        font-weight: 500;
+    }
+    .store-pricing .price-section .price-features .fas{
+        font-weight: 700;
+        padding-right: 10px;
+    }
+    .store-pricing .price-section .price-features .fas.fa-check{
+        color: #348D0D;
+    }
+    .store-pricing .price-section .price-features .fas.fa-times{
+        color: #FF343B;
+    }
+    .store-pricing .plan-button{
+        text-align: center;
+    }
+    .store-pricing .plan-button .btn{
+        width: 80%;
+        color: #ffffff;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+
+}
