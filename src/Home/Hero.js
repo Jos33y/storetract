@@ -62,8 +62,7 @@ const Hero = () => {
                             </RubberBand>
                             <Shake>
                                 <hr className="line"/>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore </p>
+                                <p> Bring your retail store online and keep serving customers without missing an order.</p>
                                 <Link to="/register" className="btn btn-md btn-primary"> Get started for free</Link>
                             </Shake>
 
