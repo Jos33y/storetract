@@ -53,6 +53,15 @@ body{
     float: right;
     width: 95%;
 }
+.Form .form-group .Input-box select{
+    border: 0px solid transparent;
+    border-radius: 0px;
+    font-size: 14px;
+    background: #ffffff;
+    padding: 10px 15px 0;
+    float: right;
+    width: 95%;
+}
 
 .Form .form-group .Input-box input:focus{
     border: 0px solid transparent;

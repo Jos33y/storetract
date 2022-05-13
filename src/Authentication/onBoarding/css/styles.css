@@ -160,6 +160,35 @@
     word-break: normal;
 }
 
+
+.store-activated{
+    text-align: center;
+    margin-top: 5%;
+}
+.store-activated .far{
+    font-size: 120px;
+    color: #1abc2e;
+    margin-bottom: 20px;
+}
+.store-activated h5{
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 40px;
+    color: #3E4095;
+}
+
+.store-activated .btn{
+    width: 35%;
+    color: #ffffff;
+    background: #3E4095;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 13px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
 @media only screen and (max-width: 600px) {
 
     .on-boarding-header{
@@ -210,60 +239,46 @@
         padding: 10px 10px;
         text-transform: uppercase;
     }
-    .store-pricing .price-section hr{
-        margin: 20px 0 30px;
-    }
-    .store-pricing .price-section .price-text{
-        text-align: center;
-    }
 
     .store-pricing .price-section .price-text h3.price{
-        color: #3f4451;
-        font-size: 50px;
-        font-weight: 500;
+        font-size: 45px;
     }
     .store-pricing .price-section .price-text h3.price .month{
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 600;
     }
-    .store-pricing .price-section .price-features{
-        margin-top: 20px;
-    }
-    .store-pricing .price-section .price-features ul{
-        list-style: none;
-        padding: 0;
-    }
+
     .store-pricing .price-section .price-features ul li{
-        margin: 10px 0px;
-        padding: 10px;
-        border-radius: 5px;
-        color:#505975;
-        font-size: 14px;
-        background: #F2F2F2;
-        font-weight: 500;
-    }
-    .store-pricing .price-section .price-features .fas{
-        font-weight: 700;
-        padding-right: 10px;
-    }
-    .store-pricing .price-section .price-features .fas.fa-check{
-        color: #348D0D;
-    }
-    .store-pricing .price-section .price-features .fas.fa-times{
-        color: #FF343B;
-    }
-    .store-pricing .plan-button{
-        text-align: center;
+        font-size: 13px;
     }
     .store-pricing .plan-button .btn{
-        width: 80%;
-        color: #ffffff;
-        border: 1px solid transparent;
-        border-radius: 10px;
+        font-size: 14px;
+
+    }
+
+
+    .store-activated{
+        text-align: center;
+        margin-top: 20%;
+    }
+    .store-activated .far{
+        font-size: 80px;
+        color: #1abc2e;
+        margin-bottom: 20px;
+    }
+    .store-activated h5{
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: capitalize;
+        margin-bottom: 40px;
+        color: #3E4095;
+    }
+
+    .store-activated .btn{
+        width: 65%;
         padding: 10px 20px;
-        font-size: 15px;
-        font-weight: 500;
-        letter-spacing: 1px;
+        font-size: 14px;
+        margin-bottom: 20%;
     }
 
 }

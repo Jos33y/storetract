@@ -41,7 +41,7 @@ const Login = () => {
                //if user doesnt exist
 
                if(docSnap.exists()) {
-                   if(!docSnap.data().shopActivated) {
+                   if(!docSnap.data().storeActivated) {
                        navigate('/onboarding/pricing')
                    }
                    else {

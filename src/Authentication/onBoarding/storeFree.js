@@ -57,6 +57,7 @@ const StoreFreeActivation = ({fullName, userId}) => {
                     .then(() => {
                         const userData = {
                             storeActivated: true,
+                            storePlan: 'BASIC',
                             businessName: formDataCopy.businessName,
                             storeUrl: (`${Url}`),
                         }
@@ -185,16 +186,28 @@ const StoreFreeActivation = ({fullName, userId}) => {
                                     <div className="form-group">
                                         <div className="Input-box">
                                             <label htmlFor="storeCategory"><i className="fas fa-layer-group"></i></label>
-                                            <input type="text"
-                                                   id="storeCategory"
-                                                   onChange={onChange}
-                                                   required={true}
-                                                   maxLength={20}
-                                                   value={storeCategory}
-                                                   placeholder="Your Business Category"/>
+                                            <select name="country"
+                                                    className="form-control"
+                                                    id="storeCategory"
+                                                    required={ true }
+                                                    onChange={ onChange }
+                                                    value={storeCategory}
+                                            >
+                                                <option selected={true}>--Select Category--</option>
+                                                <option value='accessories'>Accessories</option>
+                                                <option value='book-store'>Book Store</option>
+                                                <option value='clothing'>Clothing</option>
+                                                <option value='fashion-accessories'>Fashion Accessories</option>
+                                                <option value='food-and-beverages'>Food & Beverages</option>
+                                                <option value='health-and-beauty'>Health & Beauty </option>
+                                                <option value='home-and-garden'>Home & Garden</option>
+                                                <option value='jewelry-and-watches'>Jewelry & Watches</option>
+                                                <option value='shoes'>Shoes</option>
+                                                <option value='toy-and-hobbies'>Toys & Hobbies</option>
+                                                <option value='others'>Others Categories</option>
+                                            </select>
                                         </div>
                                     </div>
-
                                     <div className="form-group button">
                                         <Button disabled={disabled} className="btn btn-md btn-primary" type="submit">Activate</Button>
                                     </div>
