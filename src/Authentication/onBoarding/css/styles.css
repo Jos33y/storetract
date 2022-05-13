@@ -150,3 +150,12 @@
     letter-spacing: 1px;
 }
 
+
+.Auth-box{
+    margin-bottom: 5%;
+}
+.Auth-box input#storeUrl{
+    color: #3E4095;
+    font-size: 12px;
+    word-break: normal;
+}

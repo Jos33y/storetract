@@ -10,6 +10,9 @@ const StoreFreeActivation = ({fullName, userId}) => {
 
     const navigate = useNavigate()
 
+    const [disabled, setDisabled] = useState(false)
+    const [shopUrl, setShopUrl] = useState('')
+
     const [formData, setFormData] = useState({
         businessName: '',
         businessPhone: '',
@@ -25,41 +28,42 @@ const StoreFreeActivation = ({fullName, userId}) => {
         activationDate: '',
     })
 
-    const {businessName, businessPhone, storeCategory, storeUrl} = formData
+    const {businessName, businessPhone, storeCategory} = formData
 
     const onSubmit = async (e) => {
+        setDisabled(true)
         e.preventDefault()
         try {
-            let shopUrl = `${formData.businessName
+            let Url = `${formData.businessName
                 .replace(/,?\s+/g, '-')
                 .toLowerCase()}`
 
             const auth = userId;
             const formDataCopy = {...formData}
             formDataCopy.businessPhone = Number(formData.businessPhone);
-            formDataCopy.storeUrl = shopUrl;
+            formDataCopy.storeUrl = Url;
             formDataCopy.storePlan = 'BASIC';
             formDataCopy.storeOwnerRef = auth;
             formDataCopy.activationDate = serverTimestamp();
 
             // get store url
-            const getStoreRef = doc(db, 'shops', shopUrl)
+            const getStoreRef = doc(db, 'shops', Url)
             const getStoreSnap =  await getDoc(getStoreRef)
             if(getStoreSnap.exists()) {
                 toast.error("store url already existed")
             }
             else {
-                await setDoc (doc(db, 'shops', shopUrl), formDataCopy)
+                await setDoc (doc(db, 'shops', Url), formDataCopy)
                     .then(() => {
                         const userData = {
                             storeActivated: true,
                             businessName: formDataCopy.businessName,
-                            storeUrl: formDataCopy.storeUrl,
+                            storeUrl: (`${Url}`),
                         }
                         const userRef = doc(db, 'users', auth)
                         updateDoc(userRef, userData).then(
                             () => {
-                                newWallet(shopUrl).then()
+                                newWallet(Url).then()
                             }
                         )
                     })
@@ -72,10 +76,21 @@ const StoreFreeActivation = ({fullName, userId}) => {
             console.log({error})
             toast.error("unable to activate shop at the moment")
         }
-        console.log("Activation in progress")
+        setDisabled(false)
     }
 
     const onChange = (e) => {
+
+        if (e.target.id === 'businessName') {
+
+            let Url = `${e.target.value
+                .replace(/,?\s+/g, '-')
+                .toLowerCase()}`
+            // console.log("shop url: " + Url)
+            setShopUrl(Url);
+        }
+
+
         setFormData((prevState) => ({
             ...prevState,
             [e.target.id]: e.target.value,
@@ -136,7 +151,7 @@ const StoreFreeActivation = ({fullName, userId}) => {
                                                    onChange={onChange}
                                                    required={true}
                                                    value={businessName}
-                                                   maxLength={100}
+                                                   maxLength={50}
                                                    placeholder="Your Business Name"/>
                                         </div>
                                     </div>
@@ -144,12 +159,12 @@ const StoreFreeActivation = ({fullName, userId}) => {
                                     <div className="form-group">
                                         <div className="Input-box">
                                             <label htmlFor="storeUrl"> <i className="fas fa-external-link-alt"></i> </label>
-                                            <input type="url"
+                                            <input type="text"
                                                    id="storeUrl"
                                                    onChange={onChange}
                                                    required={true}
-                                                   maxLength={100}
-                                                   value={storeUrl}
+                                                   maxLength={50}
+                                                   value={ "/"  + shopUrl}
                                                    placeholder="Your Store URL"/>
                                         </div>
                                     </div>
@@ -169,9 +184,9 @@ const StoreFreeActivation = ({fullName, userId}) => {
 
                                     <div className="form-group">
                                         <div className="Input-box">
-                                            <label htmlFor="businessCategory"><i className="fas fa-layer-group"></i></label>
+                                            <label htmlFor="storeCategory"><i className="fas fa-layer-group"></i></label>
                                             <input type="text"
-                                                   id="businessCategory"
+                                                   id="storeCategory"
                                                    onChange={onChange}
                                                    required={true}
                                                    maxLength={20}
@@ -181,7 +196,7 @@ const StoreFreeActivation = ({fullName, userId}) => {
                                     </div>
 
                                     <div className="form-group button">
-                                        <Button disabled={false} className="btn btn-md btn-primary" type="submit">Activate</Button>
+                                        <Button disabled={disabled} className="btn btn-md btn-primary" type="submit">Activate</Button>
                                     </div>
 
                                 </Form>
