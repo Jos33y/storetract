@@ -14,15 +14,17 @@ import {db} from "../firebase.config";
 
 const Login = () => {
 
-    // const[disable, setDisable]= useState(false)
+    const navigate = useNavigate()
+    const[disable, setDisable]= useState(false)
     const [formData, setFormData] = useState({
         email:'',
         password: '',
     })
 
     const {email, password} = formData
-    const navigate = useNavigate()
+
     const onSubmit = async (e) => {
+        setDisable(true)
         e.preventDefault()
        try{
             const auth = getAuth()
@@ -53,6 +55,7 @@ const Login = () => {
            toast.error("Can't login user")
 
        }
+       setDisable(false)
     }
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -136,7 +139,7 @@ const Login = () => {
                                     </div>
 
                                     <div className="form-group button">
-                                        <Button className="btn btn-md btn-primary" type="submit">Login</Button>
+                                        <Button disabled={disable} className="btn btn-md btn-primary" type="submit">Login</Button>
                                     </div>
 
                                     <hr/>

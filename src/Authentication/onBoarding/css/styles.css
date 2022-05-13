@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
+
+.on-boarding-main{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    background: #e8f3fc;
+    color: #212529;
+    font-family: 'Poppins', sans-serif;
+}
+.on-boarding-header{
+    background: transparent;
+    padding: 20px 30px 10px;
+
+    box-shadow: 0px 1px 3px 1px rgba(184,181,181,0.75);
+    -webkit-box-shadow: 0px 1px 3px 1px rgba(184,181,181,0.75);
+    -moz-box-shadow: 0px 1px 3px 1px rgba(184,181,181,0.75);
+}
+.on-boarding-header ul{
+    list-style: none;
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.on-boarding-header .logo-fluid{
+    width: 100%;
+}
+.on-boarding-header h5{
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #3E4095;
+}
+
+/*store pricing styles*/
+.store-pricing{
+    margin-top: 5%;
+}
+.store-pricing .title-section{
+    width: 70%;
+    margin: auto;
+}
+.store-pricing .title{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    color: #292b2e;
+}
+
+.store-pricing .title-section .sub-title{
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    color: #454647;
+}
+.store-pricing .card{
+    border: 0px solid #3E4095;
+    padding: 0;
+    border-radius: 20px;
+
+    box-shadow: 0px 1px 10px 2px rgba(82,82,82,0.75);
+    -webkit-box-shadow: 0px 1px 10px 2px rgba(82,82,82,0.75);
+    -moz-box-shadow: 0px 1px 10px 2px rgba(82,82,82,0.75);
+}
+.store-pricing .card .basic{
+    background: #01885F;
+}
+.store-pricing .card .standard{
+    background: #3E4095;
+}
+.store-pricing .card .premium{
+    background: #022B39;
+}
+.store-pricing .card:hover{
+    border: 1px solid #7c7d99;
+
+    box-shadow: 0px 1px 3px 4px rgba(184,181,181,0.75);
+    -webkit-box-shadow: 0px 1px 3px 4px rgba(184,181,181,0.75);
+    -moz-box-shadow: 0px 1px 3px 4px rgba(184,181,181,0.75);
+}
+
+.store-pricing .card .card-header{
+    text-align: center;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+.store-pricing .card .card-header h5{
+    font-size: 25px;
+    color: #ffffff;
+    padding: 15px 10px;
+    text-transform: uppercase;
+}
+.store-pricing .price-section hr{
+    margin: 20px 0 30px;
+}
+.store-pricing .price-section .price-text{
+    text-align: center;
+}
+
+.store-pricing .price-section .price-text h3.price{
+    color: #3f4451;
+    font-size: 50px;
+    font-weight: 500;
+}
+.store-pricing .price-section .price-text h3.price .month{
+    font-size: 14px;
+    font-weight: 600;
+}
+.store-pricing .price-section .price-features{
+    margin-top: 20px;
+}
+.store-pricing .price-section .price-features ul{
+    list-style: none;
+    padding: 0;
+}
+.store-pricing .price-section .price-features ul li{
+    margin: 10px 0px;
+    padding: 10px;
+    border-radius: 5px;
+    color:#505975;
+    font-size: 14px;
+    background: #F2F2F2;
+    font-weight: 500;
+}
+.store-pricing .price-section .price-features .fas{
+    font-weight: 700;
+    padding-right: 10px;
+}
+.store-pricing .price-section .price-features .fas.fa-check{
+    color: #348D0D;
+}
+.store-pricing .price-section .price-features .fas.fa-times{
+    color: #FF343B;
+}
+.store-pricing .plan-button{
+    text-align: center;
+}
+.store-pricing .plan-button .btn{
+    width: 80%;
+    color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+

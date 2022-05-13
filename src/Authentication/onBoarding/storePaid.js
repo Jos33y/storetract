@@ -1,13 +1,13 @@
 import {Container} from "react-bootstrap";
 
-const BuyDomain = () => {
+const StorePaidActivation = () => {
     return(
         <>
             <Container>
-                <h5>Domain Registration</h5>
+                <h5>Paid Store Registration</h5>
             </Container>
         </>
     )
 }
 
-export default BuyDomain
+export default StorePaidActivation

@@ -31,6 +31,7 @@ import CheckOutShipping from "./Shop/others/checkout/CheckOutShipping";
 import CheckOutPayment from "./Shop/others/checkout/CheckOutPayment";
 import OrderConfirmation from "./Shop/others/checkout/OrderConfirmation";
 import OnBoarding from "./Authentication/onBoarding";
+import ErrorPage from "./components/ErrorPage";
 
 const App = () => {
     const currentURL = window.location.href;
@@ -95,6 +96,7 @@ const App = () => {
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/register" element={<Register />} />
                                 <Route path="/forgot-password" element={<ForgotPassword />} />
+                                <Route path="/404" element={<ErrorPage />} />
                                 <Route path="/dashboard/:dashUrl" element={<PrivateRoute/>}>
                                     <Route path="/dashboard/:dashUrl" element={<SellersDashboard />} />
                                 </Route>
@@ -111,8 +113,8 @@ const App = () => {
                                     <Route path="/dashboard/customers/:customerId" element={<SellersDashboard />} />
                                 </Route>
 
-                                <Route path="/onboarding/pricing" element={<PrivateRoute/>}>
-                                    <Route path="/onboarding/pricing" element={<OnBoarding />} />
+                                <Route path="/onboarding/:onBoardingUrl" element={<PrivateRoute/>}>
+                                    <Route path="/onboarding/:onBoardingUrl" element={<OnBoarding />} />
                                 </Route>
 
                                 <Route path="/admin-profile" element={<PrivateRoute/>}>

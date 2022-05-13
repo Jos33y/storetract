@@ -120,7 +120,7 @@ const Register = () => {
                                     </div>
                                     <div className="form-group">
                                         <div className="Input-box">
-                                            <label htmlFor="phoneNumber"><i className="fas fa-briefcase"></i></label>
+                                            <label htmlFor="phoneNumber"><i className="fas fa-mobile-alt"></i></label>
                                             <input type="text"
                                                    id="phoneNumber"
                                                    value={phoneNumber}

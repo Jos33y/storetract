@@ -1,18 +1,31 @@
+import React, {useEffect, useRef, useState} from "react";
+import "./css/styles.css";
 import {Container} from "react-bootstrap";
 import {doc, getDoc} from "firebase/firestore";
 import {db} from "../../firebase.config";
-import React, {useEffect, useRef, useState} from "react";
 import {getAuth} from "firebase/auth";
 import Spinner from "../../components/Spinner";
+import Header from "./components/Header";
+import {useNavigate, useParams} from "react-router-dom";
+import StorePricing from "./storePricing";
+import StoreFree from "./storeFree";
+import StorePaid from "./storePaid";
+import StorePayment from "./storePayment";
+import StoreActivated from "./storeActivated";
+import BuyDomain from "./buyDomain";
+import FooterSection from "../../Home/FooterSection";
+
 
 const OnBoarding = () => {
 
     const auth = getAuth()
     const isMounted = useRef()
+    const params = useParams()
+    const navigate = useNavigate()
+    console.log(params.onBoardingUrl)
 
     const [loading, setLoading] = useState(true)
     const [shopData, setShopData] = useState(null)
-
 
     // get user function
     const getUser = async () =>{
@@ -29,6 +42,31 @@ const OnBoarding = () => {
 
         setLoading(false)
     }
+
+    //get pages
+    const pages = () => {
+        if(params.onBoardingUrl === "pricing") {
+            return <StorePricing fullName={shopData.name} />
+        }
+        else if(params.onBoardingUrl === "activate-basic-store") {
+            return <StoreFree userId={auth.currentUser.uid} fullName={shopData.name} />
+        }
+        else if(params.onBoardingUrl === "activate-premium-store") {
+            return <StorePaid userId={auth.currentUser.uid} />
+        }
+        else if(params.onBoardingUrl === "make-payment") {
+            return <StorePayment userId={auth.currentUser.uid} />
+        }
+        else if(params.onBoardingUrl === "store-activated") {
+            return <StoreActivated userId={auth.currentUser.uid} />
+        }
+        else if(params.onBoardingUrl === "buy-domain") {
+            return <BuyDomain userId={auth.currentUser.uid} />
+        }
+        else {
+            navigate("/404")
+        }
+    }
     useEffect(() => {
         if(isMounted) {
             getUser().then()
@@ -43,11 +81,13 @@ const OnBoarding = () => {
         <>
             {loading ?
                 (<Spinner />) : (
-            <Container>
-                <h5 className="text-center">
-                   Welcome {`${shopData.name}`} OnBoarding Section loading now.
-                </h5>
-            </Container>
+                    <div className="on-boarding-main">
+                        <Header />
+                        <Container>
+                            {pages()}
+                        </Container>
+                        <FooterSection />
+                    </div>
                 ) }
         </>
     )
