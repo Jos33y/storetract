@@ -91,85 +91,88 @@ const Register = () => {
     return(
         <>
             <HomeNavbar />
-            <Container >
-                <Row>
-                    <Col md={1}></Col>
-                    <Col md={10} className="Auth-box">
-                        <Row>
-                            <Col md={6}>
-                                <div className="Form-image">
-                                    <img src={RegisterOffice} alt="" className="img-register"/>
-                                    <p> <Link to="/login" className="register">I have a store</Link> </p>
+            <div className="Body">
+                <Container >
+                    <Row>
+                        <Col md={1}></Col>
+                        <Col md={10} className="Auth-box">
+                            <Row>
+                                <Col md={6}>
+                                    <div className="Form-image">
+                                        <img src={RegisterOffice} alt="" className="img-register"/>
+                                        <p> <Link to="/login" className="register">I have a store</Link> </p>
 
-                                </div>
-                            </Col>
-                            <Col md={6}>
-                                <Form className="Form" onSubmit={onSubmit} autocomplete="off">
-                                    <h5>Sign up</h5>
-                                    <div className="form-group">
-                                        <div className="Input-box">
-                                            <label htmlFor="full-name"><i className="fas fa-user"></i></label>
-                                            <input type="text"
-                                                   id="name"
-                                                   value={name}
-                                                   onChange={onChange}
-                                                   required={true}
-                                                   maxLength={100}
-                                                   placeholder="Your Full Name"/>
+                                    </div>
+                                </Col>
+                                <Col md={6}>
+                                    <Form className="Form" onSubmit={onSubmit} autocomplete="off">
+                                        <h5>Sign up</h5>
+                                        <div className="form-group">
+                                            <div className="Input-box">
+                                                <label htmlFor="full-name"><i className="fas fa-user"></i></label>
+                                                <input type="text"
+                                                       id="name"
+                                                       value={name}
+                                                       onChange={onChange}
+                                                       required={true}
+                                                       maxLength={100}
+                                                       placeholder="Your Full Name"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <div className="Input-box">
-                                            <label htmlFor="phoneNumber"><i className="fas fa-mobile-alt"></i></label>
-                                            <input type="text"
-                                                   id="phoneNumber"
-                                                   value={phoneNumber}
-                                                   onChange={onChange}
-                                                   required={true}
-                                                   maxLength={20}
-                                                   placeholder="Your Phone Number"/>
+                                        <div className="form-group">
+                                            <div className="Input-box">
+                                                <label htmlFor="phoneNumber"><i className="fas fa-mobile-alt"></i></label>
+                                                <input type="text"
+                                                       id="phoneNumber"
+                                                       value={phoneNumber}
+                                                       onChange={onChange}
+                                                       required={true}
+                                                       maxLength={20}
+                                                       placeholder="Your Phone Number"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <div className="Input-box">
-                                            <label htmlFor="email"><i className="fas fa-envelope"></i></label>
-                                            <input type="email"
-                                                   id="email"
-                                                   value={email}
-                                                   onChange={onChange}
-                                                   required={true}
-                                                   placeholder="Your Email "/>
+                                        <div className="form-group">
+                                            <div className="Input-box">
+                                                <label htmlFor="email"><i className="fas fa-envelope"></i></label>
+                                                <input type="email"
+                                                       id="email"
+                                                       value={email}
+                                                       onChange={onChange}
+                                                       required={true}
+                                                       placeholder="Your Email "/>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="form-group" >
-                                        <div className="Input-box">
-                                            <label htmlFor="email"><i className="fas fa-lock"></i></label>
-                                            <input type="password"
-                                                   id="password"
-                                                   value={password}
-                                                   onChange={onChange}
-                                                   required={true}
-                                                   placeholder="Password"/>
+                                        <div className="form-group" >
+                                            <div className="Input-box">
+                                                <label htmlFor="email"><i className="fas fa-lock"></i></label>
+                                                <input type="password"
+                                                       id="password"
+                                                       value={password}
+                                                       onChange={onChange}
+                                                       required={true}
+                                                       placeholder="Password"/>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="form-group button">
-                                        <Button className="btn btn-md btn-primary" type="submit">Register</Button>
-                                    </div>
+                                        <div className="form-group button">
+                                            <Button className="btn btn-md btn-primary" type="submit">Register</Button>
+                                        </div>
 
-                                    {/*<hr/>*/}
-                                    {/*<p className="Social-sign-in">Social sign up</p>*/}
-                                    {/*<img src={GoogleLogo} alt="" className="Social-sign-in-fluid" disabled={disable} onClick={onGoogleClick}/>*/}
-                                    {/*<hr/>*/}
-                                </Form>
-                            </Col>
+                                        {/*<hr/>*/}
+                                        {/*<p className="Social-sign-in">Social sign up</p>*/}
+                                        {/*<img src={GoogleLogo} alt="" className="Social-sign-in-fluid" disabled={disable} onClick={onGoogleClick}/>*/}
+                                        {/*<hr/>*/}
+                                    </Form>
+                                </Col>
 
-                        </Row>
-                    </Col>
-                    <Col md={1}></Col>
-                </Row>
-            </Container>
+                            </Row>
+                        </Col>
+                        <Col md={1}></Col>
+                    </Row>
+                </Container>
+            </div>
+
         </>
     )
 }
