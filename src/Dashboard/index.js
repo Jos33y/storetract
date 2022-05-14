@@ -5,7 +5,7 @@ import "./css/responsive.css";
 import {useNavigate, useParams} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import TopNavbar from "./components/TopNavbar";
-import DashboardPage from "./pages/DashboardPage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 import ErrorPage from "./pages/ErrorPage";
 import AddProductPage from "./pages/AddProductPage";
 import TransactionPage from "./pages/transactionPage";
