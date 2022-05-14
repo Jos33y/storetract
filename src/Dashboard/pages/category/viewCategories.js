@@ -55,16 +55,12 @@ const ViewCategories = () => {
 
                 if(profileSnap.exists()){
                     //  console.log(profileSnap.data())
-                    if (profileSnap.data().shopActivated){
+                        fetchCategories(profileSnap.data().storeUrl)
+                }
 
-                        fetchCategories(profileSnap.data().shopUrl)
-
-                    }
-                    else
-                    {
-                        navigate('/activate-shop')
-                    }
-
+                else
+                {
+                    navigate('/login')
                 }
             }
             getUser()

@@ -56,20 +56,15 @@ const ProductListPage = () => {
 
                 if(profileSnap.exists()){
                     //  console.log(profileSnap.data())
-                    if (profileSnap.data().shopActivated){
-                        fetchProducts(profileSnap.data().shopUrl)
-
-                    }
-                    else
-                    {
-                        navigate('/activate-shop')
-                    }
-
+                        await fetchProducts(profileSnap.data().storeUrl)
                 }
-
+                else
+                {
+                    navigate('/activate-shop')
+                }
             }
 
-            getUser()
+            getUser().then()
 
         }
         return () => {
@@ -101,7 +96,7 @@ const ProductListPage = () => {
                                 <select className="form-select">
                                     <option value="status">All category</option>
                                     <option value="Active">Electronics</option>
-                                    <option value="Disabled">Clothings</option>
+                                    <option value="Disabled">Clothing's</option>
                                     <option value="Show all">Others</option>
                                 </select>
                             </Col>

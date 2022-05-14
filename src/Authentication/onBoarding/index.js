@@ -37,8 +37,6 @@ const OnBoarding = () => {
             //  console.log(profileSnap.data())
             if (profileSnap.data()){
                 setShopData(profileSnap.data())
-
-
             }
         }
 

@@ -11,8 +11,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-
-
+import Statistics from "./dashboard/statistics";
 
 ChartJS.register(
     CategoryScale,
@@ -47,10 +46,7 @@ export const data = {
         },
     ],
 };
-const DashboardPage = () => {
-
-
-
+const DashboardPage = ({storeData}) => {
 
     return (
       <>
@@ -58,8 +54,8 @@ const DashboardPage = () => {
              <div className="content-header">
                  <h2 className="content-title"> Dashboard </h2>
                  <div>
-                     <Link to="/johnson-enterprises" className="btn btn-md btn-primary"><i
-                         className="fas fa-external-link-alt"></i> View Store </Link>
+                     <a target="_blank"  rel="noopener noreferrer" href={`/${storeData.storeUrl}`} className="btn btn-md btn-primary"><i
+                         className="fas fa-external-link-alt"></i> View Store </a>
                  </div>
              </div>
              {/*dashboard cards*/}
@@ -155,6 +151,8 @@ const DashboardPage = () => {
                      </Card>
                  </Col>
              </Row>
+
+             <Statistics />
 
              {/*latest orders section*/}
              <Card className="card mb-4">

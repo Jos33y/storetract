@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "./css/dashStyles.css";
 import "./css/bootstrap.css";
 import "./css/responsive.css";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import TopNavbar from "./components/TopNavbar";
 import DashboardPage from "./pages/DashboardPage";
@@ -21,53 +21,93 @@ import StoretractCreditPage from "./pages/storetractCreditPage";
 import SubscriptionPage from "./pages/subscriptionPage";
 import HelpDeskPage from "./pages/helpDeskPage";
 import SettingsPage from "./pages/settingsPage";
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../firebase.config";
+import {getAuth} from "firebase/auth";
+import Spinner from "../components/Spinner";
 
 
 const SellersDashboard = () => {
 
+    const auth = getAuth()
+    const isMounted = useRef()
     const params = useParams()
+    const navigate = useNavigate()
+
+    const [loading, setLoading] = useState(true)
+    const [profileData, setProfileData] = useState(null)
+    const [storeData, setStoreData] = useState(null)
     // console.log(params.dashUrl)
-    console.log(params.orderId)
+
+
+    // get user function
+    const getUser = async () =>{
+        setLoading(true)
+        const profileRef = doc(db, 'users', auth.currentUser.uid)
+        const profileSnap =  await getDoc(profileRef)
+
+        if(profileSnap.exists()){
+            //  console.log(profileSnap.data())
+                setProfileData(profileSnap.data())
+            await  getStoreDetails(profileSnap.data().storeUrl)
+        }
+        else {
+            navigate("/login")
+        }
+
+        setLoading(false)
+    }
+
+   const getStoreDetails = async (storeUrl) => {
+        const storeDetailsRef = doc(db, 'shops', storeUrl)
+       const storeDetailsSnap = await getDoc(storeDetailsRef)
+
+       if(storeDetailsSnap.exists()){
+           // console.log(storeDetailsSnap.data())
+           setStoreData(storeDetailsSnap.data())
+       }
+    }
+
 
     const pages = () => {
 
         if (params.dashUrl === "home"){
-            return <DashboardPage />
+            return <DashboardPage userId={auth.currentUser.uid} fullName={profileData.name} storeData={storeData}/>
         }
         else if (params.dashUrl === "categories") {
-            return <CategoriesPage />
+            return <CategoriesPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
         else if (params.dashUrl === "add-product") {
-            return <AddProductPage/>
+            return <AddProductPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
 
         else if (params.dashUrl === "transactions") {
-                return <TransactionPage />
+                return <TransactionPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
         else if (params.dashUrl === "customers") {
 
-            return <CustomersPage />
+            return <CustomersPage userId={auth.currentUser.uid} />
         }
        else if(params.customerId){
-            return <CustomerDetails />
+            return <CustomerDetails userId={auth.currentUser.uid}/>
         }
         else if (params.dashUrl === "orders") {
-            return <OrderListPage />
+            return <OrderListPage userId={auth.currentUser.uid}/>
         }
        else if (params.orderId) {
-            return <OrderDetailsPage />
+            return <OrderDetailsPage userId={auth.currentUser.uid}/>
         }
         else if (params.dashUrl === "products") {
-            return <ProductListPage />
+            return <ProductListPage userId={auth.currentUser.uid}/>
         }
         else if (params.productId) {
-            return <ProductDetailsPage />
+            return <ProductDetailsPage userId={auth.currentUser.uid}/>
         }
         else if (params.dashUrl === "wallet") {
-            return <WalletPage />
+            return <WalletPage userId={auth.currentUser.uid}/>
         }
         else if (params.dashUrl === "subscriptions") {
-            return <SubscriptionPage />
+            return <SubscriptionPage userId={auth.currentUser.uid}/>
         }
         else if (params.dashUrl === "storetract-credit") {
             return <StoretractCreditPage />
@@ -83,16 +123,31 @@ const SellersDashboard = () => {
         }
     }
 
+    useEffect(() => {
+        if(isMounted) {
+            getUser().then()
+        }
+        return () => {
+            isMounted.current = false;
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMounted, auth.currentUser.uid])
+
+
     return (
         <>
-            <b className="screen-overlay"></b>
-            <Sidebar pageName={params.dashUrl} />
-            <main className="main-wrap">
-                <TopNavbar />
-                {pages()}
-            </main>
+            {loading ?
+                (<Spinner />) : (
+                    <>
+                        <b className="screen-overlay"></b>
+                        <Sidebar pageName={params.dashUrl} />
+                        <main className="main-wrap">
+                            <TopNavbar />
+                            {pages()}
+                        </main>
+                    </>
+                ) }
         </>
     )
-
 }
 export default SellersDashboard
