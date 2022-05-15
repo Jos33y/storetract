@@ -1,6 +1,6 @@
 import {Card, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {collection, getDocs, query} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
@@ -8,12 +8,13 @@ import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-6
 
 const LatestOrders = ({storeUrl}) => {
 
+    const isMounted = useRef()
     const [orders, setOrders] = useState([])
 
     const getLatestOrders = async () => {
 
         try {
-            const getOrdersRef = collection(db, 'shops', 'johnson-enterprises', 'orders')
+            const getOrdersRef = collection(db, 'shops', storeUrl, 'orders')
             const q = query(getOrdersRef)
             const querySnap = await getDocs(q)
 
@@ -36,9 +37,14 @@ const LatestOrders = ({storeUrl}) => {
 
     useEffect(() => {
 
-        getLatestOrders().then()
-
-    }, [])
+        if(isMounted) {
+            getLatestOrders().then()
+        }
+        return () => {
+            isMounted.current = false
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMounted])
 
     return(
         <>
@@ -50,51 +56,6 @@ const LatestOrders = ({storeUrl}) => {
                     <div className="table-responsive">
                         <Table className="table table-hover">
                             <tbody>
-                            {/*row one */}
-                            <tr>
-                                <td>2323</td>
-                                <td className="bold">Devon Lane</td>
-                                <td>devon@example.com</td>
-                                <td>&#8358;45,000.00</td>
-                                <td> <span className="badge rounded-pill alert-success">Delivered</span> </td>
-                                <td> 01-03-2022</td>
-                                <td className="text-end">
-                                    <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
-                                    <div className="dropdown">
-                                        <Link to="#" data-bs-toggle="dropdown" class="btn btn-light btn-analytics">
-                                            <i className="fas fa-ellipsis-v"></i>
-                                        </Link>
-                                        <div className="dropdown-menu">
-                                            <Link to="#" className="dropdown-item"> View details</Link>
-                                            <Link to="#" className="dropdown-item"> Edit info</Link>
-                                            <Link to="#" className="dropdown-item text-danger"> Delete</Link>
-                                        </div>
-                                    </div> {/* dropdown ends*/}
-                                </td>
-                            </tr>
-
-                            {/*row two */}
-                            <tr>
-                                <td>2545</td>
-                                <td className="bold">Stewie Family Guy</td>
-                                <td>stewie@gmail.com</td>
-                                <td>&#8358;89,056.00</td>
-                                <td> <span className="badge rounded-pill alert-warning">Pending</span> </td>
-                                <td> 02-03-2022</td>
-                                <td className="text-end">
-                                    <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
-                                    <div className="dropdown">
-                                        <Link to="#" data-bs-toggle="dropdown" class="btn btn-light btn-analytics">
-                                            <i className="fas fa-ellipsis-v"></i>
-                                        </Link>
-                                        <div className="dropdown-menu">
-                                            <Link to="#" className="dropdown-item"> View details</Link>
-                                            <Link to="#" className="dropdown-item"> Edit info</Link>
-                                            <Link to="#" className="dropdown-item text-danger"> Delete</Link>
-                                        </div>
-                                    </div> {/* dropdown ends*/}
-                                </td>
-                            </tr>
 
                             {/*row three */}
                             {orders.map((order) => (
@@ -102,19 +63,20 @@ const LatestOrders = ({storeUrl}) => {
                                 <td>{order.data.orderId}</td>
                                 <td className="bold">{order.data.firstname} {order.data.lastname}</td>
                                 <td>{order.data.email}</td>
-                                <td>&#8358;{order.data.orderTotal}</td>
-                                <td> <span className="badge rounded-pill alert-warning">{order.data.deliveryStatus}</span> </td>
-                                <td> {(order.data.timeStamp).toDate()}</td>
+                                <td>&#8358;{order.data.orderTotal.toString()
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
+                                <td> <span className={`badge rounded-pill ${ order.data.deliveryStatus === "Confirmed" ? ('alert-warning') : 'alert-danger'}`}>{order.data.deliveryStatus}</span> </td>
+                                <td> {(order.data.timeStamp).toDate().toLocaleDateString("en-US")}</td>
                                 <td className="text-end">
-                                    <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
+                                    <Link to={`/dashboard/orders/${order.id}`} className="btn btn-light btn-analytics">Details </Link>
                                     <div className="dropdown">
                                         <Link to="#" data-bs-toggle="dropdown" class="btn btn-light btn-analytics">
                                             <i className="fas fa-ellipsis-v"></i>
                                         </Link>
                                         <div className="dropdown-menu">
-                                            <Link to="#" className="dropdown-item"> View details</Link>
-                                            <Link to="#" className="dropdown-item"> Edit info</Link>
-                                            <Link to="#" className="dropdown-item text-danger"> Delete</Link>
+                                            <Link to={`/dashboard/orders/${order.id}`} className="dropdown-item"> View details</Link>
+                                            <Link to={`/dashboard/orders/${order.id}`} className="dropdown-item"> Edit info</Link>
+                                            <Link to={`/dashboard/orders/${order.id}`} className="dropdown-item text-danger"> Delete</Link>
                                         </div>
                                     </div> {/* dropdown ends*/}
                                 </td>

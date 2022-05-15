@@ -1,11 +1,86 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "../pagesStyles.css"
 import {Card ,Col ,Row} from "react-bootstrap";
 import Statistics from "./statistics";
 import LatestOrders from "./latestOrders";
+import {collection, getDocs, query} from "firebase/firestore";
+import {db} from "../../../firebase.config";
+import {toast} from "react-toastify";
 
 
 const DashboardPage = ({storeData}) => {
+
+
+    const isMounted = useRef()
+    const [orders, setOrders] = useState([])
+    const [products, setProducts] = useState([])
+    const [totalSales, setTotalSales] = useState(null);
+
+
+
+    // get number of orders
+    const getOrders = async () => {
+        try {
+            const getOrdersRef = collection(db, 'shops', storeData.storeUrl, 'orders')
+            const q = query(getOrdersRef)
+            const querySnap = await getDocs(q)
+
+            let orders = []
+            querySnap.forEach((doc) => {
+                // console.log(doc.data());
+                return orders.push({
+                    id:doc.id,
+                    data:doc.data(),
+                })
+            })
+            setOrders(orders)
+            const sales = orders.reduce((a, c) => a + c.data.orderTotal++, 0);
+            setTotalSales(sales)
+
+        }
+        catch (error) {
+            console.log({error})
+            toast.error("currently can't get your orders")
+        }
+
+    }
+
+
+    // get number of orders
+    const getProducts = async () => {
+        try {
+            const getProdsRef = collection(db, 'shops', storeData.storeUrl, 'products')
+            const q = query(getProdsRef)
+            const querySnap = await getDocs(q)
+
+            let products = []
+            querySnap.forEach((doc) => {
+                // console.log(doc.data());
+                return products.push({
+                    id:doc.id,
+                    data:doc.data(),
+                })
+            })
+            setProducts(products)
+        }
+        catch (error) {
+            console.log({error})
+            toast.error("currently can't get Products ")
+        }
+
+    }
+
+    useEffect(() => {
+
+        if(isMounted) {
+            getOrders().then()
+            getProducts().then()
+        }
+        return () => {
+            isMounted.current = false
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMounted])
 
     return (
       <>
@@ -29,7 +104,8 @@ const DashboardPage = ({storeData}) => {
                              </span>
                              <div className="text">
                                  <h6 className="mb-1">Total Sales</h6>
-                                 <span>&#8358; 19,626,058.20</span>
+                                 <span>&#8358; {totalSales ?  totalSales.toString()
+                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',') : '0'}</span>
                              </div>
                          </article>
                      </Card>
@@ -43,7 +119,8 @@ const DashboardPage = ({storeData}) => {
                              </span>
                              <div className="text">
                                  <h6 className="mb-1">Total Orders</h6>
-                                 <span>87,790</span>
+                                 <span>{orders && orders.length > 0 ? (`${orders.length.toString()
+                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`) : ('0')} </span>
                              </div>
                          </article>
                      </Card>
@@ -58,7 +135,8 @@ const DashboardPage = ({storeData}) => {
                              </span>
                              <div className="text">
                                  <h6 className="mb-1">Total Products</h6>
-                                 <span>5,678</span>
+                                 <span>{products && products.length > 0 ? (`${products.length.toString()
+                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`) : ('0')} </span>
                              </div>
                          </article>
                      </Card>
