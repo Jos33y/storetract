@@ -21,7 +21,6 @@ const TopNavbar = () => {
     const handleSidebar = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Handling Sidebar");
         document.querySelector('#offcanvas_aside').classList.toggle('show')
         document.body.classList.toggle('offcanvas-active');
         document.querySelector('.screen-overlay').classList.toggle('show')

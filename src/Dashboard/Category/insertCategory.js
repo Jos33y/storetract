@@ -78,12 +78,10 @@ const InsertCategory = () => {
                     {
                         navigate('/activate-shop')
                     }
-
                 }
-
             }
 
-            getUser()
+            getUser().then()
 
         }
         return () => {

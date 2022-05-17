@@ -11,8 +11,6 @@ import {doc ,getDoc ,serverTimestamp ,setDoc ,updateDoc} from "firebase/firestor
 import {db} from "../../../firebase.config";
 import Spinner from "../../../components/Spinner";
 
-
-
 const CheckOutInformation = () => {
 
     const [instructions, setInstructions] = useState()

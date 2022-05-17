@@ -1,27 +1,26 @@
 import React, {useEffect ,useRef ,useState} from "react";
-import {Link ,useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import "../pagesStyles.css"
 import {Card ,Col ,Row} from "react-bootstrap";
 import {getAuth} from "firebase/auth";
-import {collection, doc, getDoc, getDocs, query} from "firebase/firestore";
+import {collection, getDocs, query} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 import Spinner from "../../../components/Spinner";
 import ProductBox from "./productBox";
 import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-60-pq.svg";
 
-const ProductListPage = () => {
+const ProductListPage = ({storeUrl}) => {
 
-    const [products, setProducts] = useState(null)
+    const [products, setProducts] = useState([])
     const auth = getAuth()
-    const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
     const isMounted = useRef()
 
-    const fetchProducts = async (shopName) => {
+    const fetchProducts = async () => {
         try
         {
-            const prodRef = collection(db, 'shops', shopName, 'products')
+            const prodRef = collection(db, 'shops', storeUrl, 'products')
             const q = query(prodRef)
             const querySnap = await getDocs(q)
 
@@ -48,23 +47,7 @@ const ProductListPage = () => {
 
     useEffect(() => {
         if(isMounted) {
-
-            const getUser = async () =>{
-                setLoading(true)
-                const profileRef = doc(db, 'users', auth.currentUser.uid)
-                const profileSnap =  await getDoc(profileRef)
-
-                if(profileSnap.exists()){
-                    //  console.log(profileSnap.data())
-                        await fetchProducts(profileSnap.data().storeUrl)
-                }
-                else
-                {
-                    navigate('/activate-shop')
-                }
-            }
-
-            getUser().then()
+            fetchProducts().then()
 
         }
         return () => {

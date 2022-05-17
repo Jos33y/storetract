@@ -8,8 +8,7 @@ import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 
 
-const DashboardPage = ({storeData}) => {
-
+const DashboardPage = ({storeData, userId}) => {
 
     const isMounted = useRef()
     const [orders, setOrders] = useState([])
@@ -80,7 +79,7 @@ const DashboardPage = ({storeData}) => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMounted])
+    }, [isMounted, userId])
 
     return (
       <>

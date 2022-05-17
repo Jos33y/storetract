@@ -109,6 +109,10 @@ const App = () => {
                                     <Route path="/dashboard/orders/:orderId" element={<SellersDashboard />} />
                                 </Route>
 
+                                <Route path="/dashboard/categories/:categoryUrl" element={<PrivateRoute/>}>
+                                    <Route path="/dashboard/categories/:categoryUrl" element={<SellersDashboard />} />
+                                </Route>
+
                                 <Route path="/dashboard/customers/:customerId" element={<PrivateRoute/>}>
                                     <Route path="/dashboard/customers/:customerId" element={<SellersDashboard />} />
                                 </Route>

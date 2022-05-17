@@ -77,6 +77,9 @@ const SellersDashboard = () => {
         else if (params.dashUrl === "categories") {
             return <CategoriesPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
+        else if (params.categoryUrl) {
+            return <CategoriesPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
+        }
         else if (params.dashUrl === "add-product") {
             return <AddProductPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
@@ -98,7 +101,7 @@ const SellersDashboard = () => {
             return <OrderDetailsPage userId={auth.currentUser.uid}/>
         }
         else if (params.dashUrl === "products") {
-            return <ProductListPage userId={auth.currentUser.uid}/>
+            return <ProductListPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
         else if (params.productId) {
             return <ProductDetailsPage userId={auth.currentUser.uid}/>
