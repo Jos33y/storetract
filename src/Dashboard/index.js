@@ -139,7 +139,7 @@ const SellersDashboard = () => {
             {loading ?
                 (<Spinner />) : (
                     <>
-                        <b className="screen-overlay"></b>
+                        <div className="screen-overlay"></div>
                         <Sidebar pageName={params.dashUrl} />
                         <main className="main-wrap">
                             <TopNavbar />

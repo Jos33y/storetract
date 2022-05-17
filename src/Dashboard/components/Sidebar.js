@@ -11,8 +11,9 @@ const Sidebar = ({pageName}) => {
             document.body.classList.remove('aside-mini');
             document.body.classList.remove('offcanvas-active');
             document.querySelector('.screen-overlay').classList.remove('show')
+            document.querySelector('.navbar-aside').classList.remove('show')
             setActive(!isActive)
-            console.log(isActive)
+            console.log(!isActive)
             console.log(" less than 768");
         }
         else {
@@ -25,7 +26,7 @@ const Sidebar = ({pageName}) => {
 
     return(
         <>
-            <aside className= {isActive ? ("navbar-aside show") : ("navbar-aside") }  id="offcanvas_aside">
+            <aside className="navbar-aside" id="offcanvas_aside">
                 {/*aside top section*/}
                 <div className="aside-top">
                     <Link to="/dashboard/home" className="brand-wrap">
@@ -41,7 +42,7 @@ const Sidebar = ({pageName}) => {
                     <ul className="menu-aside">
                         {/*menu one*/}
                         <li className={`menu-item ${pageName === 'home' ? 'active' : ''}`}>
-                            <Link to="/dashboard/home" className="menu-link">
+                            <Link to="/dashboard/home" onClick={handleMinimize} className="menu-link">
                                 <i className="fas fa-home"></i>
                             <span className="text">Dashboard</span>
                             </Link>
@@ -49,7 +50,7 @@ const Sidebar = ({pageName}) => {
 
                         {/*menu categories*/}
                         <li className={`menu-item ${pageName === 'categories' ? 'active' : ''}`}>
-                            <Link to="/dashboard/categories" className="menu-link">
+                            <Link onClick={handleMinimize} to="/dashboard/categories" className="menu-link">
                                 <i className="fas fa-layer-group"></i>
                                 <span className="text">Categories</span>
                             </Link>
