@@ -84,8 +84,8 @@ const Shop = () => {
     const fetchCategories = async (shopName) => {
         try
         {
-            const catRef = collection(db, 'shops', shopName, 'category' )
-            const q = query(catRef, orderBy('timestamp', 'asc'))
+            const catRef = collection(db, 'shops', shopName, 'categories' )
+            const q = query(catRef, orderBy('timeStamp', 'asc'))
             const querySnap = await getDocs(q)
             let categories = [];
             querySnap.forEach((doc) => {
@@ -185,7 +185,7 @@ const Shop = () => {
                 return <ShopOrderConfirmation businessUrl={ShopURL} loading={loading}/>
             }
             else if(params.shopName) {
-                return <ShopHome businessUrl={ShopURL} products={products} loading={loading} />
+                return <ShopHome businessName={ shopData.businessName } businessUrl={ShopURL} products={products} loading={loading} />
             }
         }
         else{
@@ -216,30 +216,10 @@ const Shop = () => {
                             <div className="body">
                             <ShopHeader businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain} categories={categories}/>
                                <div className="main-section">
-
                                    {pages()}
-
                                </div>
                                 <ShopFooter businessName={ shopData.businessName }/>
                             </div>
-
-
-                            {/*<div className="Shop-hero">*/}
-                           {/*    <h1>Welcome to {shopData.businessName}</h1>*/}
-                           {/*    <img src={HeroImage} alt="" className="img-fluid"/>*/}
-                           {/*</div>*/}
-
-                            {/*<Auth businessUrl={ShopURL} />*/}
-                            {/*<Row>*/}
-                            {/*    <Col md={3} className="side-bar">*/}
-                            {/*        <CategorySection shopName={ ShopURL }/>*/}
-                            {/*    </Col>*/}
-                            {/*    <Col md={9}>*/}
-
-                            {/*        <ShopHome businessUrl={ShopURL} products={products} loading={loading} />*/}
-                            {/*    </Col>*/}
-                            {/*</Row>*/}
-
 
                         </>
                     ) }

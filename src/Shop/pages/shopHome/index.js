@@ -7,7 +7,7 @@ import ShopTrendingNow from "./shopTrendingNow";
 
 
 
-const ShopHome = ({products, businessUrl, loading}) => {
+const ShopHome = ({products, businessUrl, loading, businessName}) => {
 
     return (
         <Container>
@@ -18,7 +18,7 @@ const ShopHome = ({products, businessUrl, loading}) => {
                        <Row>
                            <Col md={6}>
                                <div className="Hero-shop-text">
-                                   <h3>Fashion Home</h3>
+                                   <h3>{businessName}</h3>
                                    <h5>Let's make your shopping life easier</h5>
                                    <Link to="products" className="btn btn-md btn-success"> Shop now </Link>
                                </div>

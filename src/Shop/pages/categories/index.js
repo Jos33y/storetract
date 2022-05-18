@@ -19,7 +19,7 @@ const ShopCategories = ({businessUrl}) => {
     const fetchCategory = async () => {
         try
         {
-            const docRef = doc(db, "shops", params.shopName, 'category', params.categoryUrl )
+            const docRef = doc(db, "shops", params.shopName, 'categories', params.categoryUrl )
             const docSnap = await getDoc(docRef );
 
             if (docSnap.exists()) {
