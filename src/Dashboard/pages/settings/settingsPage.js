@@ -1,8 +1,8 @@
 import React from "react";
-import "./pagesStyles.css"
+import "../pagesStyles.css"
 import {Button ,Card ,Col ,Form ,Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import AvatarOne from "../../assets/images/sellers/avatar1.jpg";
+import AvatarOne from "../../../assets/images/sellers/avatar1.jpg";
 
 const SettingsPage = () => {
     return (

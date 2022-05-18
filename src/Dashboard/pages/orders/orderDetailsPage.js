@@ -162,10 +162,10 @@ const OrderDetailsPage = () => {
                                                    <div className="left">
                                                        <img src={ItemFour} alt="item" width={40} height={40} className="img-xs"/>
                                                    </div>
-                                                   <div className="info">Desiger Bag </div>
+                                                   <div className="info">Designer Bag </div>
 
                                                </Link>
-                                           </td>
+                                           </td>`
                                            <td> &#8358; 2,000.00</td>
                                            <td> 4 </td>
                                            <td className="text-end"> &#8358; 8,000</td>

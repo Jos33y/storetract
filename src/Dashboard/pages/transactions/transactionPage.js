@@ -1,8 +1,8 @@
 import React from "react";
-import "./pagesStyles.css"
+import "../pagesStyles.css"
 import {Card ,Col ,Row} from "react-bootstrap";
-import TransactionListPage from "./transactions/transactionListPage";
-import TransactionDetailsPage from "./transactions/transactionDetailsPage";
+import TransactionListPage from "./transactionListPage";
+import TransactionDetailsPage from "./transactionDetailsPage";
 
 const TransactionPage = () => {
 

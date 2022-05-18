@@ -55,6 +55,17 @@ const LatestOrders = ({storeUrl}) => {
                     {orders && orders.length > 0 ? (
                     <div className="table-responsive">
                         <Table className="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th className="text-end">Action</th>
+                            </tr>
+                            </thead>
                             <tbody>
 
                             {/*row three */}

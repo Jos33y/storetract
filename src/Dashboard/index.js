@@ -8,18 +8,18 @@ import TopNavbar from "./components/TopNavbar";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import ErrorPage from "./pages/ErrorPage";
 import AddProductPage from "./pages/products/AddProductPage";
-import TransactionPage from "./pages/transactionPage";
-import CustomersPage from "./pages/customersPage";
+import TransactionPage from "./pages/transactions/transactionPage";
+import CustomersPage from "./pages/customers/customersPage";
 import CustomerDetails from "./pages/customers/customerDetails";
-import OrderListPage from "./pages/orderListPage";
+import OrderListPage from "./pages/orders/orderListPage";
 import OrderDetailsPage from "./pages/orders/orderDetailsPage";
 import ProductListPage from "./pages/products/productListPage";
 import CategoriesPage from "./pages/category/categoriesPage";
-import WalletPage from "./pages/walletPage";
-import StoretractCreditPage from "./pages/storetractCreditPage";
-import SubscriptionPage from "./pages/subscriptionPage";
-import HelpDeskPage from "./pages/helpDeskPage";
-import SettingsPage from "./pages/settingsPage";
+import WalletPage from "./pages/wallet/walletPage";
+import StoretractCreditPage from "./pages/storetract/storetractCreditPage";
+import SubscriptionPage from "./pages/subscription/subscriptionPage";
+import HelpDeskPage from "./pages/helpdesk/helpDeskPage";
+import SettingsPage from "./pages/settings/settingsPage";
 import {doc, getDoc} from "firebase/firestore";
 import {db} from "../firebase.config";
 import {getAuth} from "firebase/auth";
@@ -89,13 +89,13 @@ const SellersDashboard = () => {
         }
         else if (params.dashUrl === "customers") {
 
-            return <CustomersPage userId={auth.currentUser.uid} />
+            return <CustomersPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
        else if(params.customerId){
             return <CustomerDetails userId={auth.currentUser.uid}/>
         }
         else if (params.dashUrl === "orders") {
-            return <OrderListPage userId={auth.currentUser.uid}/>
+            return <OrderListPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
         }
        else if (params.orderId) {
             return <OrderDetailsPage userId={auth.currentUser.uid}/>
