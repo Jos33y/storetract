@@ -1,7 +1,7 @@
 import React from "react";
 import {Button ,Form} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import AvatarSeller from "../../assets/images/sellers/avatar1.jpg";
+import AvatarDefault from "../../assets/images/avatardefault_92824.png";
 import {getAuth} from "firebase/auth";
 
 const TopNavbar = () => {
@@ -57,10 +57,10 @@ const TopNavbar = () => {
                         </li>
                         <li className="dropdown nav-item">
                             <Link to="#" className="nav-link btn-icon" data-bs-toggle="dropdown" >
-                                <img src={AvatarSeller} className="img-xs rounded-circle" alt="User"/></Link>
+                                <img src={AvatarDefault} className="img-xs rounded-circle" alt="User"/></Link>
                             <div className="dropdown-menu dropdown-menu-end">
-                                <Link to="/seller-profile" className="dropdown-item">My Profile</Link>
-                                <Link to="/account-settings" className="dropdown-item">Settings</Link>
+                                <Link to="/dashboard/settings" className="dropdown-item">My Profile</Link>
+                                <Link to="/dashboard/settings" className="dropdown-item">Settings</Link>
                                 <Button  onClick={logOut} className="dropdown-item text-danger"> Log out</Button>
                             </div>
                         </li>

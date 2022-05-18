@@ -2,7 +2,7 @@ import React from "react";
 import "../pagesStyles.css"
 import {Button ,Card ,Col ,Form ,Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import AvatarOne from "../../../assets/images/sellers/avatar1.jpg";
+import AvatarDefault from "../../../assets/images/avatardefault_92824.png";
 
 const SettingsPage = () => {
     return (
@@ -17,12 +17,9 @@ const SettingsPage = () => {
                         <Row className="gx-5">
                             <aside className="col-lg-3 border-end">
                                 <nav className="nav nav-pills flex-lg-column mb-4">
-                                    <Link  to="https://" aria-current="page" className="nav-link active"> General</Link>
-                                    <Link  to="https://" className="nav-link"> Moderators</Link>
-                                    <Link  to="https://" className="nav-link"> Admin account</Link>
-                                    <Link  to="https://" className="nav-link"> SEO settings</Link>
-                                    <Link  to="https://" className="nav-link"> Mail Settings</Link>
-                                    <Link  to="https://" className="nav-link"> Newsletter</Link>
+                                    <Link  to="/dashboard/settings" aria-current="page" className="nav-link active"> General</Link>
+                                    <Link  to="/dashboard/settings" className="nav-link"> Business Settings</Link>
+                                    <Link  to="/dashboard/settings" className="nav-link"> Social Accounts</Link>
                                 </nav>
                             </aside>
 
@@ -75,11 +72,11 @@ const SettingsPage = () => {
                                             </Col>
                                             <aside className="col-lg-4">
                                                 <figure className="text-lg-center">
-                                                    <img src={AvatarOne} alt="user avatar" className="img-lg mb-3 img-avatar"/>
+                                                    <img src={AvatarDefault} alt="user avatar" className="img-lg mb-3 img-avatar"/>
                                                     <figcaption>
-                                                        <Link to="https://" className="btn btn-outline-primary">
+                                                        <button type="button" className="btn btn-outline-primary">
                                                             <i className="fas fa-upload"></i> upload
-                                                        </Link>
+                                                        </button>
                                                     </figcaption>
                                                 </figure>
                                             </aside>
@@ -92,7 +89,7 @@ const SettingsPage = () => {
                                     <Row style={{maxWidth: '920px'}}>
                                         <div className="col-md">
                                             <article className="box mb-3 bg-light">
-                                                <Link to="https://" className="btn float-end btn-outline-secondary btn-sm">Change</Link>
+                                                <button type="button" className="btn float-end btn-outline-secondary btn-sm">Change</button>
                                                 <h6>Password</h6>
                                                 <small className="text-muted d-block" style={{width: '70%'}}>You can reset or change your password by clicking here</small>
                                             </article>
@@ -100,7 +97,7 @@ const SettingsPage = () => {
 
                                         <div className="col-md">
                                             <article className="box mb-3 bg-light">
-                                                <Link to="https://" className="btn float-end btn-outline-danger btn-sm">Deactivate</Link>
+                                                <button type="button" className="btn float-end btn-outline-danger btn-sm">Deactivate</button>
                                                 <h6>Remove account</h6>
                                                 <small className="text-muted d-block" style={{width: '70%'}}>Once you delete your account, there is no going back.</small>
                                             </article>
