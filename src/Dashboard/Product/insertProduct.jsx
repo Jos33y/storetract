@@ -29,7 +29,7 @@ const InsertProduct = () => {
         productPrice: 0,
         productDiscountPrice: 0,
         productDescription: '',
-        images: {},
+        images: [],
         offer: false,
         timestamp: '',
     })

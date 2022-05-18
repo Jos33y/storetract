@@ -13,7 +13,7 @@ import StorePaid from "./storePaid";
 import StorePayment from "./storePayment";
 import StoreActivated from "./storeActivated";
 import BuyDomain from "./buyDomain";
-import FooterSection from "../../Home/FooterSection";
+import Footer from "../../Home/Footer";
 
 
 const OnBoarding = () => {
@@ -86,7 +86,7 @@ const OnBoarding = () => {
                         <Container>
                             {pages()}
                         </Container>
-                        <FooterSection />
+                        <Footer />
                     </div>
                 ) }
         </>

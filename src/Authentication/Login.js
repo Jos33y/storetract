@@ -110,7 +110,7 @@ const Login = () => {
                                     </div>
                                 </Col>
                                 <Col md={6}>
-                                    <Form className="Form" onSubmit={onSubmit} autocomplete="off">
+                                    <Form className="Form" onSubmit={onSubmit} autocomplete="on">
                                         <h5>Sign in</h5>
 
                                         <div className="form-group">

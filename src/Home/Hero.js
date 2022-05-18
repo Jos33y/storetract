@@ -10,7 +10,7 @@ const Hero = () => {
     const [hamburgerClicked, setHamburgerClicked] = useState(false)
 
     const changeBackground = () => {
-        console.log(window.scrollY)
+        // console.log(window.scrollY)
         if (window.scrollY >= 80) {
             setHamburgerClicked(true)
         } else {
@@ -62,7 +62,7 @@ const Hero = () => {
                             </RubberBand>
                             <Shake>
                                 <hr className="line"/>
-                                <p> Bring your retail store online and keep serving customers without missing an order.</p>
+                                <p> Bring your retail store online and keep serving customers without missing orders.</p>
                                 <Link to="/register" className="btn btn-md btn-primary"> Get started for free</Link>
                             </Shake>
 

@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import "../pagesStyles.css"
 import {Card ,Col ,Row} from "react-bootstrap";
 import {getAuth} from "firebase/auth";
-import {collection, getDocs, query} from "firebase/firestore";
+import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 import Spinner from "../../../components/Spinner";
@@ -13,17 +13,28 @@ import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-6
 const ProductListPage = ({storeUrl}) => {
 
     const [products, setProducts] = useState([])
+    const [categories, setCategories] = useState([])
     const auth = getAuth()
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
+    const [loadingTwo, setLoadingTwo] = useState(false)
+
     const isMounted = useRef()
 
-    const fetchProducts = async () => {
+    const fetchProducts = async (changeCat) => {
+        setLoadingTwo(true)
+        let catChange = changeCat ? changeCat : 'all';
         try
         {
             const prodRef = collection(db, 'shops', storeUrl, 'products')
-            const q = query(prodRef)
-            const querySnap = await getDocs(q)
+            let q;
+            if(catChange === 'all') {
+                q = query(prodRef, orderBy('timeStamp', 'desc'),)
+            }
+            else{
+                q = query(prodRef, where("productCategory", "==", `${catChange}`))
 
+            }
+            const querySnap = await getDocs(q)
             let products = []
 
             querySnap.forEach((doc) => {
@@ -34,21 +45,52 @@ const ProductListPage = ({storeUrl}) => {
                 })
             })
             setProducts(products)
-            setLoading(false)
-
         }
         catch (error) {
             console.log({error})
             toast.error("Unable to retrieve products")
 
         }
+        setLoading(false)
+        setLoadingTwo(false)
     }
 
+    const onChange = (e) => {
+
+            fetchProducts(e.target.value).then()
+
+    }
+    const fetchCategories = async () => {
+        try
+        {
+            // const auth = getAuth()
+            const catRef = collection(db, 'shops', storeUrl, 'categories' )
+            const q = query(catRef, orderBy('timeStamp', 'desc'), limit(10))
+            const querySnap = await getDocs(q)
+
+            let categories = [];
+
+            querySnap.forEach((doc) => {
+                //console.log(doc.data())
+                return categories.push({
+                    id: doc.id,
+                    data: doc.data(),
+                })
+            })
+            setCategories(categories)
+            // setLoading(false)
+        }
+        catch (error) {
+            toast.error("could not fetch categories")
+            console.log({error})
+        }
+    }
 
     useEffect(() => {
         if(isMounted) {
-            fetchProducts().then()
 
+            fetchCategories().then()
+            fetchProducts().then()
         }
         return () => {
             isMounted.current = false
@@ -75,25 +117,29 @@ const ProductListPage = ({storeUrl}) => {
                             <Col lg={4} md={6} className="me-auto">
                                 <input type="text" placeholder="Search..." className="form-control"/>
                             </Col>
-                            <Col lg={2} md={3} className="col-6">
-                                <select className="form-select">
-                                    <option value="status">All category</option>
-                                    <option value="Active">Electronics</option>
-                                    <option value="Disabled">Clothing's</option>
-                                    <option value="Show all">Others</option>
+                            <Col lg={4} md={6} className="col-6">
+                                <select className="form-select"
+                                        id='productCategory'
+                                        onChange={onChange}>
+                                    <option value='all'>
+                                        All category
+                                    </option>
+                                    {categories.map((category) => (
+                                    <option value={category.data.categoryUrl} key={ category.id } > {category.data.title} </option>
+                                    ))}
                                 </select>
                             </Col>
 
-                            <Col lg={2} md={3} className="col-6">
-                                <select className="form-select">
-                                    <option value="show 20">Latest added</option>
-                                    <option value="show 20">Cheap first</option>
-                                    <option value="show 20">Most viewed</option>
-                                </select>
-                            </Col>
+                            {/*<Col lg={2} md={3} className="col-6">*/}
+                            {/*    <select className="form-select">*/}
+                            {/*        <option value="show 20">Latest added</option>*/}
+                            {/*        <option value="show 20">Cheap first</option>*/}
+                            {/*        <option value="show 20">Most viewed</option>*/}
+                            {/*    </select>*/}
+                            {/*</Col>*/}
                         </Row>
                     </header>
-                    {loading ?
+                    {loadingTwo ?
                         (<Spinner />)
                         : products && products.length > 0 ?
                             (<>
@@ -103,7 +149,7 @@ const ProductListPage = ({storeUrl}) => {
 
                             {products.map((product) => (
                                 <Col className="col" key={product.id}>
-                                    <ProductBox product={product.data} id={product.id} />
+                                    <ProductBox product={product.data} id={product.id} storeUrl={storeUrl} />
                                 </Col>
                             ))}
 

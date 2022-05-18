@@ -4,7 +4,7 @@ import StoreTractLogo from "../assets/images/logo-svg.svg";
 import {Link} from "react-router-dom";
 import {Fade} from "react-reveal";
 
-const FooterSection = () => {
+const Footer = () => {
   return(
       <>
           <div className="Footer-section">
@@ -56,4 +56,4 @@ const FooterSection = () => {
   )
 }
 
-export default FooterSection
+export default Footer

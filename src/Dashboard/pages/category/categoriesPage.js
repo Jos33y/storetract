@@ -17,12 +17,14 @@ import {toast} from "react-toastify";
 import {Link, useParams} from "react-router-dom";
 import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-60-pq.svg";
 import {v4 as uuidv4} from "uuid";
+import Spinner from "../../../components/Spinner";
 
 const CategoriesPage = ({storeUrl, userId}) => {
 
     const isMounted = useRef()
     const params = useParams()
     const categorySlug = params.categoryUrl;
+    const [loading, setLoading] = useState(true)
     const [isDisabled, setIsDisabled] = useState(false)
     const [categories, setCategories] = useState(null)
     const [categoryData, setCategoryData] = useState({
@@ -30,7 +32,6 @@ const CategoriesPage = ({storeUrl, userId}) => {
         description: '',
         timeStamp: '',
     })
-
 
     const {title, description} = categoryData;
 
@@ -42,7 +43,7 @@ const CategoriesPage = ({storeUrl, userId}) => {
         try {
 
             if(categorySlug) {
-                console.log("updating")
+                // console.log("updating")
                 const categoryDataCopy = {...categoryData}
                 const categoryUpdateRef = doc(db, 'shops', storeUrl, 'categories', categorySlug)
                 await updateDoc(categoryUpdateRef, categoryDataCopy)
@@ -73,14 +74,12 @@ const CategoriesPage = ({storeUrl, userId}) => {
         setIsDisabled(false)
     }
 
-
     const onChange = (e) => {
         setCategoryData((prevState) => ({
             ...prevState,
             [e.target.id]: e.target.value,
         } ))
     }
-
 
     const getCategory = async () =>{
 
@@ -97,7 +96,6 @@ const CategoriesPage = ({storeUrl, userId}) => {
             console.log({error})
         }
     }
-
 
     const fetchCategories = async () => {
         try
@@ -123,6 +121,7 @@ const CategoriesPage = ({storeUrl, userId}) => {
             toast.error("could not fetch categories")
             console.log({error})
         }
+        setLoading(false)
     }
 
     const onDelete  = async(ID) => {
@@ -131,14 +130,13 @@ const CategoriesPage = ({storeUrl, userId}) => {
             const catRef = doc(db, 'shops', storeUrl, 'categories', ID)
             await deleteDoc(catRef)
 
-            toast.success("delete successfully")
+            toast.success("deleted successfully")
             fetchCategories().then()
         }
         catch (error) {
             console.log({error})
         }
     }
-
 
     useEffect(() => {
 
@@ -157,6 +155,10 @@ const CategoriesPage = ({storeUrl, userId}) => {
 
     return (
         <>
+            {loading ?
+                (<Spinner />) :
+                (
+
             <section className="content-main">
                 <div className="content-header">
                     <h2 className="content-title"> Categories </h2>
@@ -241,7 +243,7 @@ const CategoriesPage = ({storeUrl, userId}) => {
                                                             {/*<td>/{category.categoryUrl}</td>*/}
                                                             <td className="text-end">
                                                                 <div className="dropdown">
-                                                                    <Link to="#" data-bs-toggle="dropdown" class="btn btn-outline-secondary">
+                                                                    <Link to="#" data-bs-toggle="dropdown" className="btn btn-outline-secondary">
                                                                         <i className="fas fa-ellipsis-v"></i>
                                                                     </Link>
                                                                     <div className="dropdown-menu">
@@ -271,6 +273,7 @@ const CategoriesPage = ({storeUrl, userId}) => {
                 </Card>
 
             </section>
+                ) }
 
             </>
     )

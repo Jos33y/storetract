@@ -7,14 +7,13 @@ import Sidebar from "./components/Sidebar";
 import TopNavbar from "./components/TopNavbar";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import ErrorPage from "./pages/ErrorPage";
-import AddProductPage from "./pages/AddProductPage";
+import AddProductPage from "./pages/products/AddProductPage";
 import TransactionPage from "./pages/transactionPage";
 import CustomersPage from "./pages/customersPage";
 import CustomerDetails from "./pages/customers/customerDetails";
 import OrderListPage from "./pages/orderListPage";
 import OrderDetailsPage from "./pages/orders/orderDetailsPage";
 import ProductListPage from "./pages/products/productListPage";
-import ProductDetailsPage from "./pages/products/productDetailsPage";
 import CategoriesPage from "./pages/category/categoriesPage";
 import WalletPage from "./pages/walletPage";
 import StoretractCreditPage from "./pages/storetractCreditPage";
@@ -25,6 +24,7 @@ import {doc, getDoc} from "firebase/firestore";
 import {db} from "../firebase.config";
 import {getAuth} from "firebase/auth";
 import Spinner from "../components/Spinner";
+import EditProductPage from "./pages/products/editProduct";
 
 
 const SellersDashboard = () => {
@@ -104,7 +104,7 @@ const SellersDashboard = () => {
             return <ProductListPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
         else if (params.productId) {
-            return <ProductDetailsPage userId={auth.currentUser.uid}/>
+            return <EditProductPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
         }
         else if (params.dashUrl === "wallet") {
             return <WalletPage userId={auth.currentUser.uid}/>

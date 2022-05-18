@@ -1,22 +1,39 @@
-import {Card} from "react-bootstrap";
+import { Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import React from "react";
+import {deleteDoc, doc} from "firebase/firestore";
+import {db} from "../../../firebase.config";
+import {toast} from "react-toastify";
 
-const ProductBox = ({product, id}) => {
+const ProductBox = ({product, id, storeUrl}) => {
+
+    const onDelete = async () => {
+        console.log(id)
+        try {
+            const prodRef = doc(db, 'shops', storeUrl, 'products', id)
+            await deleteDoc(prodRef)
+
+            toast.success("Product deleted successfully")
+
+        }
+        catch (error) {
+            console.log({error})
+        }
+    }
   return (
       <>
           <Card className="card card-product-grid">
-              <Link  to={`/${product.productCategory}/${id}`}  className="link img-wrap">
+              <Link  to={`/dashboard/edit-product/${id}`} className="link img-wrap">
                   <img src={product.imgUrls[0]} alt="Product"/>
               </Link>
               <div className="info-wrap">
                   <span className="title text-truncate"> {product.productName}</span>
-                  <div className="price mb-2">&#8358;  &#8358;{product.productPrice.toString()
+                  <div className="price mb-2">&#8358;{product.productPrice.toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</div>
-                  <Link data-bs-toggle="dropdown"  to={`/${product.productCategory}/${id}`} className="btn btn-sm btn-outline-secondary"><i
+                  <Link  to={`/dashboard/edit-product/${id}`} className="btn btn-sm btn-outline-secondary"><i
                       className="fas fa-edit"></i> Edit</Link>
-                  <Link to="/dashboard/add-product"  className="btn btn-sm btn-outline-danger ms-2"> <i
-                      className="fas fa-trash-alt"></i> Delete </Link>
+                  <button onClick={onDelete}  type="button" className="btn btn-sm btn-outline-danger ms-2"> <i
+                      className="fas fa-trash-alt"></i> Delete </button>
               </div>
           </Card>
       </>
