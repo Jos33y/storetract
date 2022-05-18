@@ -1,20 +1,65 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Col ,Row ,Table} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import Amex from "../../../assets/images/payments/1.png";
 import MasterCard from "../../../assets/images/payments/2.png";
-import PayPal from "../../../assets/images/payments/3.png";
-import Visa from "../../../assets/images/payments/4.png";
+import {collection, getDocs, query} from "firebase/firestore";
+import {db} from "../../../firebase.config";
+import {toast} from "react-toastify";
+import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-60-pq.svg";
+import Spinner from "../../../components/Spinner";
 
-const TransactionListPage = () => {
+const TransactionListPage = ({storeUrl, userId}) => {
+
+    const isMounted = useRef()
+    const [transactions, setTransactions] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    const getTransactions= async () => {
+        setLoading(true)
+        try {
+            const getTransactionRef= collection(db, 'shops', storeUrl, 'transactions')
+            const q = query(getTransactionRef)
+            const querySnap = await getDocs(q)
+
+            let transactions = []
+            querySnap.forEach((doc) => {
+                // console.log(doc.data());
+                return transactions.push({
+                    id:doc.id,
+                    data:doc.data(),
+                })
+            })
+            setTransactions(transactions)
+        }
+        catch (error) {
+            console.log({error})
+            toast.error("currently can't get your orders")
+        }
+        setLoading(false)
+    }
+
+    useEffect(() => {
+
+        if(isMounted) {
+            getTransactions().then()
+        }
+        return () => {
+            isMounted.current = false
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMounted, userId])
+
     return (
         <>
+            {loading ?
+                (<Spinner />) :
+                (
+                    <>
             <header className="border-bottom mb-4 pb-4">
                 <Row>
                     <Col lg={5} className="col-6 me-auto">
                         <input type="text" placeholder="search" className="form-control"/>
                     </Col>
-                    <Col lg={2} className="col-6">
+                    <Col lg={3} className="col-6">
                         <select className="form-select">
                             <option value="Method">Method</option>
                             <option value="Master card">Master card</option>
@@ -25,121 +70,51 @@ const TransactionListPage = () => {
 
                 </Row>
             </header>
-            <div className="table-responsive">
-                <Table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Transaction ID</th>
-                            <th>Paid</th>
-                            <th>Method</th>
-                            <th>Date</th>
-                            <th className="text-end"> Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            {transactions && transactions.length > 0 ? (
+                <div className="table-responsive">
+                    <Table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Paid</th>
+                                <th>Method</th>
+                                <th>Date</th>
+                                <th className="text-end"> Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                     {/*Row one*/}
-                        <tr>
-                            <td className="bold">#56678</td>
-                            <td>&#8358; 56,890.00</td>
+                    {transactions.map((transaction) => (
+                        <tr key={transaction.id}>
+                            <td className="bold">#{transaction.id}</td>
+                            <td>&#8358;{transaction.data.orderTotal.toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
                             <td>
                                 <div className="icontext">
-                                    <img width={36} src={Amex} className="icon border" alt="Payment"/>
-                                    <span className="text text-muted">Amex</span>
+                                    <img width={36} src={MasterCard} className="icon border" alt="Payment"/>
+                                    <span className="text text-muted">{transaction.data.paymentMethod}</span>
                                 </div>
                             </td>
-                            <td> 16.12.2021, 14:21</td>
+                            <td> {(transaction.data.timeStamp).toDate().toLocaleDateString("en-US")}</td>
                             <td className="text-end">
-                                <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
+                                <button type='button' className="btn btn-light btn-analytics">Details </button>
                             </td>
                         </tr>
+                    ))}
 
-                    {/*Row one*/}
-                    <tr>
-                        <td className="bold">#134768</td>
-                        <td>&#8358; 87,980.00</td>
-                        <td>
-                            <div className="icontext">
-                                <img width={36} src={Visa} className="icon border" alt="Payment"/>
-                                <span className="text text-muted">Visa card</span>
-                            </div>
-                        </td>
-                        <td> 14.12.2021, 14:21</td>
-                        <td className="text-end">
-                            <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
-                        </td>
-                    </tr>
-
-
-                    {/*Row one*/}
-                    <tr>
-                        <td className="bold">#4564</td>
-                        <td>&#8358; 908,890.00</td>
-                        <td>
-                            <div className="icontext">
-                                <img width={36} src={PayPal} className="icon border" alt="Payment"/>
-                                <span className="text text-muted">PayPal</span>
-                            </div>
-                        </td>
-                        <td> 12.12.2021, 14:21</td>
-                        <td className="text-end">
-                            <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
-                        </td>
-                    </tr>
-
-
-                    {/*Row one*/}
-                    <tr>
-                        <td className="bold">#54458</td>
-                        <td>&#8358; 26,890.00</td>
-                        <td>
-                            <div className="icontext">
-                                <img width={36} src={PayPal} className="icon border" alt="Payment"/>
-                                <span className="text text-muted">PayPal</span>
-                            </div>
-                        </td>
-                        <td> 12.12.2021, 14:21</td>
-                        <td className="text-end">
-                            <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
-                        </td>
-                    </tr>
-
-
-                    {/*Row one*/}
-                    <tr>
-                        <td className="bold">#98667</td>
-                        <td>&#8358; 6,890.00</td>
-                        <td>
-                            <div className="icontext">
-                                <img width={36} src={Amex} className="icon border" alt="Payment"/>
-                                <span className="text text-muted">Amex</span>
-                            </div>
-                        </td>
-                        <td> 10.12.2021, 14:21</td>
-                        <td className="text-end">
-                            <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
-                        </td>
-                    </tr>
-
-
-                    {/*Row one*/}
-                    <tr>
-                        <td className="bold">#06678</td>
-                        <td>&#8358; 16,760.00</td>
-                        <td>
-                            <div className="icontext">
-                                <img width={36} src={MasterCard} className="icon border" alt="Payment"/>
-                                <span className="text text-muted">Mastercard</span>
-                            </div>
-                        </td>
-                        <td> 08.12.2021, 14:21</td>
-                        <td className="text-end">
-                            <Link to="https://" className="btn btn-light btn-analytics">Details </Link>
-                        </td>
-                    </tr>
-                    </tbody>
-            </Table>
-            </div>
+                        </tbody>
+                    </Table>
+                </div>
+                ) : (
+                    <div className="No-category">
+                        <h5>Currently No Transactions </h5>
+                        <img src={NotFoundImage} alt="" className="img-fluid"/>
+                    </div>
+                )
+            }
         </>
+    ) }
+</>
     )
 
 }

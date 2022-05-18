@@ -4,7 +4,7 @@ import {Card ,Col ,Row} from "react-bootstrap";
 import TransactionListPage from "./transactionListPage";
 import TransactionDetailsPage from "./transactionDetailsPage";
 
-const TransactionPage = () => {
+const TransactionPage = ({storeUrl, userId}) => {
 
     return(
         <>
@@ -16,7 +16,7 @@ const TransactionPage = () => {
                     <div className="card-body">
                         <Row>
                             <Col lg={9}>
-                                <TransactionListPage />
+                                <TransactionListPage storeUrl={storeUrl} userId={userId}/>
                             </Col>
 
                             <aside className="col-lg-3">

@@ -23,15 +23,15 @@ const CustomersPage = ({storeUrl, userId}) => {
             const q = query(getCustomersRef)
             const querySnap = await getDocs(q)
 
-            let orders = []
+            let customers = []
             querySnap.forEach((doc) => {
-                console.log(doc.data());
-                return orders.push({
+                // console.log(doc.data());
+                return customers.push({
                     id:doc.id,
                     data:doc.data(),
                 })
             })
-            setCustomers(orders)
+            setCustomers(customers)
         }
         catch (error) {
             console.log({error})
@@ -91,26 +91,6 @@ const CustomersPage = ({storeUrl, userId}) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {/*ROw one customer*/}
-                                    <tr>
-                                        <td width="40%">
-                                            <Link to="https://" className="itemside">
-                                                <div className="left">
-                                                    <img src={AvatarDefault} className="img-sm img-avatar" alt="avatar"/>
-                                                </div>
-                                                <div className="info pl-3">
-                                                    <h6 className="mb-0 title">Eleanor Pena</h6>
-                                                    <small className="text-muted">Customer ID: #469 </small>
-                                                </div>
-                                            </Link>
-                                        </td>
-                                        <td> eleanor2020@gmail.com</td>
-                                        <td> <span className="badge rounded-pill alert-success">Active</span> </td>
-                                        <td> 08.07.2021</td>
-                                        <td className="text-end">
-                                            <Link to="/dashboard/customers/439" className="btn btn-light btn-analytics">View </Link>
-                                        </td>
-                                    </tr>
 
                                 {/*ROw two customer*/}
                                 {customers.map((customer) => (
