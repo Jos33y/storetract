@@ -87,7 +87,7 @@ const DashboardPage = ({storeData, userId}) => {
              <div className="content-header">
                  <h2 className="content-title"> Dashboard </h2>
                  <div>
-                     <a target="_blank"  rel="noopener noreferrer" href={`/${storeData.storeUrl}`} className="btn btn-md btn-primary"><i
+                     <a target="_blank"  rel="noopener noreferrer" href={storeData.domainName ? (`https://${storeData.domainName}`) : (`/${storeData.storeUrl}`)} className="btn btn-md btn-primary"><i
                          className="fas fa-external-link-alt"></i> View Store </a>
                  </div>
              </div>

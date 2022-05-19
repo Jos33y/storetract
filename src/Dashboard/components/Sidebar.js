@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import "./componetStyles.css"
 import {Button} from "react-bootstrap";
 
-const Sidebar = ({pageName, storeUrl}) => {
+const Sidebar = ({pageName, storeData}) => {
     // const [isActive, setActive ] = useState(false)
     const handleMinimize = () => {
         if (window.innerWidth < 768) {
@@ -131,7 +131,8 @@ const Sidebar = ({pageName, storeUrl}) => {
                         <li className="menu-item">
                             <a target="_blank"
                                rel="noopener noreferrer"
-                               href={`/${storeUrl}`}
+
+                               href={storeData.domainName ? (`https://${storeData.domainName}`) : (`/${storeData.storeUrl}`)}
                                className="menu-link">
                                 <i className="fas fa-store"></i>
                                 <span className="text">View Store</span>
