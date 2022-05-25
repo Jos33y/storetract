@@ -43,11 +43,21 @@ const ShopHeader = ({businessName, businessUrl, domain, categories}) => {
                                     Categories
                                 </Dropdown.Toggle>
 
-                                <Dropdown.Menu >
-                                    {categories.map((category) => (
-                                    <Dropdown.Item href={ `/${businessUrl}/category/${ category.data.categoryUrl }` } key={ category.id }> {category.data.title} </Dropdown.Item>
-                                    ))}
+                                {domain ? (
+                                    <Dropdown.Menu >
+                                        {categories.map((category) => (
+                                            <Dropdown.Item href={ `/category/${ category.data.categoryUrl }` } key={ category.id }> {category.data.title} </Dropdown.Item>
+                                        ))}
                                     </Dropdown.Menu>
+                                ) : (
+                                    <Dropdown.Menu >
+                                        {categories.map((category) => (
+                                            <Dropdown.Item href={ `/${businessUrl}/category/${ category.data.categoryUrl }` } key={ category.id }> {category.data.title} </Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                )}
+
+
 
                             </Dropdown>
                         </li>

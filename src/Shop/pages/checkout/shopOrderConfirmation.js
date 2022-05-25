@@ -4,10 +4,10 @@ import {Button, Col, Container, Row, Table} from "react-bootstrap";
 import OrderSummary from "./orderSummary";
 import {useReactToPrint} from "react-to-print";
 import {doc, getDoc} from "firebase/firestore";
-import {db} from "../../../firebase.config";
-import Spinner from "../../../components/Spinner";
+import {db} from "../../config/firebase.config";
+import Spinner from "../../components/Spinner";
 
-const ShopOrderConfirmation = ({businessUrl}) => {
+const ShopOrderConfirmation = ({businessUrl, domain}) => {
 
     const params = useParams()
     const navigate = useNavigate()
@@ -23,16 +23,16 @@ const ShopOrderConfirmation = ({businessUrl}) => {
     const itemsPrice = carts.reduce((a, c) => a + c.productPrice * c.qty, 0);
     const [loading, setLoading] = useState(false);
 
+    // handle printing of receipt
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
-
 
     // get customer information using customer ID
     const getCustomer = async (CustomerID) =>{
         setLoading(true)
         try {
-            const customerRef = doc(db, 'shops', params.shopName, 'customers', CustomerID)
+            const customerRef = doc(db, 'shops', `${businessUrl}`, 'customers', CustomerID)
             const customerSnap =  await getDoc(customerRef)
 
             if(customerSnap.exists()){
@@ -89,10 +89,23 @@ const ShopOrderConfirmation = ({businessUrl}) => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMounted, params.shopName])
+    }, [isMounted, businessUrl])
 
     const continueShopping = () => {
-        navigate(`/${params.shopName}`)
+        try {
+            localStorage.removeItem("cart")
+            localStorage.removeItem("orderUniqueID");
+            localStorage.removeItem("paymentMethod")
+        }
+        catch (e) {
+            console.log({e})
+        }
+        if(domain){
+            navigate(`/`)
+        }
+        else{
+            navigate(`/${params.shopName}`)
+        }
     }
 
     const trackOrder = () => {
@@ -104,7 +117,12 @@ const ShopOrderConfirmation = ({businessUrl}) => {
         catch (e) {
             console.log({e})
         }
-        navigate(`/${params.shopName}/track-order`)
+        if(domain){
+            navigate(`/track-order`)
+        }
+        else{
+            navigate(`/${params.shopName}/track-order`)
+        }
     }
 
     return(
@@ -119,7 +137,13 @@ const ShopOrderConfirmation = ({businessUrl}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                <Link  to={(`/${businessUrl}/cart`)} className="bread-crumb-link"> Cart</Link>
+                                {
+                                    domain ? (
+                                        <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
+                                    ) : (
+                                        <Link  to={(`/${businessUrl}/cart`)} className="bread-crumb-link"> Cart</Link>
+                                    )
+                                }
                             </li>
                             <i className="fas fa-chevron-right"></i>
                             <li>

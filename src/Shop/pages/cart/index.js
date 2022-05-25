@@ -4,9 +4,9 @@ import React, {useEffect, useRef, useState} from "react";
 import CartList from "./CartList";
 import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../components/Spinner";
 
-const ShopCart = ({businessUrl}) => {
+const ShopCart = ({businessUrl, domain}) => {
 
     const navigate = useNavigate()
     const params = useParams()
@@ -22,7 +22,13 @@ const ShopCart = ({businessUrl}) => {
         setDisabled(true)
         try {
             toast.success("checked out")
-            navigate(`/${params.shopName}/checkout/information`)
+
+            if(domain) {
+                navigate(`/checkout/information`)
+            }
+             else{
+                navigate(`/${params.shopName}/checkout/information`)
+            }
         }
         catch (e) {
             console.log({e})
@@ -92,7 +98,7 @@ const ShopCart = ({businessUrl}) => {
                         <Row className="justify-content-center">
                             {carts.map((cart) => (
                             <Col md={10} key={cart.id}>
-                                <CartList businessUrl={businessUrl} id={cart.id} cart={cart} onDelete={() => {onDelete(cart)}} />
+                                <CartList businessUrl={businessUrl} id={cart.id} cart={cart} onDelete={() => {onDelete(cart)}} domain={domain} />
                             </Col>
                             ))}
 

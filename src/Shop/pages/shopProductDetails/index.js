@@ -4,12 +4,12 @@ import React, {useEffect, useRef, useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import SimilarItem from "./similarItem";
 import {collection, doc, getDoc, getDocs, limit, query} from "firebase/firestore";
-import {db} from "../../../firebase.config";
+import {db} from "../../config/firebase.config";
 import {toast} from "react-toastify";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../components/Spinner";
 
 
-const ShopProductDetails = ({businessUrl}) => {
+const ShopProductDetails = ({businessUrl, domain}) => {
     const params = useParams()
     const isMounted = useRef()
 
@@ -57,8 +57,6 @@ const ShopProductDetails = ({businessUrl}) => {
             setDisabled(false)
         }
 
-
-
         // setDisabled(true)
 
     }
@@ -66,8 +64,7 @@ const ShopProductDetails = ({businessUrl}) => {
     const fetchProducts = async () => {
         try
         {
-
-            const prodRef = collection(db, 'shops', params.shopName, 'products')
+            const prodRef = collection(db, 'shops', `${businessUrl}`, 'products')
             const q = query(prodRef, limit(4))
             const querySnap = await getDocs(q)
             let products = []
@@ -91,7 +88,7 @@ const ShopProductDetails = ({businessUrl}) => {
     const fetchProductDetails = async () => {
         try
         {
-            const docRef = doc(db, "shops", params.shopName, 'products', params.productUrl)
+            const docRef = doc(db, "shops", `${businessUrl}`, 'products', params.productUrl)
             const docSnap = await getDoc(docRef );
 
             if (docSnap.exists()) {
@@ -112,8 +109,8 @@ const ShopProductDetails = ({businessUrl}) => {
     useEffect(() => {
         if(isMounted) {
             let localCart = localStorage.getItem("cart");
-            fetchProducts()
-            fetchProductDetails()
+            fetchProducts().then()
+            fetchProductDetails().then()
 
             //turn it into js
             localCart = JSON.parse(localCart);
@@ -142,10 +139,24 @@ const ShopProductDetails = ({businessUrl}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                <Link to={ `/${businessUrl}`} className="bread-crumb-link"> Home</Link>
+                                {
+                                    domain ? (
+                                        <Link to={ `/`} className="bread-crumb-link"> Home</Link>
+                                    ) : (
+                                        <Link to={ `/${businessUrl}`} className="bread-crumb-link"> Home</Link>
+                                    )
+                                }
+
                             </li> |
                             <li>
-                                <Link to={ `/${businessUrl}/products` } className="bread-crumb-link"> Products</Link>
+                                {
+                                    domain ? (
+                                        <Link to={ `/products` } className="bread-crumb-link"> Products</Link>
+                                    ) : (
+                                        <Link to={ `/${businessUrl}/products` } className="bread-crumb-link"> Products</Link>
+                                    )
+                                }
+
                             </li> |
                             <li>
                                 {product.productName}
@@ -154,7 +165,13 @@ const ShopProductDetails = ({businessUrl}) => {
                     </div>
                     {/*--------------product details section-----------------------*/}
                     <div className="Product-details">
-                        <Link to={ `/${businessUrl}/products` }  className="h5"> <i className="fas fa-chevron-left"></i>  Products</Link>
+                        {
+                            domain ? (
+                                <Link to={ `/products` }  className="h5"> <i className="fas fa-chevron-left"></i>  Products</Link>
+                            ) : (
+                                <Link to={ `/${businessUrl}/products` }  className="h5"> <i className="fas fa-chevron-left"></i>  Products</Link>
+                            )
+                        }
                         <Row>
                             <Col md={7}>
                                 <div className="Image-box">
@@ -178,13 +195,13 @@ const ShopProductDetails = ({businessUrl}) => {
                                     <h5 className="Product-title"> {product.productName} </h5>
                                     <h6 className="Product-price"> &#8358; {product.productPrice.toString()
                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
-                                    <p className="input">
+                                    <div className="input">
                                         <h5>Quantity</h5>
                                         <input type="number"
                                                className="form-control"
                                                id="quantity"
                                                onChange={onChange}
-                                               value={quantity}/></p>
+                                               value={quantity}/></div>
                                     <p className="Product-description">
                                         <span className="title">Description: </span> <br/>
                                         {product.productDescription}
@@ -202,7 +219,7 @@ const ShopProductDetails = ({businessUrl}) => {
                         </Row>
                     </div>
 
-                    <SimilarItem products={products} loading={loading} businessUrl={businessUrl} />
+                    <SimilarItem products={products} loading={loading} businessUrl={businessUrl} domain={domain} />
                 </div>
 
             </Container>

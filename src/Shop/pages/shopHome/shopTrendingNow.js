@@ -1,7 +1,7 @@
 import {Col, Row} from "react-bootstrap";
-import CatImageOne from "../../../assets/images/shopimages/cat-image-one.svg"
-import CatImageTwo from "../../../assets/images/shopimages/cat-image-two.svg"
-import CatImageThree from "../../../assets/images/shopimages/cat-image-three.svg"
+import CatImageOne from "../../assets/images/shopimages/cat-image-one.svg"
+import CatImageTwo from "../../assets/images/shopimages/cat-image-two.svg"
+import CatImageThree from "../../assets/images/shopimages/cat-image-three.svg"
 const ShopTrendingNow = () => {
 
     return(

@@ -1,13 +1,13 @@
 import {Col, Container, Row} from "react-bootstrap";
 import {collection, doc, getDoc, getDocs, query, where} from "firebase/firestore";
-import {db} from "../../../firebase.config";
+import {db} from "../../config/firebase.config";
 import React, {useEffect, useRef, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../components/Spinner";
 import ProductCard from "../../components/ProductCard";
 
-const ShopCategories = ({businessUrl}) => {
+const ShopCategories = ({businessUrl, domain}) => {
 
     const params = useParams()
     const isMounted = useRef()
@@ -19,7 +19,7 @@ const ShopCategories = ({businessUrl}) => {
     const fetchCategory = async () => {
         try
         {
-            const docRef = doc(db, "shops", params.shopName, 'categories', params.categoryUrl )
+            const docRef = doc(db, "shops", `${businessUrl}`, 'categories', params.categoryUrl )
             const docSnap = await getDoc(docRef );
 
             if (docSnap.exists()) {
@@ -38,7 +38,7 @@ const ShopCategories = ({businessUrl}) => {
     const fetchProducts = async () => {
         try
         {
-            const prodRef = collection(db, 'shops', params.shopName, 'products')
+            const prodRef = collection(db, 'shops', `${businessUrl}`, 'products')
             const q = query(prodRef, where("productCategory", "==", params.categoryUrl))
             const querySnap = await getDocs(q)
             let products = []
@@ -80,7 +80,12 @@ const ShopCategories = ({businessUrl}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                <Link to={ `/${businessUrl}`} className="bread-crumb-link"> Home</Link>
+                                {domain ? (
+                                    <Link to={ `/`} className="bread-crumb-link"> Home</Link>
+                                ) : (
+                                    <Link to={ `/${businessUrl}`} className="bread-crumb-link"> Home</Link>
+                                )}
+
                             </li> |
                             <li>
                                 {categoryName.title}
@@ -100,7 +105,7 @@ const ShopCategories = ({businessUrl}) => {
                                             { products.map((product) => (
                                                 <Col md={ 3 } key={ product.id }>
                                                     <ProductCard id={ product.id } product={ product.data }
-                                                                 businessUrl={ businessUrl }/>
+                                                                 businessUrl={ businessUrl} domain={domain}/>
                                                 </Col>
                                             )) }
                                         </Row>

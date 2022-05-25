@@ -6,12 +6,12 @@ import OrderSummary from "./orderSummary";
 import {toast} from "react-toastify";
 import {v4 as uuidv4} from "uuid";
 import {doc, getDoc, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
-import {db} from "../../../firebase.config";
-import Spinner from "../../../components/Spinner";
+import {db} from "../../config/firebase.config";
+import Spinner from "../../components/Spinner";
 
 
 
-const ShopCheckout = ({businessUrl}) => {
+const ShopCheckout = ({businessUrl, domain}) => {
 
     const params = useParams()
     const isMounted = useRef()
@@ -51,7 +51,6 @@ const ShopCheckout = ({businessUrl}) => {
         timeStamp: '',
     }
 
-
     const {email, firstname, lastname, country, state, city, deliveryAddress, phoneNumber} = formData
 
     // handle form data store and update form information
@@ -83,7 +82,7 @@ const ShopCheckout = ({businessUrl}) => {
                 formDataCopy.customerId = customerId;
                 formDataCopy.timeStamp = serverTimestamp();
 
-                const customerRef = doc(db, 'shops', params.shopName, 'customers', customerId)
+                const customerRef = doc(db, 'shops', `${businessUrl}`, 'customers', customerId)
                 await setDoc(customerRef, formDataCopy)
                     .then(() => {
 
@@ -100,19 +99,24 @@ const ShopCheckout = ({businessUrl}) => {
                         orderCopy.orderStatus = "Pending";
                         orderCopy.productOrdered = [...carts];
                         orderCopy.timeStamp = serverTimestamp();
-                        const orderRef = doc(db, 'shops', params.shopName, 'orders', orderID)
+                        const orderRef = doc(db, 'shops', `${businessUrl}`, 'orders', orderID)
                         setDoc(orderRef, orderCopy)
                     })
                 // console.log({...formDataCopy})
                 toast.success("information saved")
-                navigate(`/${params.shopName}/checkout/payment`)
+                if(domain) {
+                    navigate(`/checkout/payment`);
+                }
+                else{
+                    navigate(`/${params.shopName}/checkout/payment`)
+                }
             }
             else if(customerID === formData.customerId){
 
                 const formDataCopy = {...formData}
                 formDataCopy.timeStamp = serverTimestamp()
 
-                const customerRef = doc(db, 'shops', params.shopName, 'customers', customerID)
+                const customerRef = doc(db, 'shops', `${businessUrl}`, 'customers', customerID)
                 await updateDoc(customerRef, formDataCopy)
                     .then(() => {
                         //store orders
@@ -128,12 +132,16 @@ const ShopCheckout = ({businessUrl}) => {
                         orderCopy.orderStatus = "Pending";
                         orderCopy.productOrdered = [...carts];
                         orderCopy.timeStamp = serverTimestamp();
-                        const orderRef = doc(db, 'shops', params.shopName, 'orders', orderUniqueID)
+                        const orderRef = doc(db, 'shops',`${businessUrl}`, 'orders', orderUniqueID)
                         updateDoc(orderRef, orderCopy)
                     })
-
                 toast.success("information updated")
-                navigate(`/${params.shopName}/checkout/payment`);
+                if(domain) {
+                    navigate(`/checkout/payment`);
+                }
+                else{
+                    navigate(`/${params.shopName}/checkout/payment`);
+                }
             }
         }
         catch (error) {
@@ -147,7 +155,7 @@ const ShopCheckout = ({businessUrl}) => {
     const getCustomer = async (CustomerID) =>{
         setLoading(true)
         try {
-            const customerRef = doc(db, 'shops', params.shopName, 'customers', CustomerID)
+            const customerRef = doc(db, 'shops', `${businessUrl}`, 'customers', CustomerID)
             const customerSnap =  await getDoc(customerRef)
 
             if(customerSnap.exists()){
@@ -160,7 +168,6 @@ const ShopCheckout = ({businessUrl}) => {
         }
         setLoading(false)
     }
-
 
     // onChange function to make input functional
     const onChange = (e) => {
@@ -201,21 +208,13 @@ const ShopCheckout = ({businessUrl}) => {
                 setCarts(localCart)
                 // console.log(carts)
             }
-            // console.log("formdata id: "  + formData.customerId);
-            // console.log( customerID);
         }
-
-            // Math.random should be unique because of its seeding algorithm.
-            // Convert it to base 36 (numbers + letters), and grab the first 9 characters
-            // after the decimal.
-
 
         return () => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMounted, params.shopName])
-
+    }, [isMounted, businessUrl])
 
     return(
         <>
@@ -229,7 +228,13 @@ const ShopCheckout = ({businessUrl}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                <Link  to={(`/${businessUrl}/cart`)} className="bread-crumb-link"> Cart</Link>
+                                {
+                                    domain ? (
+                                        <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
+                                    ) : (
+                                        <Link  to={(`/${businessUrl}/cart`)} className="bread-crumb-link"> Cart</Link>
+                                    )
+                                }
                             </li>
                             <i className="fas fa-chevron-right"></i>
                             <li>

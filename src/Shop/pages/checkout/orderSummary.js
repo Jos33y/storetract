@@ -1,7 +1,6 @@
-import {Button ,Table} from "react-bootstrap";
 import React ,{useEffect ,useRef ,useState} from "react";
+import {Button ,Table} from "react-bootstrap";
 import {useParams} from "react-router-dom";
-
 
 const OrderSummary = ({confirm}) => {
 
@@ -23,16 +22,12 @@ const OrderSummary = ({confirm}) => {
             }
             // console.log(carts)
 
-
-
         }
         return () => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMounted, params.productUrl])
-
-
 
     return (
         <>

@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const CartList = ({cart, businessUrl, onDelete}) => {
+const CartList = ({cart, businessUrl, onDelete, domain}) => {
 
     return(
         <>
@@ -15,9 +15,20 @@ const CartList = ({cart, businessUrl, onDelete}) => {
 
                     <li className="middle-cart">
                         <div className="cart-texts">
-                            <Link to={ `/${businessUrl}/products/${ cart.productCategory}/${cart.uniqueId}`} className="cart-name">
-                                {cart.productName}
-                            </Link>
+
+
+
+                            {
+                                domain ? (
+                                    <Link to={ `/products/${ cart.productCategory}/${cart.uniqueId}`} className="cart-name">
+                                        {cart.productName}
+                                    </Link>
+                                ) : (
+                                    <Link to={ `/${businessUrl}/products/${ cart.productCategory}/${cart.uniqueId}`} className="cart-name">
+                                        {cart.productName}
+                                    </Link>
+                                )
+                            }
                             <h5 className="quantity">{cart.qty} <i className="fas fa-times"></i> &#8358;{cart.productPrice.toString()
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h5>
                         </div>

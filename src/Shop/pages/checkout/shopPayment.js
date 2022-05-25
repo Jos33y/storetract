@@ -2,16 +2,16 @@ import {Button, Col, Container, Row, Table} from "react-bootstrap";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import OrderSummary from "./orderSummary";
 import React, {useEffect, useRef, useState} from "react";
-import PaystackLogo from "../../../assets/images/paystack-logo-vector.png";
-import KlumpLogo from "../../../assets/images/klump-two-ng.PNG";
-import AcceptedPayment from "../../../assets/images/shopimages/cards-501x173.png";
 import {toast} from "react-toastify";
 import {usePaystackPayment} from "react-paystack";
 import {doc, getDoc, serverTimestamp, setDoc, addDoc, updateDoc, collection} from "firebase/firestore";
-import {db} from "../../../firebase.config";
-import Spinner from "../../../components/Spinner";
+import {db} from "../../config/firebase.config";
+import Spinner from "../../components/Spinner";
+import PaystackLogo from "../../assets/images/paystack-logo-vector.png";
+import KlumpLogo from "../../assets/images/klump-two-ng.PNG";
+import AcceptedPayment from "../../assets/images/shopimages/cards-501x173.png";
 
-const ShopPayment = ({businessUrl}) => {
+const ShopPayment = ({businessUrl, domain}) => {
 
     const params = useParams()
     const navigate = useNavigate()
@@ -44,9 +44,8 @@ const ShopPayment = ({businessUrl}) => {
                 transactionRef: reference.transaction,
                 timeStamp: serverTimestamp(),
             }
-            const transRef = doc(db, 'shops', params.shopName, 'transactions', reference.reference)
+            const transRef = doc(db, 'shops',`${businessUrl}`, 'transactions', reference.reference)
             await setDoc(transRef, transactionData)
-
         }
         catch (error) {
             console.log({error})
@@ -55,17 +54,13 @@ const ShopPayment = ({businessUrl}) => {
 
     // get account balance
     const getWalletBalance = async () => {
-
         try {
-            const getBalanceRef = doc(db, 'shops', params.shopName, 'walletBalance', 'account')
+            const getBalanceRef = doc(db, 'shops', `${businessUrl}`, 'walletBalance', 'account')
             const balanceSnap =  await getDoc(getBalanceRef)
 
             if(balanceSnap.exists()){
                 // console.log(customerSnap.data())
                 setBalanceData(balanceSnap.data())
-            }
-            else {
-                newWallet()
             }
         }
         catch (e) {
@@ -82,7 +77,7 @@ const ShopPayment = ({businessUrl}) => {
             balanceDataCopy.accountBalance = newBalance;
             balanceDataCopy.timeStamp = serverTimestamp();
 
-            const balanceRef = doc(db, 'shops', params.shopName, 'walletBalance', 'account')
+            const balanceRef = doc(db, 'shops', `${businessUrl}`, 'walletBalance', 'account')
             await updateDoc(balanceRef, balanceDataCopy)
         }
 
@@ -91,20 +86,6 @@ const ShopPayment = ({businessUrl}) => {
         }
     }
 
-    // create new wallet
-    const newWallet = async () => {
-        try {
-            const balanceDataCopy = {
-                accountBalance: 0,
-                timeStamp: serverTimestamp(),
-            }
-            const balanceRef = doc(db, 'shops', params.shopName, 'walletBalance', 'account')
-            await setDoc(balanceRef, balanceDataCopy)
-        }
-        catch (error) {
-            console.log({error})
-        }
-    }
     // add purchase to deposit history
     const addDepositToHistory = async (reference) => {
         try {
@@ -115,7 +96,7 @@ const ShopPayment = ({businessUrl}) => {
                 transactionRef: reference.reference,
                 timeStamp: serverTimestamp(),
             }
-            const depositRef = collection(db, 'shops', params.shopName, 'walletDepositHistory')
+            const depositRef = collection(db, 'shops', `${businessUrl}`, 'walletDepositHistory')
             await addDoc(depositRef, depositHistoryData)
         }
         catch (error) {
@@ -134,7 +115,7 @@ const ShopPayment = ({businessUrl}) => {
                 orderTotal: (`${itemsPrice}`),
                 timeStamp: serverTimestamp(),
             }
-            const orderRef = doc(db, 'shops', params.shopName, 'orders', orderUniqueID)
+            const orderRef = doc(db, 'shops', `${businessUrl}`, 'orders', orderUniqueID)
             await updateDoc(orderRef, orderCopy)
         }
 
@@ -143,7 +124,6 @@ const ShopPayment = ({businessUrl}) => {
         }
     }
 
-
     // PayStack Payment config
     const paystack_config = {
         reference: (new Date()).getTime().toString(),
@@ -151,7 +131,6 @@ const ShopPayment = ({businessUrl}) => {
         amount: (itemsPrice * 100),
         publicKey: "pk_test_92373800d132af22fc873ce48794f7f6165d4ad3",
     };
-
 
     // function that initializes PayStack Payment
     const initializePayment = usePaystackPayment(paystack_config);
@@ -174,7 +153,13 @@ const ShopPayment = ({businessUrl}) => {
         toast.success("Payment successful");
         console.log({reference});
 
-        navigate(`/${params.shopName}/checkout/order-confirmation`)
+        if(domain) {
+            navigate(`/checkout/order-confirmation`)
+        }
+        else{
+            navigate(`/${params.shopName}/checkout/order-confirmation`)
+        }
+
     };
 
     // you onclose function for when the PayStack dialog is closed
@@ -182,7 +167,6 @@ const ShopPayment = ({businessUrl}) => {
         // implementation for  whatever you want to do when the PayStack dialog closed.
         toast.error("Payment window closed");
     }
-
 
     // check if paystack buttons is active
     const activePaystack = () => {
@@ -242,7 +226,7 @@ const ShopPayment = ({businessUrl}) => {
     const getCustomer = async (CustomerID) =>{
         setLoading(true)
         try {
-            const customerRef = doc(db, 'shops', params.shopName, 'customers', CustomerID)
+            const customerRef = doc(db, 'shops', `${businessUrl}`, 'customers', CustomerID)
             const customerSnap =  await getDoc(customerRef)
 
             if(customerSnap.exists()){
@@ -309,11 +293,23 @@ const ShopPayment = ({businessUrl}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                <Link  to={(`/${businessUrl}/cart`)} className="bread-crumb-link"> Cart</Link>
+                                {
+                                    domain ? (
+                                        <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
+                                    ) : (
+                                        <Link  to={(`/${businessUrl}/cart`)} className="bread-crumb-link"> Cart</Link>
+                                    )
+                                }
                             </li>
                             <i className="fas fa-chevron-right"></i>
                             <li>
-                                <Link  to={(`/${businessUrl}/checkout/information`)} className="bread-crumb-link"> Information</Link>
+                                {
+                                    domain ? (
+                                        <Link  to={(`/checkout/information`)} className="bread-crumb-link"> Information</Link>
+                                    ) : (
+                                        <Link  to={(`/${businessUrl}/checkout/information`)} className="bread-crumb-link"> Information</Link>
+                                    )
+                                }
                             </li>
                             <i className="fas fa-chevron-right"></i>
                             <li>
@@ -340,12 +336,28 @@ const ShopPayment = ({businessUrl}) => {
                                             <tr className="top">
                                                 <td><p className="text-head"> Contact</p></td>
                                                 <td> <p>{formData.email} </p></td>
-                                                <td> <Link to={(`/${businessUrl}/checkout/information`)} className="link">Change</Link> </td>
+                                                <td>
+                                                    {
+                                                        domain ? (
+                                                            <Link to={(`/checkout/information`)} className="link">Change</Link>
+                                                        ) : (
+                                                            <Link to={(`/${businessUrl}/checkout/information`)} className="link">Change</Link>
+                                                        )
+                                                    }
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><p className="text-head"> Ship to</p></td>
                                                 <td> <p>{formData.deliveryAddress}, {formData.city}, {formData.state} state, {formData.country} </p></td>
-                                                <td> <Link to={(`/${businessUrl}/checkout/information`)} className="link">Change</Link> </td>
+                                                <td>
+                                                    {
+                                                        domain ? (
+                                                            <Link to={(`/checkout/information`)} className="link">Change</Link>
+                                                        ) : (
+                                                            <Link to={(`/${businessUrl}/checkout/information`)} className="link">Change</Link>
+                                                        )
+                                                    }
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><p className="text-head"> Method</p></td>
@@ -429,7 +441,15 @@ const ShopPayment = ({businessUrl}) => {
                                                 <Button className="btn btn-md btn-primary" onClick={makePayment}> Make Payment </Button>
                                             </Col>
                                             <Col md={4}>
-                                                <p><Link to={(`/${businessUrl}/checkout/information`)} className="link"> Return to Shipping</Link></p>
+                                                <p>
+                                                    {
+                                                        domain ? (
+                                                            <Link to={(`/checkout/information`)} className="link"> Return to Shipping</Link>
+                                                        ) : (
+                                                            <Link to={(`/${businessUrl}/checkout/information`)} className="link"> Return to Shipping</Link>
+                                                        )
+                                                    }
+                                                </p>
                                             </Col>
 
                                         </Row>

@@ -1,11 +1,11 @@
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../components/Spinner";
 import "../../css/shopHeader.css"
 import {Col, Row} from "react-bootstrap";
 import ProductCard from "../../components/ProductCard";
 import React from "react";
 import {Link} from "react-router-dom";
 
-const ShopHomeProduct = ({loading, products, businessUrl}) => {
+const ShopHomeProduct = ({loading, products, businessUrl, domain}) => {
 
     return(
         <>
@@ -26,7 +26,7 @@ const ShopHomeProduct = ({loading, products, businessUrl}) => {
                                     { products.map((product) => (
                                         <Col md={ 3 } key={ product.id }>
                                             <ProductCard id={ product.id } product={ product.data }
-                                                         businessUrl={ businessUrl }/>
+                                                         businessUrl={ businessUrl } domain={domain}/>
                                         </Col>
                                     )) }
                                 </Row>

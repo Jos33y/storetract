@@ -1,13 +1,11 @@
 import React from "react";
 import {Row, Col, Container} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import HeroImage from "../../../assets/images/shopimages/hero-image-side.svg"
+import HeroImage from "../../assets/images/shopimages/hero-image-side.svg"
 import ShopHomeProduct from "./shopHomeProduct";
 import ShopTrendingNow from "./shopTrendingNow";
 
-
-
-const ShopHome = ({products, businessUrl, loading, businessName}) => {
+const ShopHome = ({products, businessUrl, loading, businessName, domain}) => {
 
     return (
         <Container>
@@ -33,7 +31,7 @@ const ShopHome = ({products, businessUrl, loading, businessName}) => {
                </Container>
             </div>
 
-            <ShopHomeProduct loading={loading} products={products} businessUrl={businessUrl} />
+            <ShopHomeProduct loading={loading} products={products} businessUrl={businessUrl} domain={domain} />
             <ShopTrendingNow />
 
         </Container>

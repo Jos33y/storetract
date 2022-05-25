@@ -2,12 +2,12 @@ import {Col, Container, Row} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
 import React, {useEffect, useRef, useState} from "react";
 import {collection, getDocs, limit, query} from "firebase/firestore";
-import {db} from "../../../firebase.config";
+import {db} from "../../config/firebase.config";
 import {toast} from "react-toastify";
 import ProductCard from "../../components/ProductCard";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../components/Spinner";
 
-const ShopProducts = ({businessUrl}) => {
+const ShopProducts = ({businessUrl, domain}) => {
 
     const params = useParams()
     const isMounted = useRef()
@@ -19,7 +19,7 @@ const ShopProducts = ({businessUrl}) => {
     const fetchProducts = async () => {
         try
         {
-            const prodRef = collection(db, 'shops', params.shopName, 'products')
+            const prodRef = collection(db, 'shops', `${businessUrl}`, 'products')
             const q = query(prodRef, limit(5))
             const querySnap = await getDocs(q)
             let products = []
@@ -59,7 +59,7 @@ const ShopProducts = ({businessUrl}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                <Link to={ `/${businessUrl}`} className="bread-crumb-link"> Home</Link>
+                                <Link to={ `/`} className="bread-crumb-link"> Home</Link>
                             </li> |
                             <li>
                                  Products
@@ -79,7 +79,7 @@ const ShopProducts = ({businessUrl}) => {
                             { products.map((product) => (
                                 <Col md={ 3 } key={ product.id }>
                                     <ProductCard id={ product.id } product={ product.data }
-                                                 businessUrl={ businessUrl }/>
+                                                 businessUrl={ businessUrl } domain={domain}/>
                                 </Col>
                             )) }
                         </Row>
