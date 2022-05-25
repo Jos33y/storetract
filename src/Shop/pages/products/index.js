@@ -7,7 +7,7 @@ import {toast} from "react-toastify";
 import ProductCard from "../../components/ProductCard";
 import Spinner from "../../components/Spinner";
 
-const ShopProducts = ({businessUrl, domain}) => {
+const ShopProducts = ({businessUrl}) => {
 
     const params = useParams()
     const isMounted = useRef()
@@ -79,7 +79,7 @@ const ShopProducts = ({businessUrl, domain}) => {
                             { products.map((product) => (
                                 <Col md={ 3 } key={ product.id }>
                                     <ProductCard id={ product.id } product={ product.data }
-                                                 businessUrl={ businessUrl } domain={domain}/>
+                                                 businessUrl={ businessUrl }/>
                                 </Col>
                             )) }
                         </Row>

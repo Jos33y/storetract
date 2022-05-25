@@ -5,7 +5,7 @@ import ProductCard from "../../components/ProductCard";
 import React from "react";
 import {Link} from "react-router-dom";
 
-const ShopHomeProduct = ({loading, products, businessUrl, domain}) => {
+const ShopHomeProduct = ({loading, products, businessUrl}) => {
 
     return(
         <>
@@ -26,7 +26,7 @@ const ShopHomeProduct = ({loading, products, businessUrl, domain}) => {
                                     { products.map((product) => (
                                         <Col md={ 3 } key={ product.id }>
                                             <ProductCard id={ product.id } product={ product.data }
-                                                         businessUrl={ businessUrl } domain={domain}/>
+                                                         businessUrl={ businessUrl }/>
                                         </Col>
                                     )) }
                                 </Row>

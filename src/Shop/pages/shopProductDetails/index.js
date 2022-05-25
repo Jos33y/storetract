@@ -9,7 +9,7 @@ import {toast} from "react-toastify";
 import Spinner from "../../components/Spinner";
 
 
-const ShopProductDetails = ({businessUrl, domain}) => {
+const ShopProductDetails = ({businessUrl}) => {
     const params = useParams()
     const isMounted = useRef()
 
@@ -139,24 +139,10 @@ const ShopProductDetails = ({businessUrl, domain}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                {
-                                    domain ? (
-                                        <Link to={ `/`} className="bread-crumb-link"> Home</Link>
-                                    ) : (
-                                        <Link to={ `/${businessUrl}`} className="bread-crumb-link"> Home</Link>
-                                    )
-                                }
-
+                                <Link to={ `/`} className="bread-crumb-link"> Home</Link>
                             </li> |
                             <li>
-                                {
-                                    domain ? (
-                                        <Link to={ `/products` } className="bread-crumb-link"> Products</Link>
-                                    ) : (
-                                        <Link to={ `/${businessUrl}/products` } className="bread-crumb-link"> Products</Link>
-                                    )
-                                }
-
+                                <Link to={ `/products` } className="bread-crumb-link"> Products</Link>
                             </li> |
                             <li>
                                 {product.productName}
@@ -165,13 +151,7 @@ const ShopProductDetails = ({businessUrl, domain}) => {
                     </div>
                     {/*--------------product details section-----------------------*/}
                     <div className="Product-details">
-                        {
-                            domain ? (
-                                <Link to={ `/products` }  className="h5"> <i className="fas fa-chevron-left"></i>  Products</Link>
-                            ) : (
-                                <Link to={ `/${businessUrl}/products` }  className="h5"> <i className="fas fa-chevron-left"></i>  Products</Link>
-                            )
-                        }
+                        <Link to={ `/products` }  className="h5"> <i className="fas fa-chevron-left"></i>  Products</Link>
                         <Row>
                             <Col md={7}>
                                 <div className="Image-box">
@@ -219,7 +199,7 @@ const ShopProductDetails = ({businessUrl, domain}) => {
                         </Row>
                     </div>
 
-                    <SimilarItem products={products} loading={loading} businessUrl={businessUrl} domain={domain} />
+                    <SimilarItem products={products} loading={loading} businessUrl={businessUrl} />
                 </div>
 
             </Container>

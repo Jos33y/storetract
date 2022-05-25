@@ -5,7 +5,7 @@ import HeroImage from "../../assets/images/shopimages/hero-image-side.svg"
 import ShopHomeProduct from "./shopHomeProduct";
 import ShopTrendingNow from "./shopTrendingNow";
 
-const ShopHome = ({products, businessUrl, loading, businessName, domain}) => {
+const ShopHome = ({products, businessUrl, loading, businessName}) => {
 
     return (
         <Container>
@@ -31,7 +31,7 @@ const ShopHome = ({products, businessUrl, loading, businessName, domain}) => {
                </Container>
             </div>
 
-            <ShopHomeProduct loading={loading} products={products} businessUrl={businessUrl} domain={domain} />
+            <ShopHomeProduct loading={loading} products={products} businessUrl={businessUrl} />
             <ShopTrendingNow />
 
         </Container>

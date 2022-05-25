@@ -11,7 +11,7 @@ import PaystackLogo from "../../assets/images/paystack-logo-vector.png";
 import KlumpLogo from "../../assets/images/klump-two-ng.PNG";
 import AcceptedPayment from "../../assets/images/shopimages/cards-501x173.png";
 
-const ShopPayment = ({businessUrl, domain}) => {
+const ShopPayment = ({businessUrl}) => {
 
     const params = useParams()
     const navigate = useNavigate()
@@ -152,13 +152,7 @@ const ShopPayment = ({businessUrl, domain}) => {
         // toast.success("stringify")
         toast.success("Payment successful");
         console.log({reference});
-
-        if(domain) {
-            navigate(`/checkout/order-confirmation`)
-        }
-        else{
-            navigate(`/${params.shopName}/checkout/order-confirmation`)
-        }
+        navigate(`/checkout/order-confirmation`)
 
     };
 
@@ -293,23 +287,11 @@ const ShopPayment = ({businessUrl, domain}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                {
-                                    domain ? (
-                                        <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
-                                    ) : (
-                                        <Link  to={(`/${businessUrl}/cart`)} className="bread-crumb-link"> Cart</Link>
-                                    )
-                                }
+                                <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
                             </li>
                             <i className="fas fa-chevron-right"></i>
                             <li>
-                                {
-                                    domain ? (
-                                        <Link  to={(`/checkout/information`)} className="bread-crumb-link"> Information</Link>
-                                    ) : (
-                                        <Link  to={(`/${businessUrl}/checkout/information`)} className="bread-crumb-link"> Information</Link>
-                                    )
-                                }
+                                <Link  to={(`/checkout/information`)} className="bread-crumb-link"> Information</Link>
                             </li>
                             <i className="fas fa-chevron-right"></i>
                             <li>
@@ -337,26 +319,14 @@ const ShopPayment = ({businessUrl, domain}) => {
                                                 <td><p className="text-head"> Contact</p></td>
                                                 <td> <p>{formData.email} </p></td>
                                                 <td>
-                                                    {
-                                                        domain ? (
-                                                            <Link to={(`/checkout/information`)} className="link">Change</Link>
-                                                        ) : (
-                                                            <Link to={(`/${businessUrl}/checkout/information`)} className="link">Change</Link>
-                                                        )
-                                                    }
+                                                    <Link to={(`/checkout/information`)} className="link">Change</Link>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td><p className="text-head"> Ship to</p></td>
                                                 <td> <p>{formData.deliveryAddress}, {formData.city}, {formData.state} state, {formData.country} </p></td>
                                                 <td>
-                                                    {
-                                                        domain ? (
-                                                            <Link to={(`/checkout/information`)} className="link">Change</Link>
-                                                        ) : (
-                                                            <Link to={(`/${businessUrl}/checkout/information`)} className="link">Change</Link>
-                                                        )
-                                                    }
+                                                    <Link to={(`/checkout/information`)} className="link">Change</Link>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -442,13 +412,7 @@ const ShopPayment = ({businessUrl, domain}) => {
                                             </Col>
                                             <Col md={4}>
                                                 <p>
-                                                    {
-                                                        domain ? (
-                                                            <Link to={(`/checkout/information`)} className="link"> Return to Shipping</Link>
-                                                        ) : (
-                                                            <Link to={(`/${businessUrl}/checkout/information`)} className="link"> Return to Shipping</Link>
-                                                        )
-                                                    }
+                                                    <Link to={(`/checkout/information`)} className="link"> Return to Shipping</Link>
                                                 </p>
                                             </Col>
 

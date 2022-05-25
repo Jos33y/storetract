@@ -31,8 +31,6 @@ const Shop = ({storeUrl}) => {
 
 // webhook: https://hooks.slack.com/services/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
 
-    console.log(storeUrl);
-
     const confirmUrl = async (URL) => {
         try {
             const shopRef = doc(db ,"shops", `${URL}`)

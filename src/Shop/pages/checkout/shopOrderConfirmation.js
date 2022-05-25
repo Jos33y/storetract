@@ -1,4 +1,4 @@
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useRef, useState} from "react";
 import {Button, Col, Container, Row, Table} from "react-bootstrap";
 import OrderSummary from "./orderSummary";
@@ -7,9 +7,9 @@ import {doc, getDoc} from "firebase/firestore";
 import {db} from "../../config/firebase.config";
 import Spinner from "../../components/Spinner";
 
-const ShopOrderConfirmation = ({businessUrl, domain}) => {
+const ShopOrderConfirmation = ({businessUrl}) => {
 
-    const params = useParams()
+    // const params = useParams()
     const navigate = useNavigate()
     const isMounted = useRef()
     const componentRef = useRef();
@@ -100,12 +100,7 @@ const ShopOrderConfirmation = ({businessUrl, domain}) => {
         catch (e) {
             console.log({e})
         }
-        if(domain){
-            navigate(`/`)
-        }
-        else{
-            navigate(`/${params.shopName}`)
-        }
+        navigate(`/`)
     }
 
     const trackOrder = () => {
@@ -117,12 +112,7 @@ const ShopOrderConfirmation = ({businessUrl, domain}) => {
         catch (e) {
             console.log({e})
         }
-        if(domain){
-            navigate(`/track-order`)
-        }
-        else{
-            navigate(`/${params.shopName}/track-order`)
-        }
+        navigate(`/track-order`)
     }
 
     return(
@@ -137,13 +127,7 @@ const ShopOrderConfirmation = ({businessUrl, domain}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                {
-                                    domain ? (
-                                        <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
-                                    ) : (
-                                        <Link  to={(`/${businessUrl}/cart`)} className="bread-crumb-link"> Cart</Link>
-                                    )
-                                }
+                                <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
                             </li>
                             <i className="fas fa-chevron-right"></i>
                             <li>

@@ -1,6 +1,6 @@
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import "../../css/shopHeader.css"
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useRef, useState} from "react";
 import OrderSummary from "./orderSummary";
 import {toast} from "react-toastify";
@@ -11,9 +11,9 @@ import Spinner from "../../components/Spinner";
 
 
 
-const ShopCheckout = ({businessUrl, domain}) => {
+const ShopCheckout = ({businessUrl}) => {
 
-    const params = useParams()
+    // const params = useParams()
     const isMounted = useRef()
     const navigate = useNavigate()
 
@@ -104,12 +104,7 @@ const ShopCheckout = ({businessUrl, domain}) => {
                     })
                 // console.log({...formDataCopy})
                 toast.success("information saved")
-                if(domain) {
-                    navigate(`/checkout/payment`);
-                }
-                else{
-                    navigate(`/${params.shopName}/checkout/payment`)
-                }
+                navigate(`/checkout/payment`);
             }
             else if(customerID === formData.customerId){
 
@@ -136,12 +131,7 @@ const ShopCheckout = ({businessUrl, domain}) => {
                         updateDoc(orderRef, orderCopy)
                     })
                 toast.success("information updated")
-                if(domain) {
-                    navigate(`/checkout/payment`);
-                }
-                else{
-                    navigate(`/${params.shopName}/checkout/payment`);
-                }
+                navigate(`/checkout/payment`);
             }
         }
         catch (error) {
@@ -228,13 +218,7 @@ const ShopCheckout = ({businessUrl, domain}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                {
-                                    domain ? (
-                                        <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
-                                    ) : (
-                                        <Link  to={(`/${businessUrl}/cart`)} className="bread-crumb-link"> Cart</Link>
-                                    )
-                                }
+                                <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
                             </li>
                             <i className="fas fa-chevron-right"></i>
                             <li>

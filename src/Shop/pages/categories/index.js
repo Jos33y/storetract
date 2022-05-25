@@ -7,7 +7,7 @@ import {toast} from "react-toastify";
 import Spinner from "../../components/Spinner";
 import ProductCard from "../../components/ProductCard";
 
-const ShopCategories = ({businessUrl, domain}) => {
+const ShopCategories = ({businessUrl}) => {
 
     const params = useParams()
     const isMounted = useRef()
@@ -68,7 +68,7 @@ const ShopCategories = ({businessUrl, domain}) => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMounted, params.shopName])
+    }, [isMounted, businessUrl])
 
 
 
@@ -80,12 +80,7 @@ const ShopCategories = ({businessUrl, domain}) => {
                     <div className='bread-crumb'>
                         <ul>
                             <li>
-                                {domain ? (
-                                    <Link to={ `/`} className="bread-crumb-link"> Home</Link>
-                                ) : (
-                                    <Link to={ `/${businessUrl}`} className="bread-crumb-link"> Home</Link>
-                                )}
-
+                                <Link to={ `/`} className="bread-crumb-link"> Home</Link>
                             </li> |
                             <li>
                                 {categoryName.title}
@@ -105,7 +100,7 @@ const ShopCategories = ({businessUrl, domain}) => {
                                             { products.map((product) => (
                                                 <Col md={ 3 } key={ product.id }>
                                                     <ProductCard id={ product.id } product={ product.data }
-                                                                 businessUrl={ businessUrl} domain={domain}/>
+                                                                 businessUrl={ businessUrl}/>
                                                 </Col>
                                             )) }
                                         </Row>

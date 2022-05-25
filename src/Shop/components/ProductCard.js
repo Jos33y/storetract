@@ -7,33 +7,22 @@ import QuickView from "../others/modal/QuickView";
 // import ProdImage from "../../assets/images/shopimages/61Dr0DoZ2aL.png";
 
 
-const ProductCard = ({product, businessUrl, id, domain}) => {
+const ProductCard = ({product, businessUrl, id}) => {
     const [isQuickView, setQuickView] = useState(false);
 
     return(
         <>
             <Card className="product-card-shop">
 
-                <Link to={ domain ? (
-                    `/products/${ product.productCategory}/${id}`
-                    ) : (
-                    `/${businessUrl}/products/${ product.productCategory}/${id}`
-                    )}
-                      className="Product-card-link">
+                <Link to={`/products/${ product.productCategory}/${id}`} className="Product-card-link">
 
                 <Card.Img src={product.imgUrls[0]}  variant="top" alt="prod picture here" className="card-img-top" />
                 </Link>
                 <Card.Body className="card-body">
                     <div className="text">
-                        {domain ? (
                             <Link to={ `/products/${ product.productCategory}/${id}`} className="product-title">
                                 {product.productName}
                             </Link>
-                        ) : (
-                            <Link to={ `/${businessUrl}/products/${ product.productCategory}/${id}`} className="product-title">
-                                {product.productName}
-                            </Link>
-                        )}
                     </div>
                     <div className="card-shop-footer">
                         <Button className="btn btn-md btn-outline">Add <i className="fas fa-plus"></i></Button>
