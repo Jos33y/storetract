@@ -3,7 +3,7 @@ import "../css/shopHeader.css"
 import {Link} from "react-router-dom";
 import {Dropdown, Container} from "react-bootstrap";
 
-const ShopHeader = ({businessName, businessUrl, domain, categories}) => {
+const ShopHeader = ({businessName, businessUrl, categories}) => {
     //
     // let name = businessName;
     // let imgSrc = "";
@@ -30,7 +30,7 @@ const ShopHeader = ({businessName, businessUrl, domain, categories}) => {
             <div className="Header-two">
                 <Container>
                     <ul>
-                        <li><Link to= {domain ? ('/') : (`/${businessUrl}`) } className="Shop-name"> {businessName} </Link></li>
+                        <li><Link to= {'/'} className="Shop-name"> {businessName} </Link></li>
                         <li>
                             <div className="form-group">
                                 <input type="text" placeholder="Search" className="form-control"/>
@@ -42,30 +42,18 @@ const ShopHeader = ({businessName, businessUrl, domain, categories}) => {
                                 <Dropdown.Toggle variant="transparent"  id="dropdown-basic" className="dropDown">
                                     Categories
                                 </Dropdown.Toggle>
-
-                                {domain ? (
                                     <Dropdown.Menu >
                                         {categories.map((category) => (
                                             <Dropdown.Item href={ `/category/${ category.data.categoryUrl }` } key={ category.id }> {category.data.title} </Dropdown.Item>
                                         ))}
                                     </Dropdown.Menu>
-                                ) : (
-                                    <Dropdown.Menu >
-                                        {categories.map((category) => (
-                                            <Dropdown.Item href={ `/${businessUrl}/category/${ category.data.categoryUrl }` } key={ category.id }> {category.data.title} </Dropdown.Item>
-                                        ))}
-                                    </Dropdown.Menu>
-                                )}
-
-
-
                             </Dropdown>
                         </li>
-                        <li className="button-cart"> <Link to={domain ? ('/cart') : (`/${businessUrl}/cart`) }
+                        <li className="button-cart"> <Link to={'/cart'}
                                                            className="Cart-button"> <i className="fas fa-shopping-cart"></i>
                             Cart: <span className="number">{ cart.length > 0 ? ( cart.length ) : '0' }</span></Link></li>
 
-                        {/*<Link to={domain ? ('/account') : (`/${businessUrl}/account`) } className="Account-link">*/}
+                        {/*<Link to={'/account'} className="Account-link">*/}
                         {/*    <i className="fas fa-truck"></i>*/}
                         {/*</Link>*/}
                     </ul>

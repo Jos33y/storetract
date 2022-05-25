@@ -26,7 +26,6 @@ const Shop = ({storeUrl}) => {
     const [products ,setProducts] = useState(null)
     const [categories, setCategories] = useState([])
     const [loading ,setLoading] = useState(true)
-    const [domain, setDomain] = useState(false)
     const [ShopURL ,setShopURL] = useState(storeUrl)
 
 // webhook: https://hooks.slack.com/services/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
@@ -100,7 +99,6 @@ const Shop = ({storeUrl}) => {
             setLoading(true)
             if (storeUrl) {
                 setShopURL(storeUrl)
-                setDomain(true)
                 confirmUrl(storeUrl).then(() => {
                     fetchProducts(storeUrl)
                     fetchCategories(storeUrl)
@@ -118,31 +116,31 @@ const Shop = ({storeUrl}) => {
     const pages = () => {
 
             if(storeUrl && params.productUrl) {
-                return <ShopProductDetails businessUrl={ShopURL} loading={loading} domain={domain}/>
+                return <ShopProductDetails businessUrl={ShopURL} loading={loading} />
             }
             else if(params.indexUrl === "track-order") {
-                return <TrackOrder businessUrl={ShopURL} loading={loading} domain={domain}/>
+                return <TrackOrder businessUrl={ShopURL} loading={loading} />
             }
             else if(params.indexUrl === "category") {
-                return <ShopCategories businessUrl={ShopURL} loading={loading} domain={domain}/>
+                return <ShopCategories businessUrl={ShopURL} loading={loading} />
             }
             else if(params.indexUrl === "cart") {
-                return <ShopCart businessUrl={ShopURL} loading={loading} domain={domain}/>
+                return <ShopCart businessUrl={ShopURL} loading={loading}/>
             }
             else if(params.indexUrl === "products") {
-                return <ShopProducts businessUrl={ShopURL} loading={loading} domain={domain}/>
+                return <ShopProducts businessUrl={ShopURL} loading={loading} />
             }
             else if(params.checkoutUrl === "information") {
-                return <ShopCheckout businessUrl={ShopURL} loading={loading} domain={domain}/>
+                return <ShopCheckout businessUrl={ShopURL} loading={loading} />
             }
             else if(params.checkoutUrl === "payment") {
-                return <ShopPayment businessUrl={ShopURL} loading={loading} domain={domain}/>
+                return <ShopPayment businessUrl={ShopURL} loading={loading} />
             }
             else if(params.checkoutUrl === "order-confirmation") {
-                return <ShopOrderConfirmation businessUrl={ShopURL} loading={loading} domain={domain}/>
+                return <ShopOrderConfirmation businessUrl={ShopURL} loading={loading} />
             }
             else if(storeUrl) {
-                return <ShopHome businessName={ shopData.businessName } businessUrl={ShopURL} products={products} loading={loading} domain={domain} />
+                return <ShopHome businessName={ shopData.businessName } businessUrl={ShopURL} products={products} loading={loading} />
             }
         else{
 
@@ -167,7 +165,7 @@ const Shop = ({storeUrl}) => {
                 { loading ?
                     (<Spinner/>) : (
                         <>
-                            <ShopHeader businessName={ shopData.businessName } businessUrl={ ShopURL } domain={domain} categories={categories}/>
+                            <ShopHeader businessName={ shopData.businessName } businessUrl={ ShopURL } categories={categories}/>
                             <div className="main-section">
                                 {pages()}
                             </div>
