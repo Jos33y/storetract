@@ -3,7 +3,7 @@ import "../pagesStyles.css"
 import {Card ,Col ,Row} from "react-bootstrap";
 import Statistics from "./statistics";
 import LatestOrders from "./latestOrders";
-import {collection, getDocs, query} from "firebase/firestore";
+import {collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 
@@ -33,8 +33,7 @@ const DashboardPage = ({storeData, userId}) => {
                 })
             })
             setOrders(orders)
-            const sales = orders.reduce((a, c) => a + c.data.orderTotal++, 0);
-            setTotalSales(sales)
+            getTotalSales().then()
 
         }
         catch (error) {
@@ -42,6 +41,31 @@ const DashboardPage = ({storeData, userId}) => {
             toast.error("currently can't get your orders")
         }
 
+    }
+
+    const getTotalSales = async () => {
+        try {
+            const getTotalRef = collection(db, 'shops', storeData.storeUrl, 'orders')
+            const q = query(getTotalRef, where("deliveryStatus", "==", 'Confirmed'))
+            const querySnap = await getDocs(q)
+
+            let salesTotal = []
+            querySnap.forEach((doc) => {
+                // console.log(doc.data());
+                return salesTotal.push({
+                    id:doc.id,
+                    data:doc.data(),
+                })
+            })
+            const sales = salesTotal.reduce((a, c) => a + c.data.orderTotal++, 0);
+            setTotalSales(sales)
+            console.log("sales: ", sales)
+
+        }
+        catch (error) {
+            console.log({error})
+            toast.error("currently can't get your total sales")
+        }
     }
 
 
