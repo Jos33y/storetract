@@ -1,12 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
-import "../css/shopHeader.css"
 import {Link} from "react-router-dom";
-import {Dropdown, Container} from "react-bootstrap";
 
-const ShopHeader = ({businessName, businessUrl, categories}) => {
-    //
-    // let name = businessName;
-    // let imgSrc = "";
+const ShopHeader = ({businessName }) => {
     const isMounted = useRef()
     const [cart ,setCart] = useState([])
 
@@ -27,39 +22,19 @@ const ShopHeader = ({businessName, businessUrl, categories}) => {
     } ,[isMounted])
     return(
         <>
-            <div className="Header-two">
-                <Container>
-                    <ul>
-                        <li><Link to= {'/'} className="Shop-name"> {businessName} </Link></li>
-                        <li>
-                            <div className="form-group">
-                                <input type="text" placeholder="Search" className="form-control"/>
-                                <button className="btn btn-sm btn-outline"> <i className="fas fa-search"></i> </button>
-                            </div>
-                        </li>
-                        <li>
-                            <Dropdown>
-                                <Dropdown.Toggle variant="transparent"  id="dropdown-basic" className="dropDown">
-                                    Categories
-                                </Dropdown.Toggle>
-                                    <Dropdown.Menu >
-                                        {categories.map((category) => (
-                                            <Dropdown.Item href={ `/category/${ category.data.categoryUrl }` } key={ category.id }> {category.data.title} </Dropdown.Item>
-                                        ))}
-                                    </Dropdown.Menu>
-                            </Dropdown>
-                        </li>
-                        <li className="button-cart"> <Link to={'/cart'}
-                                                           className="Cart-button"> <i className="fas fa-shopping-cart"></i>
-                            Cart: <span className="number">{ cart.length > 0 ? ( cart.length ) : '0' }</span></Link></li>
+            <nav className="Store-header sticky-top">
+                <ul>
+                    <li className="name-nav"><Link to= {'/'} className="store-name"> {businessName} </Link></li>
+                    <li className="store-navbar">
+                        <li className='home-link'><Link to= {'/'} className="link"> Home </Link></li>
+                        <li><Link to= {'/products'} className="link"> Shop </Link></li>
+                        <li><Link to= {'/track-order'} className="link"> Track Order </Link></li>
+                        <li className="shopping-cart"><Link to= {'/cart'} className="link">
+                            <i className="fas fa-shopping-cart"> </i> Shopping cart ({ cart.length > 0 ? ( cart.length ) : '0' }) </Link></li>
+                    </li>
 
-                        {/*<Link to={'/account'} className="Account-link">*/}
-                        {/*    <i className="fas fa-truck"></i>*/}
-                        {/*</Link>*/}
-                    </ul>
-                </Container>
-
-            </div>
+                </ul>
+            </nav>
         </>
     )
 

@@ -1,5 +1,6 @@
 
 import '../css/styles.css';
+import '../css/storeone.css';
 import React, {useEffect ,useRef ,useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {collection, getDocs, query, doc, getDoc, limit, orderBy} from "firebase/firestore";
@@ -16,7 +17,6 @@ import ShopCheckout from "./checkout";
 import ShopPayment from "./checkout/shopPayment";
 import ShopOrderConfirmation from "./checkout/shopOrderConfirmation";
 import TrackOrder from "./trackOrder";
-import ShopCategories from "./categories";
 
 const Shop = ({storeUrl}) => {
     const params = useParams()
@@ -75,7 +75,7 @@ const Shop = ({storeUrl}) => {
         try
         {
             const catRef = collection(db, 'shops', `${URL}`, 'categories' )
-            const q = query(catRef, orderBy('timeStamp', 'asc'))
+            const q = query(catRef, orderBy('timeStamp', 'asc'), limit(3))
             const querySnap = await getDocs(q)
             let categories = [];
             querySnap.forEach((doc) => {
@@ -121,8 +121,8 @@ const Shop = ({storeUrl}) => {
             else if(params.indexUrl === "track-order") {
                 return <TrackOrder businessUrl={ShopURL} loading={loading} />
             }
-            else if(params.indexUrl === "category") {
-                return <ShopCategories businessUrl={ShopURL} loading={loading} />
+            else if(params.categoryUrl) {
+                return <ShopProducts businessUrl={ShopURL} loading={loading} />
             }
             else if(params.indexUrl === "cart") {
                 return <ShopCart businessUrl={ShopURL} loading={loading}/>
@@ -140,7 +140,7 @@ const Shop = ({storeUrl}) => {
                 return <ShopOrderConfirmation businessUrl={ShopURL} loading={loading} />
             }
             else if(storeUrl) {
-                return <ShopHome businessName={ shopData.businessName } businessUrl={ShopURL} products={products} loading={loading} />
+                return <ShopHome businessName={ shopData.businessName } products={products} loading={loading} categories={categories} />
             }
         else{
 

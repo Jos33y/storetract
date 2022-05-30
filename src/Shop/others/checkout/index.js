@@ -8,8 +8,8 @@ import React, {useEffect ,useRef ,useState} from "react";
 import {toast} from "react-toastify";
 import {v4 as uuidv4} from "uuid";
 import {doc ,getDoc ,serverTimestamp ,setDoc ,updateDoc} from "firebase/firestore";
-import {db} from "../../../firebase.config";
-import Spinner from "../../../components/Spinner";
+import {db} from "../../config/firebase.config";
+import Spinner from "../../components/Spinner";
 
 const CheckOutInformation = () => {
 

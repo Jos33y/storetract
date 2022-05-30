@@ -1,4 +1,4 @@
-import LogoHead from "../../../assets/images/packnow.jpg"
+import LogoHead from "../../assets/images/packnow.jpg"
 import {Link} from "react-router-dom";
 import React from "react";
 

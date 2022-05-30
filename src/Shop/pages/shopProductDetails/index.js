@@ -1,7 +1,7 @@
 import "../../css/shopHeader.css"
 import {Link, useParams} from "react-router-dom";
 import React, {useEffect, useRef, useState} from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import SimilarItem from "./similarItem";
 import {collection, doc, getDoc, getDocs, limit, query} from "firebase/firestore";
 import {db} from "../../config/firebase.config";
@@ -19,6 +19,7 @@ const ShopProductDetails = ({businessUrl}) => {
     const [cart, setCart] = useState([])
     const [loading, setLoading] = useState(true)
     const [quantity, setQuantity] = useState("1")
+    const [mainImage, setMainImage] = useState(null);
 
 
     const onChange = (e) => {
@@ -49,16 +50,12 @@ const ShopProductDetails = ({businessUrl}) => {
             //make cart a string and store in local space
             let stringCart = JSON.stringify(cartData);
             localStorage.setItem("cart", stringCart)
-            setDisabled(false)
-
         }
         catch (error) {
             console.log({error})
-            setDisabled(false)
         }
 
-        // setDisabled(true)
-
+        setDisabled(false)
     }
     //Fetch Product
     const fetchProducts = async () => {
@@ -84,6 +81,7 @@ const ShopProductDetails = ({businessUrl}) => {
 
         }
     }
+
     //Fetch Product Details
     const fetchProductDetails = async () => {
         try
@@ -94,6 +92,7 @@ const ShopProductDetails = ({businessUrl}) => {
             if (docSnap.exists()) {
                 //console.log("Document data:", docSnap.data());
                 setProduct(docSnap.data())
+                setMainImage(docSnap.data().imgUrls[0])
                 setLoading(false)
             } else {
                 console.log("No such document!");
@@ -118,7 +117,6 @@ const ShopProductDetails = ({businessUrl}) => {
             if (localCart) setCart(localCart)
             // console.log(localCart)
 
-
         }
         return () => {
             isMounted.current = false
@@ -132,9 +130,7 @@ const ShopProductDetails = ({businessUrl}) => {
                 (<Spinner />)
                 :
                 (
-            <Container>
-
-                <div className="Shop-product-details">
+                <div className="Store-product-details">
                     {/*--------------bread crumbs section-----------------------*/}
                     <div className='bread-crumb'>
                         <ul>
@@ -149,45 +145,65 @@ const ShopProductDetails = ({businessUrl}) => {
                             </li>
                         </ul>
                     </div>
+
                     {/*--------------product details section-----------------------*/}
-                    <div className="Product-details">
-                        <Link to={ `/products` }  className="h5"> <i className="fas fa-chevron-left"></i>  Products</Link>
+                    <div className="product-details">
                         <Row>
-                            <Col md={7}>
-                                <div className="Image-box">
+                            <Col lg={7} className="col-sm-12">
+                                <div className="image-box">
                                     <Row>
-                                        <Col md={9} className="main">
-                                            <img src={product.imgUrls[0]} alt="" className="img-fluid" />
+                                        <Col md={9} className="col-sm-12">
+                                            <div className="main">
+                                                <img src={`${mainImage}`} alt="" className="img-fluid" />
+                                            </div>
+
                                         </Col>
-                                        <Col md={3} className="thumb">
-                                            <ul className="Thumb-nails">
-                                                <li>  <img src={product.imgUrls[0] ? product.imgUrls[0] : product.imgUrls[0] } alt="" className="img-fluid"/></li>
-                                                <li>  <img src={product.imgUrls[1] ? product.imgUrls[1] : product.imgUrls[0] } alt="" className="img-fluid"/></li>
-                                                <li>  <img src={product.imgUrls[2] ? product.imgUrls[2] : product.imgUrls[0] } alt="" className="img-fluid"/></li>
-                                            </ul>
+                                        <Col md={3}  className="col-sm-12" >
+                                            <div className="thumb">
+                                                <ul className="thumb-nails">
+                                                    <li onClick={() => {setMainImage(product.imgUrls[0])}}>
+                                                        <img src={product.imgUrls[0] ? product.imgUrls[0] : product.imgUrls[0] } alt="" className="img-fluid"/>
+                                                    </li>
+
+                                                    <li onClick={() => {setMainImage(product.imgUrls[1])}}>
+                                                        <img src={product.imgUrls[1] ? product.imgUrls[1] : product.imgUrls[0] } alt="" className="img-fluid"/>
+                                                    </li>
+
+                                                    <li onClick={() => {setMainImage(product.imgUrls[2])}}>
+                                                        <img src={product.imgUrls[2] ? product.imgUrls[2] : product.imgUrls[0] } alt="" className="img-fluid"/>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
                                         </Col>
                                     </Row>
                                 </div>
                             </Col>
 
-                            <Col md={5}>
-                                <div className="Product-details-text">
-                                    <h5 className="Product-title"> {product.productName} </h5>
-                                    <h6 className="Product-price"> &#8358; {product.productPrice.toString()
+                            <Col lg={5} className="col-sm-12">
+                                <div className="product-details-text">
+                                    <h5 className="product-title"> {product.productName} </h5>
+                                    <h6 className="product-price"> &#8358; {product.productPrice.toString()
                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
+                                    <hr/>
                                     <div className="input">
                                         <h5>Quantity</h5>
                                         <input type="number"
                                                className="form-control"
                                                id="quantity"
                                                onChange={onChange}
-                                               value={quantity}/></div>
-                                    <p className="Product-description">
-                                        <span className="title">Description: </span> <br/>
-                                        {product.productDescription}
-                                    </p>
-                                    <div className="text-center">
-                                        <button className="btn btn-md btn-primary btn-contact"
+                                               value={quantity}/>
+                                    </div>
+                                    <hr/>
+                                    <div className="product-description">
+                                        <h5 className="title">Description:</h5>
+                                        <div className="description-text">
+                                            <p>  {product.productDescription} </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="button-align">
+                                        <button className="btn btn-md btn-secondary"
                                                 disabled={disabled}
                                                 onClick={() => addToCart(product)}> Add to Cart</button>
                                     </div>
@@ -197,12 +213,12 @@ const ShopProductDetails = ({businessUrl}) => {
 
                             </Col>
                         </Row>
+
                     </div>
 
                     <SimilarItem products={products} loading={loading} businessUrl={businessUrl} />
                 </div>
 
-            </Container>
                 )}
         </>
     )

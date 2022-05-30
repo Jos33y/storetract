@@ -1,15 +1,13 @@
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import "../../css/shopHeader.css";
 import React, {useEffect, useRef, useState} from "react";
-import CartList from "./CartList";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import Spinner from "../../components/Spinner";
 
 const ShopCart = ({businessUrl}) => {
 
     const navigate = useNavigate()
-    const params = useParams()
     const isMounted = useRef()
 
     const [disabled, setDisabled] = useState(false)
@@ -27,6 +25,9 @@ const ShopCart = ({businessUrl}) => {
         catch (e) {
             console.log({e})
         }
+    }
+    const continueShopping = () => {
+        navigate(`/products`)
     }
 
     // delete cart codes
@@ -73,7 +74,7 @@ const ShopCart = ({businessUrl}) => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMounted, params.productUrl])
+    }, [isMounted, businessUrl])
 
     return(
         <>
@@ -81,50 +82,114 @@ const ShopCart = ({businessUrl}) => {
                 (<Spinner />)
                 :
                 (
-            <Container>
-                <div className="Shopping-cart">
-                    <h4 className="title">My Shopping Cart</h4>
+            <div className="store-shopping-cart">
+                <div className='bread-crumb'>
+                    <ul>
+                        <li>
+                            <Link to={ `/`} className="bread-crumb-link"> Home</Link>
+                        </li> |
 
-                    {/*loading cart section*/}
-                    {carts && carts.length > 0 ?
-                        ( <>
-                    <div className="Cart-section">
-                        <Row className="justify-content-center">
-                            {carts.map((cart) => (
-                            <Col md={10} key={cart.id}>
-                                <CartList businessUrl={businessUrl} id={cart.id} cart={cart} onDelete={() => {onDelete(cart)}} />
-                            </Col>
-                            ))}
-
-                            <Col md={10}>
-                                <Row>
-                                    <Col md={7}></Col>
-                                    <Col md={5}>
-                                        <div className="Checkout-box">
-                                            <h6 className="cart-count">
-                                                {carts.length} { carts.length === 1 ? 'item' : 'Items'}
-                                            </h6>
-                                            <div className="cart-total">
-                                                <h5>Subtotal</h5>
-                                                <h5 className="total-price">&#8358;{(itemsPrice).toFixed(2).toString()
-                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h5>
+                        <li>
+                            <a href={ `/products`} className="bread-crumb-link"> Shop</a>
+                        </li> |
+                        <li> Shopping Cart </li>
+                    </ul>
+                </div>
+                <Row>
+                    <Col lg={8}>
+                        <div className="cart-table">
+                            <table className="table table-hover">
+                                <thead>
+                                <th className="product-name">Product</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                                </thead>
+                                <tbody>
+                                {/*loading cart section*/}
+                                {carts && carts.length > 0 ?
+                                    ( <>
+                                    {carts.map((cart) => (
+                                <tr key={cart.id}>
+                                    <td className="products-cart">
+                                        <div className="cart-products">
+                                            <div className="cart-img">
+                                                <img src={cart.imgUrls[0]} alt="" className="img-fluid"/>
                                             </div>
-                                            <div className="cart-total-btn">
-                                                <Button className="btn btn-md btn-primary"
-                                                        disabled={disabled}
-                                                        onClick={onCheckout}> Checkout</Button>
+                                            <div className="text-section">
+                                                <h5>
+                                                    <Link to={ `/products/${ cart.productCategory}/${cart.uniqueId}`} className="cart-name">  {cart.productName} </Link>
+                                                </h5>
+                                                <h6>&#8358;{cart.productPrice.toString()
+                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
                                             </div>
                                         </div>
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
-                    </div>
-                        </> ) :
-                        // empty cart section
-                        (<h4> Empty Cart</h4>)}
-                </div>
-            </Container>
+                                    </td>
+                                    <td> <p className="quantity"> {cart.qty} </p>  </td>
+
+                                    <td>
+                                        <p className="total-price"> &#8358;{(cart.productPrice * cart.qty).toString()
+                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
+                                    </td>
+
+                                    <td><p className="delete" onClick={() => {onDelete(cart)}}> <i className="fas fa-times"></i></p></td>
+                                </tr>
+                                    ))}
+                                    </> ) :
+                                    // empty cart section
+                                    (<tr>
+                                        <td colSpan={4} className="text-center"> <h6>Cart is empty </h6> </td>
+                                    </tr>)}
+                                </tbody>
+                            </table>
+                            <hr/>
+                            <div className="buttons-cart">
+                                <button className="btn btn-md btn-outline" onClick={continueShopping}> continue shopping </button>
+                                {carts.length > 0 && (   <button className="btn btn-md btn-secondary"> update cart </button>  )}
+                            </div>
+                        </div>
+                    </Col>
+                    <Col lg={4}>
+                        {carts.length > 0 && (
+                        <div className="cart-side-bar">
+                            <div className="discount-code">
+                                <h5> Discount Code</h5>
+                                <form action="#" method="post">
+                                    <div className="form-group">
+                                        <input type="text" placeholder="Coupon code" className="form-control"/>
+                                        <button className="btn btn-md btn-secondary"> Apply</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div className="cart-summary">
+                                <h5>Cart total</h5>
+                                <div className="summary-text">
+                                    <div className="title">
+                                        <h6>Subtotal</h6>
+                                        <h6>Total</h6>
+                                    </div>
+
+                                    <div className="prices">
+                                        <h6 className="light">&#8358;{(itemsPrice).toFixed(2).toString()
+                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
+
+                                        <h6 className="light">&#8358;{(itemsPrice).toFixed(2).toString()
+                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
+                                    </div>
+                                </div>
+
+                                <div className="button-center">
+                                    <button className="btn btn-md btn-secondary"
+                                            disabled={disabled}
+                                            onClick={onCheckout}> proceed to checkout</button>
+                                </div>
+                            </div>
+                        </div>
+                        )}
+                    </Col>
+                </Row>
+            </div>
                 )}
         </>
     )

@@ -1,13 +1,13 @@
 import {Col ,Container ,Row} from "react-bootstrap";
 import React ,{useEffect ,useRef ,useState} from "react";
 import './styles.css'
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../components/Spinner";
 import ShopHeader from "../../components/ShopHeader";
-import CategorySection from "../../components/CategorySection";
+import CategorySection from "../CategorySection";
 import {Link ,useParams} from "react-router-dom";
 import ShopFooter from "../../components/ShopFooter";
 import {doc ,getDoc} from "firebase/firestore";
-import {db} from "../../../firebase.config";
+import {db} from "../../config/firebase.config";
 import Login from "./Login";
 import Register from "./Register";
 

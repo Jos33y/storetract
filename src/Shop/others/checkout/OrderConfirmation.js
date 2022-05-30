@@ -11,8 +11,6 @@ const OrderConfirmation = () => {
     const params = useParams()
     const navigate = useNavigate()
 
-
-
     const continueShopping = () => {
 
         console.log("Handling Information")

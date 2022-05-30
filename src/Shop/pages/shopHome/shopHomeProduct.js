@@ -1,38 +1,33 @@
 import Spinner from "../../components/Spinner";
 import "../../css/shopHeader.css"
 import {Col, Row} from "react-bootstrap";
-import ProductCard from "../../components/ProductCard";
 import React from "react";
 import {Link} from "react-router-dom";
 
-const ShopHomeProduct = ({loading, products, businessUrl}) => {
+const ShopHomeProduct = ({loading, products}) => {
 
     return(
         <>
-            <div className="Shop-home-products">
+            <div className="Store-home-products">
                 { loading ?
                     (<Spinner/>)
                     : products && products.length > 0 ?
                         (
                             <>
-
-                                <div className="Shop-home-title">
-                                    <h3 className="home-title">Products</h3>
-                                    <Link to="products" className="h5"> view all <i className="fas fa-chevron-right"></i></Link>
-                                </div>
-                                {/*<h6 className="small">{ products.length } Product(s)</h6>*/}
-                                <Row>
-
-                                    { products.map((product) => (
-                                        <Col md={ 3 } key={ product.id }>
-                                            <ProductCard id={ product.id } product={ product.data }
-                                                         businessUrl={ businessUrl }/>
-                                        </Col>
-                                    )) }
-                                </Row>
+                <h3 className="head">An inside look to our products...</h3>
+                <Row>
+                    { products.map((product) => (
+                    <Col lg={3} className="col-md-3 col-6" key={ product.id }>
+                        <div className="store-prod-box">
+                            <img src={product.data.imgUrls[0]} alt="" className="img-fluid"/>
+                        </div>
+                    </Col>
+                    )) }
+                </Row>
+                <Link to="/products" className="btn btn-md btn-secondary"> View all</Link>
                             </>
-                        ) :
-                        (<h6>No product available</h6>)
+                ) :
+                (<h6>No product available</h6>)
                 }
             </div>
         </>

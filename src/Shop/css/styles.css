@@ -12,128 +12,7 @@
     overflow-x: hidden;
 }
 
-.Nav-header{
-    padding: 10px 5px 5px;
-}
 
-/*Shop Header Styles*/
-.Header{
-    padding: 5px 10px 0px;
-    background: #2e2e2e;
-
-}
-.Header ul{
-    list-style: none;
-    padding-bottom: 0px;
-}
-
-.Header .NavBrand{
-    padding-top: 0px;
-    padding-bottom: 0px;
-    display: inline-block;
-    font-weight: 700;
-    font-size: 20px;
-    color: #ffffff;
-    text-transform: uppercase;
-}
-
-
-.Header .logo-fluid{
-    width: 7%;
-    border-radius: 50%;
-    background: #ffffff;
-    padding: 1px;
-    margin-right: 10px;
-
-    box-shadow: -1px 1px 7px 1px rgba(176,174,174,0.75);
-    -webkit-box-shadow: -1px 1px 7px 1px rgba(176,174,174,0.75);
-    -moz-box-shadow: -1px 1px 7px 1px rgba(176,174,174,0.75);
-}
-
-
-.Header .Account-nav ul{
-    list-style: none;
-    padding-top: 10px;
-    float: right;
-    width: 60%;
-    padding-bottom: 0px;
-}
-.Header .Account-nav ul li{
-    display: inline-block;
-    margin-right: 30px;
-    font-size: 13px;
-    text-transform: uppercase;
-}
-.Header .Account-nav ul li .Account-link{
-    color: #ffffff;
-    text-decoration: none
-;
-}
-.Header .Account-nav ul li .Account-link .cart-count{
-    padding-left: 10px;
-}
-
-/*Shop Footer Styles*/
-.Footer {
-    padding: 20px 40px 20px;
-
-    background: #2e2e2e;
-}
-.Footer p{
-    padding-top: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    float: left;
-
-}
-
-
-.Footer .Socials ul{
-    list-style: none;
-    text-align: right;
-}
-.Footer .Socials ul li{
-    display: inline-block;
-    margin-right: 20px;
-}
-.Footer .Socials ul li .Socials-link{
-    color: #ffffff;
-    text-decoration: none;
-}
-
-/*Shop Category Section Styles*/
-
-.Shop-hero{
-   height: 450px;
-    padding: 10px 50px;
-    margin-bottom: 5%;
-    align-items: center;
-    justify-content: center;
-}
-.Shop-hero .img-fluid{
-    width: 100%;
-    height: 450px;
-    border-radius: 10px;
-    object-fit: cover;
-    background: #2e2e2e;
-}
-.Shop-hero h1{
-
-    position: absolute;
-    text-align: center;
-    font-weight: 800;
-    letter-spacing: 1px;
-    font-size: 45px;
-    color: #ffffff;
-    word-wrap: break-word;
-   top: 50%;
-    left: 15%;
-    z-index: 1000;
-    text-transform: uppercase;
-}
 .Category-section{
     text-align: center;
     padding: 50px 20px 10px;
@@ -478,28 +357,6 @@ Qv-Modal-styles .Close-button .fas{
     -webkit-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.75);
 }
-/*cart page bread crumb styles */
-.bread-crumb{
-    text-align: center;
-}
-.bread-crumb ul{
-    padding: 10px 0;
-    list-style: none;
-    font-size: 16px;
-    font-weight: 600;
-    color: #212529;
-    text-transform: uppercase;
-}
-.bread-crumb ul li{
-    display: inline-block;
-    margin: 3px 10px;
-}
-.bread-crumb ul li .bread-crumb-link{
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #535659;
-    font-weight: 500;
-}
 
 /*cart page styles*/
 .Cart-page{
@@ -632,12 +489,7 @@ Qv-Modal-styles .Close-button .fas{
     display: inline-block;
     margin: 3px 10px;
 }
-.Category-page .bread-crumb ul li .bread-crumb-link{
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #adadad;
-    font-weight: 500;
-}
+
 .Category-page .category-title{
     text-align: center;
     text-transform: capitalize;

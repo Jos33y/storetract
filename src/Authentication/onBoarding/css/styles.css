@@ -150,7 +150,163 @@
     letter-spacing: 1px;
 }
 
+/*buy domain styles*/
+.buy-domain{
+    margin-top: 5%;
+}
+.buy-domain .title-section{
+    margin: auto;
+}
+.buy-domain .title{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    color: #292b2e;
+}
 
+.buy-domain .form-group{
+    margin: 40px 0;
+    background: #3E4095;
+    border: 1px solid #3E4095;
+    padding: 30px 20px;
+    border-radius: 5px;
+
+    box-shadow: 0px 0px 6px 3px rgba(122,122,122,0.75);
+    -webkit-box-shadow: 0px 0px 6px 3px rgba(122,122,122,0.75);
+    -moz-box-shadow: 0px 0px 6px 3px rgba(122,122,122,0.75);
+}
+
+.buy-domain .form-group .form-control{
+    height: 55px;
+    border-radius: 5px;
+    color: #414241;
+    width: 100%;
+}
+.buy-domain .form-group .form-control:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.buy-domain .form-group .form-control::placeholder{
+    color: #525252;
+}
+
+.buy-domain .form-group .btn{
+    height: 55px;
+    width: 100%;
+    background: #d1d1d1;
+    border-radius: 5px;
+    color: #3E4095;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.buy-domain .domain-checked{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding:  40px 20px 30px;
+    background: #ffffff;
+}
+.buy-domain .domain-checked .row, .col-1, .col-9, .col-2{
+    padding: 0;
+    margin: 0;
+}
+
+.buy-domain .domain-checked .far{
+    font-size: 70px;
+}
+.buy-domain .domain-checked .fa-check-circle{
+    color: #1fc063;
+}
+.buy-domain .domain-checked .fa-times-circle{
+    color: #e0324c;
+
+}
+.buy-domain .domain-checked h5{
+    margin-left: 20px;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.buy-domain .domain-checked .success{
+    color: #1fc063;
+}
+
+.buy-domain .domain-checked .error{
+    color: #e0324c;
+}
+.buy-domain .domain-checked .price{
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 40px;
+}
+.buy-domain .domain-checked .bold{
+    font-weight: 600;
+}
+
+.buy-domain .domain-checked .btn{
+    background: #edf7ec;
+    color: #1fc063;
+    font-weight: 500;
+    font-size: 13px;
+    border: 0px solid #1fc063;
+    width: 100%;
+    height: 40px;
+}
+
+.buy-domain .display-card .card{
+    height: 150px;
+    width: 100%;
+    text-align: center;
+}
+.buy-domain .display-card .card .card-body{
+    margin: auto;
+}
+.buy-domain .display-card .card .img-fluid{
+    width: 60%;
+
+}
+.buy-domain .display-card .card p{
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+}
+.buy-domain .browse-extension{
+    margin-top: 8%;
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 20px 30px;
+
+    box-shadow: 0px 0px 3px 3px rgba(219,219,219,0.75);
+    -webkit-box-shadow: 0px 0px 3px 3px rgba(219,219,219,0.75);
+    -moz-box-shadow: 0px 0px 3px 3px rgba(219,219,219,0.75);
+}
+
+.buy-domain .browse-extension .table thead th {
+    font-size: 14px;
+    font-weight: 600;
+    color: #525252;
+    padding: 10px 10px;
+}
+.buy-domain .browse-extension .table tbody td{
+    color: #2e2e2e;
+    font-size: 14px;
+    padding-top: 10px;
+}
+.buy-domain .browse-extension .table tbody p{
+    margin-bottom: 2px;
+}
+.buy-domain .browse-extension .table tbody p.domain-name{
+    font-size: 14px;
+    color: #525252;
+    font-weight: 600;
+}
+
+.buy-domain .browse-extension .table tbody p.year{
+    font-size: 14px;
+    color: #939694;
+    margin-bottom: 5px;
+}
 .Auth-box{
     margin-bottom: 5%;
 }
@@ -189,6 +345,132 @@
     font-weight: 500;
     letter-spacing: 1px;
 }
+
+
+@media only screen and (max-width: 812px) {
+    /*buy domain styles*/
+    .buy-domain {
+        margin-top: 5%;
+    }
+
+    .buy-domain .title-section {
+        margin: auto;
+    }
+
+    .buy-domain .title {
+        font-size: 25px;
+    }
+
+    .buy-domain .form-group {
+        margin: 40px 0;
+        padding: 30px 20px;
+    }
+
+    .buy-domain .form-group .form-control {
+        height: 50px;
+    }
+
+
+    .buy-domain .form-group .btn {
+        margin-top: 20px;
+        height: 50px;
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .buy-domain .domain-checked {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        padding: 40px 15px 30px;
+        justify-content: center;
+        text-align: center;
+    }
+
+
+    .buy-domain .domain-checked .row{
+        justify-content: center;
+    }
+
+    .buy-domain .domain-checked .far {
+        font-size: 70px;
+        text-align: center;
+    }
+
+    .buy-domain .domain-checked h5 {
+        font-size: 22px;
+        font-weight: 400;
+        margin: 10px 0 20px;
+    }
+    .buy-domain .domain-checked .price {
+        font-size: 24px;
+        line-height: 50px;
+    }
+
+    .buy-domain .domain-checked .btn {
+        font-size: 13px;
+        border: 0px solid #1fc063;
+        width: 30%;
+        height: 40px;
+    }
+
+    .buy-domain .display-card .card {
+        height: 150px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .buy-domain .display-card .card .card-body {
+        margin: auto;
+    }
+
+    .buy-domain .display-card .card .img-fluid {
+        width: 60%;
+
+    }
+
+    .buy-domain .display-card .card p {
+        text-align: center;
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+    .buy-domain .browse-extension {
+        margin-top: 8%;
+        background: #ffffff;
+        border-radius: 5px;
+        padding: 20px 30px;
+    }
+
+    .buy-domain .browse-extension .table thead th {
+        font-size: 14px;
+        font-weight: 600;
+        color: #525252;
+        padding: 10px 10px;
+    }
+
+    .buy-domain .browse-extension .table tbody td {
+        color: #2e2e2e;
+        font-size: 14px;
+        padding-top: 10px;
+    }
+
+    .buy-domain .browse-extension .table tbody p {
+        margin-bottom: 2px;
+    }
+
+    .buy-domain .browse-extension .table tbody p.domain-name {
+        font-size: 14px;
+        color: #525252;
+        font-weight: 600;
+    }
+
+    .buy-domain .browse-extension .table tbody p.year {
+        font-size: 14px;
+        color: #939694;
+        margin-bottom: 5px;
+    }
+}
+
 @media only screen and (max-width: 600px) {
 
     .on-boarding-header{
@@ -281,4 +563,117 @@
         margin-bottom: 20%;
     }
 
+    /*buy domain styles*/
+    .buy-domain {
+        margin-top: 6%;
+    }
+
+    .buy-domain .title-section {
+        margin: auto;
+    }
+
+    .buy-domain .title {
+        font-size: 24px;
+    }
+
+    .buy-domain .form-group {
+        margin: 40px 0;
+        padding: 30px 15px;
+    }
+
+    .buy-domain .form-group .form-control {
+        height: 50px;
+        font-size: 13px;
+    }
+    .buy-domain .form-group .form-control::placeholder{
+        font-size: 12px;
+    }
+
+    .buy-domain .form-group .btn {
+        margin-top: 20px;
+        height: 50px;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .buy-domain .display-card .card{
+        height: 120px;
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+    .buy-domain .display-card .card .card-body{
+        margin: auto;
+    }
+    .buy-domain .display-card .card .img-fluid{
+        width: 60%;
+
+    }
+    .buy-domain .display-card .card p{
+        font-size: 12px;
+    }
+    .buy-domain .browse-extension{
+        margin-top: 8%;
+        padding: 20px 10px;
+    }
+
+    .buy-domain .browse-extension .table thead th {
+        font-size: 13px;
+        padding: 10px 10px;
+    }
+    .buy-domain .browse-extension .table tbody td{
+        color: #2e2e2e;
+        font-size: 13px;
+        padding-top: 5px;
+    }
+    .buy-domain .browse-extension .table tbody p{
+        margin-bottom: 2px;
+    }
+    .buy-domain .browse-extension .table tbody p.domain-name{
+        font-size: 13px;
+        color: #525252;
+        font-weight: 600;
+    }
+
+    .buy-domain .browse-extension .table tbody p.year{
+        font-size: 12px;
+        color: #939694;
+        margin-bottom: 5px;
+    }
+
+
+    .buy-domain .domain-checked {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        padding: 40px 10px 30px;
+        justify-content: center;
+        text-align: center;
+    }
+
+
+    .buy-domain .domain-checked .far {
+        font-size: 60px;
+        text-align: center;
+    }
+
+    .buy-domain .domain-checked h5 {
+        font-size: 20px;
+        font-weight: 400;
+        margin: 10px 0 20px;
+    }
+    .buy-domain .domain-checked .price {
+        font-size: 23px;
+        line-height: 50px;
+    }
+
+    .buy-domain .domain-checked .btn {
+        font-size: 12px;
+        border: 0px solid #1fc063;
+        width: 30%;
+        height: 40px;
+    }
+
 }
+
+
+

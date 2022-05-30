@@ -4,19 +4,16 @@ import {Link ,useNavigate ,useParams} from "react-router-dom";
 import CheckOutHeader from "./CheckOutHeader";
 import OrderSummary from "./OrderSummary";
 import ShopFooter from "../../components/ShopFooter";
-import FlutterLogo from "../../../assets/images/flutter-wave.png";
-import PaystackLogo from "../../../assets/images/paystack-logo-vector.png";
-import KlumpLogo from "../../../assets/images/klump-two-ng.PNG";
 import {useFlutterwave, closePaymentModal} from "flutterwave-react-v3";
 import {usePaystackPayment} from "react-paystack";
 import {Helmet} from "react-helmet";
+import FlutterLogo from "../../assets/images/flutter-wave.png";
+import PaystackLogo from "../../assets/images/paystack-logo-vector.png";
+import KlumpLogo from "../../assets/images/klump-two-ng.PNG";
 
 const CheckOutPayment = () => {
     const params = useParams()
     const navigate = useNavigate()
-
-
-
 
     // flutter wave payment section
     const flutter_config = {

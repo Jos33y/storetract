@@ -5,8 +5,8 @@ import OrderSummary from "./OrderSummary";
 import ShopFooter from "../../components/ShopFooter";
 import React, {useEffect ,useRef ,useState} from "react";
 import {doc ,getDoc} from "firebase/firestore";
-import {db} from "../../../firebase.config";
-import Spinner from "../../../components/Spinner";
+import {db} from "../../config/firebase.config";
+import Spinner from "../../components/Spinner";
 
 const CheckOutShipping = () => {
     // const [carts, setCarts] = useState([])

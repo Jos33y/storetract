@@ -34,13 +34,10 @@ const StoreFreeActivation = ({fullName, userId}) => {
         setDisabled(true)
         e.preventDefault()
         try {
-            let Url = `${formData.businessName
-                .replace(/,?\s+/g, '-')
-                .toLowerCase()}`
+            let Url = `${formData.businessName.replace(/,?\s+/g, '-').toLowerCase()}`
 
             const auth = userId;
             const formDataCopy = {...formData}
-            formDataCopy.businessPhone = Number(formData.businessPhone);
             formDataCopy.storeUrl = Url;
             formDataCopy.storePlan = 'BASIC';
             formDataCopy.storeOwnerRef = auth;
@@ -186,7 +183,7 @@ const StoreFreeActivation = ({fullName, userId}) => {
                                     <div className="form-group">
                                         <div className="Input-box">
                                             <label htmlFor="storeCategory"><i className="fas fa-layer-group"></i></label>
-                                            <select name="country"
+                                            <select
                                                     className="form-control"
                                                     id="storeCategory"
                                                     required={ true }

@@ -1,4 +1,4 @@
-import Spinner from "../../components/Spinner";
+import Spinner from "../components/Spinner";
 import ShopHeader from "../components/ShopHeader";
 // import CategorySection from "./components/CategorySection";
 import React ,{useEffect ,useRef ,useState} from "react";
@@ -6,10 +6,10 @@ import {Button ,Col ,Row ,Table} from "react-bootstrap";
 import ProductCard from "../components/ProductCard";
 import ShopFooter from "../components/ShopFooter";
 import {collection ,doc ,getDoc ,getDocs ,limit ,query} from "firebase/firestore";
-import {db} from "../../firebase.config";
+import {db} from "../config/firebase.config";
 import {Link ,useNavigate ,useParams} from "react-router-dom";
 import {toast} from "react-toastify";
-import CartTable from "../components/CartTable";
+import CartTable from "./CartTable";
 
 const Cart = () => {
 

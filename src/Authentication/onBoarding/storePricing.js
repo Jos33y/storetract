@@ -73,7 +73,7 @@ const StorePricing = ({fullName}) => {
                                         </div>
 
                                         <div className="plan-button">
-                                            <Button className="btn btn-md btn-success standard" disabled={true}> Select</Button>
+                                            <Link to="/onboarding/buy-domain" className="btn btn-md btn-success standard" disabled={true}> Select</Link>
                                         </div>
                                     </div>
                                 </Card>

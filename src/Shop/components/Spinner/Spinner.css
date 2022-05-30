@@ -8,3 +8,25 @@
 .Spinner .BoxLoader {
     align-content: center;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .Spinner {
+        position: fixed;
+        top: 30%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+@media only screen and (max-width: 378px) {
+    .Spinner{
+        position: fixed;
+        top: 30%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+    }
+}

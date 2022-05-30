@@ -1,15 +1,16 @@
 import React from 'react';
 import './Spinner.css'
-import { Bars} from  'react-loader-spinner'
+import { Circles} from  'react-loader-spinner'
 const Spinner = () => {
 
     return(
         <>
             <div className="Spinner">
-                <Bars
+                <Circles
                     color="#3E4095"
-                    height={100}
-                    width={100} />
+                    height={80}
+                    width={80}
+                    ariaLabel="loading-indicator"/>
             </div>
 
         </>
