@@ -37,7 +37,7 @@ const BuyDomain = () => {
                 else{
                     setRegistered(false)
                     if(slit.length > 2) {
-                        if(slit[2] === 'net')
+                        if(slit[2] === 'ng')
                         setPrice('1,200')
                         else setPrice('6,000')
                     }
@@ -118,12 +118,11 @@ const BuyDomain = () => {
                                    </div>
                                ) : (
                                    <div className="row">
-                                       <div className="col-1">
+                                       <div className="col-lg-1 col-md-12">
                                            <p><i className="far fa-times-circle"></i></p>
                                        </div>
-                                       <div className="col-9">
+                                       <div className="col-lg-9 col-md-12">
                                            <h5>
-                                               <br/>
                                                <span className="error"><span className="bold"> {domainName}</span>   is unavailable</span>
                                                {/*<br/><span className="price"> ₦1,200.00</span>*/}
                                            </h5>
