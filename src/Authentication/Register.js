@@ -7,7 +7,7 @@ import {getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/a
 import {doc, setDoc, serverTimestamp} from "firebase/firestore"
 import {db} from "../firebase.config";
 import RegisterOffice from "../assets/images/22Z_2012.w003.n001.69B.p12.69.jpg";
-// import GoogleLogo from "../assets/images/google-logo-9808.png";
+
 
 const Register = () => {
 

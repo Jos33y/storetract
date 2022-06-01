@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import AvatarDefault from "../../assets/images/avatardefault_92824.png";
 import {getAuth} from "firebase/auth";
 
-const TopNavbar = () => {
+const TopNavbar = ({storeLogoUrl}) => {
 
     const auth = getAuth()
     const navigate = useNavigate()
@@ -57,10 +57,10 @@ const TopNavbar = () => {
                         </li>
                         <li className="dropdown nav-item">
                             <Link to="#" className="nav-link btn-icon" data-bs-toggle="dropdown" >
-                                <img src={AvatarDefault} className="img-xs rounded-circle" alt="User"/></Link>
+                                <img src={`${storeLogoUrl ? storeLogoUrl : AvatarDefault}`} className="img-xs rounded-circle" alt="User"/></Link>
                             <div className="dropdown-menu dropdown-menu-end">
-                                <Link to="/dashboard/settings" className="dropdown-item">My Profile</Link>
-                                <Link to="/dashboard/settings" className="dropdown-item">Settings</Link>
+                                <Link to="/dashboard/settings/profile" className="dropdown-item">My Profile</Link>
+                                <Link to="/dashboard/settings/store" className="dropdown-item">Settings</Link>
                                 <Button  onClick={logOut} className="dropdown-item text-danger"> Log out</Button>
                             </div>
                         </li>

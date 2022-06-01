@@ -69,7 +69,11 @@
 
 .img-avatar {
     border-radius: 100%;
-    border: 3px solid #fff;
+    border: 2px solid #fff;
+
+    box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -webkit-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -moz-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
 }
 
 .img-xs, .img-sm, .img-md, .img-lg {
@@ -146,3 +150,165 @@ body.offcanvas-active {
 }
 
 
+.No-category {
+    margin-top: 5%;
+    text-align: center;
+}
+.No-category h5 {
+    font-size: 23px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #3E4095;
+    margin-top: 10%;
+    margin-bottom: 30px;
+}
+.No-category .img-fluid{
+    width: 40%;
+}
+
+/*account settings form*/
+.content-body .account-form{
+    border: 0px solid #3E4095;
+    padding: 40px 20px;
+    border-radius: 5px;
+
+    box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -webkit-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -moz-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+}
+.content-body .account-form .form-group{
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0 30px;
+}
+.content-body .account-form .form-group label{
+    font-size: 16px;
+    font-weight: 600;
+    color: #3E4095;
+}
+.content-body .account-form .form-group .form-control{
+    width: 70%;
+    margin-left: 10px;
+    border-radius: 1px;
+    border: 0px solid #3E4095;
+    border-bottom: 1px solid #3E4095;
+}
+
+.content-body .account-form .form-group .form-control:focus{
+    outline: none;
+    box-shadow: none;
+}
+.content-body .account-form .button-save{
+    margin-top: 0;
+    text-align: center;
+}
+
+.content-body .account-form .button-save .btn{
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #3E4095;
+    border: 1px solid transparent;
+    padding: 8px 30px;
+
+}
+
+
+
+/*store settings form*/
+.content-body .store-form{
+    border: 0px solid #3E4095;
+    padding: 40px 20px;
+    border-radius: 5px;
+
+    box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -webkit-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -moz-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+}
+.content-body .store-form .form-group{
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0 30px;
+}
+.content-body .store-form .form-group label{
+    font-size: 16px;
+    font-weight: 600;
+    color: #3E4095;
+}
+
+.content-body .store-form .form-group label.facebook{
+    color: #4267B2;
+}
+
+.content-body .store-form .form-group label.instagram{
+    color: #C13584;
+}
+
+.content-body .store-form .form-group label.twitter{
+     color: #1DA1F2;
+ }
+
+.content-body .store-form .form-group .form-control{
+    width: 70%;
+    margin-left: 10px;
+    padding-bottom: 2px;
+    border-radius: 1px;
+    border: 0px solid #3E4095;
+    border-bottom: 1px solid #3E4095;
+}
+
+.content-body .store-form .form-group textarea.form-control{
+    width: 70%;
+    margin-left: 10px;
+    border-radius: 1px;
+    border: 1px solid #3E4095;
+}
+
+.content-body .store-form .form-group .form-control:focus{
+    outline: none;
+    box-shadow: none;
+}
+.content-body .store-form .button-save{
+    margin-top: 0;
+    text-align: center;
+}
+
+.content-body .store-form .button-save .btn{
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #3E4095;
+    border: 1px solid transparent;
+    padding: 8px 30px;
+
+}
+.content-body .store-form .form-group.logo-image{
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 10px 0 30px;
+}
+.content-body .store-form .form-group .logo-container{
+    height: 150px;
+    width: 250px;
+    cursor: pointer;
+    margin-left: 80px;
+}
+
+.content-body .store-form .form-group .logo-container .img-fluid{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1px;
+    border: 0px solid #3E4095;
+
+    box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -webkit-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -moz-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+}

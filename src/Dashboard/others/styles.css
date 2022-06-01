@@ -174,21 +174,6 @@
     font-weight: 400;
     color: #939694;
 }
-.No-category {
-    margin-top: 5%;
-    text-align: center;
-}
-.No-category h5 {
-    font-size: 23px;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: #3E4095;
-    margin-bottom: 30px;
-}
-.No-category .img-fluid{
-    width: 40%;
-}
 
 /*categories style section*/
 .Category{

@@ -148,11 +148,11 @@ const AddProductPage = ({userId, storeUrl}) => {
                     data: doc.data(),
                 })
             })
-            if(categories){
-                setCategories(categories)
+            if(categories === []){
+                navigate('/dashboard/categories')
             }
             else{
-                navigate('/dashboard/categories')
+                setCategories(categories)
             }
 
             // setLoading(false)
@@ -187,7 +187,6 @@ const AddProductPage = ({userId, storeUrl}) => {
             }))
         }
     }
-
 
     useEffect(() => {
 

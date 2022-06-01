@@ -122,7 +122,7 @@ const Sidebar = ({pageName, storeData}) => {
                         {/*menu settings*/}
                         <hr/>
                         <li className={`menu-item ${pageName === 'settings' ? 'active' : ''}`} onClick={handleMinimize}>
-                            <Link to="/dashboard/settings" className="menu-link">
+                            <Link to="/dashboard/settings/profile" className="menu-link">
                                 <i className="fas fa-cog"></i>
                                 <span className="text">Settings</span>
                             </Link>

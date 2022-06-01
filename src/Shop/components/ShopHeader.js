@@ -29,9 +29,9 @@ const ShopHeader = ({businessName }) => {
                         <li className='home-link'><Link to= {'/'} className="link"> Home </Link></li>
                         <li><Link to= {'/products'} className="link"> Shop </Link></li>
                         <li><Link to= {'/track-order'} className="link"> Track Order </Link></li>
-                        <li className="shopping-cart"><Link to= {'/cart'} className="link">
-                            <i className="fas fa-shopping-cart"> </i> Shopping cart ({ cart.length > 0 ? ( cart.length ) : '0' }) </Link></li>
                     </li>
+                    <li className="shopping-cart"><Link to= {'/cart'} className="link">
+                        <i className="fas fa-shopping-cart"> </i> Shopping cart ({ cart.length > 0 ? ( cart.length ) : '0' }) </Link></li>
 
                 </ul>
             </nav>

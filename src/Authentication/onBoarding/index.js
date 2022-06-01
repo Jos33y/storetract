@@ -51,11 +51,11 @@ const OnBoarding = () => {
         else if(params.onBoardingUrl === "activate-basic-store") {
             return <StoreFree userId={auth.currentUser.uid} fullName={shopData.name} />
         }
-        else if(params.onBoardingUrl === "activate-premium-store") {
-            return <StorePaid userId={auth.currentUser.uid} />
+        else if(params.onBoardingUrl === "activate-standard-store") {
+            return <StorePaid userId={auth.currentUser.uid} fullName={shopData.name} />
         }
         else if(params.onBoardingUrl === "make-payment") {
-            return <StorePayment userId={auth.currentUser.uid} />
+            return <StorePayment userId={auth.currentUser.uid} email={shopData.email} />
         }
         else if(params.onBoardingUrl === "store-activated") {
             return <StoreActivated userId={auth.currentUser.uid} />

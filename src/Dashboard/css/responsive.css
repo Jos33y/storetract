@@ -31,6 +31,16 @@
 }
 @media all and (max-width: 768px) {
     /* mobile devices */
+    .No-category {
+        margin-top: 5%;
+        text-align: center;
+    }
+    .No-category h5 {
+        font-size: 17px;
+    }
+    .No-category .img-fluid{
+        width: 60%;
+    }
     .mobile-block {
         display: block !important;
     }
@@ -100,12 +110,13 @@
     }
 
     .content-header {
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
         margin-bottom: 1rem;
     }
     .content-header .content-title {
         margin-bottom: 1rem;
+        font-size: 20px;
     }
 
     .card-header input.form-control {

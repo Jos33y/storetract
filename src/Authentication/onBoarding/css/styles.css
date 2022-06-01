@@ -153,6 +153,7 @@
 /*buy domain styles*/
 .buy-domain{
     margin-top: 5%;
+    font-family: 'Montserrat', sans-serif;
 }
 .buy-domain .title-section{
     margin: auto;
@@ -307,6 +308,70 @@
     color: #939694;
     margin-bottom: 5px;
 }
+
+/*storetract payment styles*/
+.store-payment{
+    margin-top: 5%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.store-payment .card{
+    padding: 0px 0px 10px;
+    margin: 10px;
+    background: #f5f5f5;
+
+    box-shadow: 0px 0px 6px 1px rgba(209,209,209,0.75);
+    -webkit-box-shadow: 0px 0px 6px 1px rgba(209,209,209,0.75);
+    -moz-box-shadow: 0px 0px 6px 1px rgba(209,209,209,0.75);
+}
+
+.store-payment .card h5.title{
+    font-size: 22px;
+    font-weight: 700;
+    color: #3E4095;
+}
+
+.store-payment .card .card-body .order-summary{
+    margin-top: 20px;
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.store-payment .card .card-body .order-summary h6{
+    font-size: 15px;
+    font-weight: 500;
+    color: #2e2e2e;
+    margin-bottom: 20px;
+}
+.store-payment .card .card-body .order-summary .order-price h6{
+    font-weight: 600;
+    font-size: 16px;
+}
+.store-payment .card .card-body .order-summary .order-price .total{
+    font-size: 20px;
+ }
+
+.store-payment .card .card-body .payment-button{
+    text-align: center;
+}
+.store-payment .card .card-body .payment-button .btn{
+    margin-top: 30px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    background: #95933e;
+    border: 1px solid #95933e;
+    width: 80%;
+    border-radius: 15px;
+    padding: 12px 20px;
+
+    box-shadow: 0px 0px 3px 1px rgba(138,138,138,0.75);
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(138,138,138,0.75);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(138,138,138,0.75);
+}
+
+/*authentication box styles*/
 .Auth-box{
     margin-bottom: 5%;
 }
@@ -409,7 +474,7 @@
     .buy-domain .domain-checked .btn {
         font-size: 13px;
         border: 0px solid #1fc063;
-        width: 30%;
+        width: 60%;
         height: 40px;
     }
 
@@ -425,9 +490,7 @@
 
     .buy-domain .display-card .card .img-fluid {
         width: 60%;
-
     }
-
     .buy-domain .display-card .card p {
         text-align: center;
         font-weight: 500;
@@ -469,6 +532,46 @@
         color: #939694;
         margin-bottom: 5px;
     }
+
+    .store-payment .card{
+        padding: 0px 0px 10px;
+        margin: 0;
+        background: #f5f5f5;
+    }
+
+    .store-payment .card h5.title{
+        font-size: 20px;
+        font-weight: 700;
+        color: #3E4095;
+    }
+
+    .store-payment .card .card-body .order-summary{
+        margin-top: 20px;
+        display: flex;
+        flex: auto;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .store-payment .card .card-body .order-summary h6{
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+    .store-payment .card .card-body .order-summary .order-price h6{
+        font-weight: 600;
+        font-size: 15px;
+    }
+    .store-payment .card .card-body .order-summary .order-price .total{
+        font-size: 17px;
+    }
+    .store-payment .card .card-body .payment-button .btn{
+        margin-top: 30px;
+        font-size: 14px;
+        width: 80%;
+        border-radius: 10px;
+        padding: 8px 20px;
+    }
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -665,12 +768,40 @@
         font-size: 23px;
         line-height: 50px;
     }
-
     .buy-domain .domain-checked .btn {
         font-size: 12px;
         border: 0px solid #1fc063;
-        width: 40%;
+        width: 65%;
         height: 40px;
+    }
+    .store-payment .card{
+        padding: 0px 0px 10px;
+        margin: 10px;
+        background: #f5f5f5;
+    }
+
+    .store-payment .card h5.title{
+        font-size: 18px;
+    }
+
+    .store-payment .card .card-body .order-summary h6{
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    .store-payment .card .card-body .order-summary .order-price h6{
+        font-weight: 600;
+        font-size: 14px;
+    }
+    .store-payment .card .card-body .order-summary .order-price .total{
+        font-size: 16px;
+    }
+    .store-payment .card .card-body .payment-button .btn{
+        margin-top: 30px;
+        font-size: 13px;
+        width: 80%;
+        border-radius: 10px;
+        padding: 8px 20px;
     }
 
 }

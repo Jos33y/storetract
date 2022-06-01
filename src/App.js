@@ -60,53 +60,54 @@ const App = () => {
                             <Routes>
                                 {home ?
                                     (<>
-                                    <Route path="/" element={<Home />} />
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/register" element={<Register />} />
-                                <Route path="/forgot-password" element={<ForgotPassword />} />
-                                <Route path="/404" element={<ErrorPage />} />
-                                <Route path="/dashboard/:dashUrl" element={<PrivateRoute/>}>
-                                    <Route path="/dashboard/:dashUrl" element={<SellersDashboard />} />
-                                </Route>
+                                        <Route path="/" element={<Home />} />
+                                        <Route path="/login" element={<Login />} />
+                                        <Route path="/register" element={<Register />} />
+                                        <Route path="/forgot-password" element={<ForgotPassword />} />
+                                        <Route path="/404" element={<ErrorPage />} />
+                                        <Route path="/dashboard/:dashUrl" element={<PrivateRoute/>}>
+                                            <Route path="/dashboard/:dashUrl" element={<SellersDashboard />} />
+                                        </Route>
+                                        <Route path="/dashboard/edit-product/:productId" element={<PrivateRoute/>}>
+                                            <Route path="/dashboard/edit-product/:productId" element={<SellersDashboard />} />
+                                        </Route>
 
-                                <Route path="/dashboard/edit-product/:productId" element={<PrivateRoute/>}>
-                                    <Route path="/dashboard/edit-product/:productId" element={<SellersDashboard />} />
-                                </Route>
+                                        <Route path="/dashboard/orders/:orderId" element={<PrivateRoute/>}>
+                                            <Route path="/dashboard/orders/:orderId" element={<SellersDashboard />} />
+                                        </Route>
 
-                                <Route path="/dashboard/orders/:orderId" element={<PrivateRoute/>}>
-                                    <Route path="/dashboard/orders/:orderId" element={<SellersDashboard />} />
-                                </Route>
+                                        <Route path="/dashboard/categories/:categoryUrl" element={<PrivateRoute/>}>
+                                            <Route path="/dashboard/categories/:categoryUrl" element={<SellersDashboard />} />
+                                        </Route>
 
-                                <Route path="/dashboard/categories/:categoryUrl" element={<PrivateRoute/>}>
-                                    <Route path="/dashboard/categories/:categoryUrl" element={<SellersDashboard />} />
-                                </Route>
+                                        <Route path="/dashboard/customers/:customerId" element={<PrivateRoute/>}>
+                                            <Route path="/dashboard/customers/:customerId" element={<SellersDashboard />} />
+                                        </Route>
+                                        <Route path="/dashboard/settings/:settingsUrl" element={<PrivateRoute/>}>
+                                            <Route path="/dashboard/settings/:settingsUrl" element={<SellersDashboard />} />
+                                        </Route>
+                                        <Route path="/onboarding/:onBoardingUrl" element={<PrivateRoute/>}>
+                                            <Route path="/onboarding/:onBoardingUrl" element={<OnBoarding />} />
+                                        </Route>
 
-                                <Route path="/dashboard/customers/:customerId" element={<PrivateRoute/>}>
-                                    <Route path="/dashboard/customers/:customerId" element={<SellersDashboard />} />
-                                </Route>
-
-                                <Route path="/onboarding/:onBoardingUrl" element={<PrivateRoute/>}>
-                                    <Route path="/onboarding/:onBoardingUrl" element={<OnBoarding />} />
-                                </Route>
-
-                                <Route path="/admin-profile" element={<PrivateRoute/>}>
-                                    <Route path="/admin-profile" element={<AdminProfile />} />
-                                </Route>
-                                <Route path="/insert-category" element={<PrivateRoute/>}>
-                                    <Route path="/insert-category" element={<InsertCategory />} />
-                                </Route>
-                                <Route path="/view-categories" element={<PrivateRoute/>}>
-                                    <Route path="/view-categories" element={<ViewCategories />} />
-                                </Route>
-                                <Route path="/insert-product" element={<PrivateRoute/>}>
-                                    <Route path="/insert-product" element={<InsertProduct />} />
-                                </Route>
-                                <Route path="/view-products" element={<PrivateRoute/>}>
-                                    <Route path="/view-products" element={<ViewProducts />} />
-                                </Route>
-                                <Route path="/activate-shop" element={<PrivateRoute/>}>
-                                    <Route path="/activate-shop" element={<ActivateShop />} />
-                                </Route>
+                                        <Route path="/admin-profile" element={<PrivateRoute/>}>
+                                            <Route path="/admin-profile" element={<AdminProfile />} />
+                                        </Route>
+                                        <Route path="/insert-category" element={<PrivateRoute/>}>
+                                            <Route path="/insert-category" element={<InsertCategory />} />
+                                        </Route>
+                                        <Route path="/view-categories" element={<PrivateRoute/>}>
+                                            <Route path="/view-categories" element={<ViewCategories />} />
+                                        </Route>
+                                        <Route path="/insert-product" element={<PrivateRoute/>}>
+                                            <Route path="/insert-product" element={<InsertProduct />} />
+                                        </Route>
+                                        <Route path="/view-products" element={<PrivateRoute/>}>
+                                            <Route path="/view-products" element={<ViewProducts />} />
+                                        </Route>
+                                        <Route path="/activate-shop" element={<PrivateRoute/>}>
+                                            <Route path="/activate-shop" element={<ActivateShop />} />
+                                        </Route>
                                     </>) : (
 
                                         <>

@@ -25,6 +25,8 @@ import {db} from "../firebase.config";
 import {getAuth} from "firebase/auth";
 import Spinner from "../components/Spinner";
 import EditProductPage from "./pages/products/editProduct";
+import AccountSettings from "./pages/settings/accountSettings";
+import StoreSettings from "./pages/settings/storeSettings";
 
 
 const SellersDashboard = () => {
@@ -115,8 +117,14 @@ const SellersDashboard = () => {
         else if (params.dashUrl === "storetract-credit") {
             return <StoretractCreditPage />
         }
-        else if (params.dashUrl === "settings") {
-            return <SettingsPage />
+        else if (params.settingsUrl === "profile") {
+            return <SettingsPage storeUrl={storeData.storeUrl} userId={auth.currentUser.uid} />
+        }
+        else if (params.settingsUrl === "store") {
+            return <StoreSettings userId={auth.currentUser.uid}  storeUrl={storeData.storeUrl} />
+        }
+        else if (params.settingsUrl === "account") {
+            return <AccountSettings storeUrl={storeData.storeUrl} />
         }
         else if (params.dashUrl === "help-desk") {
             return <HelpDeskPage />
@@ -145,7 +153,7 @@ const SellersDashboard = () => {
                         <div className="screen-overlay"></div>
                         <Sidebar pageName={params.dashUrl} storeData={storeData} />
                         <main className="main-wrap">
-                            <TopNavbar />
+                            <TopNavbar storeLogoUrl={profileData.storeLogo} />
                             {pages()}
                         </main>
                     </>

@@ -118,13 +118,13 @@ const StoreFreeActivation = ({fullName, userId}) => {
                     <Col md={1}></Col>
                     <Col md={10} className="Auth-box">
                         <Row>
-                           <Col md={6}>
+                           <Col lg={6}>
                                <div className="Form-image">
                                    <img src={ActivateStore} alt="" className="img-fluid"/>
                                    <p> <Link className="register" to="/onboarding/pricing">change store plan</Link></p>
                                </div>
                            </Col>
-                            <Col md={6}>
+                            <Col lg={6}>
                                 <Form className="Form" onSubmit={onSubmit} autoComplete="off">
                                     <h5>Activate Store</h5>
 

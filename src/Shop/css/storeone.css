@@ -76,6 +76,11 @@
     font-size: 14px;
     font-weight: 500;
     color: #000000;
+    text-decoration: none;
+}
+.Store-header .shopping-cart{
+    margin-top: 10px;
+    float: right;
 }
 
 /* --------  store-hero section ------- */
