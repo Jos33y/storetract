@@ -21,7 +21,7 @@ const StorePayment = ({email, userId}) => {
         reference: (new Date()).getTime().toString(),
         email: (email),
         amount: (pricePay * 100),
-        publicKey: "pk_test_92373800d132af22fc873ce48794f7f6165d4ad3",
+        publicKey: "pk_live_6644f568dbbd9aba479d5080983e600e315afc7c",
     };
 
     const updatePaymentStatus =  async() => {
