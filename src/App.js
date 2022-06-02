@@ -9,15 +9,8 @@ import Register from "./Authentication/Register";
 import ForgotPassword from "./Authentication/ForgotPassword";
 import OnBoarding from "./Authentication/onBoarding";
 import ErrorPage from "./components/ErrorPage";
-// import AdminDashboard from "./Dashboard/others";
 import SellersDashboard from "./Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
-import InsertCategory from "./Dashboard/Category/insertCategory";
-import ViewCategories from "./Dashboard/Category/viewCategories";
-import ViewProducts from "./Dashboard/Product/viewProducts";
-import AdminProfile from "./Dashboard/others/profile";
-import ActivateShop from "./Dashboard/others/activateShop";
-import InsertProduct from "./Dashboard/Product/insertProduct";
 import Shop from "./Shop/pages";
 
 const App = () => {
@@ -71,15 +64,12 @@ const App = () => {
                                         <Route path="/dashboard/edit-product/:productId" element={<PrivateRoute/>}>
                                             <Route path="/dashboard/edit-product/:productId" element={<SellersDashboard />} />
                                         </Route>
-
                                         <Route path="/dashboard/orders/:orderId" element={<PrivateRoute/>}>
                                             <Route path="/dashboard/orders/:orderId" element={<SellersDashboard />} />
                                         </Route>
-
                                         <Route path="/dashboard/categories/:categoryUrl" element={<PrivateRoute/>}>
                                             <Route path="/dashboard/categories/:categoryUrl" element={<SellersDashboard />} />
                                         </Route>
-
                                         <Route path="/dashboard/customers/:customerId" element={<PrivateRoute/>}>
                                             <Route path="/dashboard/customers/:customerId" element={<SellersDashboard />} />
                                         </Route>
@@ -88,25 +78,6 @@ const App = () => {
                                         </Route>
                                         <Route path="/onboarding/:onBoardingUrl" element={<PrivateRoute/>}>
                                             <Route path="/onboarding/:onBoardingUrl" element={<OnBoarding />} />
-                                        </Route>
-
-                                        <Route path="/admin-profile" element={<PrivateRoute/>}>
-                                            <Route path="/admin-profile" element={<AdminProfile />} />
-                                        </Route>
-                                        <Route path="/insert-category" element={<PrivateRoute/>}>
-                                            <Route path="/insert-category" element={<InsertCategory />} />
-                                        </Route>
-                                        <Route path="/view-categories" element={<PrivateRoute/>}>
-                                            <Route path="/view-categories" element={<ViewCategories />} />
-                                        </Route>
-                                        <Route path="/insert-product" element={<PrivateRoute/>}>
-                                            <Route path="/insert-product" element={<InsertProduct />} />
-                                        </Route>
-                                        <Route path="/view-products" element={<PrivateRoute/>}>
-                                            <Route path="/view-products" element={<ViewProducts />} />
-                                        </Route>
-                                        <Route path="/activate-shop" element={<PrivateRoute/>}>
-                                            <Route path="/activate-shop" element={<ActivateShop />} />
                                         </Route>
                                     </>) : (
 

@@ -2,11 +2,8 @@ import React from "react";
 import "../pagesStyles.css"
 import {Button ,Card ,Col ,Row ,Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import ItemOne from "../../../assets/images/items/1.jpg";
 import ItemTwo from "../../../assets/images/items/2.jpg";
-import ItemThree from "../../../assets/images/items/3.jpg";
-import ItemFour from "../../../assets/images/items/4.jpg";
-import VisaCard from "../../../assets/images/payments/2.png"
+import VisaCard from "../../../assets/images/payments/2.png";
 
 const OrderDetailsPage = () => {
     return (
@@ -110,7 +107,7 @@ const OrderDetailsPage = () => {
                                             <td>
                                                 <Link to="https://" className="itemside">
                                                     <div className="left">
-                                                        <img src={ItemOne} alt="item" width={40} height={40} className="img-xs"/>
+                                                        <img src={ItemTwo} alt="item" width={40} height={40} className="img-xs"/>
                                                     </div>
                                                     <div className="info">T-shirt blue XXL size</div>
 
@@ -143,7 +140,7 @@ const OrderDetailsPage = () => {
                                            <td>
                                                <Link to="https://" className="itemside">
                                                    <div className="left">
-                                                       <img src={ItemThree} alt="item" width={40} height={40} className="img-xs"/>
+                                                       <img src={ItemTwo} alt="item" width={40} height={40} className="img-xs"/>
                                                    </div>
                                                    <div className="info">Jeans wear for men</div>
 
@@ -160,7 +157,7 @@ const OrderDetailsPage = () => {
                                            <td>
                                                <Link to="https://" className="itemside">
                                                    <div className="left">
-                                                       <img src={ItemFour} alt="item" width={40} height={40} className="img-xs"/>
+                                                       <img src={ItemTwo} alt="item" width={40} height={40} className="img-xs"/>
                                                    </div>
                                                    <div className="info">Designer Bag </div>
 
