@@ -4,8 +4,8 @@ import SectionOne from "../assets/images/section-one.svg"
 import SectionTwo from "../assets/images/section-two.svg"
 import SectionThree from "../assets/images/section-three.svg"
 import SectionFour from  "../assets/images/section-four.svg"
-import {Fade, LightSpeed, Zoom, Slide} from 'react-reveal';
-import Shake from 'react-reveal/Shake';
+import {Fade, LightSpeed, Zoom, Slide} from '@stahl.luke/react-reveal';
+import Shake from '@stahl.luke/react-reveal/Shake';
 
 const BodySection = () => {
 

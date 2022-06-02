@@ -3,9 +3,9 @@ import React ,{useEffect ,useState} from "react";
 import {Col ,Row} from "react-bootstrap";
 import StoreTractLogo from "../assets/images/logo-svg.svg";
 import HeroImage from "../assets/images/store-tract-hero.svg";
-import RubberBand from "react-reveal/RubberBand";
-import Jello from "react-reveal/Jello";
-import Shake from "react-reveal/Shake";
+import RubberBand from "@stahl.luke/react-reveal/RubberBand";
+import Jello from "@stahl.luke/react-reveal/Jello";
+import Shake from "@stahl.luke/react-reveal/Shake";
 const Hero = () => {
     const [hamburgerClicked, setHamburgerClicked] = useState(false)
 

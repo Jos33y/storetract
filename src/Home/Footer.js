@@ -2,7 +2,7 @@ import React from "react";
 import {Col ,Container ,Row} from "react-bootstrap";
 import StoreTractLogo from "../assets/images/logo-svg.svg";
 import {Link} from "react-router-dom";
-import {Fade} from "react-reveal";
+import {Fade} from "@stahl.luke/react-reveal";
 
 const Footer = () => {
 
