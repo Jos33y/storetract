@@ -140,7 +140,7 @@ const Shop = ({storeUrl}) => {
                 return <ShopOrderConfirmation businessUrl={ShopURL} loading={loading} />
             }
             else if(storeUrl) {
-                return <ShopHome businessName={ shopData.businessName } products={products} loading={loading} categories={categories} />
+                return <ShopHome shopData={shopData} products={products} loading={loading} categories={categories} />
             }
         else{
 
@@ -169,7 +169,7 @@ const Shop = ({storeUrl}) => {
                             <div className="main-section">
                                 {pages()}
                             </div>
-                            <ShopFooter businessName={ shopData.businessName }/>
+                            <ShopFooter shopData={shopData}/>
                         </> ) }
             </div>
         </>

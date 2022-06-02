@@ -32,7 +32,7 @@ const App = () => {
             const arr = host
                 .split(".")
                 .slice(0, host.includes("localhost") ? -1 : -2);
-            if(arr.length >= 2) {setSubdomain(arr[0]) }
+            if(arr.length >= 0) {setSubdomain(arr[0]) }
             else {setHome(true)};
             console.log(arr.length)
             console.log(arr);

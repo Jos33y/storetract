@@ -41,6 +41,7 @@ const StoreFreeActivation = ({fullName, userId}) => {
             formDataCopy.storeUrl = Url;
             formDataCopy.storePlan = 'BASIC';
             formDataCopy.storeOwnerRef = auth;
+            formDataCopy.domainName = (`${Url}.storetract.com`)
             formDataCopy.activationDate = serverTimestamp();
 
             // get store url
