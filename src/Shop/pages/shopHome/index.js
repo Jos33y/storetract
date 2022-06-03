@@ -12,11 +12,11 @@ const ShopHome = ({products, loading, categories, shopData}) => {
             <div className="Hero-store">
                 <Row>
                     <Col md={5}>
-                       <div className="Hero-store-text">
-                           <h3>{shopData.businessName}</h3>
-                           <h5> {shopData.storeDescription ? shopData.storeDescription : 'About Store'} </h5>
-                           <Link to="products" className="btn btn-md btn-success"> Shop now </Link>
-                       </div>
+                        <div className="Hero-store-text">
+                            <h3>{shopData.businessName}</h3>
+                            <h5> {shopData.storeDescription ? shopData.storeDescription : 'About Store'} </h5>
+                            <Link to="products" className="btn btn-md btn-success"> Shop now </Link>
+                        </div>
                     </Col>
                     <Col md={7}>
                         <div className="Hero-store-img">

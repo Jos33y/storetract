@@ -34,7 +34,8 @@ const StoreFreeActivation = ({fullName, userId}) => {
         setDisabled(true)
         e.preventDefault()
         try {
-            let Url = `${formData.businessName.replace(/,?\s+/g, '-').toLowerCase()}`
+            let trimUrl = formData.businessName.trim();
+            let Url = `${trimUrl.replace(/,?\s+/g, '-').toLowerCase()}`
 
             const auth = userId;
             const formDataCopy = {...formData}
@@ -82,11 +83,13 @@ const StoreFreeActivation = ({fullName, userId}) => {
 
         if (e.target.id === 'businessName') {
 
-            let Url = `${e.target.value
+            let Url = (e.target.value).trim()
+
+            let url = `${Url
                 .replace(/,?\s+/g, '-')
                 .toLowerCase()}`
             // console.log("shop url: " + Url)
-            setShopUrl(Url);
+            setShopUrl(url);
         }
 
 
@@ -191,16 +194,14 @@ const StoreFreeActivation = ({fullName, userId}) => {
                                                     onChange={ onChange }
                                                     value={storeCategory}
                                             >
-                                                <option selected={true}>--Select Category--</option>
                                                 <option value='accessories'>Accessories</option>
                                                 <option value='book-store'>Book Store</option>
-                                                <option value='clothing'>Clothing</option>
-                                                <option value='fashion-accessories'>Fashion Accessories</option>
+                                                <option value='electronics-and-gadgets'>Electronics / Gadgets </option>
+                                                <option value='fashion'>Fashion </option>
                                                 <option value='food-and-beverages'>Food & Beverages</option>
                                                 <option value='health-and-beauty'>Health & Beauty </option>
                                                 <option value='home-and-garden'>Home & Garden</option>
                                                 <option value='jewelry-and-watches'>Jewelry & Watches</option>
-                                                <option value='shoes'>Shoes</option>
                                                 <option value='toy-and-hobbies'>Toys & Hobbies</option>
                                                 <option value='others'>Others Categories</option>
                                             </select>

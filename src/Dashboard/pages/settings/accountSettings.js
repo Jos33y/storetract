@@ -7,6 +7,7 @@ import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 
 
+
 const AccountSettings = ({storeUrl}) => {
 
     const isMounted = useRef()
@@ -24,6 +25,7 @@ const AccountSettings = ({storeUrl}) => {
         setLoading(true)
         e.preventDefault()
         try {
+
             const bankDataCopy = {...bankData}
             bankDataCopy.updateTime = serverTimestamp()
             const bankDataRef = doc(db, 'shops', storeUrl, 'walletBalance', 'accountInfo')
@@ -92,6 +94,29 @@ const AccountSettings = ({storeUrl}) => {
                                                     onChange={onChange}
                                                     className="form-control">
                                                 <option value="null" selected={true} >Select bank name </option>
+                                                <option value="Access Bank">Access Bank</option>
+                                                <option value="Citibank">Citibank</option>
+                                                <option value="Diamond Bank">Diamond Bank</option>
+                                                <option value="Dynamic Standard Bank">Dynamic Standard Bank</option>
+                                                <option value="Ecobank Nigeria">Ecobank Nigeria</option>
+                                                <option value="Fidelity Bank Nigeria">Fidelity Bank Nigeria</option>
+                                                <option value="First Bank of Nigeria">First Bank of Nigeria</option>
+                                                <option value="First City Monument Bank">First City Monument Ban</option>
+                                                <option value="Guaranty Trust Bank">Guaranty Trust Bank</option>
+                                                <option value="Heritage Bank Plc">Heritage Bank Plc</option>
+                                                <option value="Jaiz Bank">Jaiz Bank</option>
+                                                <option value="Keystone Bank Limited">Keystone Bank Limited</option>
+                                                <option value="Providus Bank Plc">Providus Bank Plc</option>
+                                                <option value="Polaris Bank">Polaris Bank</option>
+                                                <option value="Stanbic IBTC Bank Nigeria Limited">Stanbic IBTC Bank Nigeria Limited</option>
+                                                <option value="Standard Chartered Bank">Standard Chartered Bank</option>
+                                                <option value="Sterling Bank">Sterling Bank</option>
+                                                <option value="Suntrust Bank Nigeria Limited">Suntrust Bank Nigeria Limited</option>
+                                                <option value="Union Bank of Nigeria">Union Bank of Nigeria</option>
+                                                <option value="United Bank for Africa">United Bank for Africa</option>
+                                                <option value="Unity Bank Plc">Unity Bank Plc</option>
+                                                <option value="Wema Bank">Wema Bank</option>
+                                                <option value="Zenith Bank">Zenith Bank</option>
                                                 <option value="KUDA" >Kuda MFB</option>
                                             </select>
                                         </div>

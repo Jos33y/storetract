@@ -21,7 +21,7 @@ const StorePayment = ({email, userId}) => {
         reference: (new Date()).getTime().toString(),
         email: (email),
         amount: (pricePay * 100),
-        publicKey: "pk_live_6644f568dbbd9aba479d5080983e600e315afc7c",
+        publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_LIVE_KEY,
     };
 
     const updatePaymentStatus =  async() => {

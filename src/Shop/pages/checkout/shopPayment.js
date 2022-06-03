@@ -1,4 +1,4 @@
-import {Button, Col, Container, Row, Table} from "react-bootstrap";
+import {Button, Col, Row, Table} from "react-bootstrap";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import OrderSummary from "./orderSummary";
 import React, {useEffect, useRef, useState} from "react";
@@ -129,7 +129,7 @@ const ShopPayment = ({businessUrl}) => {
         reference: (new Date()).getTime().toString(),
         email: (formData.email),
         amount: (itemsPrice * 100),
-        publicKey: "pk_test_92373800d132af22fc873ce48794f7f6165d4ad3",
+        publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_LIVE_KEY,
     };
 
     // function that initializes PayStack Payment
@@ -281,7 +281,6 @@ const ShopPayment = ({businessUrl}) => {
                 (<Spinner/>) :
 
                 (
-            <Container>
                 <div className="Shop-Checkout">
                     {/*--------------bread crumbs section-----------------------*/}
                     <div className='bread-crumb'>
@@ -306,14 +305,15 @@ const ShopPayment = ({businessUrl}) => {
                     </div>
 
                     {/*--------------main section-----------------------*/}
-                    <div className="Shop-section-wrapper">
-                        <Row>
-                            {/*--------------payment section-----------------------*/}
-                            <Col md={7}>
-                                <h5 className="title">Checkout </h5>
+                    <div className="container-fluid">
+                        <div className="Shop-section-wrapper">
+                            <Row>
+                                {/*--------------payment section-----------------------*/}
+                                <Col lg={7}>
+                                    <h5 className="title">Checkout </h5>
                                     {/*shipping address*/}
                                     <div className="Shipping-address">
-                                        <Table className="table">
+                                        <Table className="table contact">
                                             <tbody>
                                             <tr className="top">
                                                 <td><p className="text-head"> Contact</p></td>
@@ -375,6 +375,9 @@ const ShopPayment = ({businessUrl}) => {
                                                         {displayP && (
                                                             <>
                                                                 <p>
+                                                                    you've selected paystack, click make payment button to continue.
+                                                                </p>
+                                                                <p>
                                                                     You will be redirected to our secure payment checkout.
                                                                 </p>
                                                                 <div className="payment-img">
@@ -393,6 +396,9 @@ const ShopPayment = ({businessUrl}) => {
                                                         {displayK && (
                                                             <>
                                                                 <p>
+                                                                    you've selected useKlump, click make payment button to continue.
+                                                                </p>
+                                                                <p>
                                                                     Klump helps you buy anything you need on a payment plan that works for you. <br/>
                                                                     Spread payments over 3 months after an initial 25% deposit.
                                                                 </p>
@@ -407,10 +413,10 @@ const ShopPayment = ({businessUrl}) => {
                                     {/*buttons section*/}
                                     <div className="form-group buttons">
                                         <Row>
-                                            <Col md={ 4 }>
+                                            <Col lg={ 4 } className="col-md-8 col-6">
                                                 <Button className="btn btn-md btn-primary" onClick={makePayment}> Make Payment </Button>
                                             </Col>
-                                            <Col md={4}>
+                                            <Col lg={4} className="col-md-4 col-6">
                                                 <p>
                                                     <Link to={(`/checkout/information`)} className="link"> Return to Shipping</Link>
                                                 </p>
@@ -418,16 +424,16 @@ const ShopPayment = ({businessUrl}) => {
 
                                         </Row>
                                     </div>
-                            </Col>
+                                </Col>
 
-                            {/*--------------order summary section-----------------------*/}
-                            <Col md={5}>
-                                <OrderSummary confirm={false} />
-                            </Col>
-                        </Row>
+                                {/*--------------order summary section-----------------------*/}
+                                <Col lg={5}>
+                                    <OrderSummary confirm={false} />
+                                </Col>
+                            </Row>
+                        </div>
                     </div>
                 </div>
-            </Container>
                 )
             }
         </>

@@ -4,395 +4,8 @@
 /*body{*/
 /*    background: linear-gradient(255.45deg, #FFEEE4 19.77%, #BCEDFC 64.33%);*/
 /*}*/
-.Header-two{
-    padding: 30px 5px 5px;
-    background: #E1F6FF;
-    font-family: 'Poppins', sans-serif;
-}
-.Header-two .Shop-name{
-    font-size: 28px;
-    line-height: 48px;
-    font-weight: 700;
-    text-decoration: none;
-    color: #212529;
-    text-transform: uppercase;
-}
-
-.Header-two ul{
-    list-style: none;
-    padding-bottom: 0px;
-}
-.Header-two ul li{
-    display: inline-block;
-    margin: 5px 20px;
-}
-.Header-two ul li .form-group{
-   display: flex;
-    background: #FBFEFF;
-    border: 1px solid #FBFEFF;
-    border-radius: 20px;
-    padding: 5px 10px;
-}
-
-.Header-two ul li .form-group .form-control{
-    width: 80%;
-    height: 40px;
-    padding: 0px;
-    color: #BDBDBD;
-    font-size: 18px;
-    margin-left: 10px;
-    background: #FBFEFF;
-    border: 0px solid transparent;
-}
-.Header-two ul li .form-group input::placeholder{
-    font-size: 18px;
-    font-weight: 500;
-    color: #BDBDBD;
-    text-transform: capitalize;
-}
-.Header-two ul li .form-group input:focus{
-    outline: none !important;
-    box-shadow: none;
-}
-.Header-two ul li .form-group .btn.btn-outline{
-    width: 20%;
-    height: 40px;
-    padding: 0;
-    border: 0px solid transparent;
-    background: transparent;
-}
-.Header-two ul li .form-group .btn.btn-outline:focus{
-    outline: none !important;
-    box-shadow: none;
-}
-.Header-two ul li .form-group .btn.btn-outline .fas{
-    font-size: 20px;
-    color: #212529;
-}
-
-.Header-two ul li .dropDown{
-    background: transparent;
-    font-size: 20px;
-    font-weight: 500;
-    color: #212529;
-    border: 0px solid transparent;
-}
-.Header-two ul li .dropDown:focus{
-    outline: none;
-    box-shadow: none;
-}
-
-.Header-two ul .button-cart{
-    margin-top: 20px;
-    float: right;
-}
-.Header-two ul li .Cart-button{
-    background: #FBFEFF;
-    font-size: 18px;
-    color: #212529;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 20px;
-}
-.Header-two ul li .Cart-button .fas{
-    font-size: 18px;
-}
-
-/************ footer section ************/
-.Footer-two{
-    margin-top: 5%;
-    background: #000000;
-    color: #ffffff;
-    padding: 20px 5px;
-    font-family: 'Poppins', sans-serif;
-}
-.Footer-two .Top-section{
-    margin-top: 20px;
-}
-.Footer-two .Top-section h5{
-    font-size: 20px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-.Footer-two .Top-section .Payment-list{
-    padding-left: 0;
-    margin-left: 0;
-}
-.Footer-two .Top-section .Payment-list li{
-    list-style: none;
-    font-size: 18px;
-    margin: 5px 0;
-    padding-left: 0;
-    font-weight: 300;
-}
-.Footer-two .footer-note{
-    text-align: center;
-    font-weight: 300;
-    font-size: 20px;
-
-}
-.Footer-two .Whatsapp{
-    display: flex;
-    margin-top: 15%;
-}
-.Footer-two .Whatsapp .Whatsapp-font .fab{
-    font-size: 50px;
-    margin-right: 10px;
-}
-.Footer-two .Whatsapp .Whatsapp-text p{
-    font-size: 18px;
-    font-weight: 300;
-}
-.Footer-two .connect{
-    margin-top: 15%;
-    text-align: center;
-}
-
-.Footer-two .connect .Socials ul{
-    list-style: none;
-
-}
-
-.Footer-two .connect .Socials ul li{
-    display: inline-block;
-    margin-right: 40px;
-}
-
-.Footer-two .connect .Socials ul li .fab{
-    font-size: 30px;
-    color: #ffffff;
-}
-/************ Hero shop section ************/
-
-.Hero-shop .Hero-shop-box{
-    margin-top: 20px;
-    background: linear-gradient(255.45deg, #FFEEE4 19.77%, #BCEDFC 64.33%);
-    padding: 0px 20px 0px 0px;
-    border-radius: 80px;
 
 
-}
-.Hero-shop-box .Hero-shop-text{
-    margin-top: 30%;
-   margin-left: 50px;
-}
-
-.Hero-shop-box .Hero-shop-text h3{
-    font-size: 55px;
-    font-weight: 900;
-    text-transform: capitalize;
-}
-
-.Hero-shop-box .Hero-shop-text h5{
-    margin-top: 15px;
-    font-size: 22px;
-    font-weight: 500;
-}
-
-.Hero-shop-box .Hero-shop-text .btn{
-    margin-top: 20px;
-    background: #FE5F03;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 21px;
-    border: 1px solid #FE5F03;
-    padding: 13px 35px;
-    align-items: center;
-    text-align: center;
-    border-radius: 25px;
-}
-.Hero-shop-box .Hero-shop-img .Hero-img{
-    width: 120%;
-}
-
-/************ shop trending section ************/
-.Shop-trending{
-    margin-top: 5%;
-
-}
-.Shop-trending .Shop-trending-head{
-    font-weight: 700;
-    font-size: 30px;
-    color: #212529;
-    text-align: center;
-    margin-bottom: 3%;
-    text-transform: uppercase;
-}
-.Shop-trending .Shop-trending-box{
-    position: relative;
-}
-.Shop-trending .Shop-trending-box .img-fluid{
-    width: 100%;
-
-}
-.Shop-trending .Shop-trending-box .Shop-trend-text{
-    position: absolute;
-    top: 160px;
-    margin: auto;
-    left: 10%;
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 65px;
-    color: #ffffff;
-    z-index: 1;
-    text-transform: uppercase;
-}
-
-
-
-
-/************ shopping cart section ************/
-.Shopping-cart{
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-.Shopping-cart .Cart-section{
-    margin-top: 3%;
-}
-.Shopping-cart h4.title{
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 27px;
-    color: #212529;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.Shopping-cart .Shopping-cart-box ul{
-    list-style: none;
-    width: 100%;
-}
-.Shopping-cart .Shopping-cart-box{
-    padding: 15px 5px 10px;
-    border-bottom-width: 2px;
-    border-bottom-color: #606060;
-    border-bottom-style: dashed;
-}
-
-.Shopping-cart .Shopping-cart-box ul li{
-    display: inline-block;
-}
-
-.Shopping-cart .Shopping-cart-box ul li.left-cart {
-    width: 25%;
-}
-.Shopping-cart .Shopping-cart-box ul li.middle-cart {
-    width: 60%;
-}
-.Shopping-cart .Shopping-cart-box ul li.right-cart {
-    width: 15%;
-}
-
-
-.Shopping-cart-box .cart-img{
-    width: 70%;
-
-
-}
-.Shopping-cart-box .cart-img .img-fluid{
-    max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0px 0px 1px 1px rgba(138,134,134,0.75);
-    -webkit-box-shadow: 0px 0px 1px 1px rgba(138,134,134,0.75);
-    -moz-box-shadow: 0px 0px 1px 1px rgba(138,134,134,0.75);
-
-
-}
-.Shopping-cart-box .cart-texts{
-    text-align: left;
-    object-position: center;
-}
-.Shopping-cart-box .cart-texts .cart-name {
-    font-size: 15px;
-    font-weight: 500;
-    text-transform: capitalize;
-    color: #212529;
-    text-decoration: none;
-}
-
-.Shopping-cart-box .cart-texts .quantity{
-    margin-top: 15px;
-    font-size: 18px;
-    font-weight: 600;
-}
-.Shopping-cart-box .cart-texts .quantity .fas{
-    margin: 0 10px;
-}
-
-.Shopping-cart-box .cart-right{
-    margin-bottom: 20px;
-    text-align: right;
-}
-.Shopping-cart-box .cart-right .far{
-    font-size: 25px;
-    cursor: pointer;
-}
-.Shopping-cart-box .cart-right .cart-price{
-    margin-top: 20px;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    color: #212529;
-}
-.Shopping-cart .Checkout-box{
-    margin-top: 30px;
-    background: #ffffff;
-    padding: 20px 40px;
-    border: 1px solid #ffffff;
-    border-radius: 30px;
-
-    box-shadow: 2px 2px 2px 1px rgba(102,101,101,0.75);
-    -webkit-box-shadow: 2px 2px 2px 1px rgba(102,101,101,0.75);
-    -moz-box-shadow: 2px 2px 2px 1px rgba(102,101,101,0.75);
-}
-.Shopping-cart .Checkout-box .cart-count{
-    font-weight: 400;
-    font-size: 20px;
-   margin-bottom: 20px;
-}
-.Shopping-cart .Checkout-box .cart-total{
-    display: flex;
-    justify-content: space-between;
-}
-.Shopping-cart .Checkout-box .cart-total h5{
-    font-weight: 400;
-    font-size: 20px;
-}
-
-.Shopping-cart .Checkout-box .cart-total h5.total-price{
-    font-weight: 600;
-    font-size: 22px;
-}
-.Shopping-cart .Checkout-box .cart-total-btn .btn{
-    margin-top: 20px;
-    text-transform: uppercase;
-    border-radius: 50px;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 16px;
-    padding: 15px 35px;
-    background: #FE5F03;
-    width: 100%;
-    border: 1px solid #FE5F03;
-}
-
-/************ shop product section ************/
-.Shop-products{
-    margin-top: 2%;
-}
-
-.Shop-products .Shop-products-list .h5{
-    font-style: normal;
-    font-weight: 700;
-    font-size: 35px;
-    color: #212529;
-    text-decoration: none;
-    margin-bottom: 3%;
-}
 
 /***********************************************/
 /*--------------check out styles---------------*/
@@ -621,15 +234,15 @@
     letter-spacing: 0.5px;
     height: 50px;
     width: 100%;
-    background: #FE5F03;
-    border: 0 solid #FE5F03;
+    background: #95933e;
+    border: 0 solid #95933e;
 
     box-shadow: 2px 2px 2px 1px rgba(56, 56, 56, 0.75);
     -webkit-box-shadow: 2px 2px 2px 1px rgba(56, 56, 56, 0.75);
     -moz-box-shadow: 2px 2px 2px 1px rgba(56, 56, 56, 0.75);
 }
 .Shop-Checkout .form-group .btn:hover{
-    background: #7a2e01;
+    background: #5c5b1f;
 }
 .Shop-Checkout .form-group p{
     padding-top: 20px;
@@ -824,8 +437,8 @@
 }
 .Order-updates .btn {
     border-radius: 25px;
-    border: 0px solid #FE5F03;
-    color: #FE5F03;
+    border: 0px solid #95933e;
+    color: #95933e;
     padding: 10px 30px;
     font-size: 14px;
     font-weight: 600;
@@ -908,4 +521,470 @@
     font-size: 15px;
     font-weight: 600;
     float: right;
+}
+
+
+@media only screen and (max-width: 811px) {
+    .Shop-Checkout .bread-crumb{
+        text-align: center;
+    }
+    .Shop-Checkout  .bread-crumb ul{
+        padding: 10px 0 5px;
+        font-size: 15px;
+    }
+    .Shop-Checkout  .bread-crumb ul li{
+        display: inline-block;
+        margin: 3px 10px;
+    }
+    .Shop-Checkout .bread-crumb .fas{
+        font-size: 10px;
+    }
+
+    /************ shop checkout wrapper section ************/
+
+    .Shop-section-wrapper h5.title{
+        font-weight: 600;
+        font-size: 23px;
+        margin-bottom: 5%;
+    }
+
+    .Shop-section-wrapper h6.sub-title{
+        margin-top: 5%;
+        font-weight: 500;
+        font-size: 17px;
+        margin-bottom: 20px;
+    }
+
+
+    /************ checkout input styles ************/
+    .Shop-section-wrapper .form-group{
+        margin: 0 0;
+    }
+    .Shop-section-wrapper .Form-checkout label{
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    .Shop-section-wrapper .form-group .form-control{
+        margin-bottom: 20px;
+        border-radius: 1px;
+        height: 40px;
+    }
+    .Shop-section-wrapper .form-group input{
+        font-size: 13px;
+        border: 1px solid #d1d1d1;
+    }
+    .Shop-section-wrapper .form-group select{
+        font-size: 13px;
+        border: 1px solid #d1d1d1;
+    }
+
+    .Shop-section-wrapper .form-group textarea{
+        font-size: 13px;
+        border-radius: 1px;
+    }
+    .Shop-section-wrapper .form-group input:focus{
+        outline: none !important;
+        box-shadow: none;
+    }
+    .Shop-section-wrapper .form-group select:focus{
+        outline: none !important;
+        box-shadow: none;
+    }
+
+
+    /************ checkout button section ************/
+    .Shop-Checkout .form-group.buttons{
+        margin-top: 8%;
+    }
+    .Shop-Checkout .form-group .btn {
+        border-radius: 25px;
+        font-size: 14px;
+        height: 45px;
+        width: 80%;
+    }
+    .Shop-Checkout .form-group .btn:hover{
+        background: #5c5b1f;
+    }
+    .Shop-Checkout .form-group p{
+        padding-top: 20px;
+        font-size: 14px;
+    }
+    .Shop-Checkout .form-group p .link{
+        color:#363636;
+        text-decoration: none;
+    }
+
+
+    /************ order confirmation styles ************/
+    .Order-confirmation{
+        padding: 5px;
+        /*background: #f0f0ff;*/
+        margin-bottom: 20px;
+    }
+    .Order-confirmation .far{
+        font-size: 60px;
+        float: left;
+        padding-right: 20px;
+    }
+    .Order-confirmation .Thank-you .text{
+        margin-bottom: 10%;
+    }
+    .Order-confirmation .Thank-you .text h6{
+        font-size: 13px;
+    }
+    .Order-confirmation .Thank-you .text h4{
+        font-size: 20px;
+        font-weight: 400;
+    }
+    .order-box{
+        border-radius: 5px;
+        border: 1px solid #939694;
+        padding: 15px 8px;
+        margin-bottom: 5%;
+    }
+    .order-box h4{
+        font-size: 17px;
+        font-weight: 400;
+        color: #525252;
+    }
+    .order-box p{
+        font-size: 12px;
+        font-weight: 400;
+        color: #525252;
+    }
+    .Order-updates .btn {
+        padding: 10px 30px;
+        font-size: 13px;
+        margin-right: 10px;
+    }
+
+    .Order-updates button.btn-success {
+        margin-left: 10px;
+    }
+
+    .Contact-info h5{
+        margin-top: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #2e2e2e;
+    }
+    .Contact-info p{
+        font-size: 12px;
+        font-weight: 400;
+        color: #939694;
+    }
+
+    .Order-confirmation th {
+        font-size: 13px;
+        color: #525252;
+        font-weight: 600;
+        border-top-width: 0;
+    }
+
+    .Order-confirmation td p{
+        padding-top: 5px;
+    }
+    .Order-confirmation td .title{
+        font-size: 13px;
+        font-weight: 500;
+        word-wrap: break-word;
+    }
+    .Order-confirmation td .amount{
+        font-size: 13px;
+        font-weight: 500;
+        text-align: right;
+    }
+
+    .Order-confirmation .Sub-total td{
+        padding: 0;
+    }
+    .Order-confirmation .Sub-total ul{
+        list-style: none;
+        padding-left: 0;
+        margin-left: 0;
+    }
+    .Order-confirmation .Sub-total ul li{
+        font-size: 12px;
+    }
+    .Order-confirmation .Sub-total ul .price{
+        float: right;
+    }
+    .Order-confirmation .Sub-total ul .price.money{
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .Order-confirmation .Total-section td .total{
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .Order-confirmation .Total-section td .total-price{
+        font-size: 15px;
+        font-weight: 500;
+        float: right;
+    }
+
+
+}
+
+@media only screen and (max-width: 767px) {
+
+
+    /************ order summary section ************/
+    .Order-summary{
+        margin-top: 5%;
+        padding: 20px 15px 5px 5px;
+        background: transparent;
+    }
+    .Mini-cart .Total-section td .total-price{
+        font-size: 14px;
+        font-weight: 600;
+        float: right;
+    }
+
+
+    .Shop-Checkout .bread-crumb{
+        text-align: left;
+    }
+    .Shop-Checkout  .bread-crumb ul{
+        padding: 10px 0 5px;
+        font-size: 13px;
+    }
+    .Shop-Checkout  .bread-crumb ul li{
+        display: inline-block;
+        margin: 3px 5px;
+    }
+    .Shop-Checkout .bread-crumb .fas{
+        font-size: 8px;
+    }
+
+
+    /************ checkout input styles ************/
+    .Shop-section-wrapper .form-group{
+        margin: 0 0;
+    }
+    .Shop-section-wrapper .Form-checkout label{
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+
+    /************ shop checkout wrapper section ************/
+
+    .Shop-section-wrapper h5.title{
+        font-weight: 600;
+        font-size: 22px;
+        margin-bottom: 5%;
+    }
+
+    .Shop-section-wrapper h6.sub-title{
+        margin-top: 5%;
+        font-weight: 500;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    /************ checkout button section ************/
+    .Shop-Checkout .form-group.buttons{
+        margin-top: 5%;
+        margin-bottom: 8%;
+    }
+    .Shop-Checkout .form-group .btn {
+        font-size: 13px;
+        height: 45px;
+        width: 100%;
+    }
+    .Shop-Checkout .form-group .btn:hover{
+        background: #5c5b1f;
+    }
+    .Shop-Checkout .form-group p{
+        padding-top: 20px;
+        font-size: 14px;
+    }
+    .Shop-Checkout .form-group p .link{
+        color:#363636;
+        text-decoration: none;
+    }
+
+
+
+    /************ shipping  section ************/
+
+    .Shop-Checkout .Shipping-address{
+        border: 1px solid #adadad;
+        width: 100%;
+        border-radius: 5px;
+        padding: 0;
+        margin-bottom: 10%;
+    }
+
+    .Shop-Checkout .Shipping-address .table.contact td{
+        padding-left: 5px;
+    }
+    .Shop-Checkout .Shipping-address .text-head{
+        font-size: 12px;
+        font-weight: 600;
+        color: #4a4a4a;
+    }
+    .Shop-Checkout .Shipping-address p{
+        font-size: 12px;
+        color: #4a4a4a;
+        padding-bottom: 0;
+    }
+    .Shop-Checkout .Shipping-address .total .text-head{
+        font-size: 15px;
+        color: #2e2e2e;
+        font-weight: 600;
+    }
+    .Shop-Checkout .Shipping-address .total p{
+        font-size: 16px;
+        color: #2e2e2e;
+        font-weight: 600;
+    }
+    .Shop-Checkout .Shipping-address p.left{
+        text-align: right;
+    }
+
+    .Shop-Checkout .Shipping-address .link{
+        font-size: 12px;
+        color: #7d7d7d;
+        text-decoration: none;
+    }
+
+    .Shop-Checkout .Shipping-address .table .top td {
+        border-top-width: 0;
+    }
+
+    .Shop-Checkout .Shipping-address .table tr td {
+        padding-bottom: 0;
+    }
+    .Shop-Checkout .Shipping-method h6{
+        font-size: 15px;
+        color: #525252;
+        font-weight: 600;
+        padding-bottom: 10px;
+    }
+    .Shop-Checkout .Shipping-method .Shipping-method-table .form-check {
+        cursor: pointer;
+    }
+    .Shop-Checkout .Shipping-method .Shipping-method-table .form-check .form-check-label{
+        font-size: 13px;
+        color: #939694;
+        cursor: pointer;
+    }
+    .Shop-Checkout .Shipping-method .Shipping-method-table {
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+
+    /************ payment method styles ************/
+    .Payment-method .note{
+        font-size: 13px;
+        padding-bottom: 20px;
+    }
+
+    .Payment-method .Payment-method-list .Payment-box{
+        margin-bottom: 10%;
+        padding: 10px 10px;
+    }
+
+    .Payment-method .Payment-method-list .Payment-box h5{
+        display: flex;
+        justify-content: space-between;
+    }
+    .Payment-method .Payment-method-list .Payment-box h5 .text{
+        font-size: 16px;
+        font-weight: 600;
+        color: #011B33;
+    }
+    .Payment-method .Payment-method-list .Payment-box h5 .img-pay{
+        width: 40%;
+    }
+    .Payment-method .Payment-method-list .Payment-box p{
+        padding-top: 10px;
+        font-size: 12px;
+        padding-bottom: 0px;
+    }
+    .Payment-method .Payment-method-list .Payment-box .payment-img{
+        width: 60%;
+        margin: auto;
+    }
+    .Payment-method .Payment-method-list .Payment-box .payment-img img{
+        width: 70%;
+    }
+    .Payment-method .Payment-method-list .Payment-box.klump h5 .img-pay{
+        width: 30%;
+    }
+
+
+
+    /************ order confirmation styles ************/
+    .Order-confirmation .far{
+        font-size: 50px;
+        float: left;
+        padding-right: 20px;
+    }
+    .Order-confirmation .Thank-you .text{
+        margin-bottom: 10%;
+    }
+    .Order-confirmation .Thank-you .text h6{
+        font-size: 12px;
+    }
+    .Order-confirmation .Thank-you .text h4{
+        font-size: 18px;
+        font-weight: 400;
+    }
+    .order-box{
+        border-radius: 5px;
+        border: 1px solid #939694;
+        padding: 15px 4px;
+        margin-bottom: 5%;
+    }
+    .order-box h4{
+        font-size: 15px;
+        font-weight: 400;
+        color: #525252;
+    }
+    .order-box p{
+        font-size: 11px;
+        font-weight: 400;
+        color: #525252;
+    }
+    .Order-updates .btn {
+        padding: 8px 20px;
+        font-size: 11px;
+        margin-right: 5px;
+    }
+
+    .Order-updates button.btn-success {
+        margin-left: 5px;
+    }
+
+
+}
+@media only screen and (max-width: 376px) {
+
+    .Shop-Checkout .bread-crumb{
+        text-align: left;
+    }
+    .Shop-Checkout  .bread-crumb ul{
+        padding: 10px 0 5px;
+        font-size: 13px;
+    }
+    .Shop-Checkout  .bread-crumb ul li{
+        display: inline-block;
+        margin: 3px 5px;
+    }
+    .Shop-Checkout .bread-crumb .fas{
+        font-size: 8px;
+    }
+
+
+    .Shop-Checkout .Shipping-address .table.contact td{
+        padding-left: 3px;
+        padding-right: 2px;
+    }
+
+
+
 }

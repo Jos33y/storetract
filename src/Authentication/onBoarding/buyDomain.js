@@ -27,7 +27,7 @@ const BuyDomain = () => {
 
         console.log(slit, slit.length)
         let domain =  formData;      // domain name you want to check
-        let apikey = "85cd507c4e1dd0538d603c8653c5173c"; // your API key
+        let apikey = process.env.REACT_APP_WHO_IS_API_KEY; // your API key
         try {
             await fetch('https://api.whoapi.com/?domain='+domain+'&r=taken&apikey='+apikey).then(response => {
                 return response.json();

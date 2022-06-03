@@ -57,6 +57,7 @@ const ShopCart = ({businessUrl}) => {
         catch (e) {
             console.log({e})
         }
+        window.location.reload();
     }
 
     useEffect(() => {

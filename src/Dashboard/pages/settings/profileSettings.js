@@ -44,10 +44,17 @@ const ProfileSettings = ({userId}) => {
                 storeLogo: storeLogoUrls,
                 updateTime: serverTimestamp(),
             }
+            const updateShop = {
+                businessName: `${businessName}`,
+                businessPhone: `${phoneNumber}`,
+            }
             delete formDataCopy.email;
             delete formDataCopy.storeUrl;
             const formDataRef = doc(db, 'users', userId)
-            await updateDoc(formDataRef, formDataCopy)
+            await updateDoc(formDataRef, formDataCopy).then(() => {
+                const updateStoreRef = doc(db, 'shops', `${storeUrl}`)
+                updateDoc(updateStoreRef, updateShop)
+            })
             toast.success("Changes saved")
         }
         catch (error) {

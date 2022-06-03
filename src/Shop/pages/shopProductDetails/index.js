@@ -41,7 +41,9 @@ const ShopProductDetails = ({businessUrl}) => {
                 toast.error('item already added') //alert user
             } else { //if item doesn't exist, simply add it
                 cartData.push({...product, qty: quantity})
-                toast.success('product added to cart')
+                if (toast.success('product added to cart')) {
+                    window.location.reload();
+                }
             }
 
             //update app state
@@ -56,6 +58,7 @@ const ShopProductDetails = ({businessUrl}) => {
         }
 
         setDisabled(false)
+
     }
     //Fetch Product
     const fetchProducts = async () => {
