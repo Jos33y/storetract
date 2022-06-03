@@ -34,7 +34,7 @@ const StoreFreeActivation = ({fullName, userId}) => {
         setDisabled(true)
         e.preventDefault()
         try {
-            let trimUrl = formData.businessName.trim();
+            let trimUrl = formData.businessName.replace(/[^a-zA-Z0-9]/g, '').trim();
             let Url = `${trimUrl.replace(/,?\s+/g, '-').toLowerCase()}`
 
             const auth = userId;
@@ -86,7 +86,7 @@ const StoreFreeActivation = ({fullName, userId}) => {
             let Url = (e.target.value).trim()
 
             let url = `${Url
-                .replace(/,?\s+/g, '-')
+                .replace(/[^a-zA-Z0-9]/g, '')
                 .toLowerCase()}`
             // console.log("shop url: " + Url)
             setShopUrl(url);
@@ -165,7 +165,7 @@ const StoreFreeActivation = ({fullName, userId}) => {
                                                    id="storeUrl"
                                                    onChange={onChange}
                                                    required={true}
-                                                   maxLength={50}
+                                                   maxLength={20}
                                                    value={ "/"  + shopUrl}
                                                    placeholder="Your Store URL"/>
                                         </div>
