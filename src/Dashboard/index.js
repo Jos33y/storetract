@@ -100,7 +100,7 @@ const SellersDashboard = () => {
             return <OrderListPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
         }
        else if (params.orderId) {
-            return <OrderDetailsPage userId={auth.currentUser.uid}/>
+            return <OrderDetailsPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
         }
         else if (params.dashUrl === "products") {
             return <ProductListPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />

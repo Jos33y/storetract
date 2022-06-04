@@ -7,6 +7,7 @@ import {getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/a
 import {doc, setDoc, serverTimestamp} from "firebase/firestore"
 import {db} from "../firebase.config";
 import RegisterOffice from "../assets/images/22Z_2012.w003.n001.69B.p12.69.jpg";
+import emailjs from '@emailjs/browser';
 
 
 const Register = () => {
@@ -45,7 +46,13 @@ const Register = () => {
             formDataCopy.timestamp = serverTimestamp()
             formDataCopy.storeActivated = false;
 
-            await setDoc(doc(db, 'users', user.uid), formDataCopy)
+            await setDoc(doc(db, 'users', user.uid), formDataCopy).then(() =>{
+                emailjs.send("service_ygvg9st","template_wxhoc3n", {
+                    first_name: `${formDataCopy.name}`,
+                    to_email: `${formDataCopy.email}`,
+                },
+                    "ZwqSp3BfrVy05Rp7o",);
+            })
 
             navigate('/onboarding/pricing')
         }
@@ -55,6 +62,7 @@ const Register = () => {
 
         }
     }
+
     const onChange = (e) => {
         setFormData((prevState) => ({
         ...prevState,

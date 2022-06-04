@@ -1,36 +1,95 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "../pagesStyles.css"
 import {Button ,Card ,Col ,Row ,Table} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import ItemTwo from "../../../assets/images/items/2.jpg";
-import VisaCard from "../../../assets/images/payments/2.png";
+import {Link, useParams} from "react-router-dom";
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../../../firebase.config";
+import Spinner from "../../../components/Spinner";
 
-const OrderDetailsPage = () => {
+const OrderDetailsPage = ({userId, storeUrl}) => {
+
+    const params = useParams()
+    const isMounted = useRef()
+    const [orderData, setOrderData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [customerData, setCustomerData] = useState([]);
+
+
+
+  const orderId =   params.orderId
+    console.log(orderId)
+
+    const getOrderDetails = async () => {
+      setLoading(true)
+
+      try {
+          const orderRef = doc(db, 'shops', storeUrl, 'orders', params.orderId)
+          const orderSnap = await getDoc(orderRef)
+
+          if(orderSnap.exists()) {
+              setOrderData(orderSnap.data());
+              getCustomer(orderSnap.data().customerId).then()
+          }
+      }
+      catch (error) {
+          console.log({error})
+      }
+      setLoading(false)
+    }
+
+    const getCustomer = async (customerID) => {
+        try {
+            const customerRef = doc(db, 'shops', storeUrl, 'customers', customerID)
+            const customerSnap = await getDoc(customerRef)
+
+            if(customerSnap.exists()) {
+                setCustomerData(customerSnap.data());
+                console.log(customerSnap.data())
+            }
+        }
+        catch (error) {
+            console.log({error})
+        }
+    }
+
+    useEffect(() => {
+        if(isMounted) {
+           getOrderDetails().then()
+        }
+
+        return () => {
+            isMounted.current = false;
+        }
+// eslint-disable-next-line
+    },[isMounted, userId])
+
     return (
         <>
+            {loading ?
+                (<Spinner />) :
+                (
            <section className="content-main">
                <div className="content-header">
                    <h2 className="content-title">Order detail </h2>
                </div>
-
                <Card>
                    <header className="card-header">
                        <Row className="align-items-center">
                            <Col lg={6} md={6}>
                                <i className="fas fa-calendar-day"></i>
-                               <span className="bold"> Wed, Mar 13, 2022, 4:32pm</span> <br/>
-                               <small className="text-muted">Order ID: 3453012</small>
+                               <span className="bold"> {`${orderData.timeStamp.toDate().toLocaleString()}`}</span> <br/>
+                               {/*<span className="bold"> Wed, Mar 13, 2022, 4:32pm</span> <br/>*/}
+                               <small className="text-muted">Order ID: {`${orderData.orderId}`}</small>
                            </Col>
                            <Col lg={6} md={6} className="ms-auto text-md-end">
                                <select style={{maxWidth: "200px"}} className="form-select d-inline-block">
                                    <option value="change status">Change Status</option>
-                                   <option value="awaiting payment">Awaiting Payment</option>
-                                   <option value="confirmed">Confirmed</option>
-                                   <option value="shipped">Shipped</option>
+                                   <option value="Received">Received</option>
+                                   <option value="Received">Shipped</option>
                                    <option value="Delivered">Delivered</option>
                                </select>
-                               <Link to="https://" className="btn btn-md btn-outline-secondary ms-2">Save </Link>
-                               <Link to="https://" className="btn btn-secondary ms-2"> <i className="fas fa-print"></i></Link>
+                               <Button className="btn btn-md btn-secondary ms-2">Save </Button>
+                               {/*<Button  className="btn btn-secondary ms-2"> <i className="fas fa-print"></i></Button>*/}
                            </Col>
                        </Row>
                    </header>
@@ -44,11 +103,11 @@ const OrderDetailsPage = () => {
                                    <div className="text">
                                        <h6 className="mb-1">Customer</h6>
                                        <p className="mb-1">
-                                           John Alexander <br/>
-                                           alex@example.com <br/>
-                                           +234 70 897 6767
+                                           {`${orderData.firstname} ${orderData.lastname}`} <br/>
+                                           {`${orderData.email}`}<br/>
+                                           {`${customerData.phoneNumber}`}
                                        </p>
-                                       <Link to="dashboard/customers/678"> View Profile</Link>
+                                       <Link to={`/dashboard/customers/${orderData.customerId}`}> View Profile</Link>
                                    </div>
                                </article>
                            </Col>
@@ -60,11 +119,11 @@ const OrderDetailsPage = () => {
                                    <div className="text">
                                        <h6 className="mb-1">Order info</h6>
                                        <p className="mb-1">
-                                           Shipping: Fargo express <br/>
-                                           Pay method: card <br/>
-                                           Status: new
+                                           Shipping: {`${orderData.shippingMethod}`} <br/>
+                                           Pay method: {`${orderData.paymentMethod}`} <br/>
+                                           Status: {`${orderData.orderStatus}`}
                                        </p>
-                                       <Link to="dashboard/customers/678"> Download Info</Link>
+
                                    </div>
 
                                </article>
@@ -79,111 +138,66 @@ const OrderDetailsPage = () => {
                                    <div className="text">
                                        <h6 className="mb-1">Deliver to</h6>
                                        <p className="mb-1">
-                                           City: Tashkent, Uzbekistan<br/>
-                                           Block A, House 123, Floor 2 <br/>
-                                           Po Box 10000
+                                          {`${customerData.deliveryAddress}`} <br/>
+                                           City: {`${customerData.city}`}<br/>
+                                           State: {`${customerData.state}`}<br/>
+                                           Country: {`${customerData.country}`}
                                        </p>
-                                       <Link to="dashboard/customers/678"> View Profile</Link>
                                    </div>
                                </article>
                            </Col>
                        </Row>
 
                        <Row>
-                           <Col lg={8}>
+                           <Col lg={12}>
                                <div className="table-responsive">
                                    <Table className="table-border table-hover table-lg">
                                        <thead>
                                         <tr>
-                                            <th width="40%">Product</th>
+                                            <th width="60%">Product</th>
                                             <th width="20%">Unit Price</th>
-                                            <th width="20%">Quantity</th>
-                                            <th width="20%">Total</th>
+                                            <th width="10%">Quantity</th>
+                                            <th width="10%" className="text-end">Total</th>
                                         </tr>
                                        </thead>
                                        <tbody>
                                        {/*row one*/}
-                                        <tr>
-                                            <td>
-                                                <Link to="https://" className="itemside">
-                                                    <div className="left">
-                                                        <img src={ItemTwo} alt="item" width={40} height={40} className="img-xs"/>
-                                                    </div>
-                                                    <div className="info">T-shirt blue XXL size</div>
-
-                                                </Link>
-                                            </td>
-                                            <td> &#8358; 56,000.00</td>
-                                            <td> 2 </td>
-                                            <td className="text-end"> &#8358; 134,000</td>
-                                        </tr>
-
-                                       {/*row one*/}
-                                       <tr>
+                                       {orderData.productOrdered.map((order) => (
+                                       <tr key={order.id}>
                                            <td>
-                                               <Link to="https://" className="itemside">
+                                               <div className="itemside">
                                                    <div className="left">
-                                                       <img src={ItemTwo} alt="item" width={40} height={40} className="img-xs"/>
+                                                       <img src={order.imgUrls[0]} alt="item" width={40} height={40} style={{objectFit:"contain"}} className="img-xs"/>
                                                    </div>
-                                                   <div className="info">Winter Jacket for Men</div>
-
-                                               </Link>
+                                                   <div className="info">{order.productName} </div>
+                                               </div>
                                            </td>
-                                           <td> &#8358; 26,000.00</td>
-                                           <td> 2 </td>
-                                           <td className="text-end"> &#8358; 54,000</td>
+                                           <td>&#8358;{order.productPrice.toString()
+                                               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
+                                           <td> {order.qty} </td>
+                                           <td className="text-end"> &#8358;{(order.qty * order.productPrice).toString()
+                                               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
                                        </tr>
-
-
-                                       {/*row one*/}
-                                       <tr>
-                                           <td>
-                                               <Link to="https://" className="itemside">
-                                                   <div className="left">
-                                                       <img src={ItemTwo} alt="item" width={40} height={40} className="img-xs"/>
-                                                   </div>
-                                                   <div className="info">Jeans wear for men</div>
-
-                                               </Link>
-                                           </td>
-                                           <td> &#8358; 16,000.00</td>
-                                           <td> 3 </td>
-                                           <td className="text-end"> &#8358; 48,000</td>
-                                       </tr>
-
-
-                                       {/*row one*/}
-                                       <tr>
-                                           <td>
-                                               <Link to="https://" className="itemside">
-                                                   <div className="left">
-                                                       <img src={ItemTwo} alt="item" width={40} height={40} className="img-xs"/>
-                                                   </div>
-                                                   <div className="info">Designer Bag </div>
-
-                                               </Link>
-                                           </td>`
-                                           <td> &#8358; 2,000.00</td>
-                                           <td> 4 </td>
-                                           <td className="text-end"> &#8358; 8,000</td>
-                                       </tr>
+                                       ))}
                                        <tr>
                                            <td colSpan={4}>
                                                <article className="float-end">
                                                    <dl className="dlist">
-                                                       <dt>Subtotal: </dt> <dd> &#8358; 456,000.00</dd>
+                                                       <dt>Subtotal: </dt> <dd>&#8358;{orderData.orderTotal.toString()
+                                                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</dd>
                                                    </dl>
                                                    <dl className="dlist">
-                                                       <dt>Shipping cost: </dt> <dd> &#8358; 6,000.00</dd>
+                                                       <dt>Shipping cost: </dt> <dd> &#8358; 0.00</dd>
                                                    </dl>
 
                                                    <dl className="dlist">
-                                                       <dt>Grand total: </dt> <dd> &#8358; 462,000.00</dd>
+                                                       <dt>Grand total: </dt> <dd> &#8358;{orderData.orderTotal.toString()
+                                                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</dd>
                                                    </dl>
                                                    <dl className="dlist">
-                                                       <dt className="text-muted">Status </dt>
+                                                       <dt className="text-muted">Payment Status </dt>
                                                        <dd>
-                                                           <span className="badge rounded-pill alert-success text-success">Payment done
+                                                           <span className="badge rounded-pill alert-success text-success">{`${orderData.deliveryStatus}`}<br/>
                                                            </span> </dd>
                                                    </dl>
                                                </article>
@@ -193,28 +207,11 @@ const OrderDetailsPage = () => {
                                    </Table>
                                </div>
                            </Col>
-                           <Col lg={4}>
-                               <div className="box shadow-sm bg-light">
-                                   <h6>Payment info</h6>
-                                   <p>
-                                       <img src={VisaCard} alt="card" className="border" height={20}/> Master Card **** **** 4768 <br/>
-                                       Business name: Grand Market LLC <br/>
-                                       Phone: +1 (708) 555-7865
-                                   </p>
-                               </div>
-                               <div className="h-25 pt-4">
-                                   <div className="mb-3">
-                                       <label htmlFor="notes">Notes</label>
-                                       <textarea name="notes" id="notes" className="form-control" placeholder="Type some note"></textarea>
-                                   </div>
-                                   <Button className="btn btn-primary">Save note</Button>
-                               </div>
-                           </Col>
                        </Row>
                    </div>
                </Card>
            </section>
-
+                ) }
         </>
     )
 

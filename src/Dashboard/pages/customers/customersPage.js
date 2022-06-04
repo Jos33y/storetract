@@ -87,7 +87,7 @@ const CustomersPage = ({storeUrl, userId}) => {
                                         <th>Email</th>
                                         <th>Status</th>
                                         <th>Registered</th>
-                                        <th className="text-end">Action</th>
+                                        {/*<th className="text-end">Action</th>*/}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,9 +109,9 @@ const CustomersPage = ({storeUrl, userId}) => {
                                         <td> {customer.data.email}</td>
                                         <td> <span className="badge rounded-pill alert-success">Active</span> </td>
                                         <td> {(customer.data.timeStamp).toDate().toLocaleDateString("en-US")}</td>
-                                        <td className="text-end">
-                                            <Link to={`/dashboard/customers/${customer.id}`} className="btn btn-light btn-analytics">View </Link>
-                                        </td>
+                                        {/*<td className="text-end">*/}
+                                        {/*    <Link to={`/dashboard/customers/${customer.id}`} className="btn btn-light btn-analytics">View </Link>*/}
+                                        {/*</td>*/}
                                     </tr>
                                 ))}
                                 </tbody>

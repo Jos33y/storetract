@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import "../pagesStyles.css";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Button ,Card ,Col ,Form ,Row} from "react-bootstrap";
 import {collection, doc, getDocs, limit, orderBy, query, serverTimestamp, setDoc} from "firebase/firestore";
 import {db} from "../../../firebase.config";
@@ -12,7 +12,6 @@ import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/st
 const AddProductPage = ({userId, storeUrl}) => {
 
     const isMounted = useRef()
-    const navigate = useNavigate()
 
     // const [loading, setLoading] = useState(true)
     const [isDisabled, setDisabled] = useState(false)
@@ -148,8 +147,9 @@ const AddProductPage = ({userId, storeUrl}) => {
                     data: doc.data(),
                 })
             })
-            if(categories === []){
-                navigate('/dashboard/categories')
+            if(categories === null){
+                toast.success("create cateogory first");
+                window.location.href = "/dashboard/categories"
             }
             else{
                 setCategories(categories)

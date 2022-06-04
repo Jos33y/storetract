@@ -42,6 +42,7 @@ const ShopProductDetails = ({businessUrl}) => {
             } else { //if item doesn't exist, simply add it
                 cartData.push({...product, qty: quantity})
                 if (toast.success('product added to cart')) {
+
                     window.location.reload();
                 }
             }

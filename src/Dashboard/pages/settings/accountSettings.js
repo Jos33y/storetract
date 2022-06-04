@@ -5,8 +5,7 @@ import SettingsHeader from "./settingsHeader";
 import {doc, getDoc, serverTimestamp, setDoc} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
-
-
+// const Flutterwave = require('flutterwave-node-v3');
 
 const AccountSettings = ({storeUrl}) => {
 
@@ -19,7 +18,22 @@ const AccountSettings = ({storeUrl}) => {
         updateTime: '',
     })
 
+    // const flw = new Flutterwave(process.env.REACT_APP_FLUTTERWAVE_PUBLIC_TEST_KEY, process.env.REACT_APP_FLUTTERWAVE_SECRET_TEST_KEY);
+
     const {bankName, accountNumber, accountName} = bankData;
+
+    // const getBanks = async () => {
+    //
+    //     try {
+    //                 const payload = {
+    //                     "country":"NG"
+    //                 }
+    //                 const response = await flw.Bank.country(payload)
+    //                 console.log(response);
+    //             } catch (error) {
+    //                 console.log(error)
+    //             }
+    // }
 
     const handleSubmit = async (e) => {
         setLoading(true)
@@ -61,6 +75,7 @@ const AccountSettings = ({storeUrl}) => {
     useEffect(() => {
         if(isMounted) {
             getAccount().then()
+            // getBanks().then()
         }
         return () => {
             isMounted.current = false;

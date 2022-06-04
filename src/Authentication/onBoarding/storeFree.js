@@ -6,6 +6,7 @@ import {doc, getDoc, serverTimestamp, setDoc, updateDoc} from "firebase/firestor
 import {db} from "../../firebase.config";
 import {toast} from "react-toastify";
 
+
 const StoreFreeActivation = ({fullName, userId}) => {
 
     const navigate = useNavigate()
@@ -98,6 +99,7 @@ const StoreFreeActivation = ({fullName, userId}) => {
             [e.target.id]: e.target.value,
         } ))
     }
+
 
 
     // create new wallet
