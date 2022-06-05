@@ -60,7 +60,7 @@ const BuyDomain = () => {
                         else if(slit[1] === 'africa')
                             setPrice('17,400')
                         else if(slit[1] === 'shop')
-                            setPrice('22,300')
+                            setPrice('22,400')
                     }
                 }
                 // console.log(json.taken === 1 ? "Taken" : "Not Taken")
