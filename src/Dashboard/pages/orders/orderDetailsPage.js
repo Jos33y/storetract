@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import "../pagesStyles.css"
-import {Button ,Card ,Col ,Row ,Table} from "react-bootstrap";
+import {Button, Card, Col, Form, Row, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
 import {doc, getDoc} from "firebase/firestore";
 import {db} from "../../../firebase.config";
@@ -11,6 +11,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
     const params = useParams()
     const isMounted = useRef()
     const [orderData, setOrderData] = useState([]);
+    const [orderStatus, setOrderStatus] = useState('');
     const [loading, setLoading] = useState(true);
     const [customerData, setCustomerData] = useState([]);
 
@@ -28,6 +29,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
 
           if(orderSnap.exists()) {
               setOrderData(orderSnap.data());
+              setOrderStatus(orderSnap.data().orderStatus)
               getCustomer(orderSnap.data().customerId).then()
           }
       }
@@ -50,6 +52,23 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
         catch (error) {
             console.log({error})
         }
+    }
+    const handleChanges = async (e) => {
+      e.preventDefault()
+
+        try {
+            console.log("well done")
+        }
+        catch (error) {
+            console.log({error})
+        }
+    }
+
+    const onChange = (e) => {
+        setOrderStatus((prevState) => ({
+            ...prevState,
+            [e.target.id]: e.target.value,
+        }))
     }
 
     useEffect(() => {
@@ -81,16 +100,23 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                {/*<span className="bold"> Wed, Mar 13, 2022, 4:32pm</span> <br/>*/}
                                <small className="text-muted">Order ID: {`${orderData.orderId}`}</small>
                            </Col>
-                           <Col lg={6} md={6} className="ms-auto text-md-end">
-                               <select style={{maxWidth: "200px"}} className="form-select d-inline-block">
-                                   <option value="change status">Change Status</option>
-                                   <option value="Received">Received</option>
-                                   <option value="Received">Shipped</option>
-                                   <option value="Delivered">Delivered</option>
-                               </select>
-                               <Button className="btn btn-md btn-secondary ms-2">Save </Button>
-                               {/*<Button  className="btn btn-secondary ms-2"> <i className="fas fa-print"></i></Button>*/}
-                           </Col>
+                           <Form onSubmit={handleChanges}>
+                               <Col lg={6} md={6} className="ms-auto text-md-end">
+                                   <select style={{maxWidth: "200px"}}
+                                           name="orderStatus"
+                                           id="orderStatus"
+                                           value={orderStatus}
+                                           onChange={onChange}
+                                           className="form-select d-inline-block">
+                                       <option value="change status">Change Status</option>
+                                       <option value="Received">Received</option>
+                                       <option value="Received">Shipped</option>
+                                       <option value="Delivered">Delivered</option>
+                                   </select>
+                                   <Button type="submit" className="btn btn-md btn-secondary ms-2">Save </Button>
+                                   {/*<Button  className="btn btn-secondary ms-2"> <i className="fas fa-print"></i></Button>*/}
+                               </Col>
+                           </Form>
                        </Row>
                    </header>
                    <div className="card-body">

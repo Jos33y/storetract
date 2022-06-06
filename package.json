@@ -13,6 +13,7 @@
     "eslint-config-react-app": "^7.0.0",
     "firebase": "^9.6.6",
     "flutterwave-react-v3": "^1.2.0",
+    "klump-react": "^1.0.1",
     "public-ip": "^5.0.0",
     "react": "^16.12.0 || ^17.0.0",
     "react-bootstrap": "^2.1.2",
