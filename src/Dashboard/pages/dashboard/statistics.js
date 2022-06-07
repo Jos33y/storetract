@@ -1,4 +1,4 @@
-import {Button, Card, Col, Row} from "react-bootstrap";
+import {Card, Col, Row} from "react-bootstrap";
 import React from "react";
 import {
     Chart as ChartJS,
@@ -9,6 +9,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import {Link} from "react-router-dom";
 
 ChartJS.register(
     CategoryScale,
@@ -64,29 +65,13 @@ const Statistics = () => {
 
                 <Col xl={4} lg={12}>
                     <Card className="card mb-4">
-                        <article className="card-body">
-                            <h5 className="card-title">Marketing</h5>
-                            <span className="text-muted">Facebook page</span>
-                            <div className="progress mb-3">
-                                <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: "1%"}}>0%</div>
-                            </div>
-
-                            <span className="text-muted">Instagram page</span>
-                            <div className="progress mb-3">
-                                <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{width: "1%"}}>0%</div>
-                            </div>
-
-                            <span className="text-muted">Google search</span>
-                            <div className="progress mb-3">
-                                <div className="progress-bar progress-bar-striped bg-danger" role="progressbar" style={{width: "1%"}}>0%</div>
-                            </div>
-
-                            <span className="text-muted">Other links</span>
-                            <div className="progress mb-3">
-                                <div className="progress-bar progress-bar-striped bg-secondary" role="progressbar" style={{width: "1%"}}>0%</div>
-                            </div>
-                            <br/>
-                            <Button  className="btn btn-light btn-analytics"> Open analytics <i className="fas fa-external-link-alt"></i> </Button>
+                        <article className="card-body store-settings">
+                            <h4 className="card-title">Things to do.</h4>
+                            <h6>1. Set up store look <Link to="/dashboard/settings/store"> here </Link> </h6>
+                            <h6>2. Create product categories <Link to="/dashboard/categories"> here </Link>  </h6>
+                            <h6>3. Add different products <Link to="/dashboard/add-product"> here </Link>  </h6>
+                            <h6>4. Add delivery locations fees <Link to="/dashboard/delivery-list"> here </Link> </h6>
+                            <h6>5. Profile Settings <Link to="/dashboard/settings/profile"> here </Link> </h6>
                         </article>
                     </Card>
                 </Col>

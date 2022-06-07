@@ -1,6 +1,22 @@
 
 /* ================== HELPERS JOE =================== */
 
+.store-settings{
+    padding: 20px;
+}
+.store-settings h4{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.store-settings h6{
+    font-size: 18px;
+    font-weight: 400;
+    padding: 15px 5px;
+}
+
 .note-section{
     margin: 0px 20px 40px;
     padding: 10px 8px 5px;
@@ -246,6 +262,18 @@
 
     .account-balance .acct-row .acct-icon .fas{
         font-size: 35px;
+    }
+
+    .store-settings h4{
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    .store-settings h6{
+        font-size: 15px;
+        font-weight: 400;
+        padding: 8px 5px;
     }
 
 }

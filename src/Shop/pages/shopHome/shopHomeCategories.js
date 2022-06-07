@@ -18,7 +18,7 @@ const ShopHomeCategories = ({loading, categories}) => {
                     <Col md={4} className="col-6" key={ category.id }>
                         <div className="store-cat-box">
                             <div className="store-cat-img">
-                                <img src={category.data.img ? category.data.img :  CatImageOne} alt="" className="img-fluid"/>
+                                <img src={category.data.categoryImage ? category.data.categoryImage[0] :  CatImageOne} alt="" className="img-fluid"/>
                             </div>
                             <Link to={`/category/${category.data.categoryUrl}`} className="btn btn-md btn-secondary"> {category.data.title} </Link>
                         </div>
