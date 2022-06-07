@@ -1,5 +1,381 @@
 
+/* ================== HELPERS JOE =================== */
+
+.note-section{
+    margin: 0px 20px 40px;
+    padding: 10px 8px 5px;
+    background: #f7c9c6;
+    border-radius: 10px;
+
+}
+.note-section h6{
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.image-placeholder{
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 10px 0 30px;
+}
+.placeholder-container{
+    margin-top: 10px;
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
+}
+.placeholder-container .img-fluid{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1px;
+    border: 0px solid #3E4095;
+
+    box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -webkit-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -moz-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+}
+
+.category-table-img{
+    height: 80px;
+    width: 90px;
+    box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -webkit-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+    -moz-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
+}
+.category-table-img .img-fluid{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1px;
+}
+/* ================== ACCOUNT HELPERS=================== */
+.account-balance{
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.account-balance .card{
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+
+    box-shadow: 0px 0px 8px 3px rgba(117,117,117,0.75);
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(117,117,117,0.75);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(117,117,117,0.75);
+}
+
+.account-balance .card.current-balance{
+    background: #3e4095;
+    color: #ffffff;
+}
+
+.account-balance .card.income-balance{
+    background: #3e9568;
+    color: #ffffff;
+}
+
+.account-balance .card.outgoing-balance{
+    background: #953e40;
+    color: #ffffff;
+}
+.account-balance .card .card-body h5.balance{
+    font-size: 30px;
+    font-weight: 700;
+
+}
+.account-balance .acct-row{
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.account-balance .acct-row .acct-text{
+    margin-top: 10px;
+}
+.account-balance .acct-row .acct-text p{
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.account-balance .acct-row .acct-text p.light{
+    font-weight: 400;
+}
+
+.account-balance .acct-row .acct-icon .fas{
+    font-size: 45px;
+}
+.section-two{
+    margin-top: 5%;
+}
+.withdrawal-page .card{
+
+    border-radius: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
+    -webkit-box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
+    -moz-box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
+}
+
+.withdrawal-page .account-details{
+    padding: 2px;
+    border-radius: 10px;
+}
+.account-details .card-body {
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.account-details .card-body p{
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.account-details .card-body .account-details-title p{
+    font-weight: 600;
+}
+
+.withdrawal-form{
+    padding: 5px;
+}
+.withdrawal-form h5{
+    text-align: left;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.withdrawal-form .form-group label{
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+.withdrawal-form .form-group .form-control{
+    font-size: 17px;
+    height: 45px;
+    font-weight: 600;
+    border-radius: 1px;
+}
+
+.withdrawal-form .form-group .form-control:focus{
+    outline: none;
+    box-shadow: none;
+}
+.withdrawal-form .form-group{
+    margin: 20px 0px;
+}
+.withdrawal-form .form-group .btn{
+    width: 100%;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: #3e4095;
+    border: 1px solid #3e4095;
+
+    box-shadow: 0px 0px 3px 1px rgba(117,117,117,0.75);
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(117,117,117,0.75);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(117,117,117,0.75);
+}
+
+
+
+.recent-withdrawal .card{
+    border-radius: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
+    -webkit-box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
+    -moz-box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
+}
+
+.recent-withdrawal h5{
+    text-align: left;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+
+.recent-withdrawal .card-body .table tbody td{
+    font-size: 14px;
+ }
+.recent-withdrawal .card-body .table tbody td.id{
+    font-size: 13px;
+    font-weight: 600;
+}
+.recent-withdrawal .card-body .table tbody td .info-details h6{
+    margin-bottom: 5px;
+}
+.recent-withdrawal .card-body .table tbody td .info-details p{
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+@media (max-width: 812px) {
+
+    .account-balance .card{
+        padding: 5px 5px;
+        height: 150px;
+    }
+    .account-balance .card .card-body{
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .account-balance .card .card-body h5.balance{
+        font-size: 25px;
+    }
+    .account-balance .acct-row .acct-text{
+        margin-top: 5px;
+    }
+    .account-balance .acct-row .acct-text p{
+        margin-bottom: 5px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    .account-balance .acct-row .acct-text p.light{
+        font-weight: 400;
+    }
+
+    .account-balance .acct-row .acct-icon .fas{
+        font-size: 35px;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .account-balance .card{
+        padding: 5px 5px;
+        height: 130px;
+        margin-bottom: 20px;
+    }
+    .account-balance .card .card-body{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .account-balance .card .card-body h5.balance{
+        font-size: 23px;
+    }
+    .account-balance .acct-row{
+        display: flex;
+        flex: auto;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .account-balance .acct-row .acct-text{
+        margin-top: 5px;
+    }
+    .account-balance .acct-row .acct-text p{
+        margin-bottom: 5px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .account-balance .acct-row .acct-text p.light{
+        font-weight: 400;
+    }
+
+    .account-balance .acct-row .acct-icon .fas{
+        font-size: 30px;
+    }
+    .section-two{
+        margin-top: 5%;
+    }
+
+    .withdrawal-page .card{
+
+        border-radius: 10px;
+        margin-bottom: 40px;
+        box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
+        -webkit-box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
+        -moz-box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
+    }
+
+    .withdrawal-page .account-details{
+        padding: 2px;
+        border-radius: 10px;
+    }
+    .account-details .card-body {
+        display: flex;
+        flex: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .account-details .card-body p{
+        font-size: 13px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+    .account-details .card-body .account-details-title p{
+        font-weight: 600;
+    }
+
+    .withdrawal-form{
+        padding: 5px;
+    }
+    .withdrawal-form h5{
+        text-align: left;
+        font-size: 16px;
+    }
+    .withdrawal-form .form-group label{
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .withdrawal-form .form-group .form-control{
+        font-size: 14px;
+        height: 45px;
+        font-weight: 600;
+        border-radius: 1px;
+    }
+
+    .withdrawal-form .form-group .form-control:focus{
+        outline: none;
+        box-shadow: none;
+    }
+    .withdrawal-form .form-group{
+        margin: 20px 0px;
+    }
+    .withdrawal-form .form-group .btn{
+        width: 100%;
+        font-size: 14px;
+    }
+
+
+    .recent-withdrawal h5{
+        text-align: left;
+        font-size: 16px;
+    }
+
+
+    .recent-withdrawal .card-body .table tbody td{
+        font-size: 12px;
+    }
+    .recent-withdrawal .card-body .table tbody td.id{
+        font-size: 10px;
+        font-weight: 600;
+    }
+    .recent-withdrawal .card-body .table tbody td .info-details h6{
+        margin-bottom: 5px;
+        font-size: 12px;
+    }
+    .recent-withdrawal .card-body .table tbody td .info-details p{
+        margin-bottom: 5px;
+        font-size: 10px;
+    }
+}
 /* ================== HELPERS =================== */
+
 .table thead th {
     color: #adb5bd;
     font-weight: 400;

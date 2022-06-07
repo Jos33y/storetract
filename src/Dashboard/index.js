@@ -27,6 +27,7 @@ import Spinner from "../components/Spinner";
 import EditProductPage from "./pages/products/editProduct";
 import AccountSettings from "./pages/settings/accountSettings";
 import StoreSettings from "./pages/settings/storeSettings";
+import DeliveryPage from "./pages/delivery/deliveryPage";
 
 
 const SellersDashboard = () => {
@@ -82,6 +83,12 @@ const SellersDashboard = () => {
         else if (params.categoryUrl) {
             return <CategoriesPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
+        else if (params.dashUrl === "delivery-list") {
+            return <DeliveryPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
+        }
+        else if (params.deliveryUrl) {
+            return <DeliveryPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
+        }
         else if (params.dashUrl === "add-product") {
             return <AddProductPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
@@ -109,7 +116,7 @@ const SellersDashboard = () => {
             return <EditProductPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
         }
         else if (params.dashUrl === "wallet") {
-            return <WalletPage userId={auth.currentUser.uid}/>
+            return <WalletPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
         }
         else if (params.dashUrl === "subscriptions") {
             return <SubscriptionPage userId={auth.currentUser.uid}/>

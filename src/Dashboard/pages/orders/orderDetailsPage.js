@@ -1,18 +1,21 @@
 import React, {useEffect, useRef, useState} from "react";
 import "../pagesStyles.css"
 import {Button, Card, Col, Form, Row, Table} from "react-bootstrap";
-import {Link, useParams} from "react-router-dom";
-import {doc, getDoc} from "firebase/firestore";
+import {useParams} from "react-router-dom";
+import {doc, getDoc, updateDoc} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import Spinner from "../../../components/Spinner";
+import {toast} from "react-toastify";
 
 const OrderDetailsPage = ({userId, storeUrl}) => {
 
     const params = useParams()
     const isMounted = useRef()
     const [orderData, setOrderData] = useState([]);
-    const [orderStatus, setOrderStatus] = useState('');
+    const [orderStatus, setOrderStatus] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [loadingTwo, setLoadingTwo] = useState(false);
+    const [isDisabled, setIsDisbaled] = useState(false)
     const [customerData, setCustomerData] = useState([]);
 
 
@@ -54,21 +57,27 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
         }
     }
     const handleChanges = async (e) => {
+      setLoadingTwo(true)
+        setIsDisbaled(true)
       e.preventDefault()
 
         try {
-            console.log("well done")
+            const updateOrder = {
+                orderStatus: `${orderStatus}`,
+            }
+            const orderDataRef = doc(db, 'shops',`${storeUrl}`, 'orders' , `${orderData.orderId}`)
+            await updateDoc(orderDataRef, updateOrder).then()
+            toast.success("order status updated")
         }
         catch (error) {
             console.log({error})
         }
+        setLoadingTwo(false)
+        setIsDisbaled(false)
     }
 
     const onChange = (e) => {
-        setOrderStatus((prevState) => ({
-            ...prevState,
-            [e.target.id]: e.target.value,
-        }))
+       setOrderStatus(e.target.value)
     }
 
     useEffect(() => {
@@ -100,6 +109,8 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                {/*<span className="bold"> Wed, Mar 13, 2022, 4:32pm</span> <br/>*/}
                                <small className="text-muted">Order ID: {`${orderData.orderId}`}</small>
                            </Col>
+                           {orderData.deliveryStatus === 'Payment Successful'  && (
+
                            <Form onSubmit={handleChanges}>
                                <Col lg={6} md={6} className="ms-auto text-md-end">
                                    <select style={{maxWidth: "200px"}}
@@ -108,15 +119,20 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                            value={orderStatus}
                                            onChange={onChange}
                                            className="form-select d-inline-block">
-                                       <option value="change status">Change Status</option>
+                                       <option selected disabled value="Success">Change Status</option>
                                        <option value="Received">Received</option>
-                                       <option value="Received">Shipped</option>
+                                       <option value="Shipped">Shipped</option>
                                        <option value="Delivered">Delivered</option>
                                    </select>
-                                   <Button type="submit" className="btn btn-md btn-secondary ms-2">Save </Button>
+                                   <Button type="submit" disabled={isDisabled} className="btn btn-md btn-secondary ms-2">
+                                       {loadingTwo ? (<> <span className="spinner-border spinner-border-sm" role="status"
+                                                            aria-hidden="true"></span>&nbsp; </> ) : ('')
+                                       }
+                                       Save </Button>
                                    {/*<Button  className="btn btn-secondary ms-2"> <i className="fas fa-print"></i></Button>*/}
                                </Col>
                            </Form>
+                           )}
                        </Row>
                    </header>
                    <div className="card-body">
@@ -133,7 +149,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                            {`${orderData.email}`}<br/>
                                            {`${customerData.phoneNumber}`}
                                        </p>
-                                       <Link to={`/dashboard/customers/${orderData.customerId}`}> View Profile</Link>
+                                       {/*<Link to={`/dashboard/customers/${orderData.customerId}`}> View Profile</Link>*/}
                                    </div>
                                </article>
                            </Col>
@@ -147,7 +163,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                        <p className="mb-1">
                                            Shipping: {`${orderData.shippingMethod}`} <br/>
                                            Pay method: {`${orderData.paymentMethod}`} <br/>
-                                           Status: {`${orderData.orderStatus}`}
+                                           Status: {`${orderStatus}`}
                                        </p>
 
                                    </div>
@@ -223,7 +239,8 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                                    <dl className="dlist">
                                                        <dt className="text-muted">Payment Status </dt>
                                                        <dd>
-                                                           <span className="badge rounded-pill alert-success text-success">{`${orderData.deliveryStatus}`}<br/>
+                                                           <span className={`badge rounded-pill ${ orderData.deliveryStatus === "Payment Successful" ? ('alert-success') : 'alert-danger'}`}>{`${orderData.deliveryStatus}`}<br/>
+
                                                            </span> </dd>
                                                    </dl>
                                                </article>

@@ -46,7 +46,7 @@ const Hero = () => {
                                 <Link className="btn btn-md btn-primary" to="/login">Login </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="btn btn-md btn-success" to="/register">Sign Up </Link>
+                                <Link className="btn btn-md btn-success" to="/register"> Sign Up </Link>
                             </li>
                         </ul>
                     </div>

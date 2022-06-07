@@ -61,15 +61,17 @@ const OrderListPage = ({userId, storeUrl}) => {
                 <Card className="card mb-4">
                     <header className="card-header">
                         <Row className="gx-3">
-                            <Col lg={4} md={6} className="me-auto">
-                                <input type="text" placeholder="Search..." className="form-control"/>
+                            {/*<Col lg={4} md={6} className="me-auto">*/}
+                            {/*    <input type="text" placeholder="Search..." className="form-control"/>*/}
+                            {/*</Col>*/}
+                            <Col lg={7} md={4} className="me-auto">
                             </Col>
-                            <Col lg={2} md={3} className="col-6">
+                            <Col lg={3} md={4} className="col-6">
                                 <select className="form-select">
-                                    <option value="status">Status</option>
-                                    <option value="Active">Active</option>
-                                    <option value="Disabled">Disabled</option>
-                                    <option value="Show all">Show all</option>
+                                    <option disabled={true} selected value="status">Status</option>
+                                    <option value="Awaiting Payment">Awaiting Payment</option>
+                                    <option value="Payment Successful">Payment Successful</option>
+                                    <option value="all">Show all</option>
                                 </select>
                             </Col>
 
@@ -107,7 +109,7 @@ const OrderListPage = ({userId, storeUrl}) => {
                                             <td>{order.data.email}</td>
                                             <td>&#8358;{order.data.orderTotal.toString()
                                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
-                                            <td> <span className={`badge rounded-pill ${ order.data.deliveryStatus === "Confirmed" ? ('alert-warning') : 'alert-danger'}`}>{order.data.deliveryStatus}</span> </td>
+                                            <td> <span className={`badge rounded-pill ${ order.data.deliveryStatus === "Payment Successful" ? ('alert-success') : 'alert-danger'}`}>{order.data.deliveryStatus}</span> </td>
                                             <td> {(order.data.timeStamp).toDate().toLocaleDateString("en-US")}</td>
                                             <td className="text-end">
                                                 <Link to={`/dashboard/orders/${order.id}`} className="btn btn-light btn-analytics">Details </Link>

@@ -41,7 +41,7 @@ const StoreSettings = ({storeUrl, userId}) => {
                 toast.error('Image file too large')
                 return
             })
-            console.log("url", storeBannerUrls);
+            // console.log("url", storeBannerUrls);
             const formDataCopy = {
                 ...formData,
                 storeBanner: storeBannerUrls,
@@ -247,7 +247,7 @@ const StoreSettings = ({storeUrl, userId}) => {
                                             <label>Store Banner: </label>
                                             <label  htmlFor="upload-logo">
                                                 <div className="logo-container">
-                                                    <img src={`${image ? (image) : (storeBanner ? storeBanner : 'http://placehold.jp/250x150.png')}`} alt="" className="img-fluid"/>
+                                                    <img src={`${image ? (image) : (storeBanner ? storeBanner : 'https://placehold.jp/250x150.png')}`} alt="" className="img-fluid"/>
                                                 </div>
                                             </label>
                                             <input type="file"

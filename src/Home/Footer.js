@@ -22,17 +22,16 @@ const Footer = () => {
                   <Row className="justify-content-between">
                       <Col md={2}>
                           <img src={StoreTractLogo} alt="" className="logo-fluid"/>
-                          <p>Packnow Tech. &copy; 2022</p>
+                          <p>Packnow Technology ltd. &copy; 2022</p>
                       </Col>
 
                       <Col md={2}>
                           <ul>
-                              <li><Link to="http://" className="Footer-link"> Home </Link></li>
-                              <li><Link to="https://" className="Footer-link"> Contact Us </Link></li>
-                              <li><Link to="https://" className="Footer-link"> Pricing </Link></li>
+                              <li><Link to="/" className="Footer-link"> Home </Link></li>
+                              <li><Link to="/register" className="Footer-link"> Contact Us </Link></li>
+                              <li><Link to="/register" className="Footer-link"> Sign Up </Link></li>
                           </ul>
                       </Col>
-                      {/*https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=at_dP3FjRM3DWWblJBFNB6QSZXOX1wbS&domainName=storetract.com&outputFormat=JSON&da=1&ignoreRawTexts=1*/}
                       <Col md={3}>
                           <div className="footer-socials">
                               <ul>
@@ -47,8 +46,8 @@ const Footer = () => {
 
                       <Col md={2}>
                           <ul>
-                              <li> <Link to="https://" className="Footer-link">Terms of use </Link> </li>
-                              <li> <Link to="https://" className="Footer-link"> Privacy Policy </Link></li>
+                              <li> <Link to="/" className="Footer-link">Terms of use </Link> </li>
+                              <li> <Link to="/" className="Footer-link"> Privacy Policy </Link></li>
                               <li>  </li>
                           </ul>
 

@@ -46,7 +46,7 @@ const DashboardPage = ({storeData, userId}) => {
     const getTotalSales = async () => {
         try {
             const getTotalRef = collection(db, 'shops', storeData.storeUrl, 'orders')
-            const q = query(getTotalRef, where("deliveryStatus", "==", 'Confirmed'))
+            const q = query(getTotalRef, where("deliveryStatus", "==", 'Payment Successful'))
             const querySnap = await getDocs(q)
 
             let salesTotal = []

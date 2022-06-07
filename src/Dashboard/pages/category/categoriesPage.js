@@ -18,33 +18,55 @@ import {Link, useParams} from "react-router-dom";
 import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-60-pq.svg";
 import {v4 as uuidv4} from "uuid";
 import Spinner from "../../../components/Spinner";
+import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage";
 
 const CategoriesPage = ({storeUrl, userId}) => {
 
     const isMounted = useRef()
     const params = useParams()
+    let fileArray;
+    let fileObj;
     const categorySlug = params.categoryUrl;
     const [loading, setLoading] = useState(true)
+    const [image, setImage] = useState(null)
     const [isDisabled, setIsDisabled] = useState(false)
     const [categories, setCategories] = useState(null)
     const [categoryData, setCategoryData] = useState({
         title: '',
         description: '',
+        categoryImage: '',
         timeStamp: '',
     })
 
-    const {title, description} = categoryData;
+    const {title, description, categoryImage} = categoryData;
 
     const onSubmit = async (e) => {
         e.preventDefault()
         setIsDisabled(true)
         const randId = uuidv4().slice(0,7)
 
-        try {
 
+        try {
+            let imgUrl;
+            const categoryImgUrl = await Promise.all(
+                [...categoryImage].map((image) => storeImage(image))
+            ).catch(() => {
+                // setLoading(false)
+                return
+            })
             if(categorySlug) {
-                // console.log("updating")
+
+                if(!categoryImgUrl)
+                {
+                    imgUrl = categoryImage;
+                }
+                else{
+                    imgUrl = categoryImgUrl;
+                }
+
+                console.log("img url", imgUrl)
                 const categoryDataCopy = {...categoryData}
+                categoryDataCopy.categoryImage = imgUrl;
                 const categoryUpdateRef = doc(db, 'shops', storeUrl, 'categories', categorySlug)
                 await updateDoc(categoryUpdateRef, categoryDataCopy)
 
@@ -52,6 +74,14 @@ const CategoriesPage = ({storeUrl, userId}) => {
                 fetchCategories().then()
             }
             else {
+                const categoryImgUrl = await Promise.all(
+                    [...categoryImage].map((image) => storeImage(image))
+                ).catch(() => {
+                    // setLoading(false)
+                    toast.error('Image file too large')
+                    return
+                })
+                // console.log("url", storeBannerUrls);
 
                 let categoryDataTitle = (categoryData.title).replace(/[^a-zA-Z ]/g, "");
                 let catUnique = `${(categoryDataTitle).replace(/,?\s+/g, '-')}-${randId}`
@@ -60,6 +90,7 @@ const CategoriesPage = ({storeUrl, userId}) => {
                 // console.log({...formData})
                 const categoryDataCopy = {...categoryData}
                 categoryDataCopy.categoryUrl = catUniqueId;
+                categoryDataCopy.categoryImage = `${categoryImgUrl}`;
                 categoryDataCopy.timeStamp = serverTimestamp();
                 const categoryRef = doc(db, 'shops', storeUrl, 'categories', catUniqueId)
                 await setDoc(categoryRef, categoryDataCopy)
@@ -74,7 +105,67 @@ const CategoriesPage = ({storeUrl, userId}) => {
         setIsDisabled(false)
     }
 
+
+    //store image in firebase storage
+    const storeImage = async (image) => {
+        return new Promise((resolve, reject) => {
+            const storage = getStorage()
+            console.log(image.name)
+            const fileName = `${userId}-${image.name}-${uuidv4()}`
+
+            const storageRef = ref(storage, `categoryImages/${userId}/` + fileName)
+
+            const uploadTask = uploadBytesResumable(storageRef, image)
+
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    const progress =
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    console.log('Upload is ' + progress + '% done')
+                    switch (snapshot.state) {
+                        case 'paused':
+                            console.log('Upload is paused')
+                            break
+                        case 'running':
+                            console.log('Upload is running')
+                            break
+                        default:
+                            console.log('Default Case')
+                            break
+                    }
+                },
+                (error) => {
+                    // Handle unsuccessful uploads
+                    reject(error)
+                },
+                () => {
+                    // Handle successful uploads on complete
+                    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        resolve(downloadURL)
+                    })
+                }
+            )
+        })
+    }
+
     const onChange = (e) => {
+
+        if (e.target.files) {
+            setCategoryData((prevState) => ({
+                ...prevState,
+                categoryImage: e.target.files,
+            }))
+            console.log(categoryImage);
+            fileObj = e.target.files;
+            console.log(fileObj)
+            // console.log(fileObj[0].length)
+            fileArray = URL.createObjectURL(fileObj[0]);
+            setImage(fileArray)
+            console.log(fileArray)
+        }
+
         setCategoryData((prevState) => ({
             ...prevState,
             [e.target.id]: e.target.value,
@@ -146,6 +237,8 @@ const CategoriesPage = ({storeUrl, userId}) => {
             }
 
            fetchCategories().then()
+            console.log(categoryImage)
+            console.log(image)
         }
         return () => {
             isMounted.current = false
@@ -173,7 +266,7 @@ const CategoriesPage = ({storeUrl, userId}) => {
                                         <div className="mb-4">
                                             <label htmlFor="category_name" className="form-label"> Category Name</label>
                                             <input type="text"
-                                                   placeholder="Type here"
+                                                   placeholder="Men's Fashion"
                                                    className="form-control"
                                                    value={title}
                                                    onChange={onChange}
@@ -187,7 +280,7 @@ const CategoriesPage = ({storeUrl, userId}) => {
                                         <div className="mb-4">
                                             <label htmlFor="category_description" className="form-label"> Category Description</label>
                                             <textarea
-                                                placeholder="Type here"
+                                                placeholder="Quality and standard wears for Men."
                                                 rows={4}
                                                 className="form-control"
                                                 value={description}
@@ -195,6 +288,21 @@ const CategoriesPage = ({storeUrl, userId}) => {
                                                 required={true}
                                                 maxLength={100}
                                                 id="description"></textarea>
+                                        </div>
+
+                                        <div className="mb-4 image-placeholder">
+                                            <label>Category Image: </label>
+                                            <label  htmlFor="upload-cover-photo">
+                                                <div className="placeholder-container">
+                                                    <img src={`${image ? (image) : (categoryImage ? (categoryImage) : ('https://placehold.jp/340x340.png'))}`} alt="" className="img-fluid"/>
+                                                </div>
+                                            </label>
+                                            <input type="file"
+                                                   id="upload-cover-photo"
+                                                   accept='image/*'
+                                                   hidden={true}
+                                                   onChange={onChange}
+                                                   className="form-control" />
                                         </div>
 
                                         <div className="d-grid">
@@ -214,12 +322,12 @@ const CategoriesPage = ({storeUrl, userId}) => {
                                                 <Table className="table table-hover">
                                                     <thead>
                                                     <tr>
-                                                        <th>
-                                                            <div className="form-check">
-                                                                <input type="checkbox" className="form-check-input" value=""/>
-                                                            </div>
-                                                        </th>
-                                                        <th>ID</th>
+                                                        {/*<th>*/}
+                                                        {/*    <div className="form-check">*/}
+                                                        {/*        <input type="checkbox" className="form-check-input" value=""/>*/}
+                                                        {/*    </div>*/}
+                                                        {/*</th>*/}
+                                                        <th></th>
                                                         <th>Name</th>
                                                         <th>Description</th>
                                                         {/*<th>Slug</th>*/}
@@ -232,12 +340,16 @@ const CategoriesPage = ({storeUrl, userId}) => {
                                                     {categories.map((category) =>(
 
                                                         <tr key={category.data.id}>
+                                                            {/*<td>*/}
+                                                            {/*    <div className="form-check">*/}
+                                                            {/*        <input type="checkbox" className="form-check-input" value=""/>*/}
+                                                            {/*    </div>*/}
+                                                            {/*</td>*/}
                                                             <td>
-                                                                <div className="form-check">
-                                                                    <input type="checkbox" className="form-check-input" value=""/>
+                                                                <div className="category-table-img">
+                                                                    <img src={`${category.data.categoryImage ?  (`${category.data.categoryImage}`) : 'https://placehold.jp/70x70.png'}`} alt="" className="img-fluid"/>
                                                                 </div>
                                                             </td>
-                                                            <td>{category.data.id}</td>
                                                             <td className="bold">{category.data.title}</td>
                                                             <td>{category.data.description}</td>
                                                             {/*<td>/{category.categoryUrl}</td>*/}

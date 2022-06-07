@@ -76,20 +76,10 @@ const LatestOrders = ({storeUrl}) => {
                                 <td>{order.data.email}</td>
                                 <td>&#8358;{order.data.orderTotal.toString()
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
-                                <td> <span className={`badge rounded-pill ${ order.data.deliveryStatus === "Confirmed" ? ('alert-warning') : 'alert-danger'}`}>{order.data.deliveryStatus}</span> </td>
+                                <td> <span className={`badge rounded-pill ${ order.data.deliveryStatus === "Payment Successful" ? ('alert-success') : 'alert-danger'}`}>{order.data.deliveryStatus}</span> </td>
                                 <td> {(order.data.timeStamp).toDate().toLocaleDateString("en-US")}</td>
                                 <td className="text-end">
                                     <Link to={`/dashboard/orders/${order.id}`} className="btn btn-light btn-analytics">Details </Link>
-                                    <div className="dropdown">
-                                        <Link to="#" data-bs-toggle="dropdown" class="btn btn-light btn-analytics">
-                                            <i className="fas fa-ellipsis-v"></i>
-                                        </Link>
-                                        <div className="dropdown-menu">
-                                            <Link to={`/dashboard/orders/${order.id}`} className="dropdown-item"> View details</Link>
-                                            <Link to={`/dashboard/orders/${order.id}`} className="dropdown-item"> Edit info</Link>
-                                            <Link to={`/dashboard/orders/${order.id}`} className="dropdown-item text-danger"> Delete</Link>
-                                        </div>
-                                    </div> {/* dropdown ends*/}
                                 </td>
                             </tr>
                             ))}

@@ -214,6 +214,9 @@ const AddProductPage = ({userId, storeUrl}) => {
                     <div className="card-body">
 
                         <Form onSubmit={onSubmit}>
+                            <div className="note-section">
+                                <h6 className='text-center'>Make sure you create category first before adding products!!!</h6>
+                            </div>
                             <div className="mb-4">
                                 <label htmlFor="product-name" className="form-label">Product title  </label>
                                 <input type="text"

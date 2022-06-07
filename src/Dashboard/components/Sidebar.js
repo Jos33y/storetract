@@ -53,6 +53,13 @@ const Sidebar = ({pageName, storeData}) => {
                             </Link>
                         </li>
 
+                        {/*menu categories*/}
+                        <li className={`menu-item ${pageName === 'delivery-list' ? 'active' : ''}`} onClick={handleMinimize}>
+                            <Link to="/dashboard/delivery-list" className="menu-link">
+                                <i className="fas fa-shipping-fast"></i>
+                                <span className="text">Delivery Fees</span>
+                            </Link>
+                        </li>
 
                         {/*menu add products*/}
                         <li className={`menu-item ${pageName === 'add-product' ? 'active' : ''}`} onClick={handleMinimize}>
