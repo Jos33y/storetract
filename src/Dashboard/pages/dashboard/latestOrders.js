@@ -53,7 +53,8 @@ const LatestOrders = ({storeUrl}) => {
                     <h5 className="card-title">Latest Orders</h5>
 
                     {orders && orders.length > 0 ? (
-                    <div className="table-responsive">
+                        <>
+                    <div className="table-responsive max-table">
                         <Table className="table table-hover">
                             <thead>
                             <tr>
@@ -67,7 +68,6 @@ const LatestOrders = ({storeUrl}) => {
                             </tr>
                             </thead>
                             <tbody>
-
                             {/*row three */}
                             {orders.map((order) => (
                             <tr key={order.id}>
@@ -85,8 +85,36 @@ const LatestOrders = ({storeUrl}) => {
                             ))}
 
                             </tbody>
-                        </Table></div>
+                        </Table>
+                    </div>
+                        <div className="mini-table">
+                            <table className="table">
+                                <tbody>
+                                {orders.map((order) => (
 
+                                <tr key={order.id}>
+                                    <td>
+                                        <Link to={`/dashboard/orders/${order.id}`} className="order-details">
+                                            <h5>{order.data.firstname} {order.data.lastname}</h5>
+                                            <h6>{order.data.email}</h6>
+                                            <p>{order.data.orderId}</p>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link to={`/dashboard/orders/${order.id}`} className="order-payment-details">
+                                            <h5>&#8358;{order.data.orderTotal.toString()
+                                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h5>
+                                            <span className={`badge rounded-pill ${ order.data.deliveryStatus === "Payment Successful" ? ('alert-success') : 'alert-danger'}`}>{order.data.deliveryStatus}</span>
+                                            <p>{(order.data.timeStamp).toDate().toLocaleDateString("en-US")}</p>
+                                        </Link>
+
+                                    </td>
+                                </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        </div>
+</>
                         )
                         :
                         (

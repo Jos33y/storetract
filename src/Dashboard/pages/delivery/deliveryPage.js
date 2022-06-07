@@ -212,11 +212,6 @@ const DeliveryPage = ({storeUrl, userId}) => {
                                                         <Table className="table table-hover">
                                                             <thead>
                                                             <tr>
-                                                                <th>
-                                                                    <div className="form-check">
-                                                                        <input type="checkbox" className="form-check-input" value=""/>
-                                                                    </div>
-                                                                </th>
                                                                 <th>Location</th>
                                                                 <th>Amount</th>
                                                                 {/*<th>Slug</th>*/}
@@ -229,11 +224,6 @@ const DeliveryPage = ({storeUrl, userId}) => {
                                                             {deliveryList.map((delivery) =>(
 
                                                                 <tr key={delivery.data.id}>
-                                                                    <td>
-                                                                        <div className="form-check">
-                                                                            <input type="checkbox" className="form-check-input" value=""/>
-                                                                        </div>
-                                                                    </td>
                                                                     <td className="bold">{delivery.data.location}</td>
                                                                     <td>&#8358;{delivery.data.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
                                                                     {/*<td>/{category.categoryUrl}</td>*/}

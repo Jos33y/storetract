@@ -319,7 +319,7 @@ const CategoriesPage = ({storeUrl, userId}) => {
                                     {categories && categories.length > 0 ?
                                         (
                                             <>
-                                                <Table className="table table-hover">
+                                                <Table className="table table-hover category-table">
                                                     <thead>
                                                     <tr>
                                                         {/*<th>*/}
@@ -329,7 +329,6 @@ const CategoriesPage = ({storeUrl, userId}) => {
                                                         {/*</th>*/}
                                                         <th></th>
                                                         <th>Name</th>
-                                                        <th>Description</th>
                                                         {/*<th>Slug</th>*/}
                                                         <th className="text-end"> Action </th>
                                                     </tr>
@@ -350,8 +349,13 @@ const CategoriesPage = ({storeUrl, userId}) => {
                                                                     <img src={`${category.data.categoryImage ?  (`${category.data.categoryImage}`) : 'https://placehold.jp/70x70.png'}`} alt="" className="img-fluid"/>
                                                                 </div>
                                                             </td>
-                                                            <td className="bold">{category.data.title}</td>
-                                                            <td>{category.data.description}</td>
+                                                            <td>
+                                                                <div className="info-details">
+                                                                    <h6>{category.data.title}</h6>
+                                                                    <p>{category.data.description} </p>
+                                                                </div>
+
+                                                            </td>
                                                             {/*<td>/{category.categoryUrl}</td>*/}
                                                             <td className="text-end">
                                                                 <div className="dropdown">

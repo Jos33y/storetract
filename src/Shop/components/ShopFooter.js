@@ -53,7 +53,7 @@ const ShopFooter = ({shopData}) => {
                         <Col md={3}>
                             <br/>
                             <br/>
-                            <p className="footer-note">{shopData.businessName} &copy; 2022</p>
+                            <p className="footer-note">Powered by Storetract &copy; 2022</p>
                         </Col>
                     </Row>
                 </div>
