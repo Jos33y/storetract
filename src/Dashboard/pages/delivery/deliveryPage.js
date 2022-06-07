@@ -209,7 +209,7 @@ const DeliveryPage = ({storeUrl, userId}) => {
                                             {deliveryList && deliveryList.length > 0 ?
                                                 (
                                                     <>
-                                                        <Table className="table table-hover">
+                                                        <Table className="table table-hover delivery-table">
                                                             <thead>
                                                             <tr>
                                                                 <th>Location</th>

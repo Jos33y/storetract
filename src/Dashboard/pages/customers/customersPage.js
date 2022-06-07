@@ -79,7 +79,8 @@ const CustomersPage = ({storeUrl, userId}) => {
                     </header>
                     <div className="card-body">
                         {customers && customers.length > 0 ? (
-                        <div className="table-responsive">
+                            <>
+                                <div className="table-responsive max-table">
                             <Table className="table table-hover">
                                 <thead>
                                     <tr>
@@ -91,7 +92,6 @@ const CustomersPage = ({storeUrl, userId}) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                 {/*ROw two customer*/}
                                 {customers.map((customer) => (
                                     <tr key={customer.id}>
@@ -117,6 +117,30 @@ const CustomersPage = ({storeUrl, userId}) => {
                                 </tbody>
                             </Table>
                         </div>
+                                <div className="mini-table">
+                                    <table className="table table-hover">
+                                        <tbody>
+                                        {customers.map((customer) => (
+                                        <tr key={customer.id}>
+                                            <td>
+                                                <Link to={`/dashboard/customers/${customer.id}`} className="itemside">
+                                                    <div className="left">
+                                                        <img src={AvatarDefault} className="img-sm img-avatar" alt="avatar"/>
+                                                    </div>
+                                                    <div className="info pl-3">
+                                                        <h6 className="mb-0 title">{`${customer.data.firstname} ${customer.data.lastname}`}</h6>
+                                                        <p>{customer.data.email}</p>
+                                                        <small className="text-muted">Customer ID: #{customer.data.customerId} </small>
+                                                    </div>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                        ))}
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </>
                         )
                         :
                         (

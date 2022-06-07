@@ -88,7 +88,7 @@ const LatestOrders = ({storeUrl}) => {
                         </Table>
                     </div>
                         <div className="mini-table">
-                            <table className="table">
+                            <table className="table table-hover">
                                 <tbody>
                                 {orders.map((order) => (
 

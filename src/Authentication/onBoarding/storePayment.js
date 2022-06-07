@@ -5,7 +5,7 @@ import {usePaystackPayment} from "react-paystack";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import {doc, updateDoc} from "firebase/firestore";
-import {db} from "../../Shop/config/firebase.config";
+import {db} from "../../firebase.config";
 
 
 const StorePayment = ({email, userId}) => {

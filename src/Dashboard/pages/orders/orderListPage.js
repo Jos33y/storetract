@@ -86,7 +86,8 @@ const OrderListPage = ({userId, storeUrl}) => {
                     </header>
                     <div className="card-body">
                         {orders && orders.length > 0 ? (
-                        <div className="table-responsive">
+                            <>
+                        <div className="table-responsive max-table">
                             <Table className="table table-hover">
                                 <thead>
                                 <tr>
@@ -113,23 +114,40 @@ const OrderListPage = ({userId, storeUrl}) => {
                                             <td> {(order.data.timeStamp).toDate().toLocaleDateString("en-US")}</td>
                                             <td className="text-end">
                                                 <Link to={`/dashboard/orders/${order.id}`} className="btn btn-light btn-analytics">Details </Link>
-                                                <div className="dropdown">
-                                                    <Link to="#" data-bs-toggle="dropdown" class="btn btn-light btn-analytics">
-                                                        <i className="fas fa-ellipsis-v"></i>
-                                                    </Link>
-                                                    <div className="dropdown-menu">
-                                                        <Link to={`/dashboard/orders/${order.id}`} className="dropdown-item"> View details</Link>
-                                                        <Link to={`/dashboard/orders/${order.id}`} className="dropdown-item"> Edit info</Link>
-                                                        <Link to={`/dashboard/orders/${order.id}`} className="dropdown-item text-danger"> Delete</Link>
-                                                    </div>
-                                                </div> {/* dropdown ends*/}
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </Table>
                         </div>
+                            <div className="mini-table">
+                                <table className="table table-hover">
+                                    <tbody>
+                                    {orders.map((order) => (
 
+                                        <tr key={order.id}>
+                                            <td>
+                                                <Link to={`/dashboard/orders/${order.id}`} className="order-details">
+                                                    <h5>{order.data.firstname} {order.data.lastname}</h5>
+                                                    <h6>{order.data.email}</h6>
+                                                    <p>{order.data.orderId}</p>
+                                                </Link>
+                                            </td>
+                                            <td>
+                                                <Link to={`/dashboard/orders/${order.id}`} className="order-payment-details">
+                                                    <h5>&#8358;{order.data.orderTotal.toString()
+                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h5>
+                                                    <span className={`badge rounded-pill ${ order.data.deliveryStatus === "Payment Successful" ? ('alert-success') : 'alert-danger'}`}>{order.data.deliveryStatus}</span>
+                                                    <p>{(order.data.timeStamp).toDate().toLocaleDateString("en-US")}</p>
+                                                </Link>
+
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            </>
                             )
                             :
                             (

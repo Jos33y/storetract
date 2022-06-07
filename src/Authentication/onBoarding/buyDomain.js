@@ -113,7 +113,7 @@ const BuyDomain = () => {
                                                   required={true}
                                                   maxLength={100}
                                                   className="form-control"
-                                                  placeholder="Search for a domain name (e.g yourdomain.com)" />
+                                                  placeholder="Search for a domain (e.g yourdomain.com)" />
                                        </Col>
 
                                        <Col lg={3}>

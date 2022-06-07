@@ -28,6 +28,10 @@ import EditProductPage from "./pages/products/editProduct";
 import AccountSettings from "./pages/settings/accountSettings";
 import StoreSettings from "./pages/settings/storeSettings";
 import DeliveryPage from "./pages/delivery/deliveryPage";
+import TawkTo from "tawkto-react";
+import BuyDomainSub from "./pages/subscription/buyDomainSub";
+import UpgradePayment from "./pages/subscription/upgradePayment";
+import PaymentSuccessful from "./pages/subscription/paymentSuccessful";
 
 
 const SellersDashboard = () => {
@@ -101,7 +105,7 @@ const SellersDashboard = () => {
             return <CustomersPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl} />
         }
        else if(params.customerId){
-            return <CustomerDetails userId={auth.currentUser.uid}/>
+            return <CustomerDetails storeUrl={storeData.storeUrl} userId={auth.currentUser.uid}/>
         }
         else if (params.dashUrl === "orders") {
             return <OrderListPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
@@ -119,7 +123,16 @@ const SellersDashboard = () => {
             return <WalletPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
         }
         else if (params.dashUrl === "subscriptions") {
-            return <SubscriptionPage userId={auth.currentUser.uid}/>
+            return <SubscriptionPage userId={auth.currentUser.uid} storeData={storeData} />
+        }
+        else if (params.subUrl === "buy-new-domain") {
+            return <BuyDomainSub userId={auth.currentUser.uid} />
+        }
+        else if (params.subUrl === "upgrade-payment") {
+            return <UpgradePayment userId={auth.currentUser.uid} email={profileData.email} storeUrl={storeData.storeUrl} />
+        }
+        else if (params.subUrl === "payment-successful") {
+            return <PaymentSuccessful userId={auth.currentUser.uid} storeData={storeData} />
         }
         else if (params.dashUrl === "storetract-credit") {
             return <StoretractCreditPage />
@@ -140,10 +153,20 @@ const SellersDashboard = () => {
             return <ErrorPage />
         }
     }
+    useEffect(() => {
 
+
+
+    }, [])
     useEffect(() => {
         if(isMounted) {
             getUser().then()
+
+            let tawk = new TawkTo('629fa464b0d10b6f3e762e84', '1g4vpkad9')
+            tawk.onStatusChange((status) =>
+            {
+                // console.log(status)
+            })
         }
         return () => {
             isMounted.current = false;

@@ -57,6 +57,7 @@
     text-align: center;
     color: #454647;
 }
+
 .store-pricing .card{
     border: 0px solid #3E4095;
     padding: 0;
@@ -149,6 +150,7 @@
     font-weight: 500;
     letter-spacing: 1px;
 }
+
 
 /*buy domain styles*/
 .buy-domain{

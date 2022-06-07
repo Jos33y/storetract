@@ -155,25 +155,25 @@ const ProductListPage = ({storeUrl}) => {
 
                         </Row>
 
-                        <nav className="float-end mt-4" aria-label="Page navigation">
-                            <ul className="pagination">
-                                <li className="page-item disabled">
-                                    <Link to="https://" className="page-link">Previous</Link>
-                                </li>
-                                <li className="page-item active">
-                                    <Link to="https://" className="page-link">1</Link>
-                                </li>
-                                <li className="page-item">
-                                    <Link to="https://" className="page-link">2</Link>
-                                </li>
-                                <li className="page-item">
-                                    <Link to="https://" className="page-link">3</Link>
-                                </li>
-                                <li className="page-item disabled">
-                                    <Link to="https://" className="page-link">Next</Link>
-                                </li>
-                            </ul>
-                        </nav>
+                        {/*<nav className="float-end mt-4" aria-label="Page navigation">*/}
+                        {/*    <ul className="pagination">*/}
+                        {/*        <li className="page-item disabled">*/}
+                        {/*            <Link to="/dashboard/products" className="page-link">Previous</Link>*/}
+                        {/*        </li>*/}
+                        {/*        <li className="page-item active">*/}
+                        {/*            <Link to="/dashboard/products" className="page-link">1</Link>*/}
+                        {/*        </li>*/}
+                        {/*        <li className="page-item">*/}
+                        {/*            <Link to="/dashboard/products" className="page-link">2</Link>*/}
+                        {/*        </li>*/}
+                        {/*        <li className="page-item">*/}
+                        {/*            <Link to="/dashboard/products" className="page-link">3</Link>*/}
+                        {/*        </li>*/}
+                        {/*        <li className="page-item disabled">*/}
+                        {/*            <Link to="/dashboard/products" className="page-link">Next</Link>*/}
+                        {/*        </li>*/}
+                        {/*    </ul>*/}
+                        {/*</nav>*/}
 
                     </div>
                                 </>

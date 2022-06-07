@@ -1,3 +1,284 @@
+/* ================== Subscription Page JOE =================== */
+.subscription-page .subscription-details{
+    border-radius: 10px;
+    margin-bottom: 40px;
+    background: #623AEB;
+    color: #ffffff;
+
+    box-shadow: 0px 0px 5px 3px rgba(148,144,144,0.75);
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(148,144,144,0.75);
+    -moz-box-shadow: 0px 0px 5px 3px rgba(148,144,144,0.75);
+}
+
+.subscription-page .subscription-details h5{
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.subscription-page .subscription-details h5 .plan{
+    font-weight: 700;
+}
+.subscription-page .subscription-details p{
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.subscription-page .subscription-details .title p{
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+
+.upgrade-plan .card{
+    border: 0px solid #3E4095;
+    padding: 0;
+    border-radius: 20px;
+
+    box-shadow: 0px 1px 10px 2px rgba(82,82,82,0.75);
+    -webkit-box-shadow: 0px 1px 10px 2px rgba(82,82,82,0.75);
+    -moz-box-shadow: 0px 1px 10px 2px rgba(82,82,82,0.75);
+}
+
+.upgrade-plan .card .standard{
+    background: #164CDC;
+}
+.upgrade-plan .card:hover{
+    border: 1px solid #7c7d99;
+
+    box-shadow: 0px 1px 3px 4px rgba(184,181,181,0.75);
+    -webkit-box-shadow: 0px 1px 3px 4px rgba(184,181,181,0.75);
+    -moz-box-shadow: 0px 1px 3px 4px rgba(184,181,181,0.75);
+}
+
+.upgrade-plan .card .card-header{
+    text-align: center;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+.upgrade-plan .card .card-header h5{
+    font-size: 23px;
+    color: #ffffff;
+    padding: 15px 10px;
+    text-transform: uppercase;
+}
+
+.upgrade-plan .price-text{
+    text-align: center;
+}
+
+.upgrade-plan .price-text h3.price{
+    color: #3f4451;
+    font-size: 50px;
+    font-weight: 500;
+}
+.upgrade-plan .price-text h3.price .month{
+    font-size: 14px;
+    font-weight: 600;
+}
+.upgrade-plan .price-features{
+    margin-top: 20px;
+}
+.upgrade-plan .price-features ul{
+    list-style: none;
+    padding: 0;
+}
+.upgrade-plan .price-features ul li{
+    margin: 10px 0px;
+    padding: 10px;
+    border-radius: 5px;
+    color:#505975;
+    font-size: 14px;
+    background: #F2F2F2;
+    font-weight: 500;
+}
+.upgrade-plan .price-features .fas{
+    font-weight: 700;
+    padding-right: 10px;
+}
+.upgrade-plan .price-features .fas.fa-check{
+    color: #348D0D;
+}
+.upgrade-plan .price-features .fas.fa-times{
+    color: #FF343B;
+}
+.upgrade-plan .plan-button{
+    text-align: center;
+}
+.upgrade-plan .plan-button .btn{
+    width: 80%;
+    color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+
+/*buy domain styles*/
+.buy-domain{
+    margin-top: 2%;
+
+}
+.buy-domain .title-section{
+    margin: auto;
+}
+.buy-domain .title{
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #292b2e;
+}
+
+.buy-domain .form-group{
+    margin: 30px 0;
+    background: #3E4095;
+    border: 1px solid #3E4095;
+    padding: 20px 15px;
+    border-radius: 5px;
+    width: 100%;
+
+    box-shadow: 0px 0px 6px 3px rgba(122,122,122,0.75);
+    -webkit-box-shadow: 0px 0px 6px 3px rgba(122,122,122,0.75);
+    -moz-box-shadow: 0px 0px 6px 3px rgba(122,122,122,0.75);
+}
+
+.buy-domain .form-group .form-control{
+    height: 50px;
+    border-radius: 5px;
+    color: #414241;
+    font-size: 14px;
+    width: 100%;
+}
+.buy-domain .form-group .form-control:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.buy-domain .form-group .form-control::placeholder{
+    color: #525252;
+}
+
+.buy-domain .form-group .btn{
+    height: 50px;
+    width: 100%;
+    background: #d1d1d1;
+    border-radius: 5px;
+    color: #3E4095;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.buy-domain .domain-checked{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding:  40px 20px 30px;
+    background: #ffffff;
+}
+.buy-domain .domain-checked .row, .col-1, .col-9, .col-2{
+    padding: 0;
+    margin: 0;
+}
+
+.buy-domain .domain-checked .far{
+    font-size: 70px;
+}
+.buy-domain .domain-checked .fa-check-circle{
+    color: #1fc063;
+}
+.buy-domain .domain-checked .fa-times-circle{
+    color: #e0324c;
+
+}
+.buy-domain .domain-checked h5{
+    margin-left: 20px;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.buy-domain .domain-checked .success{
+    color: #1fc063;
+}
+
+.buy-domain .domain-checked .error{
+    color: #e0324c;
+}
+.buy-domain .domain-checked .price{
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 40px;
+}
+.buy-domain .domain-checked .bold{
+    font-weight: 600;
+}
+
+.buy-domain .domain-checked .btn{
+    background: #edf7ec;
+    color: #1fc063;
+    font-weight: 500;
+    font-size: 13px;
+    border: 0px solid #1fc063;
+    width: 100%;
+    height: 40px;
+}
+
+.buy-domain .display-card .card{
+    height: 150px;
+    width: 100%;
+    text-align: center;
+}
+.buy-domain .display-card .card .card-body{
+    margin: auto;
+}
+.buy-domain .display-card .card .img-fluid{
+    width: 60%;
+
+}
+.buy-domain .display-card .card p{
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+}
+.buy-domain .browse-extension{
+    margin-top: 8%;
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 20px 30px;
+
+    box-shadow: 0px 0px 3px 3px rgba(219,219,219,0.75);
+    -webkit-box-shadow: 0px 0px 3px 3px rgba(219,219,219,0.75);
+    -moz-box-shadow: 0px 0px 3px 3px rgba(219,219,219,0.75);
+}
+
+.buy-domain .browse-extension .table thead th {
+    font-size: 14px;
+    font-weight: 600;
+    color: #525252;
+    padding: 10px 10px;
+}
+.buy-domain .browse-extension .table tbody td{
+    color: #2e2e2e;
+    font-size: 14px;
+    padding-top: 10px;
+}
+.buy-domain .browse-extension .table tbody p{
+    margin-bottom: 2px;
+}
+.buy-domain .browse-extension .table tbody p.domain-name{
+    font-size: 14px;
+    color: #525252;
+    font-weight: 600;
+}
+
+.buy-domain .browse-extension .table tbody p.year{
+    font-size: 14px;
+    color: #939694;
+    margin-bottom: 5px;
+}
 
 /* ================== HELPERS JOE =================== */
 .mini-table{
@@ -237,280 +518,6 @@
     font-size: 12px;
 }
 
-@media (max-width: 812px) {
-    /*table sections*/
-    .max-table{
-        display: none;
-    }
-    .mini-table{
-        display: block;
-    }
-
-    .mini-table tbody td{
-        padding: 10px 0;
-        margin: 0;
-    }
-
-
-    .mini-table .order-details{
-        text-align: left;
-    }
-    .mini-table .order-details h5{
-        font-size: 15px;
-        font-weight: 600;
-    }
-    .mini-table .order-details h6{
-        font-size: 13px;
-        font-weight: 400;
-    }
-    .mini-table .order-details p {
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .mini-table .order-payment-details{
-        text-align: right;
-    }
-    .mini-table .order-payment-details h5{
-        font-size: 15px;
-        font-weight: 700;
-    }
-    .mini-table .order-payment-details span{
-        font-size: 12px;
-        font-weight: 500;
-    }
-    .mini-table .order-payment-details p{
-        font-size: 13px;
-        font-weight: 400;
-    }
-
-
-    /*account sections*/
-    .account-balance .card{
-        padding: 5px 5px;
-        height: 150px;
-    }
-    .account-balance .card .card-body{
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-    .account-balance .card .card-body h5.balance{
-        font-size: 25px;
-    }
-    .account-balance .acct-row .acct-text{
-        margin-top: 5px;
-    }
-    .account-balance .acct-row .acct-text p{
-        margin-bottom: 5px;
-        font-size: 13px;
-        font-weight: 500;
-    }
-    .account-balance .acct-row .acct-text p.light{
-        font-weight: 400;
-    }
-
-    .account-balance .acct-row .acct-icon .fas{
-        font-size: 35px;
-    }
-
-    .store-settings h4{
-        font-size: 16px;
-        text-transform: uppercase;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-    .store-settings h6{
-        font-size: 15px;
-        font-weight: 400;
-        padding: 8px 5px;
-    }
-
-}
-
-
-@media (max-width: 768px) {
-
-    .account-balance .card{
-        padding: 5px 5px;
-        height: 130px;
-        margin-bottom: 20px;
-    }
-    .account-balance .card .card-body{
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .account-balance .card .card-body h5.balance{
-        font-size: 23px;
-    }
-    .account-balance .acct-row{
-        display: flex;
-        flex: auto;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .account-balance .acct-row .acct-text{
-        margin-top: 5px;
-    }
-    .account-balance .acct-row .acct-text p{
-        margin-bottom: 5px;
-        font-size: 12px;
-        font-weight: 500;
-    }
-    .account-balance .acct-row .acct-text p.light{
-        font-weight: 400;
-    }
-
-    .account-balance .acct-row .acct-icon .fas{
-        font-size: 30px;
-    }
-    .section-two{
-        margin-top: 5%;
-    }
-
-    .withdrawal-page .card{
-
-        border-radius: 10px;
-        margin-bottom: 40px;
-        box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
-        -webkit-box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
-        -moz-box-shadow: 0px 0px 3px 2px rgba(179,179,179,0.75);
-    }
-
-    .withdrawal-page .account-details{
-        padding: 2px;
-        border-radius: 10px;
-    }
-    .account-details .card-body {
-        display: flex;
-        flex: auto;
-        flex-direction: row;
-        justify-content: space-between;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .account-details .card-body p{
-        font-size: 13px;
-        font-weight: 400;
-        margin-bottom: 10px;
-    }
-    .account-details .card-body .account-details-title p{
-        font-weight: 600;
-    }
-
-    .withdrawal-form{
-        padding: 5px;
-    }
-    .withdrawal-form h5{
-        text-align: left;
-        font-size: 16px;
-    }
-    .withdrawal-form .form-group label{
-        font-size: 15px;
-        font-weight: 600;
-    }
-
-    .withdrawal-form .form-group .form-control{
-        font-size: 14px;
-        height: 45px;
-        font-weight: 600;
-        border-radius: 1px;
-    }
-
-    .withdrawal-form .form-group .form-control:focus{
-        outline: none;
-        box-shadow: none;
-    }
-    .withdrawal-form .form-group{
-        margin: 20px 0px;
-    }
-    .withdrawal-form .form-group .btn{
-        width: 100%;
-        font-size: 14px;
-    }
-    .recent-withdrawal h5{
-        text-align: left;
-        font-size: 16px;
-    }
-
-    .recent-withdrawal .card-body .table tbody td{
-        font-size: 12px;
-    }
-    .recent-withdrawal .card-body .table tbody td.id{
-        font-size: 10px;
-        font-weight: 600;
-    }
-    .recent-withdrawal .card-body .table tbody td .info-details h6{
-        margin-bottom: 5px;
-        font-size: 12px;
-    }
-    .recent-withdrawal .card-body .table tbody td .info-details p{
-        margin-bottom: 5px;
-        font-size: 10px;
-    }
-
-    .category-table-img{
-        height: 40px;
-        width: 50px;
-    }
-    .category-table-img .img-fluid{
-        object-fit: contain;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        padding: 1px;
-    }
-    .category-table{
-        margin-top: 10%;
-    }
-    .category-table .info-details h6{
-        font-size: 14px;
-    }
-    .category-table .info-details p{
-        font-size: 13px;
-    }
-
-}
-
-
-@media (max-width: 540px) {
-    .mini-table .order-details{
-        text-decoration: none;
-        color: #2e2e2e;
-    }
-    .mini-table .order-details h5{
-        font-size: 14px;
-        font-weight: 600;
-    }
-    .mini-table .order-details h6{
-        font-size: 12px;
-        font-weight: 400;
-    }
-    .mini-table .order-details p {
-        font-size: 12px;
-        font-weight: 600;
-    }
-
-    .mini-table .order-payment-details{
-        text-align: right;
-        text-decoration: none;
-        color: #2e2e2e;
-    }
-    .mini-table .order-payment-details h5{
-        font-size: 14px;
-        font-weight: 700;
-    }
-    .mini-table .order-payment-details span{
-        font-size: 11px;
-        font-weight: 500;
-    }
-    .mini-table .order-payment-details p{
-        font-size: 12px;
-        font-weight: 400;
-    }
-
-}
-
-
 /* ================== HELPERS =================== */
 
 .table thead th {
@@ -680,6 +687,7 @@ body.offcanvas-active {
     width: 40%;
 }
 
+
 /*account settings form*/
 .content-body .account-form{
     border: 0px solid #3E4095;
@@ -825,3 +833,459 @@ body.offcanvas-active {
     -webkit-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
     -moz-box-shadow: 0px 0px 3px 2px rgba(168,168,168,0.75);
 }
+
+
+@media (max-width: 812px) {
+    /*table sections*/
+    .max-table{
+        display: none;
+    }
+    .mini-table{
+        display: block;
+    }
+
+    .mini-table tbody td{
+        padding: 10px 0;
+        margin: 0;
+    }
+
+
+    .mini-table .order-details{
+        text-align: left;
+    }
+    .mini-table .order-details h5{
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .mini-table .order-details h6{
+        font-size: 13px;
+        font-weight: 400;
+    }
+    .mini-table .order-details p {
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .mini-table .order-payment-details{
+        text-align: right;
+    }
+    .mini-table .order-payment-details h5{
+        font-size: 15px;
+        font-weight: 700;
+    }
+    .mini-table .order-payment-details span{
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .mini-table .order-payment-details p{
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    /*account sections*/
+    .account-balance .card{
+        padding: 5px 5px;
+        height: 150px;
+    }
+    .account-balance .card .card-body{
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .account-balance .card .card-body h5.balance{
+        font-size: 25px;
+    }
+    .account-balance .acct-row .acct-text{
+        margin-top: 5px;
+    }
+    .account-balance .acct-row .acct-text p{
+        margin-bottom: 5px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    .account-balance .acct-row .acct-text p.light{
+        font-weight: 400;
+    }
+
+    .account-balance .acct-row .acct-icon .fas{
+        font-size: 35px;
+    }
+
+    .store-settings h4{
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    .store-settings h6{
+        font-size: 15px;
+        font-weight: 400;
+        padding: 8px 5px;
+    }
+    .order-details-page .form{
+        margin-top: 20px;
+    }
+    .order-details-page .order-info-wrap .fas{
+        font-size: 18px;
+    }
+    .order-details-page .order-info-wrap .text h6{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .order-details-page .order-info-wrap .text p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .account-balance .card{
+        padding: 5px 5px;
+        height: 130px;
+        margin-bottom: 20px;
+    }
+    .account-balance .card .card-body{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .account-balance .card .card-body h5.balance{
+        font-size: 23px;
+    }
+    .account-balance .acct-row{
+        display: flex;
+        flex: auto;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .account-balance .acct-row .acct-text{
+        margin-top: 5px;
+    }
+    .account-balance .acct-row .acct-text p{
+        margin-bottom: 5px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .account-balance .acct-row .acct-text p.light{
+        font-weight: 400;
+    }
+
+    .account-balance .acct-row .acct-icon .fas{
+        font-size: 30px;
+    }
+    .section-two{
+        margin-top: 5%;
+    }
+
+    .withdrawal-page .card{
+
+        border-radius: 10px;
+        margin-bottom: 40px;
+
+    }
+
+    .withdrawal-page .account-details{
+        padding: 2px;
+        border-radius: 10px;
+    }
+    .account-details .card-body {
+        display: flex;
+        flex: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .account-details .card-body p{
+        font-size: 13px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+    .account-details .card-body .account-details-title p{
+        font-weight: 600;
+    }
+
+    .withdrawal-form{
+        padding: 5px;
+    }
+    .withdrawal-form h5{
+        text-align: left;
+        font-size: 16px;
+    }
+    .withdrawal-form .form-group label{
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .withdrawal-form .form-group .form-control{
+        font-size: 14px;
+        height: 45px;
+        font-weight: 600;
+        border-radius: 1px;
+    }
+
+    .withdrawal-form .form-group .form-control:focus{
+        outline: none;
+        box-shadow: none;
+    }
+    .withdrawal-form .form-group{
+        margin: 20px 0px;
+    }
+    .withdrawal-form .form-group .btn{
+        width: 100%;
+        font-size: 14px;
+    }
+    .recent-withdrawal h5{
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .recent-withdrawal .card-body .table tbody td{
+        font-size: 12px;
+    }
+    .recent-withdrawal .card-body .table tbody td.id{
+        font-size: 10px;
+        font-weight: 600;
+    }
+    .recent-withdrawal .card-body .table tbody td .info-details h6{
+        margin-bottom: 5px;
+        font-size: 12px;
+    }
+    .recent-withdrawal .card-body .table tbody td .info-details p{
+        margin-bottom: 5px;
+        font-size: 10px;
+    }
+
+    .category-table-img{
+        height: 40px;
+        width: 50px;
+    }
+    .category-table-img .img-fluid{
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 1px;
+    }
+    .category-table{
+        margin-top: 10%;
+    }
+    .category-table .info-details h6{
+        font-size: 14px;
+    }
+    .category-table .info-details p{
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 540px) {
+    .mini-table .order-details{
+        text-decoration: none;
+        color: #2e2e2e;
+    }
+    .mini-table .order-details h5{
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .mini-table .order-details h6{
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .mini-table .order-details p {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .mini-table .order-payment-details{
+        text-align: right;
+        text-decoration: none;
+        color: #2e2e2e;
+    }
+    .mini-table .order-payment-details h5{
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .mini-table .order-payment-details span{
+        font-size: 11px;
+        font-weight: 500;
+    }
+    .mini-table .order-payment-details p{
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .mini-table .info{
+        font-size: 13px;
+    }
+    .mini-table .total-price{
+        font-size: 13px;
+        font-weight: 700;
+    }
+    .mini-table .qty h6{
+        font-size: 13px;
+        font-weight: 600;
+        text-align: right;
+    }
+
+    .mini-table dt{
+        font-size: 13px;
+    }
+    .mini-table dd{
+        font-size: 13px;
+    }
+
+
+    .delivery-table{
+        margin-top: 50px;
+    }
+    .delivery-table td{
+        font-size: 13px;
+    }
+
+    .note-section{
+        margin: 0 0 40px;
+        padding: 10px 0px 5px;
+
+    }
+    .note-section h6{
+        font-size: 11px;
+        font-weight: 600;
+        color: #000000;
+    }
+    .mini-table .left{
+        height: 50px;
+        width: 50px;
+    }
+
+    .mini-table .img-avatar {
+        border-radius: 100%;
+        border: 2px solid #fff;
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+    .mini-table .info h6.title{
+        font-size: 14px;
+    }
+    .mini-table .info p{
+        font-size: 12px;
+    }
+
+    .mini-table .info small{
+        font-size: 10px;
+    }
+
+    .customer-details .name-md{
+        margin-top: 30px;
+    }
+    .customer-details .name-md h3{
+        font-size: 18px;
+    }
+    .customer-details .name-md p{
+        font-size: 16px;
+    }
+    .customer-details .details h6{
+        font-size: 15px;
+    }
+    .customer-details .details p{
+        font-size: 14px;
+    }
+
+    /*account settings form*/
+    .content-body .account-form{
+        border: 0px solid #3E4095;
+        padding: 40px 10px;
+    }
+    .content-body .account-form .form-group{
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 10px 0 30px;
+    }
+    .content-body .account-form .form-group label{
+        font-size: 13px;
+        font-weight: 600;
+        color: #3E4095;
+    }
+    .content-body .account-form .form-group .form-control{
+        width: 90%;
+        margin-left: 10px;
+        font-size: 13px;
+
+    }
+
+
+    .content-body .account-form .button-save .btn{
+        font-size: 13px;
+
+    }
+
+        /*store settings form*/
+    .content-body .store-form{
+        border: 0px solid #3E4095;
+        padding: 40px 10px;
+    }
+    .content-body .store-form .form-group{
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 10px 0 30px;
+    }
+    .content-body .store-form .form-group label{
+        font-size: 14px;
+        font-weight: 600;
+        color: #3E4095;
+    }
+
+    .content-body .store-form .form-group .form-control{
+        width: 90%;
+        margin-left: 10px;
+        font-size: 13px;
+
+    }
+
+    .content-body .store-form .form-group textarea.form-control{
+        width: 90%;
+        height: 100px;
+        margin-left: 10px;
+        border-radius: 1px;
+        border: 1px solid #3E4095;
+    }
+
+    .content-body .store-form .form-group .form-control:focus{
+        outline: none;
+        box-shadow: none;
+    }
+    .content-body .store-form .button-save{
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .content-body .store-form .button-save .btn{
+        font-size: 13px;
+
+    }
+    .content-body .store-form .form-group.logo-image{
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: 10px 0 30px;
+    }
+    .content-body .store-form .form-group .logo-container{
+        height: 130px;
+        width: 200px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    .buy-domain .title{
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        color: #292b2e;
+    }
+
+}
+

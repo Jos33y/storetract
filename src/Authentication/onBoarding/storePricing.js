@@ -1,5 +1,6 @@
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import React from "react";
 
 const StorePricing = ({fullName}) => {
     return(
@@ -66,8 +67,8 @@ const StorePricing = ({fullName}) => {
                                                 <li><i className="fas fa-check"></i> Access to all themes</li>
                                                 <li><i className="fas fa-check"></i> 5 Store manager</li>
                                                 <li><i className="fas fa-check"></i> Custom Domain</li>
+                                                <li><i className="fas fa-check"></i> No Storetract watermark</li>
                                                 <li><i className="fas fa-times"></i> Abandoned cart notification</li>
-                                                <li><i className="fas fa-times"></i> No Storetract watermark</li>
                                                 <li><i className="fas fa-times"></i> Mobile App</li>
                                             </ul>
                                         </div>

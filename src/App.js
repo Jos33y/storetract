@@ -77,6 +77,10 @@ const App = () => {
                                         <Route path="/dashboard/customers/:customerId" element={<PrivateRoute/>}>
                                             <Route path="/dashboard/customers/:customerId" element={<SellersDashboard />} />
                                         </Route>
+
+                                        <Route path="/dashboard/subscriptions/:subUrl" element={<PrivateRoute/>}>
+                                            <Route path="/dashboard/subscriptions/:subUrl" element={<SellersDashboard />} />
+                                        </Route>
                                         <Route path="/dashboard/settings/:settingsUrl" element={<PrivateRoute/>}>
                                             <Route path="/dashboard/settings/:settingsUrl" element={<SellersDashboard />} />
                                         </Route>

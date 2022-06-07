@@ -18,11 +18,6 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
     const [isDisabled, setIsDisbaled] = useState(false)
     const [customerData, setCustomerData] = useState([]);
 
-
-
-  const orderId =   params.orderId
-    console.log(orderId)
-
     const getOrderDetails = async () => {
       setLoading(true)
 
@@ -49,7 +44,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
 
             if(customerSnap.exists()) {
                 setCustomerData(customerSnap.data());
-                console.log(customerSnap.data())
+                // console.log(customerSnap.data())
             }
         }
         catch (error) {
@@ -98,9 +93,9 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                 (
            <section className="content-main">
                <div className="content-header">
-                   <h2 className="content-title">Order detail </h2>
+                   <h2 className="content-title">Order details</h2>
                </div>
-               <Card>
+               <Card className="order-details-page">
                    <header className="card-header">
                        <Row className="align-items-center">
                            <Col lg={6} md={6}>
@@ -109,9 +104,10 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                {/*<span className="bold"> Wed, Mar 13, 2022, 4:32pm</span> <br/>*/}
                                <small className="text-muted">Order ID: {`${orderData.orderId}`}</small>
                            </Col>
+
                            {orderData.deliveryStatus === 'Payment Successful'  && (
 
-                           <Form onSubmit={handleChanges}>
+                           <Form onSubmit={handleChanges} className="form">
                                <Col lg={6} md={6} className="ms-auto text-md-end">
                                    <select style={{maxWidth: "200px"}}
                                            name="orderStatus"
@@ -192,7 +188,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
 
                        <Row>
                            <Col lg={12}>
-                               <div className="table-responsive">
+                               <div className="table-responsive max-table">
                                    <Table className="table-border table-hover table-lg">
                                        <thead>
                                         <tr>
@@ -248,6 +244,58 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                        </tr>
                                        </tbody>
                                    </Table>
+                               </div>
+
+                               <div className="mini-table">
+                                   <table className="table table-hover">
+
+
+                                       <tbody>
+                                       {orderData.productOrdered.map((order) => (
+                                       <tr>
+                                           <td>
+                                               <div className="itemside">
+                                                   <div className="left">
+                                                       <img src={order.imgUrls[0]} alt="item" width={40} height={40} style={{objectFit:"contain"}} className="img-xs"/>
+                                                   </div>
+                                                   <div className="info"> {order.productName} </div>
+                                               </div>
+                                               <div className="qty">
+                                                   <h6>  {order.qty} X &#8358;{order.productPrice.toString()
+                                                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
+                                               </div>
+                                           </td>
+                                           <td> <p className="total-price"> &#8358;{(order.qty * order.productPrice).toString()
+                                               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')} </p></td>
+                                       </tr>
+                                       ))}
+                                       <tr>
+                                           <td colSpan={2}>
+                                               <article className="float-end">
+                                                   <dl className="dlist">
+                                                       <dt>Subtotal: </dt> <dd>&#8358;{orderData.orderTotal.toString()
+                                                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</dd>
+                                                   </dl>
+                                                   <dl className="dlist">
+                                                       <dt>Shipping cost: </dt> <dd> &#8358; 0.00</dd>
+                                                   </dl>
+
+                                                   <dl className="dlist">
+                                                       <dt>Grand total: </dt> <dd> &#8358;{orderData.orderTotal.toString()
+                                                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</dd>
+                                                   </dl>
+                                                   <dl className="dlist">
+                                                       <dt className="text-muted">Payment Status </dt>
+                                                       <dd>
+                                                           <span className={`badge rounded-pill ${ orderData.deliveryStatus === "Payment Successful" ? ('alert-success') : 'alert-danger'}`}>{`${orderData.deliveryStatus}`}<br/>
+
+                                                           </span> </dd>
+                                                   </dl>
+                                               </article>
+                                           </td>
+                                       </tr>
+                                       </tbody>
+                                   </table>
                                </div>
                            </Col>
                        </Row>

@@ -22,8 +22,6 @@ const OnBoarding = () => {
     const isMounted = useRef()
     const params = useParams()
     const navigate = useNavigate()
-    console.log(params.onBoardingUrl)
-
     const [loading, setLoading] = useState(true)
     const [shopData, setShopData] = useState(null)
 

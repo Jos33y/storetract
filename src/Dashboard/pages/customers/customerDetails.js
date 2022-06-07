@@ -1,14 +1,46 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useEffect, useRef, useState} from "react";
+import {Link, useParams} from "react-router-dom";
 import {Button ,Card ,Col ,Row} from "react-bootstrap";
-import Brand from "../../../assets/images/brands/brand.jpg"
+import AvatarDefault from "../../../assets/images/avatardefault_92824.png"
 import MapImg from "../../../assets/images/dashimages/map.jpg"
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../../../firebase.config";
 
-const CustomerDetails = () => {
+const CustomerDetails = ({userId, storeUrl}) => {
+
+    const params = useParams()
+    const isMounted = useRef()
+    const [customerData, setCustomerData] = useState([]);
+
+
+    const getCustomer = async (customerID) => {
+        try {
+            const customerRef = doc(db, 'shops', storeUrl, 'customers', params.customerId)
+            const customerSnap = await getDoc(customerRef)
+
+            if(customerSnap.exists()) {
+                setCustomerData(customerSnap.data());
+                console.log(customerSnap.data())
+            }
+        }
+        catch (error) {
+            console.log({error})
+        }
+    }
+    useEffect(() => {
+        if(isMounted) {
+            getCustomer().then()
+        }
+
+        return () => {
+            isMounted.current = false;
+        }
+// eslint-disable-next-line
+    },[isMounted, userId])
 
     return(
         <>
-           <section className="content-main">
+           <section className="content-main customer-details">
                <div className="content-header">
                    <Link to="/dashboard/customers" className="btn btn-light btn-analytics"><i
                        className="fas fa-arrow-left"></i> Go back </Link>
@@ -19,17 +51,16 @@ const CustomerDetails = () => {
                    </div>
                    <div className="card-body">
                        <Row>
-                           <Col className="col-xl col-lg flex-grow-0" style={{flexBasis: "230px"}} >
+                           <Col xl={4} className="col-xl col-lg-6 col-md-4 flex-grow-0" style={{flexBasis: "230px"}} >
                                <div className="img-thumbnail shadow w-100 bg-white position-relative text-center" style={{height: "190px", width: "200px", marginTop: "-120px"}} >
-                                   <img src={Brand} className="center-xy img-fluid" alt="brand"/>
+                                   <img src={AvatarDefault} className="center-xy img-fluid" alt="brand"/>
                                </div>
                            </Col>
-                           <Col className="col-xl col-lg">
-                               <h3>Adidas Sports Shop</h3>
-                               <p>3891 Ranchview Dr. Richardson, California 62639</p>
-
+                           <Col xl={4} className="col-md col-lg-6 name-md">
+                               <h3>{`${customerData.firstname} ${customerData.lastname}`}</h3>
+                               <p>{`${customerData.deliveryAddress} ${customerData.city}, ${customerData.state}, ${customerData.country}`}</p>
                            </Col>
-                           <Col xl={4} className="text-md-end">
+                           <Col xl={4} className="col-lg-12 text-md-end">
                                <select className="form-select w-auto d-inline-block">
                                    <option value="actions">Actions</option>
                                    <option value="delete customers">Delete customers</option>
@@ -39,29 +70,21 @@ const CustomerDetails = () => {
                            </Col>
                        </Row>
                        <hr className="my-4" />
-                           <Row className="g-4">
-                               <Col md={12} lg={4} xl={2}>
-                                   <article className="box">
-                                       <p className="mb-0 text-muted"> Total sales: </p>
-                                       <h5 className="text-success"> 238 </h5>
-                                       <p className="mb-0 text-muted">Revenue: </p>
-                                       <h5 className="text-success mb-0"> &#8358; 56,789.00</h5>
-                                   </article>
-                               </Col>
+                           <Row className="g-4 details">
                                <Col sm={6} lg={4} xl={3}>
                                    <h6>Contacts</h6>
                                    <p>
-                                       Manager: Jerome Bell <br/>
-                                       info@jerome.com <br/>
-                                       +2347098765456
+                                       {`${customerData.firstname} ${customerData.lastname}`} <br/>
+                                       {`${customerData.email}`} <br/>
+                                       {`${customerData.phoneNumber}`}
                                    </p>
                                </Col>
                                <Col sm={6} lg={4} xl={3}>
                                    <h6>Address</h6>
                                    <p>
-                                       Country: California <br/>
-                                       Address: Ranchview Dr. Richardson<br/>
-                                       Postal Code: 62639
+                                       Country: {`${customerData.country}`} <br/>
+                                       State: {`${customerData.state}`} <br/>
+                                       Address: {`${customerData.deliveryAddress} ${customerData.city}`}
                                    </p>
                                </Col>
                                <Col sm={6} xl={4} className="text-xl-end">

@@ -146,13 +146,13 @@ const Sidebar = ({pageName, storeData}) => {
                             </a>
                         </li>
 
-                        {/*view connect*/}
-                        <li className={`menu-item ${pageName === 'help-desk' ? 'active' : ''}`} onClick={handleMinimize}>
-                            <Link to="/dashboard/help-desk" className="menu-link">
-                                <i className="fas fa-headset"></i>
-                                <span className="text">Help Desk</span>
-                            </Link>
-                        </li>
+                        {/*/!*view connect*!/*/}
+                        {/*<li className={`menu-item ${pageName === 'help-desk' ? 'active' : ''}`} onClick={handleMinimize}>*/}
+                        {/*    <Link to="/dashboard/help-desk" className="menu-link">*/}
+                        {/*        <i className="fas fa-headset"></i>*/}
+                        {/*        <span className="text">Help Desk</span>*/}
+                        {/*    </Link>*/}
+                        {/*</li>*/}
                     </ul>
                     <br/>
                     <br/>
