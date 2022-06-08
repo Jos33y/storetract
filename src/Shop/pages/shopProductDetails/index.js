@@ -42,7 +42,6 @@ const ShopProductDetails = ({businessUrl}) => {
             } else { //if item doesn't exist, simply add it
                 cartData.push({...product, qty: quantity})
                 if (toast.success('product added to cart')) {
-
                     window.location.reload();
                 }
             }
@@ -134,94 +133,94 @@ const ShopProductDetails = ({businessUrl}) => {
                 (<Spinner />)
                 :
                 (
-                <div className="Store-product-details">
-                    {/*--------------bread crumbs section-----------------------*/}
-                    <div className='bread-crumb'>
-                        <ul>
-                            <li>
-                                <Link to={ `/`} className="bread-crumb-link"> Home</Link>
-                            </li> |
-                            <li>
-                                <Link to={ `/products` } className="bread-crumb-link"> Products</Link>
-                            </li> |
-                            <li>
-                                {product.productName}
-                            </li>
-                        </ul>
-                    </div>
+                    <div className="Store-product-details">
+                        {/*--------------bread crumbs section-----------------------*/}
+                        <div className='bread-crumb'>
+                            <ul>
+                                <li>
+                                    <Link to={ `/`} className="bread-crumb-link"> Home</Link>
+                                </li> |
+                                <li>
+                                    <Link to={ `/products` } className="bread-crumb-link"> Products</Link>
+                                </li> |
+                                <li>
+                                    {product.productName}
+                                </li>
+                            </ul>
+                        </div>
 
-                    {/*--------------product details section-----------------------*/}
-                    <div className="product-details">
-                        <Row>
-                            <Col lg={7} className="col-sm-12">
-                                <div className="image-box">
-                                    <Row>
-                                        <Col md={9} className="col-sm-12">
-                                            <div className="main">
-                                                <img src={`${mainImage}`} alt="" className="img-fluid" />
-                                            </div>
+                        {/*--------------product details section-----------------------*/}
+                        <div className="product-details">
+                            <Row>
+                                <Col lg={7} className="col-sm-12">
+                                    <div className="image-box">
+                                        <Row>
+                                            <Col md={9} className="col-sm-12">
+                                                <div className="main">
+                                                    <img src={`${mainImage}`} alt="" className="img-fluid" />
+                                                </div>
 
-                                        </Col>
-                                        <Col md={3}  className="col-sm-12" >
-                                            <div className="thumb">
-                                                <ul className="thumb-nails">
-                                                    <li onClick={() => {setMainImage(product.imgUrls[0])}}>
-                                                        <img src={product.imgUrls[0] ? product.imgUrls[0] : product.imgUrls[0] } alt="" className="img-fluid"/>
-                                                    </li>
+                                            </Col>
+                                            <Col md={3}  className="col-sm-12" >
+                                                <div className="thumb">
+                                                    <ul className="thumb-nails">
+                                                        <li onClick={() => {setMainImage(product.imgUrls[0])}}>
+                                                            <img src={product.imgUrls[0] ? product.imgUrls[0] : product.imgUrls[0] } alt="" className="img-fluid"/>
+                                                        </li>
 
-                                                    <li onClick={() => {setMainImage(product.imgUrls[1])}}>
-                                                        <img src={product.imgUrls[1] ? product.imgUrls[1] : product.imgUrls[0] } alt="" className="img-fluid"/>
-                                                    </li>
+                                                        <li onClick={() => {setMainImage(product.imgUrls[1])}}>
+                                                            <img src={product.imgUrls[1] ? product.imgUrls[1] : product.imgUrls[0] } alt="" className="img-fluid"/>
+                                                        </li>
 
-                                                    <li onClick={() => {setMainImage(product.imgUrls[2])}}>
-                                                        <img src={product.imgUrls[2] ? product.imgUrls[2] : product.imgUrls[0] } alt="" className="img-fluid"/>
-                                                    </li>
+                                                        <li onClick={() => {setMainImage(product.imgUrls[2])}}>
+                                                            <img src={product.imgUrls[2] ? product.imgUrls[2] : product.imgUrls[0] } alt="" className="img-fluid"/>
+                                                        </li>
 
-                                                </ul>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </div>
-                            </Col>
-
-                            <Col lg={5} className="col-sm-12">
-                                <div className="product-details-text">
-                                    <h5 className="product-title"> {product.productName} </h5>
-                                    <h6 className="product-price"> &#8358; {product.productPrice.toString()
-                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
-                                    <hr/>
-                                    <div className="input">
-                                        <h5>Quantity</h5>
-                                        <input type="number"
-                                               className="form-control"
-                                               id="quantity"
-                                               onChange={onChange}
-                                               value={quantity}/>
+                                                    </ul>
+                                                </div>
+                                            </Col>
+                                        </Row>
                                     </div>
-                                    <hr/>
-                                    <div className="product-description">
-                                        <h5 className="title">Description:</h5>
-                                        <div className="description-text">
-                                            <p>  {product.productDescription} </p>
+                                </Col>
+
+                                <Col lg={5} className="col-sm-12">
+                                    <div className="product-details-text">
+                                        <h5 className="product-title"> {product.productName} </h5>
+                                        <h6 className="product-price"> &#8358; {product.productPrice.toString()
+                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
+                                        <hr/>
+                                        <div className="input">
+                                            <h5>Quantity</h5>
+                                            <input type="number"
+                                                   className="form-control"
+                                                   id="quantity"
+                                                   onChange={onChange}
+                                                   value={quantity}/>
                                         </div>
+                                        <hr/>
+                                        <div className="product-description">
+                                            <h5 className="title">Description:</h5>
+                                            <div className="description-text">
+                                                <p>  {product.productDescription} </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="button-align">
+                                            <button className="btn btn-md btn-secondary"
+                                                    disabled={disabled}
+                                                    onClick={() => addToCart(product)}> Add to Cart</button>
+                                        </div>
+
+
                                     </div>
 
-                                    <div className="button-align">
-                                        <button className="btn btn-md btn-secondary"
-                                                disabled={disabled}
-                                                onClick={() => addToCart(product)}> Add to Cart</button>
-                                    </div>
+                                </Col>
+                            </Row>
 
+                        </div>
 
-                                </div>
-
-                            </Col>
-                        </Row>
-
+                        <SimilarItem products={products} loading={loading} businessUrl={businessUrl} />
                     </div>
-
-                    <SimilarItem products={products} loading={loading} businessUrl={businessUrl} />
-                </div>
 
                 )}
         </>

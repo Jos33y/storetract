@@ -732,6 +732,15 @@
     color: #3E4095;
     margin-bottom: 10%;
 }
+.product-details-text .product-price .strike{
+    font-size: 20px;
+    font-weight: 700;
+    color: #525252;
+    padding-left: 10px;
+    text-decoration: line-through;
+    margin-bottom: 10%;
+}
+
 
 .product-details-text .input{
     display: flex;
