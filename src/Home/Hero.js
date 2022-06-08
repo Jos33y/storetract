@@ -64,6 +64,10 @@ const Hero = () => {
                                 <hr className="line"/>
                                 <p> Bring your retail store online and keep serving customers without missing orders.</p>
                                 <Link to="/register" className="btn btn-md btn-primary"> Get started for free</Link>
+                                <a href="https://store.storetract.com/"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   className="btn btn-md btn-success"> Demo Store</a>
                             </Shake>
 
                         </div>

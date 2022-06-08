@@ -35,6 +35,8 @@ const EditProductPage = ({storeUrl, userId}) => {
         productName: '',
         productCategory: '',
         productPrice: 0,
+        productDiscountPrice: 0,
+        discountOffer: false,
         productDescription: '',
         images: {},
         timeStamp: '',
@@ -44,6 +46,8 @@ const EditProductPage = ({storeUrl, userId}) => {
         productName,
         productCategory,
         productPrice,
+        productDiscountPrice,
+        discountOffer,
         productDescription,
         images,
     } = formData
@@ -97,6 +101,16 @@ const EditProductPage = ({storeUrl, userId}) => {
     }
 
     const onChange = (e) => {
+
+
+        let boolean = null
+        if (e.target.value === 'true') {
+            boolean = true
+        }
+        if (e.target.value === 'false') {
+            boolean = false
+        }
+
         //Files
         if (e.target.files) {
             setFormData((prevState) => ({
@@ -115,7 +129,7 @@ const EditProductPage = ({storeUrl, userId}) => {
         if (!e.target.files) {
             setFormData((prevState) => ({
                 ...prevState,
-                [e.target.id]: e.target.value,
+                [e.target.id]: boolean ?? e.target.value,
             }))
         }
     }
@@ -259,7 +273,25 @@ const EditProductPage = ({storeUrl, userId}) => {
                             </div>
 
                             <Row className="gx-2">
-                                <Col sm={6} className="mb-4">
+
+                                <Col sm={3} className="mb-4">
+                                    <label htmlFor="discountOffer" className="form-label">Discount Offer </label>
+                                    <select
+                                        id='discountOffer'
+                                        className='form-control'
+                                        required={true}
+                                        value={discountOffer}
+                                        onChange={onChange}
+                                        placeholder='Discount Offer ?'
+                                    >
+                                        <option value='disable' disabled={true} selected={true}>
+                                            Select YES/NO if product has discount offer...
+                                        </option>
+                                        <option value='true'>YES</option>
+                                        <option value='false'>NO</option>
+                                    </select>
+                                </Col>
+                                <Col sm={4} className="mb-4">
                                     <label htmlFor="product-price" className="form-label">Product Price (&#8358;)  </label>
                                     <input type="number"
                                            className="form-control"
@@ -269,6 +301,23 @@ const EditProductPage = ({storeUrl, userId}) => {
                                            id="productPrice"/>
                                 </Col>
 
+                                {discountOffer && (
+                                    <Col sm={4} className="form-group">
+                                        <label htmlFor="product-discount-price" className="form-label">Product Discount Price (&#8358;)  </label>
+
+                                        <input type="number"
+                                               id="productDiscountPrice"
+                                               value={productDiscountPrice}
+                                               onChange={onChange}
+                                               placeholder="Product Discount Price"
+                                               required={discountOffer}
+                                               className="form-control"/>
+                                    </Col>
+                                )}
+                            </Row>
+
+
+                            <Row>
                                 <Col sm={6} className="mb-4">
                                     <label className="form-label" htmlFor="category">Category</label>
                                     <select name="category"
@@ -286,8 +335,8 @@ const EditProductPage = ({storeUrl, userId}) => {
                                         ))}
                                     </select>
                                 </Col>
-
                             </Row>
+
 
                             <div className="mb-4">
                                 <div className="Images-row">

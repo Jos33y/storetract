@@ -16,6 +16,8 @@ const AddProductPage = ({userId, storeUrl}) => {
     // const [loading, setLoading] = useState(true)
     const [isDisabled, setDisabled] = useState(false)
     const [categories, setCategories] = useState([])
+    const [tags, setTags] = useState([]);
+    const [isKeyReleased, setIsKeyReleased] = useState(false);
     const [image, setImage] = useState(null)
     let fileArray = [];
     let fileObj = [];
@@ -23,7 +25,10 @@ const AddProductPage = ({userId, storeUrl}) => {
         productName: '',
         productCategory: '',
         productPrice: 0,
+        productDiscountPrice: 0,
+        discountOffer: false,
         productDescription: '',
+        productTags: [],
         images: {},
         timeStamp: '',
     })
@@ -32,7 +37,10 @@ const AddProductPage = ({userId, storeUrl}) => {
         productName,
         productCategory,
         productPrice,
+        productDiscountPrice,
+        discountOffer,
         productDescription,
+        productTags,
         images,
     } = formData
 
@@ -47,10 +55,6 @@ const AddProductPage = ({userId, storeUrl}) => {
             let prodUnique = `${(formDataName).replace(/,?\s+/g, '-')}-${randId}`
             let prodUniqueId = prodUnique.toLowerCase();
 
-            // console.log(formData.productCategory)
-            // console.log("working")
-
-            // console.log(formData)
             const imgUrls = await Promise.all(
                 [...images].map((image) => storeImage(image))
             ).catch(() => {
@@ -61,6 +65,7 @@ const AddProductPage = ({userId, storeUrl}) => {
             const formDataCopy = {
                 ...formData,
                 imgUrls,
+                productTags: tags,
                 uniqueId: prodUniqueId,
                 timeStamp: serverTimestamp(),
             }
@@ -72,7 +77,10 @@ const AddProductPage = ({userId, storeUrl}) => {
                 productName: '',
                 productCategory: '',
                 productPrice: 0,
+                productDiscountPrice: 0,
+                discountOffer: 'false',
                 productDescription: '',
+                productTags: [],
                 images: {},
             }))
             setImage('')
@@ -165,6 +173,24 @@ const AddProductPage = ({userId, storeUrl}) => {
     }
 
     const onChange = (e) => {
+
+        let boolean = null
+        if (e.target.value === 'true') {
+            boolean = true
+        }
+        if (e.target.value === 'false') {
+            boolean = false
+        }
+
+        if(e.target.id === 'productTags'){
+            const {value} = e.target;
+            setFormData((prevState) => ({
+                ...prevState,
+                productTags: value,
+            }))
+        }
+        console.log("prod tags", tags)
+
         //Files
         if (e.target.files) {
             setFormData((prevState) => ({
@@ -183,11 +209,46 @@ const AddProductPage = ({userId, storeUrl}) => {
         if (!e.target.files) {
             setFormData((prevState) => ({
                 ...prevState,
-                [e.target.id]: e.target.value,
+                [e.target.id]: boolean ?? e.target.value,
             }))
         }
     }
 
+    const onKeyDown = (e) => {
+        const { key } = e;
+        const trimmedInput = productTags.trim();
+
+        if (key === ',' && trimmedInput.length && !tags.includes(trimmedInput)) {
+            e.preventDefault();
+            setTags(prevState => [...prevState, trimmedInput]);
+            setFormData((prevState) => ({
+                ...prevState,
+                productTags: '',
+            }))
+        }
+
+        if (key === "Backspace" && !productTags.length && tags.length && isKeyReleased) {
+            e.preventDefault();
+            const tagsCopy = [...tags];
+            // eslint-disable-next-line
+            const poppedTag = tagsCopy.pop();
+            e.preventDefault();
+            setTags(tagsCopy);
+            setFormData((prevState) => ({
+                ...prevState,
+                productTags: '',
+            }))
+        }
+        setIsKeyReleased(false);
+    }
+
+    const onKeyUp = () => {
+        setIsKeyReleased(true);
+    }
+
+    const deleteTag = (index) => {
+        setTags(prevState => prevState.filter((tag, i) => i !== index))
+    }
     useEffect(() => {
 
         if(isMounted) {
@@ -213,7 +274,7 @@ const AddProductPage = ({userId, storeUrl}) => {
                 <Card className="card mb-4">
                     <div className="card-body">
 
-                        <Form onSubmit={onSubmit}>
+                        <Form onSubmit={onSubmit} className="product-form">
                             <div className="note-section">
                                 <h6 className='text-center'>Make sure you create category first before adding products!!!</h6>
                             </div>
@@ -243,7 +304,25 @@ const AddProductPage = ({userId, storeUrl}) => {
                             </div>
 
                             <Row className="gx-2">
-                                <Col sm={6} className="mb-4">
+
+                                <Col sm={3} className="mb-4">
+                                    <label htmlFor="discountOffer" className="form-label">Discount Offer </label>
+                                    <select
+                                        id='discountOffer'
+                                        className='form-control'
+                                        required={true}
+                                        value={discountOffer}
+                                        onChange={onChange}
+                                        placeholder='Discount Offer ?'
+                                    >
+                                        <option value='disable' disabled={true} selected={true}>
+                                            Select YES/NO if product has discount offer...
+                                        </option>
+                                        <option value='true'>YES</option>
+                                        <option value='false'>NO</option>
+                                    </select>
+                                </Col>
+                                <Col sm={4} className="mb-4">
                                     <label htmlFor="product-price" className="form-label">Product Price (&#8358;)  </label>
                                     <input type="number"
                                            className="form-control"
@@ -253,6 +332,23 @@ const AddProductPage = ({userId, storeUrl}) => {
                                            id="productPrice"/>
                                 </Col>
 
+                                {discountOffer && (
+                                    <Col sm={4} className="form-group">
+                                        <label htmlFor="product-discount-price" className="form-label">Product Discount Price (&#8358;)  </label>
+
+                                        <input type="number"
+                                               id="productDiscountPrice"
+                                               value={productDiscountPrice}
+                                               onChange={onChange}
+                                               placeholder="Product Discount Price"
+                                               required={discountOffer}
+                                               className="form-control"/>
+                                    </Col>
+                                )}
+                            </Row>
+
+
+                            <Row>
                                 <Col sm={6} className="mb-4">
                                     <label className="form-label" htmlFor="category">Category</label>
                                     <select name="category"
@@ -270,7 +366,30 @@ const AddProductPage = ({userId, storeUrl}) => {
                                         ))}
                                     </select>
                                 </Col>
-
+                            </Row>
+                            
+                            <Row>
+                                <Col md={12} className="mb-4 prod-tags">
+                                    <label htmlFor="tag-product"> Add Product Tags  <span className="small">(use comma to separate tags) </span></label>
+                                    <div className="container">
+                                        {tags.map((tag, index) => (
+                                            <div className="tag">
+                                                {tag}
+                                                <button className="btn btn-sm btn-primary" onClick={() => deleteTag(index)}>x</button>
+                                            </div>
+                                        ))}
+                                        <input
+                                            name="productTags"
+                                            className="form-control"
+                                            id="productTags"
+                                            value={productTags}
+                                            placeholder="Enter a tag"
+                                            onKeyDown={onKeyDown}
+                                            onKeyUp={onKeyUp}
+                                            onChange={onChange}
+                                        />
+                                    </div>
+                                </Col>
                             </Row>
 
                             <div className="mb-4">

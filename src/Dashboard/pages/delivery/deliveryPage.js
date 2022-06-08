@@ -62,7 +62,13 @@ const DeliveryPage = ({storeUrl, userId}) => {
                 deliveryDataCopy.deliveryUrl = deliveryUniqueId;
                 deliveryDataCopy.timeStamp = serverTimestamp();
                 const deliveryRef = doc(db, 'shops', storeUrl, 'deliveryInfo', deliveryUniqueId)
-                await setDoc(deliveryRef, deliveryDataCopy)
+                await setDoc(deliveryRef, deliveryDataCopy).then(() => {
+                    setDeliveryData((prevState)  => ({
+                        ...prevState,
+                        location: '',
+                        amount: '',
+                    } ))
+                })
 
                 toast.success("delivery location added")
                 fetchDeliveryLocations().then()

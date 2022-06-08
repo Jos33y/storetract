@@ -93,7 +93,14 @@ const CategoriesPage = ({storeUrl, userId}) => {
                 categoryDataCopy.categoryImage = `${categoryImgUrl}`;
                 categoryDataCopy.timeStamp = serverTimestamp();
                 const categoryRef = doc(db, 'shops', storeUrl, 'categories', catUniqueId)
-                await setDoc(categoryRef, categoryDataCopy)
+                await setDoc(categoryRef, categoryDataCopy).then(() => {
+                    setCategoryData((prevState) => ({
+                        ...prevState,
+                            title: '',
+                            description: '',
+                            categoryImage: '',
+                    }))
+                })
 
                 toast.success("category inserted")
                 fetchCategories().then()

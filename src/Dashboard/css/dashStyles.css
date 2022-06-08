@@ -1,3 +1,54 @@
+.card-product-grid .strike{
+    font-size: 14px;
+    padding-left: 20px;
+    text-decoration: line-through;
+    color: #525252;
+}
+/* ================== tag styles JOE =================== */
+.prod-tags .container {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 14px;
+    border: 1px solid #3e4095;
+    border-radius: 5px;
+    color: black
+}
+
+.prod-tags .container .form-control{
+    width: 100%;
+    min-width: 50%;
+    height: 45px;
+    border: 0px solid #2e2e2e;
+    border-radius: 5px;
+    padding: 14px;
+}
+.prod-tags .container .form-control:focus{
+    outline: none;
+    box-shadow: none;
+}
+.prod-tags .tag {
+    display: flex;
+    align-items: center;
+    margin: 7px 10px 7px 0px;
+    padding: 0 5px 0px 10px;
+    border: 1px solid #95933E;
+    border-radius: 5px;
+    background-color: #95933E;
+    white-space: nowrap;
+    color: white;
+}
+
+.prod-tags .tag button.btn {
+    display: flex;
+    padding: 3px 6px;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+    color: white;
+}
+
 /* ================== Subscription Page JOE =================== */
 .subscription-page .subscription-details{
     border-radius: 10px;
@@ -1211,9 +1262,7 @@ body.offcanvas-active {
         width: 90%;
         margin-left: 10px;
         font-size: 13px;
-
     }
-
 
     .content-body .account-form .button-save .btn{
         font-size: 13px;
@@ -1285,6 +1334,48 @@ body.offcanvas-active {
         font-weight: 600;
         text-align: center;
         color: #292b2e;
+    }
+
+    .content-main .mb-4 label{
+        font-size: 14px;
+        padding-bottom: 5px;
+        font-weight: 600;
+    }
+    .content-main .mb-4 .form-control{
+        font-size: 14px;
+    }
+
+    prod-tags .container {
+        padding-left: 5px;
+        overflow-x: scroll;
+    }
+
+    .prod-tags .container .form-control{
+        width: 100%;
+        min-width: 50%;
+        height: 40px;
+        border: 0px solid #2e2e2e;
+        border-radius: 1px;
+        padding: 10px 5px;
+    }
+
+    .prod-tags .tag {
+        display: flex;
+        align-items: center;
+        margin: 7px 7px 7px 0px;
+        padding: 0 5px 0px 10px;
+        color: white;
+        font-size: 12px;
+    }
+
+    .prod-tags .tag button.btn {
+        display: flex;
+        padding: 0px 6px;
+        border: none;
+        background-color: unset;
+        cursor: pointer;
+        color: white;
+        font-size: 12px
     }
 
 }

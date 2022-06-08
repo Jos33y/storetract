@@ -28,8 +28,18 @@ const ProductBox = ({product, id, storeUrl}) => {
               </Link>
               <div className="info-wrap">
                   <span className="title text-truncate"> {product.productName}</span>
-                  <div className="price mb-2">&#8358;{product.productPrice.toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</div>
+                  {product.discountOffer ? (
+                      <div className="price mb-2">&#8358;{product.productDiscountPrice.toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                          <span className="strike">
+                              &#8358;{product.productPrice.toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      </span> </div>
+                  ) : (
+                      <div className="price mb-2">&#8358;{product.productPrice.toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</div>
+                  )}
+
                   <Link  to={`/dashboard/edit-product/${id}`} className="btn btn-sm btn-outline-secondary"><i
                       className="fas fa-edit"></i> Edit</Link>
                   <button onClick={onDelete}  type="button" className="btn btn-sm btn-outline-danger ms-2"> <i

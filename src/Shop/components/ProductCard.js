@@ -20,8 +20,20 @@ const ProductCard = ({product, id}) => {
                                         (`${product.productName}`) : (`${product.productName.slice(0,50)}...`)}
                                 </h5>
                             </Link>
-                        <h5 className="product-price">&#8358;{product.productPrice.toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h5>
+
+                        {product.discountOffer ? (
+                            <h5 className="product-price">
+                                &#8358;{product.productDiscountPrice.toString()
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                <span className="strike">
+                              &#8358;{product.productPrice.toString()
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                </span>
+                            </h5>
+                        ) : (
+                            <h5 className="product-price">&#8358;{product.productPrice.toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h5>
+                        )}
                     </div>
 
                 </Card.Body>

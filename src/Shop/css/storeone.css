@@ -416,6 +416,12 @@
     margin-top: 10px;
 }
 
+.product-card-store .card-body .product-price .strike{
+    text-decoration: line-through;
+    padding-left: 10px;
+    font-size: 14px;
+    color: #616161;
+}
 
 /************ cart table section ************/
 .store-shopping-cart {
@@ -2061,9 +2067,16 @@
     }
 
     .product-card-store .card-body .product-price{
-        font-size: 15px;
+        font-size: 13px;
         margin-top: 5px;
     }
+    .product-card-store .card-body .product-price .strike{
+        text-decoration: line-through;
+        padding-left: 10px;
+        font-size: 13px;
+        color: #616161;
+    }
+
 
     /* --------  footer section ------- */
     .Store-footer{

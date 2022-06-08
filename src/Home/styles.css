@@ -99,6 +99,10 @@
     text-transform: capitalize;
     border: 1px solid #3E4095;
 }
+.Hero-section .Hero-text .btn.btn-success {
+    background: #95933E;
+    border: 1px solid #95933E;
+}
 .Hero-section .Hero-image{
     position: relative;
     padding-top: 70px;

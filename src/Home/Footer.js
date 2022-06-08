@@ -38,7 +38,7 @@ const Footer = () => {
                                   <li><a target="_blank" rel="noopener noreferrer" href="https://facebook.com/storetract" className="Footer-link"> <i className="fab fa-facebook"></i> </a></li>
                                   <li><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/storetract" className="Footer-link"> <i className="fab fa-twitter"></i> </a></li>
                                   <li><a target="_blank" rel="noopener noreferrer" href="https://instagram.com/storetract" className="Footer-link"> <i className="fab fa-instagram"></i> </a></li>
-                                  <li><a target="_blank" rel="noopener noreferrer" href="https://linkedin.com/storetract" className="Footer-link"> <i
+                                  <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/storetract/" className="Footer-link"> <i
                                       className="fab fa-linkedin-in"></i> </a></li>
                               </ul>
                           </div>
