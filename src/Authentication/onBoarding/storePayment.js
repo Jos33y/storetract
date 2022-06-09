@@ -39,9 +39,6 @@ const StorePayment = ({email, userId}) => {
 
     // onSuccess function to call when the PayStack payment is a success
     const onSuccess = (reference) => {
-        // Implementation for whatever you want to do with reference and after success call.
-        //make payment method a string and store in local space
-
         // check status from paystack
         if (reference.status === "success") {
             updatePaymentStatus().then()

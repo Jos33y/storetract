@@ -122,13 +122,14 @@ const StorePaidActivation =  ({fullName, userId}) => {
 
     // create new Domain
     const updateDomain = async (domainName) => {
+        let domainUrl = details.nameDomain.toLowerCase()
         try {
             const domainData = {
-                domainUrl: `https://${details.nameDomain}`,
+                domainUrl: `https://${domainUrl}`,
                 storeUrl: domainName,
                 timeStamp: serverTimestamp(),
             }
-            const domainRef = doc(db, 'domains', details.nameDomain)
+            const domainRef = doc(db, 'domains', domainUrl)
             await setDoc(domainRef, domainData)
         }
         catch (error) {
