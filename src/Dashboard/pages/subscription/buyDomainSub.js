@@ -58,7 +58,7 @@ const BuyDomainSub = () => {
                         else if(slit[1] === 'online')
                             setPrice('2,600')
                         else if(slit[1] === 'store')
-                            setPrice('3,000')
+                            setPrice('3,600')
                         else if(slit[1] === 'africa')
                             setPrice('17,400')
                         else if(slit[1] === 'shop')
@@ -214,7 +214,13 @@ const BuyDomainSub = () => {
                                             <p className="year">1 Year</p>
                                         </td>
                                     </tr>
-
+                                    <tr>
+                                        <td>.store</td>
+                                        <td>
+                                            <p className="domain-name">₦3,600.00 </p>
+                                            <p className="year">1 Year</p>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>.org</td>
                                         <td>
