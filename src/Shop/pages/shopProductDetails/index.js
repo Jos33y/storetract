@@ -38,7 +38,14 @@ const ShopProductDetails = ({businessUrl}) => {
             if (existingItem) {
                 toast.error('item already added') //alert user
             } else { //if item doesn't exist, simply add it
-                cartData.push({...product, productPrice: product.productDiscountPrice, qty: quantity})
+                if(product.discountOffer) {
+                    cartData.push({...product, productPrice: product.productDiscountPrice, qty: quantity})
+                }
+                else{
+                    cartData.push({...product, qty: quantity})
+                }
+
+
                 if (toast.success('product added to cart')) {
                     window.location.reload();
                 }
@@ -188,14 +195,14 @@ const ShopProductDetails = ({businessUrl}) => {
                                         {product.discountOffer ? (
                                                 <h6 className="product-price"> &#8358; {product.productDiscountPrice.toString()
                                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                                <span className="strike">
+                                                    <span className="strike">
                                                     &#8358; {product.productPrice.toString()
-                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                                 </span>
                                                 </h6>
 
-                                        )
-                                        :
+                                            )
+                                            :
                                             (
                                                 <h6 className="product-price"> &#8358; {product.productPrice.toString()
                                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>

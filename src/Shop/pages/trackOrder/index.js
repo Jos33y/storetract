@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 // import {useNavigate} from "react-router-dom";
 import {doc, getDoc} from "firebase/firestore";
-import {db} from "../../../firebase.config";
+import {db} from "../../config/firebase.config";
 
 const TrackOrder = ({businessUrl}) => {
 

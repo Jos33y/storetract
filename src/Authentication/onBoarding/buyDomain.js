@@ -57,6 +57,8 @@ const BuyDomain = () => {
                             setPrice('3,600')
                         else if(slit[1] === 'online')
                             setPrice('2,600')
+                        else if(slit[1] === 'store')
+                            setPrice('3,000')
                         else if(slit[1] === 'africa')
                             setPrice('17,400')
                         else if(slit[1] === 'shop')

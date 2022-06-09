@@ -12,22 +12,22 @@ const ShopHomeCategories = ({loading, categories}) => {
                     : categories && categories.length > 0 ?
                         (
                             <>
-                <h3 className="head">Check out store categories</h3>
-                <Row>
-                    { categories.map((category) => (
-                    <Col md={4} className="col-6" key={ category.id }>
-                        <div className="store-cat-box">
-                            <div className="store-cat-img">
-                                <img src={category.data.categoryImage ? category.data.categoryImage || category.data.categoryImage[0]  :  CatImageOne} alt="" className="img-fluid"/>
-                            </div>
-                            <Link to={`/category/${category.data.categoryUrl}`} className="btn btn-md btn-secondary"> {category.data.title} </Link>
-                        </div>
-                    </Col>
-                    )) }
-                </Row>
-                </>
-                ) :
-                (<h6 className="text-center">No categories available</h6>)
+                                <h3 className="head">Check out store categories</h3>
+                                <Row>
+                                    { categories.map((category) => (
+                                        <Col lg={3} className="col-6" key={ category.id }>
+                                            <div className="store-cat-box">
+                                                <div className="store-cat-img">
+                                                    <img src={category.data.categoryImage ? category.data.categoryImage || category.data.categoryImage[0]  :  CatImageOne} alt="" className="img-fluid"/>
+                                                </div>
+                                                <Link to={`/category/${category.data.categoryUrl}`} className="btn btn-md btn-secondary"> {category.data.title} </Link>
+                                            </div>
+                                        </Col>
+                                    )) }
+                                </Row>
+                            </>
+                        ) :
+                        (<h6 className="text-center">No categories available</h6>)
                 }
             </div>
         </>

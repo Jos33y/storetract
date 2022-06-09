@@ -75,7 +75,7 @@ const Shop = ({storeUrl}) => {
         try
         {
             const catRef = collection(db, 'shops', `${URL}`, 'categories' )
-            const q = query(catRef, orderBy('timeStamp', 'asc'), limit(3))
+            const q = query(catRef, orderBy('timeStamp', 'asc'), limit(4))
             const querySnap = await getDocs(q)
             let categories = [];
             querySnap.forEach((doc) => {
