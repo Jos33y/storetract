@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import React, {useEffect, useRef, useState} from "react";
 import {Col, Row, Table} from "react-bootstrap";
 import OrderSummary from "./orderSummary";
@@ -10,7 +10,7 @@ import Spinner from "../../components/Spinner";
 const ShopOrderConfirmation = ({businessUrl}) => {
 
     // const params = useParams()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const isMounted = useRef()
     const componentRef = useRef();
 
@@ -18,6 +18,7 @@ const ShopOrderConfirmation = ({businessUrl}) => {
     // const [customerID, setCustomerID] = useState("")
     const [orderUniqueID, setOrderUniqueID] = useState("")
     const [formData, setFormData] = useState('')
+    const [shippingMethod, setShippingMethod] = useState(null);
     const [carts, setCarts] = useState([])
     const [paymentMethod, setPaymentMethod] = useState('')
     const itemsPrice = carts.reduce((a, c) => a + c.productPrice * c.qty, 0);
@@ -45,6 +46,19 @@ const ShopOrderConfirmation = ({businessUrl}) => {
         }
         setLoading(false)
     }
+    const trackOrder = () => {
+        try {
+            localStorage.removeItem("cart")
+            localStorage.removeItem("orderUniqueID");
+            localStorage.removeItem("paymentMethod");
+            localStorage.removeItem("customerID")
+            localStorage.removeItem("shippingMethod");
+        }
+        catch (e) {
+            console.log({e})
+        }
+        window.location.href = (`/track-order`);
+    }
 
     // useEffect functions containing add form data to session storage
     useEffect(() => {
@@ -53,12 +67,13 @@ const ShopOrderConfirmation = ({businessUrl}) => {
             let localCart = localStorage.getItem("cart");
             let localPayment = localStorage.getItem("paymentMethod");
             let localOrderID = localStorage.getItem("orderUniqueID");
+            let localShipping = localStorage.getItem('shippingMethod');
 
             // customer ID session
             localCustomerID = JSON.parse(localCustomerID);
             //load persisted cart into state if it exists
             if (localCustomerID) {
-                getCustomer(localCustomerID)
+                getCustomer(localCustomerID).then()
                 console.log(localCustomerID)
             }
 
@@ -84,36 +99,19 @@ const ShopOrderConfirmation = ({businessUrl}) => {
                 setPaymentMethod(localPayment)
                 console.log(paymentMethod)
             }
+            // shipping session
+            localShipping = JSON.parse(localShipping);
+            //load persisted cart into state if it exists
+            if (localShipping) {
+                setShippingMethod(localShipping)
+                // console.log(carts)
+            }
         }
         return () => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMounted, businessUrl])
-
-    // const continueShopping = () => {
-    //     try {
-    //         localStorage.removeItem("cart")
-    //         localStorage.removeItem("orderUniqueID");
-    //         localStorage.removeItem("paymentMethod")
-    //     }
-    //     catch (e) {
-    //         console.log({e})
-    //     }
-    //     navigate(`/`)
-    // }
-
-    const trackOrder = () => {
-        try {
-            localStorage.removeItem("cart")
-            localStorage.removeItem("orderUniqueID");
-            localStorage.removeItem("paymentMethod")
-        }
-        catch (e) {
-            console.log({e})
-        }
-        navigate(`/track-order`)
-    }
 
     return(
         <>
@@ -194,7 +192,8 @@ const ShopOrderConfirmation = ({businessUrl}) => {
                                                         <ul>
                                                             <li>Subtotal <span className="price money">&#8358;{(itemsPrice).toFixed(2).toString()
                                                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>  </li>
-                                                            <li>Shipping <span className="price"> Calculated at next steps</span></li>
+                                                            <li>Shipping <span className="price"> &#8358;{(shippingMethod ? shippingMethod.amount : 0).toString()
+                                                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}.00</span></li>
                                                         </ul>
                                                     </td>
                                                 </tr>
@@ -202,7 +201,7 @@ const ShopOrderConfirmation = ({businessUrl}) => {
                                                 {/*total section*/}
                                                 <tr className="Total-section">
                                                     <td colSpan={4}>
-                                                        <p className="total">Total <span className="total-price">&#8358;{(itemsPrice).toFixed(2).toString()
+                                                        <p className="total">Total <span className="total-price">&#8358;{(shippingMethod ?  (Number(shippingMethod.amount) + Number(itemsPrice)) : (0)).toFixed(2).toString()
                                                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span></p>
                                                     </td>
                                                 </tr>
@@ -241,7 +240,7 @@ const ShopOrderConfirmation = ({businessUrl}) => {
                                             <Row>
                                                 <Col md={6}>
                                                     <h5>Shipping address</h5>
-                                                    <p>Joseph Lagbalu
+                                                    <p>{formData.firstname + ' ' + formData.lastname}
                                                         <br/>
                                                         {formData.deliveryAddress}
                                                         <br/>
@@ -253,30 +252,17 @@ const ShopOrderConfirmation = ({businessUrl}) => {
                                                 </Col>
                                                 <Col md={6}>
                                                     <h5>Shipping method</h5>
-                                                    <p>FREE DHL Express Recorded delivery + taxes paid</p>
+                                                    <p> {shippingMethod ? shippingMethod.location : 'FREE'}</p>
                                                 </Col>
                                             </Row>
                                         </div>
 
-
-
-                                        {/*buttons section*/}
-                                        {/*<div className="form-group buttons">*/}
-                                        {/*    <Row>*/}
-                                        {/*        <Col lg={4} className="col-md-7">*/}
-                                        {/*            <Button className="btn btn-md btn-primary" onClick={continueShopping}> Continue Shopping</Button>*/}
-                                        {/*        </Col>*/}
-                                        {/*        /!*<Col md={4} className="col-md-6 col-6">*!/*/}
-                                        {/*        /!*    <p><Link to="https://" className="link"> Need help ? Contact us</Link></p>*!/*/}
-                                        {/*        /!*</Col>*!/*/}
-                                        {/*    </Row>*/}
-                                        {/*</div>*/}
                                     </div>
                                 </Col>
 
                                 {/*--------------order summary section-----------------------*/}
                                 <Col md={5}>
-                                    <OrderSummary confirm={true} />
+                                    <OrderSummary shippingMethod={shippingMethod} confirm={true} />
                                 </Col>
                             </Row>
                         </div>

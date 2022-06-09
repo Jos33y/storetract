@@ -101,10 +101,12 @@ const ShopCart = ({businessUrl}) => {
                         <div className="cart-table">
                             <table className="table table-hover">
                                 <thead>
-                                <th className="product-name">Product</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th></th>
+                                <tr>
+                                    <th className="product-name">Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 {/*loading cart section*/}

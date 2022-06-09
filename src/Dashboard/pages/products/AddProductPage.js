@@ -189,7 +189,6 @@ const AddProductPage = ({userId, storeUrl}) => {
                 productTags: value,
             }))
         }
-        console.log("prod tags", tags)
 
         //Files
         if (e.target.files) {

@@ -134,7 +134,7 @@ const Shop = ({storeUrl}) => {
                 return <ShopCheckout businessUrl={ShopURL} loading={loading} />
             }
             else if(params.checkoutUrl === "payment") {
-                return <ShopPayment businessUrl={ShopURL} loading={loading} />
+                return <ShopPayment storeData={shopData} businessUrl={ShopURL} loading={loading} />
             }
             else if(params.checkoutUrl === "order-confirmation") {
                 return <ShopOrderConfirmation businessUrl={ShopURL} loading={loading} />

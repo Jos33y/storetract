@@ -5,7 +5,7 @@ import React, {useEffect, useRef, useState} from "react";
 import OrderSummary from "./orderSummary";
 import {toast} from "react-toastify";
 import {v4 as uuidv4} from "uuid";
-import {doc, getDoc, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, orderBy, query, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
 import {db} from "../../config/firebase.config";
 import Spinner from "../../components/Spinner";
 
@@ -20,14 +20,16 @@ const ShopCheckout = ({businessUrl}) => {
     const [carts, setCarts] = useState([])
     const itemsPrice = carts.reduce((a, c) => a + c.productPrice * c.qty, 0);
     const [loading, setLoading] = useState(false)
+    const[location, setLocations]= useState([])
     const [isDisabled, setIsDisabled] = useState(false)
     const [customerID, setCustomerID] = useState("")
+    const [shippingMethod, setShippingMethod] = useState("");
     const [orderUniqueID, setOrderUniqueID] = useState("")
     const [formData, setFormData] = useState({
         email: '',
         firstname: '',
         lastname: '',
-        country: '',
+        country: 'Nigeria',
         state: '',
         city: '',
         deliveryAddress: '',
@@ -55,12 +57,12 @@ const ShopCheckout = ({businessUrl}) => {
 
     // handle form data store and update form information
     const handleInfo = async (e) => {
-        e.preventDefault()
-
-        const randId = uuidv4().slice(0,7)
-        const uniqueOrderId = (Math.floor(Math.random() * 100000000));
         setLoading(true);
         setIsDisabled(true);
+        e.preventDefault()
+        const randId = uuidv4().slice(0,7)
+        const uniqueOrderId = (Math.floor(Math.random() * 100000000));
+
 
         try {
             if ((!customerID && !formData.customerId) || (customerID !== formData.customerId)  ) {
@@ -76,6 +78,10 @@ const ShopCheckout = ({businessUrl}) => {
                 let stringOrder = JSON.stringify(orderID);
                 localStorage.setItem("orderUniqueID" ,stringOrder)
                 // toast.success("stringify")
+                let shippingTest =  await getShippingDetails(shippingMethod).then()
+                console.log("shippingDetails", shippingTest);
+                let stringShipping = JSON.stringify({...shippingTest});
+                localStorage.setItem("shippingMethod" ,stringShipping)
 
                 console.log("Handling Information")
                 const formDataCopy = {...formData}
@@ -94,7 +100,7 @@ const ShopCheckout = ({businessUrl}) => {
                         orderCopy.firstname = formData.firstname;
                         orderCopy.lastname = formData.lastname;
                         orderCopy.orderTotal = itemsPrice;
-                        orderCopy.shippingMethod = "DHL Free Delivery";
+                        orderCopy.shippingMethod = shippingMethod;
                         orderCopy.deliveryStatus = "Awaiting Payment";
                         orderCopy.orderStatus = "Pending";
                         orderCopy.productOrdered = [...carts];
@@ -107,6 +113,11 @@ const ShopCheckout = ({businessUrl}) => {
                 navigate(`/checkout/payment`);
             }
             else if(customerID === formData.customerId){
+
+              let shippingTest =  await getShippingDetails(shippingMethod).then()
+                console.log("shippingDetails", shippingTest);
+                let stringShipping = JSON.stringify({...shippingTest});
+                localStorage.setItem("shippingMethod" ,stringShipping)
 
                 const formDataCopy = {...formData}
                 formDataCopy.timeStamp = serverTimestamp()
@@ -122,7 +133,7 @@ const ShopCheckout = ({businessUrl}) => {
                         orderCopy.firstname = formData.firstname;
                         orderCopy.lastname = formData.lastname;
                         orderCopy.orderTotal = itemsPrice;
-                        orderCopy.shippingMethod = "DHL Free Delivery";
+                        orderCopy.shippingMethod = shippingMethod;
                         orderCopy.deliveryStatus = "Awaiting Payment";
                         orderCopy.orderStatus = "Pending";
                         orderCopy.productOrdered = [...carts];
@@ -159,6 +170,21 @@ const ShopCheckout = ({businessUrl}) => {
         setLoading(false)
     }
 
+    const getShippingDetails = async (shippingID) => {
+        try {
+            console.log('shipping id', shippingID);
+            const shippingRef = doc(db, 'shops', `${businessUrl}`, 'deliveryInfo', shippingID)
+            const shippingSnap =  await getDoc(shippingRef)
+
+            if(shippingSnap.exists()){
+                // console.log(customerSnap.data())
+                return shippingSnap.data();
+            }
+        }catch (error) {
+            console.log({error})
+        }
+    }
+
     // onChange function to make input functional
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -167,12 +193,42 @@ const ShopCheckout = ({businessUrl}) => {
         } ))
     }
 
+    const onLocationChange = (e) => {
+        setShippingMethod(e.target.value);
+    }
+
+    const fetchLocation = async () => {
+        try
+        {
+            const catRef = collection(db, 'shops', `${businessUrl}`, 'deliveryInfo' )
+            const q = query(catRef, orderBy('timeStamp', 'asc'))
+            const querySnap = await getDocs(q)
+            let location = [];
+            querySnap.forEach((doc) => {
+                //console.log(doc.data())
+                return location.push({
+                    id: doc.id,
+                    data: doc.data(),
+                })
+            })
+            setLocations(location)
+        }
+        catch (error) {
+            toast.error("could not fetch categories")
+            console.log({error})
+        }
+        setLoading(false)
+    }
+
+
 // useEffect functions containing add form data to session storage
     useEffect(() => {
         if(isMounted) {
             let localCustomerID = localStorage.getItem("customerID");
             let localCart = localStorage.getItem("cart");
             let localOrderID = localStorage.getItem("orderUniqueID");
+            let localShipping = localStorage.getItem('shippingMethod');
+            fetchLocation().then()
 
             // customer ID session
             localCustomerID = JSON.parse(localCustomerID);
@@ -180,7 +236,6 @@ const ShopCheckout = ({businessUrl}) => {
             if (localCustomerID) {
                 setCustomerID(localCustomerID)
                 getCustomer(localCustomerID)
-                console.log(localCustomerID)
             }
 
             // orderID ID session
@@ -188,7 +243,7 @@ const ShopCheckout = ({businessUrl}) => {
             //load persisted cart into state if it exists
             if (localOrderID) {
                 setOrderUniqueID(localOrderID)
-                console.log(localOrderID)
+
             }
 
             // cart session
@@ -196,6 +251,13 @@ const ShopCheckout = ({businessUrl}) => {
             //load persisted cart into state if it exists
             if (localCart) {
                 setCarts(localCart)
+                // console.log(carts)
+            }
+            // shipping session
+            localShipping = JSON.parse(localShipping);
+            //load persisted cart into state if it exists
+            if (localShipping) {
+                setShippingMethod(localShipping.deliveryUrl)
                 // console.log(carts)
             }
         }
@@ -210,7 +272,6 @@ const ShopCheckout = ({businessUrl}) => {
         <>
             { loading ?
                 (<Spinner/>) :
-
                 (
                     <div className="Shop-Checkout">
                     {/*--------------bread crumbs section-----------------------*/}
@@ -393,8 +454,8 @@ const ShopCheckout = ({businessUrl}) => {
                                                             value={ country }
                                                     >
                                                         <option disabled selected>--Select Country--</option>
-                                                        <option value='NIG'>Nigeria</option>
-                                                        <option value='GHN'>Ghana</option>
+                                                        <option value='Nigeria'>Nigeria</option>
+                                                        <option value='Ghana'>Ghana</option>
                                                     </select>
                                                 </Col>
                                             </Row>
@@ -406,16 +467,20 @@ const ShopCheckout = ({businessUrl}) => {
                                             <Row>
                                                 <Col lg={ 6 }>
                                                     <label htmlFor="country">Select Delivery</label>
-                                                    <select name="country"
+                                                    <select name="location"
                                                             className="form-control"
-                                                            id="country"
-                                                            required={ true }
-                                                            onChange={ onChange }
-                                                            value={ country }
+                                                            id="location"
+                                                            required={true}
+                                                            onChange={ onLocationChange }
+                                                            value={ shippingMethod }
                                                     >
-                                                        <option disabled selected>--Select Delivery--</option>
-                                                        <option value='Free'>Free</option>
-                                                        <option value='Within'>Within Lagos - 1000</option>
+                                                        <option value="0" selected>--Select Delivery--</option>
+                                                        { location.map((locate) => (
+                                                            <option key={locate.id}  value={locate.data.deliveryUrl}>
+                                                                {`${locate.data.location} (${locate.data.amount})`}
+                                                            </option>
+                                                        )) }
+
                                                     </select>
                                                 </Col>
                                             </Row>
@@ -429,7 +494,7 @@ const ShopCheckout = ({businessUrl}) => {
                                                             disabled={isDisabled}> Continue to Payment</Button>
                                                 </Col>
                                                 <Col lg={ 4 } className="col-md-4 col-5">
-                                                    <p><Link to={ (`/${ businessUrl }/cart`) }
+                                                    <p><Link to={ (`/cart`) }
                                                              className="link"> Return to Cart</Link></p>
                                                 </Col>
                                             </Row>
@@ -439,7 +504,7 @@ const ShopCheckout = ({businessUrl}) => {
 
                                 {/*--------------order summary section-----------------------*/}
                                 <Col md={5}>
-                                    <OrderSummary confirm={false} />
+                                    <OrderSummary  confirm={false} />
                                 </Col>
                             </Row>
                         </div>

@@ -1,27 +1,26 @@
 import {Button, Col, Row, Table} from "react-bootstrap";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import OrderSummary from "./orderSummary";
 import React, {useEffect, useRef, useState} from "react";
 import {toast} from "react-toastify";
-import {usePaystackPayment} from "react-paystack";
 import {doc, getDoc, serverTimestamp, setDoc, addDoc, updateDoc, collection} from "firebase/firestore";
 import {db} from "../../config/firebase.config";
 import Spinner from "../../components/Spinner";
-import PaystackLogo from "../../assets/images/paystack-logo-vector.png";
+import FlutterWaveLogo from "../../assets/images/flutter-wave.png";
 import KlumpLogo from "../../assets/images/klump-two-ng.PNG";
-import AcceptedPayment from "../../assets/images/shopimages/cards-501x173.png";
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 
-const ShopPayment = ({businessUrl}) => {
+const ShopPayment = ({businessUrl, storeData}) => {
 
     const params = useParams()
-    const navigate = useNavigate()
     const isMounted = useRef()
 
     const [displayP, setDisplayP] = useState(false);
     const [displayK, setDisplayK] = useState(false);
-    const [payMethod, setPayMethod] = useState("not selected");
+    const [isDisable, setIsDisable] = useState(false);
     const [formData, setFormData] = useState('')
     const [balanceData, setBalanceData] = useState('')
+    const [shippingMethod, setShippingMethod] = useState(null);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const [customerID, setCustomerID] = useState("")
@@ -31,20 +30,21 @@ const ShopPayment = ({businessUrl}) => {
     const [loading, setLoading] = useState(false);
 
     // save transactions for references
-    const saveTransaction = async (reference) => {
+    const saveTransaction = async (response) => {
+        let totalPrice= (Number(itemsPrice) + Number(shippingMethod.amount))
         try {
             const transactionData = {
-                transactionId: reference.reference,
+                transactionId: response.transaction_id,
                 customerId: (`${customerID}`),
                 orderId: (`${orderUniqueID}`),
-                paymentMethod: "PAYSTACK",
-                status: reference.status,
-                message: reference.message,
-                orderTotal: (`${itemsPrice}`),
-                transactionRef: reference.transaction,
+                paymentMethod: "FLUTTERWAVE",
+                status: response.status,
+                orderTotal: (`${totalPrice}`),
+                flutterWaveRef: response.flw_ref,
+                transactionRef: response.tx_ref,
                 timeStamp: serverTimestamp(),
             }
-            const transRef = doc(db, 'shops',`${businessUrl}`, 'transactions', reference.reference)
+            const transRef = doc(db, 'shops',`${businessUrl}`, 'transactions', `${response.transaction_id}`)
             await setDoc(transRef, transactionData)
         }
         catch (error) {
@@ -70,7 +70,8 @@ const ShopPayment = ({businessUrl}) => {
 
     // update account balance
     const updateWalletBalance = async () => {
-        const newBalance = (balanceData.accountBalance + itemsPrice);
+        let totalPrice= (Number(itemsPrice) + Number(shippingMethod.amount))
+        const newBalance = (balanceData.accountBalance + totalPrice);
         try {
             console.log("updating to Balance")
             const balanceDataCopy = {...balanceData}
@@ -87,13 +88,14 @@ const ShopPayment = ({businessUrl}) => {
     }
 
     // add purchase to deposit history
-    const addDepositToHistory = async (reference) => {
+    const addDepositToHistory = async (response) => {
+        let totalPrice= (Number(itemsPrice) + Number(shippingMethod.amount))
         try {
             const depositHistoryData = {
-                amountDeposited: (`${itemsPrice}`),
+                amountDeposited: (`${totalPrice}`),
                 customerId: (`${customerID}`),
                 orderId: (`${orderUniqueID}`),
-                transactionRef: reference.reference,
+                transactionRef: response.tx_ref,
                 timeStamp: serverTimestamp(),
             }
             const depositRef = collection(db, 'shops', `${businessUrl}`, 'walletDepositHistory')
@@ -106,13 +108,14 @@ const ShopPayment = ({businessUrl}) => {
 
     // update order status
     const updateOrder = async () => {
+        let totalPrice= (Number(itemsPrice) + Number(shippingMethod.amount))
         try {
             //store orders
             const orderCopy = {
-                deliveryStatus: "Confirmed",
+                deliveryStatus: "Payment Successful",
                 orderStatus:"Success",
-                paymentMethod: "PayStack",
-                orderTotal: (`${itemsPrice}`),
+                paymentMethod: "FlutterWave",
+                orderTotal: (`${totalPrice}`),
                 timeStamp: serverTimestamp(),
             }
             const orderRef = doc(db, 'shops', `${businessUrl}`, 'orders', orderUniqueID)
@@ -124,96 +127,63 @@ const ShopPayment = ({businessUrl}) => {
         }
     }
 
-    // PayStack Payment config
-    const paystack_config = {
-        reference: (new Date()).getTime().toString(),
-        email: (formData.email),
-        amount: (itemsPrice * 100),
-        publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_LIVE_KEY,
+    const config = {
+        public_key: process.env.REACT_APP_FLUTTERWAVE_PUBLIC_LIVE_KEY,
+        tx_ref: Date.now(),
+        amount: (Number(itemsPrice) + Number(shippingMethod ? shippingMethod.amount : '0')),
+        currency: 'NGN',
+        redirect_url: '/checkout/order-confirmation',
+        customer: {
+            email: (formData.email),
+            phone_number: (formData.phoneNumber),
+            name: (formData.firstname + ' ' + formData.lastname),
+        },
+        customizations: {
+            title: `${storeData.businessName}`,
+            logo: 'https://firebasestorage.googleapis.com/v0/b/packshop-packnow.appspot.com/o/storetract%2Fgeneral-logo.png?alt=media&token=d2dc9078-fc2d-4d7b-bd6f-a00c77512e7d',
+        },
     };
 
-    // function that initializes PayStack Payment
-    const initializePayment = usePaystackPayment(paystack_config);
+    const handleFlutterPayment = useFlutterwave(config);
 
-    // onSuccess function to call when the PayStack payment is a success
-    const onSuccess = (reference) => {
-        // Implementation for whatever you want to do with reference and after success call.
-        //make payment method a string and store in local space
-        let paymentMethod = JSON.stringify("PAYSTACK");
-        localStorage.setItem("paymentMethod" ,paymentMethod)
+    const handlePaymentFlutter = async () => {
 
-        saveTransaction(reference).then()
-        // check status from paystack
-        if (reference.status === "success") {
-            updateWalletBalance().then()
-            addDepositToHistory(reference).then()
-            updateOrder().then()
-        }
-        // toast.success("stringify")
-        toast.success("Payment successful");
-        console.log({reference});
-        navigate(`/checkout/order-confirmation`)
-
-    };
-
-    // you onclose function for when the PayStack dialog is closed
-    const onClose = () => {
-        // implementation for  whatever you want to do when the PayStack dialog closed.
-        toast.error("Payment window closed");
+        setIsDisable(true)
+        await handleFlutterPayment({
+            callback: (response) => {
+                updateWalletBalance().then()
+                addDepositToHistory(response).then()
+                saveTransaction(response).then()
+                updateOrder().then()
+                console.log(response);
+                let paymentMethod = JSON.stringify("FLUTTERWAVE");
+                localStorage.setItem("paymentMethod" ,paymentMethod)
+                toast.success("Payment successful");
+                closePaymentModal() // this will close the modal programmatically
+            },
+            onClose: () => {toast.error("Payment window closed");},
+        });
+        setIsDisable(false)
     }
 
     // check if paystack buttons is active
     const activePaystack = () => {
         if(displayP) {
-            if(!displayK){
-                setDisplayK(true)
-                setPayMethod("useKlump")
-            }
             setDisplayP(false)
         }
         else {
-            if(displayK){
-                setDisplayK(false)
-            }
             setDisplayP(true)
-            setPayMethod("payStack")
         }
     }
 
     // check if klump button is active
     const activeKlump = () => {
-
         if(displayK) {
-            if(!displayP){
-                setDisplayP(true)
-                setPayMethod("payStack")
-            }
             setDisplayK(false)
         }
         else {
-            if(displayP){
-                setDisplayP(false)
-            }
             setDisplayK(true)
-            setPayMethod("useKlump")
         }
-    }
-
-        // make payment functions for any selected payment method
-    const makePayment = () => {
-        if(payMethod === 'not selected') {
-            toast.error("Select a payment method");
-        }
-        else if(payMethod === "useKlump") {
-            toast.success("useKlump coming soon");
-        }
-        else if(payMethod === "payStack") {
-            initializePayment(onSuccess, onClose)
-        }
-        else {
-            toast.error("Select a payment method");
-        }
-
     }
 
     // get customer information using customer ID
@@ -238,11 +208,12 @@ const ShopPayment = ({businessUrl}) => {
     useEffect(() => {
         if(isMounted) {
 
-            getWalletBalance()
+            getWalletBalance().then()
 
             let localCustomerID = localStorage.getItem("customerID");
             let localCart = localStorage.getItem("cart");
             let localOrderID = localStorage.getItem("orderUniqueID");
+            let localShipping = localStorage.getItem('shippingMethod');
             // console.log(publicKeyCode);
 
             // customer ID session
@@ -250,7 +221,7 @@ const ShopPayment = ({businessUrl}) => {
             //load persisted cart into state if it exists
             if (localCustomerID) {
                 setCustomerID(localCustomerID)
-                getCustomer(localCustomerID)
+                getCustomer(localCustomerID).then()
             }
 
             // orderID ID session
@@ -259,7 +230,13 @@ const ShopPayment = ({businessUrl}) => {
             if (localOrderID) {
                 setOrderUniqueID(localOrderID)
             }
-
+            // shipping session
+            localShipping = JSON.parse(localShipping);
+            //load persisted cart into state if it exists
+            if (localShipping) {
+                setShippingMethod(localShipping)
+                // console.log(carts)
+            }
 
             // cart session
             localCart = JSON.parse(localCart);
@@ -281,159 +258,171 @@ const ShopPayment = ({businessUrl}) => {
                 (<Spinner/>) :
 
                 (
-                <div className="Shop-Checkout">
-                    {/*--------------bread crumbs section-----------------------*/}
-                    <div className='bread-crumb'>
-                        <ul>
-                            <li>
-                                <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
-                            </li>
-                            <i className="fas fa-chevron-right"></i>
-                            <li>
-                                <Link  to={(`/checkout/information`)} className="bread-crumb-link"> Information</Link>
-                            </li>
-                            <i className="fas fa-chevron-right"></i>
-                            <li>
-                                <span className='active'> Payment</span>
-                            </li>
-                            <i className="fas fa-chevron-right" ></i>
-                            <li>
-                                <span className='link'> Order Confirmation</span>
-                            </li>
+                    <div className="Shop-Checkout">
+                        {/*--------------bread crumbs section-----------------------*/}
+                        <div className='bread-crumb'>
+                            <ul>
+                                <li>
+                                    <Link  to={(`/cart`)} className="bread-crumb-link"> Cart</Link>
+                                </li>
+                                <i className="fas fa-chevron-right"></i>
+                                <li>
+                                    <Link  to={(`/checkout/information`)} className="bread-crumb-link"> Information</Link>
+                                </li>
+                                <i className="fas fa-chevron-right"></i>
+                                <li>
+                                    <span className='active'> Payment</span>
+                                </li>
+                                <i className="fas fa-chevron-right" ></i>
+                                <li>
+                                    <span className='link'> Order Confirmation</span>
+                                </li>
 
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
 
-                    {/*--------------main section-----------------------*/}
-                    <div className="container-fluid">
-                        <div className="Shop-section-wrapper">
-                            <Row>
-                                {/*--------------payment section-----------------------*/}
-                                <Col lg={7}>
-                                    <h5 className="title">Checkout </h5>
-                                    {/*shipping address*/}
-                                    <div className="Shipping-address">
-                                        <Table className="table contact">
-                                            <tbody>
-                                            <tr className="top">
-                                                <td><p className="text-head"> Contact</p></td>
-                                                <td> <p>{formData.email} </p></td>
-                                                <td>
-                                                    <Link to={(`/checkout/information`)} className="link">Change</Link>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><p className="text-head"> Ship to</p></td>
-                                                <td> <p>{formData.deliveryAddress}, {formData.city}, {formData.state} state, {formData.country} </p></td>
-                                                <td>
-                                                    <Link to={(`/checkout/information`)} className="link">Change</Link>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><p className="text-head"> Method</p></td>
-                                                <td colSpan={2}> <p>FREE DHL Express Recorded delivery + taxes paid · Free </p></td>
-                                            </tr>
-                                            </tbody>
-                                        </Table>
-                                    </div>
+                        {/*--------------main section-----------------------*/}
+                        <div className="container-fluid">
+                            <div className="Shop-section-wrapper">
+                                <Row>
+                                  {/*--------------payment section-----------------------*/}
+                                    <Col lg={7}>
+                                        <h5 className="title">Checkout </h5>
+                                        {/*shipping address*/}
+                                        <div className="Shipping-address">
+                                            <Table className="table contact">
+                                                <tbody>
+                                                <tr className="top">
+                                                    <td><p className="text-head"> Contact</p></td>
+                                                    <td> <p>{formData.email} </p></td>
+                                                    <td>
+                                                        <Link to={(`/checkout/information`)} className="link">Change</Link>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p className="text-head"> Ship to</p></td>
+                                                    <td> <p>{formData.deliveryAddress}, {formData.city}, {formData.state} state, {formData.country} </p></td>
+                                                    <td>
+                                                        <Link to={(`/checkout/information`)} className="link">Change</Link>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p className="text-head"> Method</p></td>
+                                                    {shippingMethod ? (
+                                                        <td colSpan={2}> <p> {shippingMethod.location} {` .  `} &#8358;{shippingMethod.amount.toString()
+                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')} </p></td>
+                                                    ) : (
+                                                        <td colSpan={2}> <p>FREE Delivery · Free </p></td>
+                                                    )}
 
-                                    <div className="Shipping-address Sub-total">
-                                        <Table className="table">
-                                            <tbody>
-                                            <tr className="top">
-                                                <td colSpan={2}><p className="text-head"> Sub total</p></td>
-                                                <td> <p className="left"> &#8358;{(itemsPrice).toFixed(2).toString()
-                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p> </td>
-                                            </tr>
-                                            <tr>
-                                                <td colSpan={2}><p className="text-head"> Shipping</p></td>
-                                                <td> <p className="left">Free</p> </td>
-                                            </tr>
-                                            <tr className="total">
-                                                <td colSpan={2}><p className="text-head"> Total</p></td>
-                                                <td> <p className="left">&#8358;{(itemsPrice).toFixed(2).toString()
-                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p> </td>
-                                            </tr>
-                                            </tbody>
-                                        </Table>
-                                    </div>
 
-                                    {/*shipping method*/}
-                                    <div className="Payment-method">
-                                        <h6 className="sub-title">Payment Method</h6>
-                                        <h6 className="note">Choose your preferred payment method.</h6>
-
-                                        <div className="Payment-method-list">
-                                            <Row>
-                                                <Col md={6}>
-                                                    {/*paystack button*/}
-                                                    <div className="Payment-box" onClick={activePaystack}>
-                                                        <h5>
-                                                            <span className="text">PayStack</span>
-                                                            <img src={PaystackLogo} alt="" className="img-pay"/>
-                                                        </h5>
-                                                        {displayP && (
-                                                            <>
-                                                                <p>
-                                                                    you've selected paystack, click make payment button to continue.
-                                                                </p>
-                                                                <p>
-                                                                    You will be redirected to our secure payment checkout.
-                                                                </p>
-                                                                <div className="payment-img">
-                                                                    <img src={AcceptedPayment} alt="" className="img-fluid"/>
-                                                                </div>
-                                                            </> ) }
-                                                    </div>
-                                                </Col>
-                                                <Col md={6}>
-                                                    {/*paystack button*/}
-                                                    <div className="Payment-box klump" onClick={activeKlump}>
-                                                        <h5>
-                                                            <span className="text">useKlump</span>
-                                                            <img src={KlumpLogo} alt="" className="img-pay"/>
-                                                        </h5>
-                                                        {displayK && (
-                                                            <>
-                                                                <p>
-                                                                    you've selected useKlump, click make payment button to continue.
-                                                                </p>
-                                                                <p>
-                                                                    Klump helps you buy anything you need on a payment plan that works for you. <br/>
-                                                                    Spread payments over 3 months after an initial 25% deposit.
-                                                                </p>
-                                                            </> ) }
-                                                    </div>
-                                                </Col>
-                                            </Row>
+                                                </tr>
+                                                </tbody>
+                                            </Table>
                                         </div>
 
-                                    </div>
+                                        <div className="Shipping-address Sub-total">
+                                            <Table className="table">
+                                                <tbody>
+                                                <tr className="top">
+                                                    <td colSpan={2}><p className="text-head"> Sub total</p></td>
+                                                    <td> <p className="left"> &#8358;{(itemsPrice).toFixed(2).toString()
+                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colSpan={2}><p className="text-head"> Shipping</p></td>
 
-                                    {/*buttons section*/}
-                                    <div className="form-group buttons">
-                                        <Row>
-                                            <Col lg={ 4 } className="col-md-8 col-6">
-                                                <Button className="btn btn-md btn-primary" onClick={makePayment}> Make Payment </Button>
-                                            </Col>
-                                            <Col lg={4} className="col-md-4 col-6">
-                                                <p>
-                                                    <Link to={(`/checkout/information`)} className="link"> Return to Shipping</Link>
-                                                </p>
-                                            </Col>
 
-                                        </Row>
-                                    </div>
-                                </Col>
+                                                    <td> <p className="left"> &#8358;{(shippingMethod ? shippingMethod.amount : 0).toString()
+                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}.00 </p> </td>
+                                                </tr>
+                                                <tr className="total">
+                                                    <td colSpan={2}><p className="text-head"> Total</p></td>
+                                                    <td> <p className="left">&#8358;{(shippingMethod ?  (Number(shippingMethod.amount) + Number(itemsPrice)) : (0)).toFixed(2).toString()
+                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p> </td>
 
-                                {/*--------------order summary section-----------------------*/}
-                                <Col lg={5}>
-                                    <OrderSummary confirm={false} />
-                                </Col>
-                            </Row>
+                                                </tr>
+                                                </tbody>
+                                            </Table>
+                                        </div>
+
+                                        {/*shipping method*/}
+                                        <div className="Payment-method">
+                                            <h6 className="sub-title">Payment Method</h6>
+                                            <h6 className="note">Choose your preferred payment method.</h6>
+
+                                            <div className="Payment-method-list">
+                                                <Row>
+                                                    <Col md={6}>
+                                                        {/*paystack button*/}
+                                                        <div className="Payment-box" >
+                                                            <h5 onClick={activePaystack}>
+                                                                <span className="text">FlutterWave</span>
+                                                                <img src={FlutterWaveLogo} alt="" className="img-pay"/>
+                                                            </h5>
+                                                            {displayP && (
+                                                                <>
+                                                                    <p>
+                                                                        you've selected flutterwave, click make payment button to continue.
+                                                                    </p>
+                                                                    <p>
+                                                                        You will be redirected to our secure payment checkout.
+                                                                    </p>
+                                                                    <div className="payment-btn">
+                                                                        <Button className="btn btn-md btn-primary" onClick={handlePaymentFlutter}> Make Payment </Button>
+                                                                    </div>
+                                                                </> ) }
+                                                        </div>
+                                                    </Col>
+                                                    <Col md={6}>
+                                                        {/*paystack button*/}
+                                                        <div className="Payment-box klump">
+                                                            <h5 onClick={activeKlump}>
+                                                                <span className="text">useKlump</span>
+                                                                <img src={KlumpLogo} alt="" className="img-pay"/>
+                                                            </h5>
+                                                            {displayK && (
+                                                                <>
+                                                                    <p>
+                                                                        you've selected useKlump, click make payment button to continue.
+                                                                    </p>
+                                                                    <p>
+                                                                        Klump helps you buy anything you need on a payment plan that works for you. <br/>
+                                                                        Spread payments over 3 months after an initial 25% deposit.
+                                                                    </p>
+                                                                    <div className="payment-btn">
+                                                                        <Button disabled={isDisable} className="btn btn-md btn-primary"
+                                                                                onClick={() => {toast.success("useKlump coming soon")}}> Make Payment </Button>
+                                                                    </div>
+                                                                </> ) }
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </div>
+
+                                        </div>
+
+                                        {/*buttons section*/}
+                                        <div className="form-group buttons">
+                                            <Row>
+                                                <Col lg={6} className="col-md-4 col-6">
+                                                    <p>
+                                                        <Link to={(`/checkout/information`)} className="link"> Return to Shipping</Link>
+                                                    </p>
+                                                </Col>
+
+                                            </Row>
+                                        </div>
+                                    </Col>
+
+                                    {/*--------------order summary section-----------------------*/}
+                                    <Col lg={5}>
+                                        <OrderSummary shippingMethod={shippingMethod} confirm={false} />
+                                    </Col>
+                                </Row>
+                            </div>
                         </div>
                     </div>
-                </div>
                 )
             }
         </>

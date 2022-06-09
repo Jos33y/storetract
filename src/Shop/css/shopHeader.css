@@ -341,7 +341,7 @@
     background: #ffffff;
     color: #011B33;
     cursor: pointer;
-    border-left: 8px solid #16befa;
+    border-left: 8px solid #e99e21;
 
     box-shadow: 2px 2px 3px 1px rgba(105,105,105,0.75);
     -webkit-box-shadow: 2px 2px 3px 1px rgba(105,105,105,0.75);
@@ -355,7 +355,7 @@
 .Payment-method .Payment-method-list .Payment-box h5 .text{
     font-size: 18px;
     font-weight: 700;
-    color: #011B33;
+    color: #e99e21;
 }
 .Payment-method .Payment-method-list .Payment-box h5 .img-pay{
     width: 50%;
@@ -380,7 +380,7 @@
     border: 1px solid  #192c69;
     background:  #192c69;
     color: #ffffff;
-    border-left: 8px solid #16befa;
+    border-left: 8px solid #e99e21;
 
 }
 
@@ -394,6 +394,25 @@
     color: #ffffff;
 }
 
+.Payment-method-list .payment-btn{
+    text-align: center;
+}
+
+.Payment-method-list .payment-btn .btn {
+    border-radius: 25px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    width: 60%;
+    background: #95933e;
+    border: 0 solid #95933e;
+    margin-bottom: 10px;
+
+    box-shadow: 2px 2px 2px 1px rgba(56, 56, 56, 0.75);
+    -webkit-box-shadow: 2px 2px 2px 1px rgba(56, 56, 56, 0.75);
+    -moz-box-shadow: 2px 2px 2px 1px rgba(56, 56, 56, 0.75);
+}
 
 /************ order confirmation styles ************/
 .Order-confirmation{

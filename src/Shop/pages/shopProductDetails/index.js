@@ -21,7 +21,6 @@ const ShopProductDetails = ({businessUrl}) => {
     const [quantity, setQuantity] = useState("1")
     const [mainImage, setMainImage] = useState(null);
 
-
     const onChange = (e) => {
         setQuantity(e.target.value)
         // console.log(quantity)
@@ -37,10 +36,9 @@ const ShopProductDetails = ({businessUrl}) => {
 
             //if item already exists
             if (existingItem) {
-                console.log(product.quantity)
                 toast.error('item already added') //alert user
             } else { //if item doesn't exist, simply add it
-                cartData.push({...product, qty: quantity})
+                cartData.push({...product, productPrice: product.productDiscountPrice, qty: quantity})
                 if (toast.success('product added to cart')) {
                     window.location.reload();
                 }
@@ -89,6 +87,7 @@ const ShopProductDetails = ({businessUrl}) => {
     const fetchProductDetails = async () => {
         try
         {
+
             const docRef = doc(db, "shops", `${businessUrl}`, 'products', params.productUrl)
             const docSnap = await getDoc(docRef );
 
@@ -125,7 +124,7 @@ const ShopProductDetails = ({businessUrl}) => {
             isMounted.current = false
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isMounted, params.productUrl])
+    }, [isMounted, businessUrl])
 
     return (
         <>
@@ -186,8 +185,22 @@ const ShopProductDetails = ({businessUrl}) => {
                                 <Col lg={5} className="col-sm-12">
                                     <div className="product-details-text">
                                         <h5 className="product-title"> {product.productName} </h5>
-                                        <h6 className="product-price"> &#8358; {product.productPrice.toString()
-                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
+                                        {product.discountOffer ? (
+                                                <h6 className="product-price"> &#8358; {product.productDiscountPrice.toString()
+                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                                <span className="strike">
+                                                    &#8358; {product.productPrice.toString()
+                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                                </span>
+                                                </h6>
+
+                                        )
+                                        :
+                                            (
+                                                <h6 className="product-price"> &#8358; {product.productPrice.toString()
+                                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h6>
+                                            )}
+
                                         <hr/>
                                         <div className="input">
                                             <h5>Quantity</h5>

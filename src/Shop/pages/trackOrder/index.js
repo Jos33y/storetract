@@ -1,7 +1,44 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
+// import {useNavigate} from "react-router-dom";
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../../../firebase.config";
 
-const TrackOrder = () => {
+const TrackOrder = ({businessUrl}) => {
+
+    // const navigate = useNavigate()
+    const[disable, setDisable]= useState(false)
+    const [formData, setFormData] = useState({
+        email:'',
+        orderId: '',
+    })
+
+    const {email, orderId} = formData
+
+    const handleSubmit = async (e) => {
+        setDisable(true)
+        e.preventDefault()
+        try {
+
+            const docRef = doc(db, 'shop', `${businessUrl}`, 'orders', formData.orderId)
+            const docSnap = await getDoc(docRef)
+
+            if(docSnap.exists()) {
+                console.log(docSnap.data())
+            }
+        }
+        catch (error) {
+            console.log({error})
+        }
+        setDisable(false)
+    }
+
+    const onChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.id]: e.target.value,
+        } ))
+    }
 
     return (
         <>
@@ -20,12 +57,14 @@ const TrackOrder = () => {
                         <div className="Tracking-order-text">
                             <p>To track your order please enter your Order ID in the box below and press the "Track" button.
                                 This was given to you on your receipt and in the confirmation email you should have received.</p>
-                        <Form>
+                        <Form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="orderId" hidden={true}>order id</label>
                                 <input type="text"
                                        id="orderId"
+                                       value={orderId}
                                        required={true}
+                                       onChange={onChange}
                                        className="form-control"
                                        placeholder="Order ID"/>
                             </div>
@@ -34,13 +73,15 @@ const TrackOrder = () => {
                                 <label htmlFor="email" hidden={true}>Billing Email Address</label>
                                 <input type="email"
                                        id="email"
+                                       value={email}
                                        required={true}
+                                       onChange={onChange}
                                        className="form-control"
                                        placeholder="Billing Email Address"/>
                             </div>
 
                             <div className="form-group button">
-                                <Button className="btn btn-md btn-primary"
+                                <Button disabled={disable} className="btn btn-md btn-primary"
                                         type="submit">Track Order</Button>
                             </div>
                         </Form>
