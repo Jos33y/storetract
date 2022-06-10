@@ -17,6 +17,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
     const [loadingTwo, setLoadingTwo] = useState(false);
     const [isDisabled, setIsDisbaled] = useState(false)
     const [customerData, setCustomerData] = useState([]);
+    const [shippingData, setShippingData] = useState(null);
 
     const getOrderDetails = async () => {
       setLoading(true)
@@ -29,6 +30,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
               setOrderData(orderSnap.data());
               setOrderStatus(orderSnap.data().orderStatus)
               getCustomer(orderSnap.data().customerId).then()
+              getShippingDetails(orderSnap.data().shippingMethod).then()
           }
       }
       catch (error) {
@@ -44,6 +46,21 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
 
             if(customerSnap.exists()) {
                 setCustomerData(customerSnap.data());
+                // console.log(customerSnap.data())
+            }
+        }
+        catch (error) {
+            console.log({error})
+        }
+    }
+
+    const getShippingDetails = async (shippingID) => {
+        try {
+            const shippingRef = doc(db, 'shops', storeUrl, 'deliveryInfo', shippingID)
+            const shippingSnap = await getDoc(shippingRef)
+
+            if(shippingSnap.exists()) {
+                setShippingData(shippingSnap.data());
                 // console.log(customerSnap.data())
             }
         }
@@ -157,7 +174,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                    <div className="text">
                                        <h6 className="mb-1">Order info</h6>
                                        <p className="mb-1">
-                                           Shipping: {`${orderData.shippingMethod}`} <br/>
+                                           Shipping: {`${shippingData ? shippingData.location : ''}`} <br/>
                                            Pay method: {`${orderData.paymentMethod}`} <br/>
                                            Status: {`${orderStatus}`}
                                        </p>
@@ -225,7 +242,7 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</dd>
                                                    </dl>
                                                    <dl className="dlist">
-                                                       <dt>Shipping cost: </dt> <dd> &#8358; 0.00</dd>
+                                                       <dt>Shipping cost: </dt> <dd> &#8358;{(shippingData ? Number(shippingData.amount) : (0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</dd>
                                                    </dl>
 
                                                    <dl className="dlist">

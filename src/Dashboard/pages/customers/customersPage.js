@@ -3,7 +3,7 @@ import "../pagesStyles.css"
 import {Link} from "react-router-dom";
 import {Card ,Col ,Row ,Table} from "react-bootstrap";
 import AvatarDefault from "../../../assets/images/avatardefault_92824.png"
-import {collection, getDocs, query} from "firebase/firestore";
+import {collection, getDocs, orderBy, query} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 import Spinner from "../../../components/Spinner";
@@ -20,7 +20,7 @@ const CustomersPage = ({storeUrl, userId}) => {
         setLoading(true)
         try {
             const getCustomersRef = collection(db, 'shops', storeUrl, 'customers')
-            const q = query(getCustomersRef)
+            const q = query(getCustomersRef, orderBy('timeStamp', 'desc'))
             const querySnap = await getDocs(q)
 
             let customers = []

@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import "../pagesStyles.css"
 import {Link} from "react-router-dom";
 import {Card ,Col ,Row ,Table} from "react-bootstrap";
-import {collection, getDocs, query} from "firebase/firestore";
+import {collection, getDocs, orderBy, query} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-60-pq.svg";
@@ -18,7 +18,7 @@ const OrderListPage = ({userId, storeUrl}) => {
         setLoading(true)
         try {
             const getOrdersRef = collection(db, 'shops', storeUrl, 'orders')
-            const q = query(getOrdersRef)
+            const q = query(getOrdersRef, orderBy('timeStamp', 'desc'))
             const querySnap = await getDocs(q)
 
             let orders = []

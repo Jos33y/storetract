@@ -1,7 +1,7 @@
 import {Card, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import React, {useEffect, useRef, useState} from "react";
-import {collection, getDocs, query} from "firebase/firestore";
+import {collection, getDocs, orderBy, query} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-60-pq.svg";
@@ -15,7 +15,7 @@ const LatestOrders = ({storeUrl}) => {
 
         try {
             const getOrdersRef = collection(db, 'shops', storeUrl, 'orders')
-            const q = query(getOrdersRef)
+            const q = query(getOrdersRef, orderBy('timeStamp', 'desc'))
             const querySnap = await getDocs(q)
 
             let orders = []

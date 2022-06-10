@@ -232,7 +232,7 @@ const ShopOrderConfirmation = ({businessUrl}) => {
                                                 </Col>
                                                 <Col md={6}>
                                                     <h5>Payment method</h5>
-                                                    <p>{paymentMethod ? paymentMethod : 'PayStack'} - &#8358;{(itemsPrice).toFixed(2).toString()
+                                                    <p>{paymentMethod ? paymentMethod : 'FlutterWave'} - &#8358;{(shippingMethod ?  (Number(shippingMethod.amount) + Number(itemsPrice)) : (0)).toFixed(2).toString()
                                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
                                                 </Col>
                                             </Row>

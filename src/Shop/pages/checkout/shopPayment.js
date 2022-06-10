@@ -39,13 +39,19 @@ const ShopPayment = ({businessUrl, storeData}) => {
                 orderId: (`${orderUniqueID}`),
                 paymentMethod: "FLUTTERWAVE",
                 status: response.status,
-                orderTotal: (`${totalPrice}`),
+                orderTotal: totalPrice,
                 flutterWaveRef: response.flw_ref,
                 transactionRef: response.tx_ref,
                 timeStamp: serverTimestamp(),
             }
             const transRef = doc(db, 'shops',`${businessUrl}`, 'transactions', `${response.transaction_id}`)
-            await setDoc(transRef, transactionData)
+            await setDoc(transRef, transactionData).then(() => {
+                updateOrder().then()
+                addDepositToHistory(response).then()
+                updateWalletBalance().then()
+                let paymentMethod = JSON.stringify("FLUTTERWAVE");
+                localStorage.setItem("paymentMethod" ,paymentMethod)
+            })
         }
         catch (error) {
             console.log({error})
@@ -115,7 +121,7 @@ const ShopPayment = ({businessUrl, storeData}) => {
                 deliveryStatus: "Payment Successful",
                 orderStatus:"Success",
                 paymentMethod: "FlutterWave",
-                orderTotal: (`${totalPrice}`),
+                orderTotal: totalPrice,
                 timeStamp: serverTimestamp(),
             }
             const orderRef = doc(db, 'shops', `${businessUrl}`, 'orders', orderUniqueID)
@@ -132,7 +138,6 @@ const ShopPayment = ({businessUrl, storeData}) => {
         tx_ref: Date.now(),
         amount: (Number(itemsPrice) + Number(shippingMethod ? shippingMethod.amount : '0')),
         currency: 'NGN',
-        redirect_url: '/checkout/order-confirmation',
         customer: {
             email: (formData.email),
             phone_number: (formData.phoneNumber),
@@ -151,14 +156,10 @@ const ShopPayment = ({businessUrl, storeData}) => {
         setIsDisable(true)
         await handleFlutterPayment({
             callback: (response) => {
-                updateWalletBalance().then()
-                addDepositToHistory(response).then()
                 saveTransaction(response).then()
-                updateOrder().then()
                 console.log(response);
-                let paymentMethod = JSON.stringify("FLUTTERWAVE");
-                localStorage.setItem("paymentMethod" ,paymentMethod)
                 toast.success("Payment successful");
+               window.location.href = '/checkout/order-confirmation';
                 closePaymentModal() // this will close the modal programmatically
             },
             onClose: () => {toast.error("Payment window closed");},
