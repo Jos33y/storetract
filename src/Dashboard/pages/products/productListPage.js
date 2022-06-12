@@ -38,7 +38,6 @@ const ProductListPage = ({storeUrl}) => {
             let products = []
 
             querySnap.forEach((doc) => {
-                //console.log(doc.data());
                 return products.push({
                     id: doc.id,
                     data: doc.data(),
@@ -71,7 +70,6 @@ const ProductListPage = ({storeUrl}) => {
             let categories = [];
 
             querySnap.forEach((doc) => {
-                //console.log(doc.data())
                 return categories.push({
                     id: doc.id,
                     data: doc.data(),

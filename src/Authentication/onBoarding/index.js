@@ -32,7 +32,6 @@ const OnBoarding = () => {
         const profileSnap =  await getDoc(profileRef)
 
         if(profileSnap.exists()){
-            //  console.log(profileSnap.data())
             if (profileSnap.data()){
                 setShopData(profileSnap.data())
             }

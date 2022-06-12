@@ -8,7 +8,6 @@ const ForgotPassword = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        console.log("Forgot Password Working")
     }
     return(
         <>

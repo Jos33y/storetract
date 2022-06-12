@@ -149,7 +149,6 @@ const AddProductPage = ({userId, storeUrl}) => {
             let categories = [];
 
             querySnap.forEach((doc) => {
-                //console.log(doc.data())
                 return categories.push({
                     id: doc.id,
                     data: doc.data(),
@@ -197,7 +196,6 @@ const AddProductPage = ({userId, storeUrl}) => {
                 images: e.target.files,
             }))
             fileObj.push(e.target.files)
-            // console.log(fileObj[0].length)
             for (let i = 0; i < fileObj[0].length; i++) {
                 fileArray.push(URL.createObjectURL(fileObj[0][i]))
             }

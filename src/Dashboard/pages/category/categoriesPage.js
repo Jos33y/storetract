@@ -64,7 +64,6 @@ const CategoriesPage = ({storeUrl, userId}) => {
                     imgUrl = categoryImgUrl;
                 }
 
-                console.log("img url", imgUrl)
                 const categoryDataCopy = {...categoryData}
                 categoryDataCopy.categoryImage = imgUrl;
                 const categoryUpdateRef = doc(db, 'shops', storeUrl, 'categories', categorySlug)
@@ -81,13 +80,11 @@ const CategoriesPage = ({storeUrl, userId}) => {
                     toast.error('Image file too large')
                     return
                 })
-                // console.log("url", storeBannerUrls);
 
                 let categoryDataTitle = (categoryData.title).replace(/[^a-zA-Z ]/g, "");
                 let catUnique = `${(categoryDataTitle).replace(/,?\s+/g, '-')}-${randId}`
                 let catUniqueId = catUnique.toLowerCase();
 
-                // console.log({...formData})
                 const categoryDataCopy = {...categoryData}
                 categoryDataCopy.categoryUrl = catUniqueId;
                 categoryDataCopy.categoryImage = `${categoryImgUrl}`;
@@ -117,7 +114,6 @@ const CategoriesPage = ({storeUrl, userId}) => {
     const storeImage = async (image) => {
         return new Promise((resolve, reject) => {
             const storage = getStorage()
-            console.log(image.name)
             const fileName = `${userId}-${image.name}-${uuidv4()}`
 
             const storageRef = ref(storage, `categoryImages/${userId}/` + fileName)
@@ -164,13 +160,9 @@ const CategoriesPage = ({storeUrl, userId}) => {
                 ...prevState,
                 categoryImage: e.target.files,
             }))
-            console.log(categoryImage);
             fileObj = e.target.files;
-            console.log(fileObj)
-            // console.log(fileObj[0].length)
             fileArray = URL.createObjectURL(fileObj[0]);
             setImage(fileArray)
-            console.log(fileArray)
         }
 
         setCategoryData((prevState) => ({
@@ -186,7 +178,6 @@ const CategoriesPage = ({storeUrl, userId}) => {
             const categorySnap =  await getDoc(categoryRef)
 
             if(categorySnap.exists()){
-                // console.log(categorySnap.data())
                 setCategoryData(categorySnap.data())
             }
         }
@@ -206,7 +197,6 @@ const CategoriesPage = ({storeUrl, userId}) => {
             let categories = [];
 
             querySnap.forEach((doc) => {
-                //console.log(doc.data())
                 return categories.push({
                     id: doc.id,
                     data: doc.data(),
@@ -223,7 +213,6 @@ const CategoriesPage = ({storeUrl, userId}) => {
     }
 
     const onDelete  = async(ID) => {
-        console.log(ID)
         try {
             const catRef = doc(db, 'shops', storeUrl, 'categories', ID)
             await deleteDoc(catRef)
@@ -244,8 +233,6 @@ const CategoriesPage = ({storeUrl, userId}) => {
             }
 
            fetchCategories().then()
-            console.log(categoryImage)
-            console.log(image)
         }
         return () => {
             isMounted.current = false

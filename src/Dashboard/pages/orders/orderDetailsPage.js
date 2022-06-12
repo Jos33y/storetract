@@ -46,7 +46,6 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
 
             if(customerSnap.exists()) {
                 setCustomerData(customerSnap.data());
-                // console.log(customerSnap.data())
             }
         }
         catch (error) {
@@ -61,7 +60,6 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
 
             if(shippingSnap.exists()) {
                 setShippingData(shippingSnap.data());
-                // console.log(customerSnap.data())
             }
         }
         catch (error) {

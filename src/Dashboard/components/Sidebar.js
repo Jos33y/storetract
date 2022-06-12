@@ -12,11 +12,9 @@ const Sidebar = ({pageName, storeData}) => {
             document.body.classList.remove('offcanvas-active');
             document.querySelector('.screen-overlay').classList.remove('show')
             document.querySelector('.navbar-aside').classList.remove('show')
-            // console.log(" less than 768");
         }
         else {
             document.body.classList.toggle('aside-mini');
-            // console.log("greater than 768")
         }
     }
 

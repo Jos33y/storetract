@@ -8,7 +8,6 @@ import {toast} from "react-toastify";
 const ProductBox = ({product, id, storeUrl}) => {
 
     const onDelete = async () => {
-        console.log(id)
         try {
             const prodRef = doc(db, 'shops', storeUrl, 'products', id)
             await deleteDoc(prodRef)

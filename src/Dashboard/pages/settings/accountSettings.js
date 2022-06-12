@@ -5,35 +5,23 @@ import SettingsHeader from "./settingsHeader";
 import {doc, getDoc, serverTimestamp, setDoc} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
-// const Flutterwave = require('flutterwave-node-v3');
 
 const AccountSettings = ({storeUrl}) => {
 
     const isMounted = useRef()
     const [loading, setLoading] = useState(false);
+    const [bankList, setBankList] = useState([])
+    const [isDisable, setIsDisable] = useState(true);
+    const [account, setAccount] = useState(false)
     const [bankData, setBankData] = useState({
         bankName: '',
+        bankCode: '',
         accountNumber: '',
         accountName: '',
         updateTime: '',
     })
 
-    // const flw = new Flutterwave(process.env.REACT_APP_FLUTTERWAVE_PUBLIC_TEST_KEY, process.env.REACT_APP_FLUTTERWAVE_SECRET_TEST_KEY);
-
-    const {bankName, accountNumber, accountName} = bankData;
-
-    // const getBanks = async () => {
-    //
-    //     try {
-    //                 const payload = {
-    //                     "country":"NG"
-    //                 }
-    //                 const response = await flw.Bank.country(payload)
-    //                 console.log(response);
-    //             } catch (error) {
-    //                 console.log(error)
-    //             }
-    // }
+    const {bankCode, accountNumber, accountName} = bankData;
 
     const handleSubmit = async (e) => {
         setLoading(true)
@@ -59,21 +47,95 @@ const AccountSettings = ({storeUrl}) => {
             if(getAccountSnap.exists()) {
 
                 setBankData(getAccountSnap.data())
+                setAccount(true)
             }
         }
         catch (error) {
             console.log({error})
         }
     }
+
+    const getListBanks = async () => {
+        setLoading(true)
+        try {
+            const url = 'https://sandboxapi.fincra.com/core/banks?currency=NGN&country=NG';
+            const options = {
+                method: 'GET',
+                headers: {Accept: 'application/json', 'api-key': process.env.REACT_APP_FINCRA_SECRET_API_KEY}
+            };
+
+            await  fetch(url, options)
+                .then(res => res.json())
+                .then(json => {setBankList(json.data)})
+                .catch(err => console.error('error:' + err));
+        }
+        catch (error) {
+            console.log({error})
+        }
+        setLoading(false)
+    }
+
+    const confirmAccount = async () => {
+        try {
+            const url = 'https://sandboxapi.fincra.com/core/accounts/resolve';
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    'api-key': process.env.REACT_APP_FINCRA_SECRET_API_KEY
+                },
+                body: JSON.stringify({accountNumber: accountNumber, bankCode: bankCode})
+            };
+
+           await fetch(url, options)
+                .then(res => res.json())
+                .then(json => {
+                    setBankData((prevState) => ({
+                        ...prevState,
+                        accountName: json.data.accountName,
+                    }))
+                    setAccount(true)
+                })
+                .catch(err => console.error('error:' + err));
+
+        }
+        catch (error) {
+            console.log({error})
+
+        }
+    }
     const onChange = (e) => {
+        setAccount(false)
+        if(e.target.id === 'accountNumber'){
+            let lengths = e.target.value;
+            if(lengths.length === 10){
+                setIsDisable(false)
+            }
+            else {
+                setIsDisable(true)
+            }
+        }
         setBankData((prevState) => ({
             ...prevState,
             [e.target.id]: e.target.value,
         }))
+        if(e.target.id === 'bankCode'){
+            let cartData = [...bankList]
+            const existingItem = cartData.find(cartItem => cartItem.code === e.target.value);
+
+            setBankData((prevState) => ({
+                ...prevState,
+                bankName: existingItem.name,
+            }))
+
+        }
+
     }
 
     useEffect(() => {
         if(isMounted) {
+            getListBanks().then()
             getAccount().then()
             // getBanks().then()
         }
@@ -103,36 +165,17 @@ const AccountSettings = ({storeUrl}) => {
 
                                         <div className="form-group">
                                             <label htmlFor="bank-name" className="form-label">Bank Name: </label>
-                                            <select name="bankName"
-                                                    id="bankName"
-                                                    value={bankName}
+                                            <select name="bankCode"
+                                                    id="bankCode"
+                                                    value={bankCode}
                                                     onChange={onChange}
                                                     className="form-control">
                                                 <option value="null" selected={true} >Select bank name </option>
-                                                <option value="Access Bank">Access Bank</option>
-                                                <option value="Citibank">Citibank</option>
-                                                <option value="Diamond Bank">Diamond Bank</option>
-                                                <option value="Dynamic Standard Bank">Dynamic Standard Bank</option>
-                                                <option value="Ecobank Nigeria">Ecobank Nigeria</option>
-                                                <option value="Fidelity Bank Nigeria">Fidelity Bank Nigeria</option>
-                                                <option value="First Bank of Nigeria">First Bank of Nigeria</option>
-                                                <option value="First City Monument Bank">First City Monument Ban</option>
-                                                <option value="Guaranty Trust Bank">Guaranty Trust Bank</option>
-                                                <option value="Heritage Bank Plc">Heritage Bank Plc</option>
-                                                <option value="Jaiz Bank">Jaiz Bank</option>
-                                                <option value="Keystone Bank Limited">Keystone Bank Limited</option>
-                                                <option value="Providus Bank Plc">Providus Bank Plc</option>
-                                                <option value="Polaris Bank">Polaris Bank</option>
-                                                <option value="Stanbic IBTC Bank Nigeria Limited">Stanbic IBTC Bank Nigeria Limited</option>
-                                                <option value="Standard Chartered Bank">Standard Chartered Bank</option>
-                                                <option value="Sterling Bank">Sterling Bank</option>
-                                                <option value="Suntrust Bank Nigeria Limited">Suntrust Bank Nigeria Limited</option>
-                                                <option value="Union Bank of Nigeria">Union Bank of Nigeria</option>
-                                                <option value="United Bank for Africa">United Bank for Africa</option>
-                                                <option value="Unity Bank Plc">Unity Bank Plc</option>
-                                                <option value="Wema Bank">Wema Bank</option>
-                                                <option value="Zenith Bank">Zenith Bank</option>
-                                                <option value="KUDA" >Kuda MFB</option>
+                                                {bankList.map((bank) => (
+                                                    <option key={bank.id}
+                                                            value={bank.code}>{bank.name}
+                                                    </option>
+                                                ))}
                                             </select>
                                         </div>
 
@@ -144,28 +187,40 @@ const AccountSettings = ({storeUrl}) => {
                                                    placeholder="0000000000"
                                                    required={true}
                                                    value={accountNumber}
+                                                   maxLength={10}
                                                    onChange={onChange}
                                                    className="form-control"/>
                                         </div>
 
-                                        <div className="form-group">
-                                            <label htmlFor="firstname" className="form-label">Account Name: </label>
-                                            <input type="text"
-                                                   id="accountName"
-                                                   placeholder="Your Account Name"
-                                                   required={true}
-                                                   value={accountName}
-                                                   onChange={onChange}
-                                                   className="form-control"/>
-                                        </div>
+                                        {account && (
+                                            <div className="form-group">
+                                                <label htmlFor="firstname" className="form-label">Account Name: </label>
+                                                <input type="text"
+                                                       id="accountName"
+                                                       placeholder="Your Account Name"
+                                                       required={true}
+                                                       value={accountName}
+                                                       onChange={onChange}
+                                                       readOnly={true}
+                                                       className="form-control"/>
+                                            </div>
+                                        )}
+
                                         <br/>
                                         <div className="button-save">
-                                            <Button  className="btn btn-primary" type="submit">
-                                                {loading ? (<>
+                                            {account ? (
+                                                    <Button  className="btn btn-primary" type="submit">
+                                                        {loading ? (<>
                                                     <span className="spinner-border spinner-border-sm" role="status"
-                                                      aria-hidden="true"></span>&nbsp; </> ) : ('')
-                                                }
-                                                Save Account</Button>
+                                                          aria-hidden="true"></span>&nbsp; </> ) : ('')
+                                                        }
+                                                        Save Account</Button>
+                                                )
+                                                : (
+                                                    <Button disabled={isDisable} className="btn btn-primary" onClick={confirmAccount} type="button">
+                                                        Confirm Account
+                                                    </Button>
+                                                )}
                                         </div>
 
                                     </Form>

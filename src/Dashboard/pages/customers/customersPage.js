@@ -25,7 +25,6 @@ const CustomersPage = ({storeUrl, userId}) => {
 
             let customers = []
             querySnap.forEach((doc) => {
-                // console.log(doc.data());
                 return customers.push({
                     id:doc.id,
                     data:doc.data(),

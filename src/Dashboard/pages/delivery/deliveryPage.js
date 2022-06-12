@@ -43,7 +43,6 @@ const DeliveryPage = ({storeUrl, userId}) => {
         try {
 
             if(deliverySlug) {
-                // console.log("updating")
                 const deliveryDataCopy = {...deliveryData}
                 const deliveryUpdateRef = doc(db, 'shops', storeUrl, 'deliveryInfo', deliverySlug)
                 await updateDoc(deliveryUpdateRef, deliveryDataCopy)
@@ -57,7 +56,6 @@ const DeliveryPage = ({storeUrl, userId}) => {
                 let deliveryUnique = `${(deliveryDataLocation).replace(/,?\s+/g, '-')}-${randId}`
                 let deliveryUniqueId = deliveryUnique.toLowerCase();
 
-                // console.log({...formData})
                 const deliveryDataCopy = {...deliveryData}
                 deliveryDataCopy.deliveryUrl = deliveryUniqueId;
                 deliveryDataCopy.timeStamp = serverTimestamp();
@@ -94,7 +92,6 @@ const DeliveryPage = ({storeUrl, userId}) => {
             const deliverySnap =  await getDoc(deliveryRef)
 
             if(deliverySnap.exists()){
-                // console.log(categorySnap.data())
                 setDeliveryData(deliverySnap.data())
             }
         }
@@ -114,7 +111,6 @@ const DeliveryPage = ({storeUrl, userId}) => {
             let deliveryList = [];
 
             querySnap.forEach((doc) => {
-                //console.log(doc.data())
                 return deliveryList.push({
                     id: doc.id,
                     data: doc.data(),
@@ -131,7 +127,6 @@ const DeliveryPage = ({storeUrl, userId}) => {
     }
 
     const onDelete  = async(ID) => {
-        console.log(ID)
         try {
             const deliveryRef = doc(db, 'shops', storeUrl, 'deliveryInfo', ID)
             await deleteDoc(deliveryRef)

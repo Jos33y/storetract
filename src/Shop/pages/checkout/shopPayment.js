@@ -65,7 +65,6 @@ const ShopPayment = ({businessUrl, storeData}) => {
             const balanceSnap =  await getDoc(getBalanceRef)
 
             if(balanceSnap.exists()){
-                // console.log(customerSnap.data())
                 setBalanceData(balanceSnap.data())
             }
         }
@@ -79,7 +78,6 @@ const ShopPayment = ({businessUrl, storeData}) => {
         let totalPrice= (Number(itemsPrice) + Number(shippingMethod.amount))
         const newBalance = (balanceData.accountBalance + totalPrice);
         try {
-            console.log("updating to Balance")
             const balanceDataCopy = {...balanceData}
             balanceDataCopy.accountBalance = newBalance;
             balanceDataCopy.timeStamp = serverTimestamp();
@@ -98,7 +96,7 @@ const ShopPayment = ({businessUrl, storeData}) => {
         let totalPrice= (Number(itemsPrice) + Number(shippingMethod.amount))
         try {
             const depositHistoryData = {
-                amountDeposited: (`${totalPrice}`),
+                amountDeposited: totalPrice,
                 customerId: (`${customerID}`),
                 orderId: (`${orderUniqueID}`),
                 transactionRef: response.tx_ref,
@@ -157,7 +155,6 @@ const ShopPayment = ({businessUrl, storeData}) => {
         await handleFlutterPayment({
             callback: (response) => {
                 saveTransaction(response).then()
-                console.log(response);
                 toast.success("Payment successful");
                window.location.href = '/checkout/order-confirmation';
                 closePaymentModal() // this will close the modal programmatically
@@ -195,7 +192,6 @@ const ShopPayment = ({businessUrl, storeData}) => {
             const customerSnap =  await getDoc(customerRef)
 
             if(customerSnap.exists()){
-                // console.log(customerSnap.data())
                 setFormData(customerSnap.data())
             }
         }
@@ -215,7 +211,7 @@ const ShopPayment = ({businessUrl, storeData}) => {
             let localCart = localStorage.getItem("cart");
             let localOrderID = localStorage.getItem("orderUniqueID");
             let localShipping = localStorage.getItem('shippingMethod');
-            // console.log(publicKeyCode);
+
 
             // customer ID session
             localCustomerID = JSON.parse(localCustomerID);
@@ -236,7 +232,7 @@ const ShopPayment = ({businessUrl, storeData}) => {
             //load persisted cart into state if it exists
             if (localShipping) {
                 setShippingMethod(localShipping)
-                // console.log(carts)
+
             }
 
             // cart session
@@ -244,7 +240,6 @@ const ShopPayment = ({businessUrl, storeData}) => {
             //load persisted cart into state if it exists
             if (localCart) {
                 setCarts(localCart)
-                // console.log(carts)
             }
         }
         return () => {

@@ -26,7 +26,6 @@ const DashboardPage = ({storeData, userId}) => {
 
             let orders = []
             querySnap.forEach((doc) => {
-                // console.log(doc.data());
                 return orders.push({
                     id:doc.id,
                     data:doc.data(),
@@ -51,7 +50,6 @@ const DashboardPage = ({storeData, userId}) => {
 
             let salesTotal = []
             querySnap.forEach((doc) => {
-                // console.log(doc.data());
                 return salesTotal.push({
                     id:doc.id,
                     data:doc.data(),
@@ -59,7 +57,6 @@ const DashboardPage = ({storeData, userId}) => {
             })
             const sales = salesTotal.reduce((a, c) => a + c.data.orderTotal++, 0);
             setTotalSales(sales)
-            console.log("sales: ", sales)
 
         }
         catch (error) {
@@ -78,7 +75,6 @@ const DashboardPage = ({storeData, userId}) => {
 
             let products = []
             querySnap.forEach((doc) => {
-                // console.log(doc.data());
                 return products.push({
                     id:doc.id,
                     data:doc.data(),

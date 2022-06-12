@@ -23,7 +23,6 @@ const OrderListPage = ({userId, storeUrl}) => {
 
             let orders = []
             querySnap.forEach((doc) => {
-                // console.log(doc.data());
                 return orders.push({
                     id:doc.id,
                     data:doc.data(),

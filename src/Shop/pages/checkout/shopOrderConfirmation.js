@@ -37,7 +37,6 @@ const ShopOrderConfirmation = ({businessUrl}) => {
             const customerSnap =  await getDoc(customerRef)
 
             if(customerSnap.exists()){
-                // console.log(customerSnap.data())
                 setFormData(customerSnap.data())
             }
         }
@@ -74,7 +73,6 @@ const ShopOrderConfirmation = ({businessUrl}) => {
             //load persisted cart into state if it exists
             if (localCustomerID) {
                 getCustomer(localCustomerID).then()
-                console.log(localCustomerID)
             }
 
             // orderID ID session
@@ -89,7 +87,6 @@ const ShopOrderConfirmation = ({businessUrl}) => {
             //load persisted cart into state if it exists
             if (localCart) {
                 setCarts(localCart)
-                // console.log(carts)
             }
 
             // payment method session
@@ -104,7 +101,6 @@ const ShopOrderConfirmation = ({businessUrl}) => {
             //load persisted cart into state if it exists
             if (localShipping) {
                 setShippingMethod(localShipping)
-                // console.log(carts)
             }
         }
         return () => {

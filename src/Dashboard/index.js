@@ -120,7 +120,7 @@ const SellersDashboard = () => {
             return <EditProductPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
         }
         else if (params.dashUrl === "wallet") {
-            return <WalletPage userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
+            return <WalletPage profileData={profileData} userId={auth.currentUser.uid} storeUrl={storeData.storeUrl}/>
         }
         else if (params.dashUrl === "subscriptions") {
             return <SubscriptionPage userId={auth.currentUser.uid} storeData={storeData} />

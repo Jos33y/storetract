@@ -59,7 +59,6 @@ const EditProductPage = ({storeUrl, userId}) => {
             const productSnap =  await getDoc(productRef)
 
             if(productSnap.exists()){
-                // console.log(productSnap.data())
                 setFormData(productSnap.data())
                 for (let i = 0; i < (productSnap.data().imgUrls).length; i++) {
                     fileArray.push(productSnap.data().imgUrls[i])
@@ -84,7 +83,6 @@ const EditProductPage = ({storeUrl, userId}) => {
             let categories = [];
 
             querySnap.forEach((doc) => {
-                //console.log(doc.data())
                 return categories.push({
                     id: doc.id,
                     data: doc.data(),
@@ -118,7 +116,6 @@ const EditProductPage = ({storeUrl, userId}) => {
                 images: e.target.files,
             }))
             fileObj.push(e.target.files)
-            // console.log(fileObj[0].length)
             for (let i = 0; i < fileObj[0].length; i++) {
                 fileArray.push(URL.createObjectURL(fileObj[0][i]))
             }
@@ -139,7 +136,6 @@ const EditProductPage = ({storeUrl, userId}) => {
         setDisabled(true)
         try{
             if(formData.imgUrls[0] !== image[0] ) {
-                console.log("it is: ", true)
                 const imgUrls = await Promise.all(
                     [...images].map((image) => storeImage(image))
                 ).catch(() => {

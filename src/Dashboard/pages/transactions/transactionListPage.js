@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Col ,Row ,Table} from "react-bootstrap";
 import MasterCard from "../../../assets/images/payments/2.png";
-import {collection, getDocs, query} from "firebase/firestore";
+import {collection, getDocs, orderBy, query} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-60-pq.svg";
@@ -17,7 +17,7 @@ const TransactionListPage = ({storeUrl, userId}) => {
         setLoading(true)
         try {
             const getTransactionRef= collection(db, 'shops', storeUrl, 'transactions')
-            const q = query(getTransactionRef)
+            const q = query(getTransactionRef, orderBy("timeStamp", "desc"))
             const querySnap = await getDocs(q)
 
             let transactions = []

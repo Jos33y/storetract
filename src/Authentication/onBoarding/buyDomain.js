@@ -21,18 +21,15 @@ const BuyDomain = () => {
         setDomainChecking(true)
         setLoading(true)
         e.preventDefault()
-        console.log("picked domain name:", formData)
 
         const slit = formData.split('.');
 
-        console.log(slit, slit.length)
         let domain =  formData;      // domain name you want to check
         let apikey = process.env.REACT_APP_WHO_IS_API_KEY; // your API key
         try {
             await fetch('https://api.whoapi.com/?domain='+domain+'&r=taken&apikey='+apikey).then(response => {
                 return response.json();
             }).then( json => {
-                // console.log({json})
                 setDomainName(domain)
 
                 if(json.taken === 1)
@@ -66,7 +63,6 @@ const BuyDomain = () => {
                         else setPrice('6,000')
                     }
                 }
-                // console.log(json.taken === 1 ? "Taken" : "Not Taken")
             })
         }
         catch (error) {

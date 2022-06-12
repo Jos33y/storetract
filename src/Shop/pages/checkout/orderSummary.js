@@ -18,7 +18,6 @@ const OrderSummary = ({confirm, shippingMethod}) => {
             if (localCart) {
                 setCarts(localCart)
             }
-            // console.log(carts)
             if(shippingMethod) {
                 // eslint-disable-next-line
                 let priceTotal = Number(itemsPrice) + Number(shippingMethod.amount)

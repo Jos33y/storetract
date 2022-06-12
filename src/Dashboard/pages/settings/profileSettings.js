@@ -38,7 +38,6 @@ const ProfileSettings = ({userId}) => {
                 toast.error('Image file too large')
                 return
             })
-            console.log("url", storeLogoUrls);
             const formDataCopy = {
                 ...formData,
                 storeLogo: storeLogoUrls,
@@ -67,7 +66,6 @@ const ProfileSettings = ({userId}) => {
     const storeImage = async (image) => {
         return new Promise((resolve, reject) => {
             const storage = getStorage()
-            console.log(image.name)
             const fileName = `${userId}-${image.name}-${uuidv4()}`
 
             const storageRef = ref(storage, `profiles/${userId}/` + fileName)
@@ -114,13 +112,9 @@ const ProfileSettings = ({userId}) => {
                 ...prevState,
                 storeLogo: e.target.files,
             }))
-            console.log(storeLogo);
             fileObj = e.target.files;
-            console.log(fileObj)
-            // console.log(fileObj[0].length)
             fileArray = URL.createObjectURL(fileObj[0]);
             setImage(fileArray)
-            console.log(fileArray)
         }
 
         if (!e.target.files) {

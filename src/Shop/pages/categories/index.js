@@ -23,7 +23,6 @@ const ShopCategories = ({businessUrl}) => {
             const docSnap = await getDoc(docRef );
 
             if (docSnap.exists()) {
-                //console.log("Document data:", docSnap.data());
                 setCategoryName(docSnap.data())
             } else {
                 console.log("No such document!");
@@ -43,7 +42,6 @@ const ShopCategories = ({businessUrl}) => {
             const querySnap = await getDocs(q)
             let products = []
             querySnap.forEach((doc) => {
-                //console.log(doc.data());
                 return products.push({
                     id: doc.id,
                     data: doc.data(),

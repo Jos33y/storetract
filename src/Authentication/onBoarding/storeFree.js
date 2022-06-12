@@ -89,7 +89,6 @@ const StoreFreeActivation = ({fullName, userId}) => {
             let url = `${Url
                 .replace(/[^a-zA-Z0-9]/g, '')
                 .toLowerCase()}`
-            // console.log("shop url: " + Url)
             setShopUrl(url);
         }
 

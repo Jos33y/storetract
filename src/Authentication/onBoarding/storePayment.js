@@ -43,7 +43,6 @@ const StorePayment = ({email, userId}) => {
         if (reference.status === "success") {
             updatePaymentStatus().then()
             toast.success("Payment successful");
-            console.log({reference});
             navigate(`/onboarding/activate-standard-store`)
         }
 

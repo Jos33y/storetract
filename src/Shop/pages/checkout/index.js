@@ -66,7 +66,6 @@ const ShopCheckout = ({businessUrl}) => {
 
         try {
             if ((!customerID && !formData.customerId) || (customerID !== formData.customerId)  ) {
-                // console.log("not available")
                 let customer = (formData.firstname).replace(/[^a-zA-Z ]/g, "");
                 let customerUnique = `${(customer).replace(/,?\s+/g, '-')}-${randId}`
                 let customerId = customerUnique.toLowerCase()
@@ -77,13 +76,10 @@ const ShopCheckout = ({businessUrl}) => {
                 localStorage.setItem("customerID" ,stringEmail)
                 let stringOrder = JSON.stringify(orderID);
                 localStorage.setItem("orderUniqueID" ,stringOrder)
-                // toast.success("stringify")
                 let shippingTest =  await getShippingDetails(shippingMethod).then()
-                console.log("shippingDetails", shippingTest);
                 let stringShipping = JSON.stringify({...shippingTest});
                 localStorage.setItem("shippingMethod" ,stringShipping)
 
-                console.log("Handling Information")
                 const formDataCopy = {...formData}
                 formDataCopy.customerId = customerId;
                 formDataCopy.timeStamp = serverTimestamp();
@@ -108,14 +104,13 @@ const ShopCheckout = ({businessUrl}) => {
                         const orderRef = doc(db, 'shops', `${businessUrl}`, 'orders', orderID)
                         setDoc(orderRef, orderCopy)
                     })
-                // console.log({...formDataCopy})
+
                 toast.success("information saved")
                 navigate(`/checkout/payment`);
             }
             else if(customerID === formData.customerId){
 
               let shippingTest =  await getShippingDetails(shippingMethod).then()
-                console.log("shippingDetails", shippingTest);
                 let stringShipping = JSON.stringify({...shippingTest});
                 localStorage.setItem("shippingMethod" ,stringShipping)
 
@@ -160,7 +155,6 @@ const ShopCheckout = ({businessUrl}) => {
             const customerSnap =  await getDoc(customerRef)
 
             if(customerSnap.exists()){
-                // console.log(customerSnap.data())
                 setFormData(customerSnap.data())
             }
         }
@@ -172,12 +166,10 @@ const ShopCheckout = ({businessUrl}) => {
 
     const getShippingDetails = async (shippingID) => {
         try {
-            console.log('shipping id', shippingID);
             const shippingRef = doc(db, 'shops', `${businessUrl}`, 'deliveryInfo', shippingID)
             const shippingSnap =  await getDoc(shippingRef)
 
             if(shippingSnap.exists()){
-                // console.log(customerSnap.data())
                 return shippingSnap.data();
             }
         }catch (error) {
@@ -205,7 +197,6 @@ const ShopCheckout = ({businessUrl}) => {
             const querySnap = await getDocs(q)
             let location = [];
             querySnap.forEach((doc) => {
-                //console.log(doc.data())
                 return location.push({
                     id: doc.id,
                     data: doc.data(),
@@ -251,14 +242,12 @@ const ShopCheckout = ({businessUrl}) => {
             //load persisted cart into state if it exists
             if (localCart) {
                 setCarts(localCart)
-                // console.log(carts)
             }
             // shipping session
             localShipping = JSON.parse(localShipping);
             //load persisted cart into state if it exists
             if (localShipping) {
                 setShippingMethod(localShipping.deliveryUrl)
-                // console.log(carts)
             }
         }
 

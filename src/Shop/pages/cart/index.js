@@ -32,9 +32,6 @@ const ShopCart = ({businessUrl}) => {
 
     // delete cart codes
     const onDelete = (cart) => {
-        console.log("on delete")
-        console.log(cart)
-
         try {
             let cartData = [...carts]
 

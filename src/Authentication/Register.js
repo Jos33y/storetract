@@ -29,7 +29,6 @@ const Register = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        console.log("Registration Working")
         try{
             const auth = getAuth()
             const userCredential = await createUserWithEmailAndPassword(

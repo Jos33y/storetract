@@ -23,7 +23,7 @@ const ShopProductDetails = ({businessUrl}) => {
 
     const onChange = (e) => {
         setQuantity(e.target.value)
-        // console.log(quantity)
+
     }
 
     //add to cart function
@@ -74,7 +74,6 @@ const ShopProductDetails = ({businessUrl}) => {
             const querySnap = await getDocs(q)
             let products = []
             querySnap.forEach((doc) => {
-                //console.log(doc.data());
                 return products.push({
                     id: doc.id,
                     data: doc.data(),
@@ -99,13 +98,11 @@ const ShopProductDetails = ({businessUrl}) => {
             const docSnap = await getDoc(docRef );
 
             if (docSnap.exists()) {
-                //console.log("Document data:", docSnap.data());
                 setProduct(docSnap.data())
                 setMainImage(docSnap.data().imgUrls[0])
                 setLoading(false)
             } else {
                 console.log("No such document!");
-                //console.log(params.productUrl)
                 //setLoading(false)
             }
         }
@@ -124,7 +121,6 @@ const ShopProductDetails = ({businessUrl}) => {
             localCart = JSON.parse(localCart);
             //load persisted cart into state if it exists
             if (localCart) setCart(localCart)
-            // console.log(localCart)
 
         }
         return () => {

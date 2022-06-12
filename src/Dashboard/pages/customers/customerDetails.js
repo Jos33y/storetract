@@ -20,7 +20,6 @@ const CustomerDetails = ({userId, storeUrl}) => {
 
             if(customerSnap.exists()) {
                 setCustomerData(customerSnap.data());
-                console.log(customerSnap.data())
             }
         }
         catch (error) {

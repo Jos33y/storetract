@@ -34,14 +34,8 @@ const Shop = ({storeUrl}) => {
         try {
             const shopRef = doc(db ,"shops", `${URL}`)
             const shopSnap = await getDoc(shopRef);
-            // console.log("domain url:", URL)
             if (shopSnap.exists()) {
-                //console.log("Document data:", shopSnap.data());
                 setShopData(shopSnap.data())
-            }
-            else {
-                console.log(storeUrl)
-                console.log("No such Details Found!");
             }
         }
         catch (e) {
@@ -57,7 +51,6 @@ const Shop = ({storeUrl}) => {
             const querySnap = await getDocs(q)
             let products = []
             querySnap.forEach((doc) => {
-                //console.log(doc.data());
                 return products.push({
                     id: doc.id ,
                     data: doc.data() ,
@@ -79,7 +72,6 @@ const Shop = ({storeUrl}) => {
             const querySnap = await getDocs(q)
             let categories = [];
             querySnap.forEach((doc) => {
-                //console.log(doc.data())
                 return categories.push({
                     id: doc.id,
                     data: doc.data(),
@@ -94,7 +86,6 @@ const Shop = ({storeUrl}) => {
     }
 
     const fetchUrl = async () => {
-        // console.log("store url: ", storeUrl);
         try {
             setLoading(true)
             if (storeUrl) {

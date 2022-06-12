@@ -24,7 +24,6 @@ const AdminNavbar = () => {
             const profileSnap =  await getDoc(profileRef)
 
             if(profileSnap.exists()){
-              //  console.log(profileSnap.data())
                 setShopURL(profileSnap.data().shopUrl)
                 setShopActivated(profileSnap.data().shopActivated)
                 setLoading(false)
