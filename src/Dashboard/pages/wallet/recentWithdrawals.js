@@ -47,7 +47,8 @@ const RecentWithdrawals = ({storeUrl, userId}) => {
                     <div className="card-body">
                         <h5>Recent withdrawals</h5>
                         {recentWithdraw && recentWithdraw.length > 0 ? (
-                        <table className="table">
+                            <div className="table-responsive">
+                                <table className="table table-hover">
                             <thead>
                             <th>id</th>
                             <th>transaction</th>
@@ -75,6 +76,7 @@ const RecentWithdrawals = ({storeUrl, userId}) => {
                             ))}
                             </tbody>
                         </table>
+                            </div>
                             )
                             :
                             (
