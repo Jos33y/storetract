@@ -164,7 +164,7 @@ const WithdrawalPage = ({userId, storeUrl, profileData, currentBalance, accountD
                                    <p>Account Name: </p>
                                    <p>Account No: </p>
                                    <p>Bank Name: </p>
-                                   <Link to="/dashboard/settings/account" > Set account details</Link>
+                                   <Link to="/dashboard/settings/account" className="link"> Set account details</Link>
                                </div>
                                <div className="account-details-text">
                                    <p> {accountDetails ? accountDetails.accountName : ''}</p>
