@@ -25,7 +25,7 @@ const ForgotPassword = () => {
                                 </div>
                             </Col>
                             <Col md={6}>
-                                <Form className="Form" onSubmit={onSubmit} autocomplete="off">
+                                <Form className="Form" onSubmit={onSubmit} autoComplete="off">
                                     <h5>Reset Password</h5>
 
                                     <div className="form-group">

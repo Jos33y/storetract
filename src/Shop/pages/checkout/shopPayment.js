@@ -46,9 +46,12 @@ const ShopPayment = ({businessUrl, storeData}) => {
             }
             const transRef = doc(db, 'shops',`${businessUrl}`, 'transactions', `${response.transaction_id}`)
             await setDoc(transRef, transactionData).then(() => {
-                updateOrder().then()
-                addDepositToHistory(response).then()
-                updateWalletBalance().then()
+                updateOrder()
+            }).then(() => {
+                addDepositToHistory(response)
+            }).then(() => {
+                updateWalletBalance()
+            }).then(() => {
                 let paymentMethod = JSON.stringify("FLUTTERWAVE");
                 localStorage.setItem("paymentMethod" ,paymentMethod)
             })
@@ -63,7 +66,6 @@ const ShopPayment = ({businessUrl, storeData}) => {
         try {
             const getBalanceRef = doc(db, 'shops', `${businessUrl}`, 'walletBalance', 'account')
             const balanceSnap =  await getDoc(getBalanceRef)
-
             if(balanceSnap.exists()){
                 setBalanceData(balanceSnap.data())
             }
@@ -120,6 +122,8 @@ const ShopPayment = ({businessUrl, storeData}) => {
                 orderStatus:"Success",
                 paymentMethod: "FlutterWave",
                 orderTotal: totalPrice,
+                orderSubTotal: itemsPrice,
+                shippingPrice: shippingMethod.amount,
                 timeStamp: serverTimestamp(),
             }
             const orderRef = doc(db, 'shops', `${businessUrl}`, 'orders', orderUniqueID)
@@ -143,20 +147,22 @@ const ShopPayment = ({businessUrl, storeData}) => {
         },
         customizations: {
             title: `${storeData.businessName}`,
-            logo: 'https://firebasestorage.googleapis.com/v0/b/packshop-packnow.appspot.com/o/storetract%2Fgeneral-logo.png?alt=media&token=d2dc9078-fc2d-4d7b-bd6f-a00c77512e7d',
+            logo: 'https://i.ibb.co/KwGjsfj/logo192.png',
         },
     };
 
     const handleFlutterPayment = useFlutterwave(config);
 
     const handlePaymentFlutter = async () => {
-
         setIsDisable(true)
+
         await handleFlutterPayment({
             callback: (response) => {
-                saveTransaction(response).then()
-                toast.success("Payment successful");
-               window.location.href = '/checkout/order-confirmation';
+                saveTransaction(response).then(() => {
+                    toast.success("Payment successful");
+                }).then(() => {
+                    window.location.href = '/checkout/order-confirmation';
+                })
                 closePaymentModal() // this will close the modal programmatically
             },
             onClose: () => {toast.error("Payment window closed");},
@@ -281,7 +287,7 @@ const ShopPayment = ({businessUrl, storeData}) => {
                         <div className="container-fluid">
                             <div className="Shop-section-wrapper">
                                 <Row>
-                                  {/*--------------payment section-----------------------*/}
+                                    {/*--------------payment section-----------------------*/}
                                     <Col lg={7}>
                                         <h5 className="title">Checkout </h5>
                                         {/*shipping address*/}

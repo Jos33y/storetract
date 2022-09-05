@@ -5,52 +5,89 @@ import {toast} from "react-toastify";
 import {addDoc, collection, doc, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
 import {db} from "../../../Shop/config/firebase.config";
 
-const WithdrawalPage = ({userId, storeUrl, profileData, currentBalance, accountDetails}) => {
+const WithdrawalPage = ({storeUrl, profileData, currentBalance, accountDetails}) => {
 
     const [withdrawAmount, setWithdrawAmount] = useState('');
+    const [totalWithdrawal, setTotalWithdrawal] = useState(null);
+    const [responseId, setResponseId] = useState('')
     const [loading, setLoading] = useState(false);
+    const [fetchFee, setFetchFee] = useState(false);
+    const [flutterFee, setFlutterFee] = useState(null);
 
+    const handleFetchFee = async (e) =>{
+        e.preventDefault()
+        setLoading(true);
+
+        try {
+            const url = '/fetch_fee';
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount: withdrawAmount,
+                })
+            };
+
+            await fetch(url, options)
+                .then(res => res.json())
+                .then((json) => {
+                    if(json) {
+                        if(json.status === 'success'){
+                            let feePrice = (Number(json.data[0].fee) + Number(100));
+                            let totalAmount = (Number(feePrice) + Number(withdrawAmount));
+                           setFlutterFee(feePrice);
+                           setTotalWithdrawal(totalAmount);
+
+                           setFetchFee(true);
+                        }
+                        else {
+                            toast.error("error in withdrawal try again or contact support!")
+                        }
+                    } else {
+                        toast.error("Withdrawal Error! reload and try again.")
+                    }
+
+                })
+                .catch(err => console.error('error:' + err));
+
+        }
+        catch (e) {
+
+        }
+        setLoading(false)
+    }
     const handleWithdrawal = async (e) =>{
         e.preventDefault()
         setLoading(true);
-        const uniqueCustomerId = (Math.floor(Math.random() * 100000000));
-        const customerRef = (`${userId}-${uniqueCustomerId}`)
+        const uniqueCustomerId = (Math.floor(Math.random() * 100000));
 
-        let amountWithdraw = (Number(withdrawAmount) + Number(200));
+        let amountWithdraw = totalWithdrawal;
 
         if (amountWithdraw > currentBalance.accountBalance) {
             toast.error("Insufficient Funds")
         }
-        else if (amountWithdraw <= '1000') {
+        else if (amountWithdraw <= '100') {
             toast.error("can't process withdrawal less than 1,000")
         }
         else {
             try {
-                const url = 'https://sandboxapi.fincra.com/disbursements/payouts';
+                const url = '/withdraw';
                 const options = {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
-                        'api-key': process.env.REACT_APP_FINCRA_SECRET_API_KEY
                     },
                     body: JSON.stringify({
-                        sourceCurrency: 'NGN',
-                        destinationCurrency: 'NGN',
-                        beneficiary: {
-                            country: 'NG',
-                            firstName: profileData.name,
-                            email: profileData.email,
-                            type: 'individual',
-                            accountHolderName: accountDetails.accountName,
-                            accountNumber: accountDetails.accountNumber,
-                            bankCode: accountDetails.bankCode
-                        },
-                        paymentDestination: 'bank_account',
                         amount: withdrawAmount,
-                        business: process.env.REACT_APP_FINCRA_BUSINESS_ID,
-                        description: 'Withdrawal request',
-                        customerReference: customerRef
+                        bankCode: accountDetails.bankCode,
+                        accountNumber: accountDetails.accountNumber,
+                        businessName: profileData.businessName,
+                        customerRef: uniqueCustomerId,
+
                     })
                 };
 
@@ -58,22 +95,39 @@ const WithdrawalPage = ({userId, storeUrl, profileData, currentBalance, accountD
                     .then(res => res.json())
                     .then((json) => {
                         if(json) {
-                            if(json.success){
-                                saveTransaction(json).then(() => {
-                                    toast.success("Withdrawal processed successfully")
-                                    window.location.reload();
-                                })
+                            if (json.status === 'success') {
+                                try{
+                                    console.log(responseId);
+                                    const url = '/verify_transaction';
+                                    const options = {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                                        body: JSON.stringify({ transactionRef: json.data.id})
+                                    };
+
+                                    fetch(url, options)
+                                        .then(res => res.json())
+                                        .then(json => {
+                                            console.log(json)
+                                            if(json.status === 'success') {
+                                                saveTransaction(json).then(() => {
+                                                    toast.success("Withdrawal Queued Successfully")
+                                                }).then(() => {
+                                                    window.location.reload();
+                                                })
+                                            }
+                                            else {
+                                                toast.error("error in withdrawal try again or contact support!")
+                                            }
+                                        })
+                                }
+                                catch (e) { console.log({e})}
+
                             }
-                            else {
-                                toast.error("error in withdrawal try again or contact support!")
-                            }
-                        } else {
+                        }else {
                             toast.error("Withdrawal Error! reload and try again.")
-                        }
-
-                    })
-                    .catch(err => console.error('error:' + err));
-
+                        }})
+                   .catch(err => console.error('error:' + err));
             }
             catch (error) {
                 console.log({error})
@@ -84,22 +138,25 @@ const WithdrawalPage = ({userId, storeUrl, profileData, currentBalance, accountD
 
     // save transactions for references
     const saveTransaction = async (response) => {
-        let amountWithdraw = (Number(withdrawAmount) + Number(200));
-
+        const uniqueCustomerId = (Math.floor(Math.random() * 100000));
+        let responseID = "trx" + uniqueCustomerId + response.data.id;
+        setResponseId(responseID);
         try {
             const transactionData = {
                 transactionId: response.data.id,
                 transactionRef: response.data.reference,
-                customerRef: response.data.customerReference,
-                message: response.message,
-                success: (response.success ? 'Successful' : 'Failed'),
+                message: response.data.complete_message,
                 status: response.data.status,
                 storeUrl: storeUrl,
-                withdrawAmount: withdrawAmount,
-                totalWithdraw: amountWithdraw,
+                narration: response.data.narration,
+                fullName: response.data.full_name,
+                withdrawAmount: response.data.amount,
+                fee: response.data.fee,
+                flutterTime: response.data.created_at,
+                totalWithdraw: totalWithdrawal,
                 timeStamp: serverTimestamp(),
             }
-            const transRef = doc(db,  'admin', 'transactions', 'withdrawal' , `${response.data.id}`)
+            const transRef = doc(db,  'admin', 'transactions', 'withdrawal' , `${responseID}`)
             await setDoc(transRef, transactionData).then(() => {
                 addWithdrawToHistory(response).then()
                 updateWalletBalance().then()
@@ -110,10 +167,11 @@ const WithdrawalPage = ({userId, storeUrl, profileData, currentBalance, accountD
         }
     }
 
+
+
     // update account balance
     const updateWalletBalance = async () => {
-        let amountWithdraw = (Number(withdrawAmount) + Number(200));
-        const newBalance = (Number(currentBalance.accountBalance) - Number(amountWithdraw));
+        const newBalance = (Number(currentBalance.accountBalance) - Number(totalWithdrawal));
         try {
             const balanceDataCopy = {
                accountBalance: newBalance,
@@ -127,17 +185,15 @@ const WithdrawalPage = ({userId, storeUrl, profileData, currentBalance, accountD
             console.log({e})
         }
     }
-
     // add purchase to deposit history
     const addWithdrawToHistory = async (response) => {
-        let amountWithdraw = (Number(withdrawAmount) + Number(200));
         try {
             const withdrawHistoryData = {
                 withdrawalAmount: withdrawAmount,
-                withdrawalCharges:'200',
-                totalWithdraw: amountWithdraw,
+                withdrawalCharges: flutterFee,
+                totalWithdraw: totalWithdrawal,
                 withdrawalId: response.data.id,
-                status: (response.success ? 'Successful' : 'Failed'),
+                status: response.data.status === 'FAILED' ? 'PENDING' : response.data.status,
                 transactionRef: response.data.reference,
                 timeStamp: serverTimestamp(),
             }
@@ -151,6 +207,10 @@ const WithdrawalPage = ({userId, storeUrl, profileData, currentBalance, accountD
 
     const onChange = (e) => {
         setWithdrawAmount(e.target.value)
+
+        if(e.target.value) {
+            setFetchFee(false)
+        }
     }
 
     return (
@@ -177,7 +237,7 @@ const WithdrawalPage = ({userId, storeUrl, profileData, currentBalance, accountD
                    <Col lg={12} className="col-md-6">
                        <Card className="card withdrawal-form">
                            <div className="card-body">
-                               <Form onSubmit={handleWithdrawal}>
+                               <Form onSubmit={handleFetchFee}>
                                    <h5>Withdraw</h5>
                                    <div className="form-group">
                                        <label htmlFor="amount"> Amount</label>
@@ -189,13 +249,38 @@ const WithdrawalPage = ({userId, storeUrl, profileData, currentBalance, accountD
                                               placeholder="1000"/>
                                    </div>
 
+                                   {fetchFee ?
+                                       (<>
+                                           <div className="form-group calculated">
+                                               <label htmlFor="amount"> Processing Fee: </label>
+                                               <p className="processing">{flutterFee}</p>
+                                           </div>
+                                           <div className="form-group calculated">
+                                               <label htmlFor="amount"> Total: </label>
+                                               <p className="total">{(totalWithdrawal).toString()
+                                                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
+                                           </div>
+                                       </>)
+                                       :
+                                       ('')
+                                   }
+
                                    <div className="form-group">
-                                       <button disabled={loading} type="submit" className="btn btn-md btn-primary">
-                                           {loading ? (<>
+                                       {fetchFee ?
+                                           (<button disabled={loading} onClick={handleWithdrawal} className="btn btn-md btn-success">
+                                               {loading ? (<>
                                                     <span className="spinner-border spinner-border-sm" role="status"
-                                                          aria-hidden="true"></span>&nbsp; </> ) : ('')
-                                           }
-                                           withdraw</button>
+                                                          aria-hidden="true"></span>&nbsp; </>) : ('')
+                                               }
+                                               confirm withdrawal</button>)
+                                           :
+                                           (<button disabled={loading} type="submit" className="btn btn-md btn-primary">
+                                               {loading ? (<>
+                                                    <span className="spinner-border spinner-border-sm" role="status"
+                                                          aria-hidden="true"></span>&nbsp; </>) : ('')
+                                               }
+                                               withdraw</button>)
+                                       }
                                    </div>
                                </Form>
                            </div>

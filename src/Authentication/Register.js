@@ -112,7 +112,7 @@ const Register = () => {
                                     </div>
                                 </Col>
                                 <Col md={6}>
-                                    <Form className="Form" onSubmit={onSubmit} autocomplete="on">
+                                    <Form className="Form" onSubmit={onSubmit} autoComplete="on">
                                         <h5>Sign up</h5>
                                         <div className="form-group">
                                             <div className="Input-box">

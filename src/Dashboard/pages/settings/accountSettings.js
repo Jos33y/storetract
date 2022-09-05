@@ -6,6 +6,7 @@ import {doc, getDoc, serverTimestamp, setDoc} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 
+
 const AccountSettings = ({storeUrl}) => {
 
     const isMounted = useRef()
@@ -39,7 +40,7 @@ const AccountSettings = ({storeUrl}) => {
         }
         setLoading(false)
     }
-
+//handling account resolve soon
     const getAccount = async() => {
         try {
             const getAccountRef = doc(db, 'shops', storeUrl, 'walletBalance', 'accountInfo')
@@ -55,13 +56,13 @@ const AccountSettings = ({storeUrl}) => {
         }
     }
 
-    const getListBanks = async () => {
+    const getBanksList = async () => {
         setLoading(true)
         try {
-            const url = 'https://sandboxapi.fincra.com/core/banks?currency=NGN&country=NG';
+            const url = '/getBanks';
             const options = {
                 method: 'GET',
-                headers: {Accept: 'application/json', 'api-key': process.env.REACT_APP_FINCRA_SECRET_API_KEY}
+                headers: {Accept: 'application/json'}
             };
 
             await  fetch(url, options)
@@ -76,35 +77,40 @@ const AccountSettings = ({storeUrl}) => {
     }
 
     const confirmAccount = async () => {
+        setLoading(true)
         try {
-            const url = 'https://sandboxapi.fincra.com/core/accounts/resolve';
+            const url = '/resolve';
             const options = {
                 method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    'api-key': process.env.REACT_APP_FINCRA_SECRET_API_KEY
-                },
-                body: JSON.stringify({accountNumber: accountNumber, bankCode: bankCode})
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ accountNumber: accountNumber, bankCode: bankCode })
             };
 
-           await fetch(url, options)
+            await fetch(url, options)
                 .then(res => res.json())
                 .then(json => {
-                    setBankData((prevState) => ({
-                        ...prevState,
-                        accountName: json.data.accountName,
-                    }))
-                    setAccount(true)
+
+                    if(json.status === 'error') {
+                        toast.error("Try again. Unable to get bank details")
+                        setAccount(false)
+                    }
+                    else{
+                        setBankData((prevState) => ({
+                            ...prevState,
+                            accountName: json.data.account_name,
+                            bankCode: bankCode,
+                            accountNumber: json.data.account_number,
+                        }))
+                        setAccount(true);
+                    }
+
                 })
-                .catch(err => console.error('error:' + err));
-
-        }
-        catch (error) {
+        } catch (error) {
             console.log({error})
-
         }
+        setLoading(false)
     }
+
     const onChange = (e) => {
         setAccount(false)
         if(e.target.id === 'accountNumber'){
@@ -120,7 +126,7 @@ const AccountSettings = ({storeUrl}) => {
             ...prevState,
             [e.target.id]: e.target.value,
         }))
-        if(e.target.id === 'bankCode'){
+        if(e.target.id === 'bankCode') {
             let cartData = [...bankList]
             const existingItem = cartData.find(cartItem => cartItem.code === e.target.value);
 
@@ -128,16 +134,14 @@ const AccountSettings = ({storeUrl}) => {
                 ...prevState,
                 bankName: existingItem.name,
             }))
+        }
 
         }
 
-    }
-
     useEffect(() => {
         if(isMounted) {
-            getListBanks().then()
             getAccount().then()
-            // getBanks().then()
+            getBanksList().then()
         }
         return () => {
             isMounted.current = false;
@@ -170,7 +174,6 @@ const AccountSettings = ({storeUrl}) => {
                                                     value={bankCode}
                                                     onChange={onChange}
                                                     className="form-control">
-                                                <option value="null" selected={true} >Select bank name </option>
                                                 {bankList.map((bank) => (
                                                     <option key={bank.id}
                                                             value={bank.code}>{bank.name}
@@ -194,7 +197,7 @@ const AccountSettings = ({storeUrl}) => {
 
                                         {account && (
                                             <div className="form-group">
-                                                <label htmlFor="firstname" className="form-label">Account Name: </label>
+                                                <label htmlFor="accountName" className="form-label">Account Name: </label>
                                                 <input type="text"
                                                        id="accountName"
                                                        placeholder="Your Account Name"
@@ -218,6 +221,10 @@ const AccountSettings = ({storeUrl}) => {
                                                 )
                                                 : (
                                                     <Button disabled={isDisable} className="btn btn-primary" onClick={confirmAccount} type="button">
+                                                        {loading ? (<>
+                                                    <span className="spinner-border spinner-border-sm" role="status"
+                                                          aria-hidden="true"></span>&nbsp; </> ) : ('')
+                                                        }
                                                         Confirm Account
                                                     </Button>
                                                 )}

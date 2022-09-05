@@ -41,6 +41,7 @@ const StoreSettings = ({storeUrl, userId}) => {
                 toast.error('Image file too large')
                 return
             })
+            console.log(storeBanner);
             const formDataCopy = {
                 ...formData,
                 storeBanner: storeBannerUrls,
@@ -177,7 +178,7 @@ const StoreSettings = ({storeUrl, userId}) => {
 
                                         <div className="form-group">
                                             <label htmlFor="description"> About Store: </label>
-                                            <textarea name=""
+                                            <textarea name="storeDescription"
                                                       id="storeDescription"
                                                       value={storeDescription}
                                                       onChange={onChange}
@@ -249,7 +250,7 @@ const StoreSettings = ({storeUrl, userId}) => {
                                                    id="upload-logo"
                                                    accept='image/*'
                                                    hidden={true}
-                                                   required={true}
+
                                                    onChange={onChange}
                                                    className="form-control" />
 

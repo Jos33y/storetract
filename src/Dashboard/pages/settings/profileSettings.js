@@ -242,7 +242,7 @@ const ProfileSettings = ({userId}) => {
                                        accept='image/*'
                                        hidden={true}
                                        onChange={onChange}
-                                       required={true}/>
+                                       />
                             </figcaption>
                         </figure>
                     </aside>

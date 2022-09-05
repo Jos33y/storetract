@@ -236,11 +236,11 @@ const OrderDetailsPage = ({userId, storeUrl}) => {
                                            <td colSpan={4}>
                                                <article className="float-end">
                                                    <dl className="dlist">
-                                                       <dt>Subtotal: </dt> <dd>&#8358;{orderData.orderTotal.toString()
+                                                       <dt>Subtotal: </dt> <dd>&#8358;{orderData.orderSubTotal.toString()
                                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</dd>
                                                    </dl>
                                                    <dl className="dlist">
-                                                       <dt>Shipping cost: </dt> <dd> &#8358;{(shippingData ? Number(shippingData.amount) : (0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</dd>
+                                                       <dt>Shipping cost: </dt> <dd> &#8358;{(orderData.shippingPrice ? Number(orderData.shippingPrice) : (0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</dd>
                                                    </dl>
 
                                                    <dl className="dlist">

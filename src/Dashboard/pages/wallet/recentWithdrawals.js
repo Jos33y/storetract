@@ -1,6 +1,6 @@
 import {Card} from "react-bootstrap";
 import React, {useEffect, useRef, useState} from "react";
-import {collection, getDocs, orderBy, query} from "firebase/firestore";
+import {collection, doc, getDocs, orderBy, query, updateDoc} from "firebase/firestore";
 import {db} from "../../../firebase.config";
 import {toast} from "react-toastify";
 import NotFoundImage from "../../../assets/images/dashimages/undraw_not_found_-60-pq.svg";
@@ -9,6 +9,53 @@ const RecentWithdrawals = ({storeUrl, userId}) => {
 
     const isMounted = useRef()
     const [recentWithdraw, setRecentWithdraw] = useState(null)
+
+    const verifyTransactions = (recentWithdraw) => {
+        let i = 0;
+        while (i < recentWithdraw.length){
+            if(recentWithdraw[i].data.status === 'PENDING'){
+                // console.log(recentWithdraw[i].data.withdrawalId)
+                let recentId = recentWithdraw[i].data.withdrawalId;
+                let recentUniqId = recentWithdraw[i].id;
+
+                try{
+                    const url = '/verify_transaction';
+                    const options = {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                        body: JSON.stringify({ transactionRef: recentId})
+                    };
+                    fetch(url, options)
+                        .then(res => res.json())
+                        .then(json => {
+                            if(json.status === 'success') {
+                                // console.log(json.data.status)
+                                updateTransaction(recentUniqId, json.data.status).then(() => {})
+                            }
+                            else {
+                            }
+                        })
+                }
+                catch (e) { console.log({e})}
+            }
+             i +=1;
+        }
+    }
+
+    // update account balance
+    const updateTransaction = async (recentUniq, recentStatus) => {
+        try {
+            const transactionData = {
+                status: recentStatus === 'FAILED' ? 'PENDING' : recentStatus,
+            }
+            const transRef = doc(db, 'shops', `${storeUrl}`, 'walletWithdrawalHistory', `${recentUniq}`)
+            await updateDoc(transRef, transactionData)
+        }
+
+        catch (e) {
+            console.log({e})
+        }
+    }
 
     const getRecentWithdrawals = async () => {
         try {
@@ -23,7 +70,9 @@ const RecentWithdrawals = ({storeUrl, userId}) => {
                     data:doc.data(),
                 })
             })
-            setRecentWithdraw(recentWithdraw)
+            verifyTransactions(recentWithdraw);
+            setRecentWithdraw(recentWithdraw);
+
         }
         catch (error) {
             console.log({error})
@@ -71,7 +120,7 @@ const RecentWithdrawals = ({storeUrl, userId}) => {
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')} </td>
                                 <td> &#8358;{recent.data.totalWithdraw.toString()
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')} </td>
-                                <td><span className={`badge rounded-pill ${recent.data.status === 'Successful' ? 'alert-success' : 'alert-warning'}`}>{recent.data.status}</span> </td>
+                                <td><span className={`badge rounded-pill ${recent.data.status === 'SUCCESSFUL' ? 'alert-success' : 'alert-warning'}`}>{recent.data.status}</span> </td>
                             </tr>
                             ))}
                             </tbody>
@@ -93,3 +142,4 @@ const RecentWithdrawals = ({storeUrl, userId}) => {
     )
 }
 export default RecentWithdrawals
+
