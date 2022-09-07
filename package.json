@@ -2,10 +2,10 @@
   "name": "storetract",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "start": "node api/index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "express": "^4.18.1",
-    "flutterwave-node-v3": "^1.0.11"
+    "flutterwave-node-v3": "^1.0.11",
+    "path": "^0.12.7"
   }
 }

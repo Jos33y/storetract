@@ -1,11 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const Flutterwave = require('flutterwave-node-v3');
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const router = express.Router();
 const app = express();
-
-const flw = new Flutterwave('FLWPUBK-362004fd0a2b005c65f960fbc7fbb355-X', 'FLWSECK-7f920ddebacbc7f75c5d10b5e5174d4c-X');
+const path = require("path");
+const {response} = require("express");
+const flw = new Flutterwave(process.env.REACT_APP_FLUTTERWAVE_PUBLIC_KEY, process.env.REACT_APP_FLUTTERWAVE_SECRET_KEY);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -30,7 +31,8 @@ const getBanks = async () => {
             "country":"NG" //Pass either NG, GH, KE, UG, ZA or TZ to get list of banks in Nigeria, Ghana, Kenya, Uganda, South Africa or Tanzania respectively
         }
         const response = await flw.Bank.country(payload)
-        return response
+        return response;
+
     } catch (error) {
         console.log(error)
     }
@@ -84,12 +86,24 @@ const getATransfer = async (transactionRef) => {
     } catch (error) {
         console.log(error)
     }
-
 }
 
 
+// Routes
+app.use(express.static(path.join(__dirname, "../packshop/build")));
 
-app.get("/getBanks", (req, res) => {
+app.get("/", function (_, res) {
+    res.sendFile(
+        path.join(__dirname, "../packshop/build/index.html"),
+        function (err) {
+            if (err) {
+                res.status(500).send(err);
+            }
+        }
+    );
+});
+
+router.get("/getbanks", (req, res) => {
     getBanks().then((response) => {
         res.json(response);
     })
@@ -125,3 +139,5 @@ app.use("/", router);
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
+
+getBanks()
